@@ -1,90 +1,68 @@
 <!doctype html>
-<html lang="en" itemscope itemtype="http://schema.org/Person">
-<head>
-  <meta charset="utf-8">
-  <!-- Site Meta Data -->
-  <title> Implementation of Machine Learning Algorithms |  </title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="Pritish S Jadhav">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Implementation of Machine Learning Algorithms</title>
 
-  <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="http://jadhavpritish.github.io/theme/css/main.css">
+    <link rel="stylesheet" href="http://jadhavpritish.github.io/theme/css/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <div><img src="" class="grv-img"/></div>
+        <div class="title"><a href="http://jadhavpritish.github.io/">Implementation of Machine Learning Algorithms </a></div>
+        <div class="sub-title"></div>
 
-  <!-- schema.org -->
-  <meta itemprop="name" content="Implementation of Machine Learning Algorithms">
-  <meta itemprop="image" content="">
-  <meta itemprop="description" content="">
+<p>
+    <div class="view"><a href="http://jadhavpritish.github.io/pages/first post.html">Binary Classification using Logictic Regression using numpy</a></div>
+    <div class="view"><a href="http://jadhavpritish.github.io/pages/Regression algorithm.html">Linear regression using numpy</a></div>
+  <div class="view"><a href="http://jadhavpritish.github.io/archives.html">Archives</a></div>
+</p>
 
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-  <!-- Style Meta Data -->
-  <link rel="stylesheet" href="http://jadhavpritish.github.io/theme/css/style.css" type="text/css" />
-  <link rel="stylesheet" href="http://jadhavpritish.github.io/theme/css/pygments.css" type="text/css" />
+<!-- Social links -->
+<div class="social">
+<h4>Follow Me</h4>
+<ul>
+    <li><a href="#">https://www.linkedin.com/in/pritish-sunil-jadhav-537075a4</a></li>
+    <li><a href="#">add another link</a></li>
+</ul>
+</div>
 
-  <!-- Feed Meta Data -->
-    <link href="http://jadhavpritish.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Implementation of Machine Learning Algorithms ATOM Feed" />
-
-  <!-- Twitter Feed -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="">
-  <meta name="twitter:image" content="">
-
-<meta name="twitter:creator" content="">
-<meta name="twitter:url" content="http://jadhavpritish.github.io">
-<meta name="twitter:title" content="Implementation of Machine Learning Algorithms">
-<meta name="twitter:description" content="">
-
-<!-- Facebook Meta Data -->
-<meta property="og:title" content="Implementation of Machine Learning Algorithms" />
-<meta property="og:description" content="" />
-<meta property="og:image" content="" />
-</head>
-
-<body>
-  <!-- Sidebar -->
-  <aside>
-    <!--<center><a href="http://jadhavpritish.github.io"><img id="avatar" src=""></a></center>-->
-    <h1>Implementation of Machine Learning Algorithms</h1>
-    <br>
-
-
-    <nav class="nav">
-      <ul class="list-bare">
+      </header>
+      <section>
+      </section>
+      <footer>
+        <p><small>&copy; Implementation of Machine Learning Algorithms &mdash; Theme based on Sundown by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <!-- Scale fix -->
+    <script>
+      var metas = document.getElementsByTagName('meta');
+      var i;
       
-         
-          <li><a class="nav__link" href="http://jadhavpritish.github.io/pages/first post.html">Binary Classification using Logictic Regression using numpy</a></li>
-          <li><a class="nav__link" href="http://jadhavpritish.github.io/pages/Regression algorithm.html">Linear regression using numpy</a></li>
-         
-      </ul>
-    </nav>
+      if (navigator.userAgent.match(/iPhone/i)) {
+        for (i=0; i<metas.length; i++) {
+          if (metas[i].name == "viewport") {
+            metas[i].content = "width=device-width, minimum-scale=1.0, maximum-scale=1.0";
+          }
+        }
+      
+        document.addEventListener("gesturestart", gestureStart, false);
+      }
 
-    <p class="social">
-        <a href="#" target="_blank" ><img src="http://jadhavpritish.github.io/theme/images/icons/https://www.linkedin.com/in/pritish-sunil-jadhav-537075a4.png"></a>
-        <a href="#" target="_blank" ><img src="http://jadhavpritish.github.io/theme/images/icons/add another link.png"></a>
-      <a href="http://jadhavpritish.github.io/feeds/all.atom.xml" rel="alternate">
-        <img src="http://jadhavpritish.github.io/theme/images/icons/rss.png"></a>
-    </p>
-
-    <!--
-    -->
-  </aside>
-
-  <!-- Content -->
-  <article>
-<h1 class="title">Hi, I'm Pritish S Jadhav</h1>
-
-
-
-  </article>
-
-  <!-- Footer -->
-  <footer>
-    <p>
-      Blog powered by <a href="http://getpelican.com/">Pelican</a>, 
-      which takes great advantage of <a href="http://python.org">Python</a>.
-      Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a href="https://parbhatpuri.com/">@parbhat</a>.
-    </p>
-  </footer>
-
-
-</body>
+      function gestureStart() {
+        for (i=0; i<metas.length; i++) {
+          if (metas[i].name == "viewport") {
+            metas[i].content = "width=device-width, minimum-scale=0.25, maximum-scale=1.6";
+          }
+        }
+      }
+    </script>
+  </body>
 </html>
