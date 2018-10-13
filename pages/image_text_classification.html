@@ -1,0 +1,2022 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Product Classificatication Using Image and Text (Deep Learning)Implementation of Machine Learning Algorithms</title>
+
+    <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/main.css">
+    <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <div><img src="" class="grv-img"/></div>
+        <div class="title"><a href="https://jadhavpritish.github.io/">Implementation of Machine Learning Algorithms </a></div>
+        <div class="sub-title"></div>
+
+<p>
+    <div class="view"><a href="https://jadhavpritish.github.io/pages/first post.html">Binary Classification using Logictic Regression using numpy</a></div>
+    <div class="view"><a href="https://jadhavpritish.github.io/pages/image_text_classification.html">Product Classificatication Using Image and Text (Deep Learning)</a></div>
+    <div class="view"><a href="https://jadhavpritish.github.io/pages/Regression algorithm.html">Linear regression using numpy</a></div>
+  <div class="view"><a href="https://jadhavpritish.github.io/archives.html">Archives</a></div>
+</p>
+
+<!-- Social links -->
+<div class="social">
+<h4>Follow Me</h4>
+<ul>
+    <li><a href="https://www.linkedin.com/in/pritish-sunil-jadhav-537075a4">linkedin</a></li>
+    <li><a href="https://www.facebook.com/jadhavpritish12">facebook</a></li>
+</ul>
+</div>
+
+      </header>
+      <section>
+<section id="content" class="body">    
+    <h1 class="entry-title">Product Classificatication Using Image and Text (Deep Learning)</h1>
+    
+    <style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI colors. */
+.ansibold {
+  font-weight: bold;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected {
+  border-color: #ababab;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  div.cell.selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  padding: 0.4em;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+.rendered_html pre,
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+.rendered_html td,
+
+
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="PRODUCT-CLASSIFICATION-USING-IMAGE-AND-TEXT--(DEEP-LEARNING)">PRODUCT CLASSIFICATION USING IMAGE AND TEXT  (DEEP LEARNING)<a class="anchor-link" href="#PRODUCT-CLASSIFICATION-USING-IMAGE-AND-TEXT--(DEEP-LEARNING)">¶</a></h3><p>Image classification and its applications has been proving its worth across business verticals. However, building a image centric product is often marred by following issues -</p>
+<ol>
+<li>Unavailability of large amounts of data</li>
+<li>Poor quality of images.</li>
+<li>Even if data is available, the training time for achieving convergence are way too high.</li>
+<li>Often metadata and other information associated with the images is not utilized.</li>
+</ol>
+<p>In this article, I shall explore an approach that can leverage the metadata at may be available to achieve better results.</p>
+<p>About the Dataset -</p>
+<p>I have customized the <a href="http://www.vicos.si/Downloads/FIDS30">FIDS30</a> dataset for this article to better suit the problem statement.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">glob</span><span class="o">,</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">codecs</span>
+
+<span class="kn">import</span> <span class="nn">tqdm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">shuffle</span>
+
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">RegexpTokenizer</span>
+
+<span class="kn">from</span> <span class="nn">shared</span> <span class="kn">import</span> <span class="n">utils</span>
+
+<span class="kn">import</span> <span class="nn">keras</span>
+<span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">backend</span> <span class="k">as</span> <span class="n">K</span>
+<span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">optimizers</span><span class="p">,</span> <span class="n">regularizers</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span><span class="p">,</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span> 
+                          <span class="n">Flatten</span><span class="p">,</span> <span class="n">Embedding</span><span class="p">,</span> <span class="n">Conv1D</span><span class="p">,</span> 
+                          <span class="n">MaxPooling1D</span><span class="p">,</span> <span class="n">GlobalMaxPooling1D</span><span class="p">,</span>
+                          <span class="n">concatenate</span><span class="p">,</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span><span class="p">,</span> <span class="n">ZeroPadding2D</span><span class="p">,</span>
+                         <span class="n">Input</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">keras.layers.normalization</span> <span class="kn">import</span> <span class="n">BatchNormalization</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing</span> <span class="kn">import</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">image</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing.text</span> <span class="kn">import</span> <span class="n">Tokenizer</span>
+<span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="kn">import</span> <span class="n">EarlyStopping</span>
+<span class="kn">from</span> <span class="nn">keras.utils</span> <span class="kn">import</span> <span class="n">to_categorical</span>
+
+
+<span class="kn">from</span> <span class="nn">keras.applications.inception_v3</span> <span class="kn">import</span> <span class="n">InceptionV3</span>
+<span class="kn">from</span> <span class="nn">keras.applications.xception</span> <span class="kn">import</span> <span class="n">Xception</span>
+<span class="kn">from</span> <span class="nn">keras.applications.resnet50</span> <span class="kn">import</span> <span class="n">ResNet50</span>
+<span class="kn">from</span> <span class="nn">keras.applications.vgg19</span> <span class="kn">import</span> <span class="n">VGG19</span>
+
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1">#from keras.layers import (Conv2D, Conv1D, MaxPooling)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># im_data = utils.get_filepath_label_map(os.path.join('.', 'data', 'image_text_data', 'train', 'FIDS30'))</span>
+<span class="c1"># print im_data.head()</span>
+<span class="c1"># im_data.to_csv('images_text_raw_metadata.csv', index = False)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">train_data_basdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'.'</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'image_text_data'</span><span class="p">,</span> <span class="s1">'raw_metadata'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">raw_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_data_basdir</span><span class="p">,</span> <span class="s1">'server_images_text_raw_metadata.csv'</span><span class="p">))</span>
+<span class="n">raw_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">w</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">h</span><span class="o">=</span><span class="mi">10</span>
+
+<span class="n">columns</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="n">raw_data</span><span class="p">[</span><span class="s1">'label'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+<span class="c1"># fig = plt.figure()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="n">rows</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">h</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">sharey</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_shuffled_data</span><span class="p">(</span><span class="n">grouped_data</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="n">shuffled_data</span> <span class="o">=</span> <span class="n">shuffle</span><span class="p">(</span><span class="n">grouped_data</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">shuffled_data</span>
+
+<span class="n">sampled_data</span> <span class="o">=</span> <span class="n">raw_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'label'</span><span class="p">,</span> <span class="n">as_index</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">get_shuffled_data</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">sampled_data</span><span class="p">[</span><span class="s1">'label'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+        
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">((</span><span class="n">columns</span><span class="o">*</span><span class="n">rows</span><span class="p">)):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span><span class="n">columns</span><span class="p">,</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">image_array</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">load_img</span><span class="p">(</span><span class="n">sampled_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s1">'image_filepaths'</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">'off'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_array</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">'nearest'</span><span class="p">)</span>
+
+    
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">labels</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+    
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">labels</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">le</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">unique_classes</span> <span class="o">=</span> <span class="n">raw_data</span><span class="p">[</span><span class="s1">'label'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">raw_data</span><span class="p">[</span><span class="s1">'label'</span><span class="p">])</span>
+
+<span class="n">Y</span> <span class="o">=</span> <span class="n">to_categorical</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">unique_classes</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(128, 4)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">MAX_NB_WORDS</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">RegexpTokenizer</span><span class="p">(</span><span class="sa">r</span><span class="s1">'\w+'</span><span class="p">)</span>
+<span class="n">stop_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">'english'</span><span class="p">))</span>
+<span class="n">stop_words</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="s1">'.'</span><span class="p">,</span> <span class="s1">','</span><span class="p">,</span> <span class="s1">'"'</span><span class="p">,</span> <span class="s2">"'"</span><span class="p">,</span> <span class="s1">':'</span><span class="p">,</span> <span class="s1">';'</span><span class="p">,</span> <span class="s1">'('</span><span class="p">,</span> <span class="s1">')'</span><span class="p">,</span> <span class="s1">'['</span><span class="p">,</span> <span class="s1">']'</span><span class="p">,</span> <span class="s1">'{'</span><span class="p">,</span> <span class="s1">'}'</span><span class="p">])</span>
+<span class="n">re_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">u</span><span class="s1">'[^</span><span class="se">\u0000</span><span class="s1">-</span><span class="se">\uD7FF\uE000</span><span class="s1">-</span><span class="se">\uFFFF</span><span class="s1">]'</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">UNICODE</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">"pre-processing train data..."</span><span class="p">)</span>
+<span class="n">processed_docs_train</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">raw_data</span><span class="p">[</span><span class="s1">'metadata'</span><span class="p">]:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+        <span class="n">filtered</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+        <span class="n">processed_docs_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filtered</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">processed_docs_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
+        
+<span class="n">raw_data</span><span class="p">[</span><span class="s1">'filtered_text'</span><span class="p">]</span> <span class="o">=</span> <span class="n">processed_docs_train</span>
+<span class="k">print</span><span class="p">(</span><span class="n">raw_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">raw_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>pre-processing train data...
+(128, 4)
+                                     image_filepaths  \
+0  ./data/image_text_data/train/FIDS30/apples/41.jpg   
+1  ./data/image_text_data/train/FIDS30/apples/14.jpg   
+2   ./data/image_text_data/train/FIDS30/apples/3.jpg   
+3  ./data/image_text_data/train/FIDS30/apples/47.jpg   
+4  ./data/image_text_data/train/FIDS30/apples/25.jpg   
+
+                                            metadata   label  \
+0  An apple is a sweet, edible fruit produced by ...  apples   
+1  The apple tree originated in Central Asia, whe...  apples   
+2  Apples have religious and mythological signifi...  apples   
+3  The apple is a deciduous tree, generally stand...  apples   
+4  The fruit matures in late summer or autumn, an...  apples   
+
+                                       filtered_text  
+0  an� apple� sweet edible� fruit� produced an� a...  
+1  the apple tree originated central asia wild an...  
+2  apples religious mythological significance man...  
+3  the apple deciduous tree generally standing 6 ...  
+4  the fruit matures late summer autumn cultivars...  
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">"tokenizing input data..."</span><span class="p">)</span>
+<span class="n">tokenizer1</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">num_words</span><span class="o">=</span><span class="n">MAX_NB_WORDS</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">char_level</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">tokenizer1</span><span class="o">.</span><span class="n">fit_on_texts</span><span class="p">(</span><span class="n">raw_data</span><span class="p">[</span><span class="s1">'filtered_text'</span><span class="p">])</span>  <span class="c1">#leaky</span>
+<span class="n">word_seq_train</span> <span class="o">=</span> <span class="n">tokenizer1</span><span class="o">.</span><span class="n">texts_to_sequences</span><span class="p">(</span><span class="n">raw_data</span><span class="p">[</span><span class="s1">'filtered_text'</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>tokenizing input data...
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [61]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">raw_data</span><span class="p">[</span><span class="s1">'doc_len'</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_data</span><span class="p">[</span><span class="s1">'filtered_text'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">words</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">)))</span>
+<span class="n">max_seq_len</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">raw_data</span><span class="p">[</span><span class="s1">'doc_len'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">raw_data</span><span class="p">[</span><span class="s1">'doc_len'</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">())</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">max_seq_len</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>46
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [62]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">word_seq_train</span> <span class="o">=</span> <span class="n">sequence</span><span class="o">.</span><span class="n">pad_sequences</span><span class="p">(</span><span class="n">word_seq_train</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="n">max_seq_len</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [63]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">word_index</span> <span class="o">=</span> <span class="n">tokenizer1</span><span class="o">.</span><span class="n">word_index</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#load embeddings</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'loading word embeddings...'</span><span class="p">)</span>
+<span class="n">embeddings_index</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'.'</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'image_text_data'</span> <span class="p">,</span><span class="s1">'glove.6B.100d.txt'</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">coefs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">'float32'</span><span class="p">)</span>
+    <span class="n">embeddings_index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">coefs</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'found </span><span class="si">%s</span><span class="s1"> word vectors'</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">embeddings_index</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>loading word embeddings...
+found 400000 word vectors
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [27]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#training params</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">8</span> 
+
+<span class="c1">#model parameters</span>
+<span class="n">num_filters</span> <span class="o">=</span> <span class="mi">64</span> 
+<span class="n">embed_dim</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">weight_decay</span> <span class="o">=</span> <span class="mf">1e-4</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#embedding matrix</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'preparing embedding matrix...'</span><span class="p">)</span>
+<span class="n">words_not_found</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">nb_words</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">MAX_NB_WORDS</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_index</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">embedding_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nb_words</span><span class="p">,</span> <span class="n">embed_dim</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">word_index</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">nb_words</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">embedding_vector</span> <span class="o">=</span> <span class="n">embeddings_index</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">embedding_vector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">embedding_vector</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># words not found in embedding index will be all-zeros.</span>
+        <span class="n">embedding_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">embedding_vector</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">words_not_found</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'number of null word embeddings: </span><span class="si">%d</span><span class="s1">'</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">embedding_matrix</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>preparing embedding matrix...
+number of null word embeddings: 102
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/data/projects/data_science_blogs/logistic_regression_binary_classification/logistic_reg_venv/lib/python2.7/site-packages/ipykernel_launcher.py:9: UnicodeWarning: Unicode equal comparison failed to convert both arguments to Unicode - interpreting them as being unequal
+  if __name__ == '__main__':
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [74]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">get_image_representation</span><span class="p">(</span><span class="n">image_filepaths</span><span class="p">,</span> <span class="n">channel_orientation</span> <span class="o">=</span> <span class="s1">'channels_first'</span><span class="p">):</span>
+    <span class="n">image_representation</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">img_path</span> <span class="ow">in</span> <span class="n">image_filepaths</span><span class="p">:</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">load_img</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">))</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">img_to_array</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">data_format</span><span class="o">=</span><span class="n">channel_orientation</span><span class="p">)</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">/</span><span class="mf">255.</span>
+        <span class="n">image_representation</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image_representation</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [75]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">prepare_training_generators</span><span class="p">(</span><span class="n">train_df</span><span class="p">,</span> <span class="n">len_unique_classes</span> <span class="p">,</span><span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span> <span class="n">channel_orientation</span> <span class="o">=</span> <span class="s2">"channels_first"</span><span class="p">):</span>
+    <span class="n">index_tracker</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">text_x</span> <span class="o">=</span> <span class="n">tokenizer1</span><span class="o">.</span><span class="n">texts_to_sequences</span><span class="p">(</span><span class="n">train_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index_tracker</span><span class="p">:</span><span class="n">index_tracker</span><span class="o">+</span><span class="n">chunk_size</span><span class="p">][</span><span class="s1">'filtered_text'</span><span class="p">])</span>
+        <span class="n">text_x</span> <span class="o">=</span> <span class="n">sequence</span><span class="o">.</span><span class="n">pad_sequences</span><span class="p">(</span><span class="n">text_x</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="n">max_seq_len</span><span class="p">)</span>
+        <span class="n">image_x</span> <span class="o">=</span> <span class="n">get_image_representation</span><span class="p">(</span><span class="n">train_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index_tracker</span><span class="p">:</span><span class="n">index_tracker</span><span class="o">+</span><span class="n">chunk_size</span><span class="p">][</span><span class="s1">'image_filepaths'</span><span class="p">],</span> <span class="n">channel_orientation</span><span class="p">)</span>
+        <span class="n">y_le</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">train_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index_tracker</span><span class="p">:</span><span class="n">index_tracker</span><span class="o">+</span><span class="n">chunk_size</span><span class="p">][</span><span class="s1">'label'</span><span class="p">])</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">to_categorical</span><span class="p">(</span><span class="n">y_le</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="n">len_unique_classes</span><span class="p">)</span>
+        <span class="n">index_tracker</span> <span class="o">+=</span> <span class="n">chunk_size</span>
+        <span class="k">if</span> <span class="n">index_tracker</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_df</span><span class="p">):</span>
+            <span class="n">index_tracker</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">yield</span> <span class="p">[</span><span class="n">text_x</span><span class="p">,</span><span class="n">image_x</span><span class="p">],</span><span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [76]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">prepare_training_generators</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_classes</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span>  <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">((</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>((16, 46), (16, 3, 256, 256), (16, 4))
+((16, 46), (16, 3, 256, 256), (16, 4))
+((16, 46), (16, 3, 256, 256), (16, 4))
+((16, 46), (16, 3, 256, 256), (16, 4))
+((16, 46), (16, 3, 256, 256), (16, 4))
+((16, 46), (16, 3, 256, 256), (16, 4))
+((16, 46), (16, 3, 256, 256), (16, 4))
+((16, 46), (16, 3, 256, 256), (16, 4))
+((16, 46), (16, 3, 256, 256), (16, 4))
+((16, 46), (16, 3, 256, 256), (16, 4))
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [18]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">IMG_SIZE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+<span class="n">IN_SHAPE</span> <span class="o">=</span> <span class="n">IMG_SIZE</span> <span class="o">+</span> <span class="p">(</span><span class="mi">3</span><span class="p">,)</span>
+
+
+<span class="k">def</span> <span class="nf">build_image_only_model</span><span class="p">(</span><span class="n">text_input_shape</span> <span class="o">=</span><span class="p">(</span><span class="mi">26</span><span class="p">,),</span> <span class="n">image_input_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">pretrained_model</span> <span class="o">=</span> <span class="s1">'vgg19'</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="mi">245</span><span class="p">):</span>
+    
+    <span class="k">print</span><span class="p">(</span><span class="s1">'received pretrained model </span><span class="si">%s</span><span class="s1">'</span><span class="o">%</span><span class="k">pretrained_model</span>)
+    <span class="n">vis_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="n">text_input_shape</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">"vis_input"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pretrained_model</span> <span class="o">==</span> <span class="s1">'inception'</span><span class="p">:</span>
+        <span class="n">pretrained_model</span> <span class="o">=</span> <span class="n">InceptionV3</span><span class="p">(</span>
+            <span class="n">include_top</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+            <span class="n">input_shape</span><span class="o">=</span><span class="n">image_input_shape</span><span class="p">,</span>
+            <span class="n">weights</span><span class="o">=</span><span class="s1">'imagenet'</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">pretrained_model</span> <span class="o">==</span> <span class="s1">'xception'</span><span class="p">:</span>
+        <span class="n">pretrained_model</span> <span class="o">=</span> <span class="n">Xception</span><span class="p">(</span>
+            <span class="n">include_top</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+            <span class="n">input_shape</span><span class="o">=</span><span class="n">image_input_shape</span><span class="p">,</span>
+            <span class="n">weights</span><span class="o">=</span><span class="s1">'imagenet'</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">pretrained_model</span> <span class="o">==</span> <span class="s1">'resnet50'</span><span class="p">:</span>
+        <span class="n">pretrained_model</span> <span class="o">=</span> <span class="n">ResNet50</span><span class="p">(</span>
+            <span class="n">include_top</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+            <span class="n">input_shape</span><span class="o">=</span><span class="n">image_input_shape</span><span class="p">,</span>
+            <span class="n">weights</span><span class="o">=</span><span class="s1">'imagenet'</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">pretrained_model</span> <span class="o">==</span> <span class="s1">'vgg19'</span><span class="p">:</span>
+        <span class="n">pretrained_model</span> <span class="o">=</span> <span class="n">VGG19</span><span class="p">(</span>
+            <span class="n">include_top</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+            <span class="n">input_shape</span><span class="o">=</span><span class="n">image_input_shape</span><span class="p">,</span>
+            <span class="n">weights</span><span class="o">=</span><span class="s1">'imagenet'</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">pretrained_model</span> <span class="o">==</span> <span class="s1">'all'</span><span class="p">:</span>
+        <span class="nb">input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">image_input_shape</span><span class="p">)</span>
+        <span class="n">inception_model</span> <span class="o">=</span> <span class="n">InceptionV3</span><span class="p">(</span>
+            <span class="n">include_top</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+            <span class="n">input_tensor</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span>
+            <span class="n">weights</span><span class="o">=</span><span class="s1">'imagenet'</span>
+        <span class="p">)</span>
+        <span class="n">xception_model</span> <span class="o">=</span> <span class="n">Xception</span><span class="p">(</span>
+            <span class="n">include_top</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+            <span class="n">input_tensor</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span>
+            <span class="n">weights</span><span class="o">=</span><span class="s1">'imagenet'</span>
+        <span class="p">)</span>
+        <span class="n">resnet_model</span> <span class="o">=</span> <span class="n">ResNet50</span><span class="p">(</span>
+            <span class="n">include_top</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+            <span class="n">input_tensor</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span>
+            <span class="n">weights</span><span class="o">=</span><span class="s1">'imagenet'</span>
+        <span class="p">)</span>
+        <span class="n">flattened_outputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Flatten</span><span class="p">()(</span><span class="n">inception_model</span><span class="o">.</span><span class="n">output</span><span class="p">),</span>
+                             <span class="n">Flatten</span><span class="p">()(</span><span class="n">xception_model</span><span class="o">.</span><span class="n">output</span><span class="p">),</span>
+                             <span class="n">Flatten</span><span class="p">()(</span><span class="n">resnet_model</span><span class="o">.</span><span class="n">output</span><span class="p">)]</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">Concatenate</span><span class="p">()(</span><span class="n">flattened_outputs</span><span class="p">)</span>
+        <span class="n">pretrained_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+
+    <span class="c1"># We can select from inception, xception, resnet50, vgg19, or a combination of the first three as the basis for our image classifier. We specify include_top=False in these models in order to remove the top level classification layers. These are the layers used to classify images into the categories of the ImageNet competition; since our categories are different, we can remove these top layers and replace them with our own.</span>
+
+    <span class="c1"># def get_model(pretrained_model, all_character_names) continued...</span>
+    <span class="k">if</span> <span class="n">pretrained_model</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="o">.</span><span class="n">ndims</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">Flatten</span><span class="p">()(</span><span class="n">pretrained_model</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">pretrained_model</span><span class="o">.</span><span class="n">output</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)(</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">'relu'</span><span class="p">)(</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)(</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">classes</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">'softmax'</span><span class="p">)(</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">vis_input</span><span class="p">,</span> <span class="n">pretrained_model</span><span class="o">.</span><span class="n">input</span><span class="p">],</span> <span class="n">outputs</span> <span class="o">=</span> <span class="n">output</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">"model"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">pretrained_model</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+        <span class="n">layer</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">line_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">'adam'</span><span class="p">,</span>
+                  <span class="n">loss</span><span class="o">=</span><span class="s1">'categorical_crossentropy'</span><span class="p">,</span>
+                  <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">'accuracy'</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [77]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">build_naive_image_only_model</span><span class="p">(</span><span class="n">text_input_shape</span> <span class="o">=</span><span class="p">(</span><span class="mi">26</span><span class="p">,),</span> <span class="n">image_input_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">pretrained_model</span> <span class="o">=</span> <span class="s1">'vgg19'</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="mi">245</span><span class="p">):</span>
+    
+    <span class="k">print</span><span class="p">(</span><span class="s1">'received pretrained model </span><span class="si">%s</span><span class="s1">'</span><span class="o">%</span><span class="k">pretrained_model</span>)
+    <span class="n">img_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">image_input_shape</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"img_input"</span><span class="p">)</span>
+    <span class="n">vis_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="n">text_input_shape</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">"vis_input"</span><span class="p">)</span>
+    
+    <span class="c1"># Block 1</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">'block1_conv1'</span><span class="p">)(</span><span class="n">img_input</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">'relu'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block1_conv2'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">'relu'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block1_pool'</span><span class="p">,</span>
+                     <span class="n">data_format</span><span class="o">=</span><span class="s2">"channels_first"</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    
+    <span class="c1"># Block 2</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+               <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block2_conv1'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">'relu'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block2_conv2'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">'relu'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block2_pool'</span><span class="p">,</span><span class="n">data_format</span><span class="o">=</span><span class="s2">"channels_first"</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    
+    <span class="c1"># Block 3</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span><span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block3_conv1'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">'relu'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+               <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block3_conv2'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">'relu'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+               <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block3_conv3'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">'relu'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block3_pool'</span><span class="p">,</span>
+                     <span class="n">data_format</span><span class="o">=</span><span class="s2">"channels_first"</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    
+    <span class="c1"># # Block 4</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span><span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block4_conv1'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">'relu'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+                <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block4_conv2'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">'relu'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span><span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block4_conv3'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">'relu'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block4_pool'</span><span class="p">,</span><span class="n">data_format</span><span class="o">=</span><span class="s2">"channels_first"</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="c1"># # Block 5</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+                <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block5_conv1'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">'relu'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+               <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block5_conv2'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">'relu'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+               <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block5_conv3'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">'relu'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">'block5_pool'</span><span class="p">,</span>
+                     <span class="n">data_format</span><span class="o">=</span><span class="s2">"channels_first"</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Flatten</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'flatten'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    
+    <span class="n">output</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">classes</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">'softmax'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">vis_input</span><span class="p">,</span> <span class="n">image_input</span><span class="p">],</span> <span class="n">outputs</span> <span class="o">=</span> <span class="n">output</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">"model"</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">line_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">'adam'</span><span class="p">,</span>
+                  <span class="n">loss</span><span class="o">=</span><span class="s1">'categorical_crossentropy'</span><span class="p">,</span>
+                  <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">'accuracy'</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [79]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">tboard</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">TensorBoard</span><span class="p">(</span><span class="n">log_dir</span><span class="o">=</span><span class="s1">'./logs'</span><span class="p">,</span> <span class="n">histogram_freq</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">write_graph</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">write_grads</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                       <span class="n">write_images</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">embeddings_freq</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">embeddings_layer_names</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">embeddings_metadata</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">embeddings_data</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="n">data_gen</span> <span class="o">=</span> <span class="n">prepare_training_generators</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_classes</span><span class="p">),</span> <span class="n">channel_orientation</span> <span class="o">=</span> <span class="s2">"channels_last"</span><span class="p">)</span>
+<span class="n">model_1</span> <span class="o">=</span> <span class="n">build_naive_image_only_model</span><span class="p">(</span><span class="n">text_input_shape</span> <span class="o">=</span><span class="p">(</span><span class="n">max_seq_len</span><span class="p">,),</span> <span class="n">image_input_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="p">,</span><span class="n">classes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">unique_classes</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>received pretrained model vgg19
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-79-144aa130823a&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> 
+<span class="ansi-green-intense-fg ansi-bold">      4</span> data_gen <span class="ansi-blue-fg">=</span> prepare_training_generators<span class="ansi-blue-fg">(</span>raw_data<span class="ansi-blue-fg">,</span> len<span class="ansi-blue-fg">(</span>unique_classes<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> channel_orientation <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">"channels_last"</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg"> </span>model_1 <span class="ansi-blue-fg">=</span> build_naive_image_only_model<span class="ansi-blue-fg">(</span>text_input_shape <span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">(</span>max_seq_len<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> image_input_shape <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">256</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">256</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">,</span>classes<span class="ansi-blue-fg">=</span>len<span class="ansi-blue-fg">(</span>unique_classes<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      6</span> 
+
+<span class="ansi-green-fg">&lt;ipython-input-77-188663595289&gt;</span> in <span class="ansi-cyan-fg">build_naive_image_only_model</span><span class="ansi-blue-fg">(text_input_shape, image_input_shape, pretrained_model, classes)</span>
+<span class="ansi-green-intense-fg ansi-bold">     73</span> 
+<span class="ansi-green-intense-fg ansi-bold">     74</span>     output <span class="ansi-blue-fg">=</span> Dense<span class="ansi-blue-fg">(</span>classes<span class="ansi-blue-fg">,</span> activation<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">'softmax'</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 75</span><span class="ansi-red-fg">     </span>model <span class="ansi-blue-fg">=</span> Model<span class="ansi-blue-fg">(</span>inputs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>vis_input<span class="ansi-blue-fg">,</span> image_input<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> outputs <span class="ansi-blue-fg">=</span> output<span class="ansi-blue-fg">,</span> name <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">"model"</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     76</span>     model<span class="ansi-blue-fg">.</span>summary<span class="ansi-blue-fg">(</span>line_length<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">200</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     77</span> 
+
+<span class="ansi-red-fg">NameError</span>: global name 'image_input' is not defined</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [73]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">history</span> <span class="o">=</span> <span class="n">model_1</span><span class="o">.</span><span class="n">fit_generator</span><span class="p">(</span><span class="n">data_gen</span><span class="p">,</span>
+                      <span class="n">steps_per_epoch</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span> <span class="o">/</span> <span class="n">batch_size</span><span class="p">,</span>
+                      <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                      <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">tboard</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Epoch 1/100
+8/8 [==============================] - 13s 2s/step - loss: 2.2747 - acc: 0.2344
+Epoch 2/100
+8/8 [==============================] - 10s 1s/step - loss: 2.1784 - acc: 0.2578
+Epoch 3/100
+8/8 [==============================] - 10s 1s/step - loss: 2.3568 - acc: 0.2422
+Epoch 4/100
+8/8 [==============================] - 12s 1s/step - loss: 2.1312 - acc: 0.2266
+Epoch 5/100
+8/8 [==============================] - 12s 1s/step - loss: 2.2289 - acc: 0.2266
+Epoch 6/100
+8/8 [==============================] - 10s 1s/step - loss: 2.0137 - acc: 0.2344
+Epoch 7/100
+8/8 [==============================] - 10s 1s/step - loss: 2.2006 - acc: 0.2266
+Epoch 8/100
+8/8 [==============================] - 10s 1s/step - loss: 2.1117 - acc: 0.2812
+Epoch 9/100
+8/8 [==============================] - 10s 1s/step - loss: 1.9144 - acc: 0.3203
+Epoch 10/100
+8/8 [==============================] - 10s 1s/step - loss: 2.0891 - acc: 0.1953
+Epoch 11/100
+8/8 [==============================] - 10s 1s/step - loss: 2.0163 - acc: 0.3203
+Epoch 12/100
+8/8 [==============================] - 10s 1s/step - loss: 1.7798 - acc: 0.3047
+Epoch 13/100
+8/8 [==============================] - 10s 1s/step - loss: 2.1138 - acc: 0.2031
+Epoch 14/100
+8/8 [==============================] - 10s 1s/step - loss: 1.8167 - acc: 0.3203
+Epoch 15/100
+8/8 [==============================] - 10s 1s/step - loss: 1.7916 - acc: 0.2969
+Epoch 16/100
+8/8 [==============================] - 10s 1s/step - loss: 1.7785 - acc: 0.3125
+Epoch 17/100
+8/8 [==============================] - 10s 1s/step - loss: 1.8975 - acc: 0.2734
+Epoch 18/100
+8/8 [==============================] - 10s 1s/step - loss: 1.9267 - acc: 0.2266
+Epoch 19/100
+8/8 [==============================] - 10s 1s/step - loss: 1.7946 - acc: 0.2734
+Epoch 20/100
+8/8 [==============================] - 10s 1s/step - loss: 1.8580 - acc: 0.2266
+Epoch 21/100
+8/8 [==============================] - 10s 1s/step - loss: 1.7022 - acc: 0.2578
+Epoch 22/100
+8/8 [==============================] - 10s 1s/step - loss: 1.8342 - acc: 0.2656
+Epoch 23/100
+8/8 [==============================] - 10s 1s/step - loss: 1.7658 - acc: 0.2734
+Epoch 24/100
+8/8 [==============================] - 10s 1s/step - loss: 1.8484 - acc: 0.2578
+Epoch 25/100
+8/8 [==============================] - 10s 1s/step - loss: 1.7965 - acc: 0.2812
+Epoch 26/100
+8/8 [==============================] - 10s 1s/step - loss: 1.8056 - acc: 0.2578
+Epoch 27/100
+8/8 [==============================] - 10s 1s/step - loss: 1.6859 - acc: 0.3125
+Epoch 28/100
+8/8 [==============================] - 10s 1s/step - loss: 1.7210 - acc: 0.2891
+Epoch 29/100
+8/8 [==============================] - 10s 1s/step - loss: 1.6246 - acc: 0.3281
+Epoch 30/100
+8/8 [==============================] - 10s 1s/step - loss: 1.7576 - acc: 0.2266
+Epoch 31/100
+8/8 [==============================] - 10s 1s/step - loss: 1.6146 - acc: 0.3359
+Epoch 32/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5936 - acc: 0.2812
+Epoch 33/100
+8/8 [==============================] - 10s 1s/step - loss: 1.6523 - acc: 0.3125
+Epoch 34/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5273 - acc: 0.3438
+Epoch 35/100
+8/8 [==============================] - 10s 1s/step - loss: 1.7496 - acc: 0.2812
+Epoch 36/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5416 - acc: 0.2734
+Epoch 37/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5579 - acc: 0.3125
+Epoch 38/100
+8/8 [==============================] - 10s 1s/step - loss: 1.6648 - acc: 0.3281
+Epoch 39/100
+8/8 [==============================] - 10s 1s/step - loss: 1.6021 - acc: 0.2422
+Epoch 40/100
+8/8 [==============================] - 10s 1s/step - loss: 1.6076 - acc: 0.3047
+Epoch 41/100
+8/8 [==============================] - 10s 1s/step - loss: 1.6762 - acc: 0.3203
+Epoch 42/100
+8/8 [==============================] - 10s 1s/step - loss: 1.6602 - acc: 0.2109
+Epoch 43/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5799 - acc: 0.3359
+Epoch 44/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4442 - acc: 0.2969
+Epoch 45/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5446 - acc: 0.3203
+Epoch 46/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5473 - acc: 0.2891
+Epoch 47/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5127 - acc: 0.2266
+Epoch 48/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5605 - acc: 0.2656
+Epoch 49/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5753 - acc: 0.2812
+Epoch 50/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5772 - acc: 0.2812
+Epoch 51/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5094 - acc: 0.2969
+Epoch 52/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5008 - acc: 0.3438
+Epoch 53/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5417 - acc: 0.3359
+Epoch 54/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4620 - acc: 0.3047
+Epoch 55/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4808 - acc: 0.3047
+Epoch 56/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4148 - acc: 0.3516
+Epoch 57/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4688 - acc: 0.3516
+Epoch 58/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5559 - acc: 0.2969
+Epoch 59/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5121 - acc: 0.3281
+Epoch 60/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5178 - acc: 0.2969
+Epoch 61/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4066 - acc: 0.3516
+Epoch 62/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5303 - acc: 0.2578
+Epoch 63/100
+8/8 [==============================] - 10s 1s/step - loss: 1.5128 - acc: 0.2422
+Epoch 64/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3824 - acc: 0.3594
+Epoch 65/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4602 - acc: 0.2812
+Epoch 66/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4362 - acc: 0.3125
+Epoch 67/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4586 - acc: 0.2891
+Epoch 68/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3747 - acc: 0.3438
+Epoch 69/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3927 - acc: 0.3203
+Epoch 70/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4580 - acc: 0.3281
+Epoch 71/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3876 - acc: 0.3281
+Epoch 72/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4131 - acc: 0.3438
+Epoch 73/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4224 - acc: 0.3203
+Epoch 74/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4736 - acc: 0.2656
+Epoch 75/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3943 - acc: 0.3594
+Epoch 76/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3814 - acc: 0.3125
+Epoch 77/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4414 - acc: 0.2969
+Epoch 78/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4631 - acc: 0.3125
+Epoch 79/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3337 - acc: 0.2969
+Epoch 80/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4321 - acc: 0.3203
+Epoch 81/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3383 - acc: 0.3750
+Epoch 82/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4568 - acc: 0.3125
+Epoch 83/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4265 - acc: 0.2656
+Epoch 84/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4447 - acc: 0.3125
+Epoch 85/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4701 - acc: 0.3438
+Epoch 86/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4041 - acc: 0.3438
+Epoch 87/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3982 - acc: 0.3516
+Epoch 88/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3290 - acc: 0.3516
+Epoch 89/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3881 - acc: 0.3516
+Epoch 90/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3635 - acc: 0.3750
+Epoch 91/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3756 - acc: 0.3125
+Epoch 92/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3590 - acc: 0.3672
+Epoch 93/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3978 - acc: 0.3125
+Epoch 94/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4322 - acc: 0.3359
+Epoch 95/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3851 - acc: 0.3203
+Epoch 96/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3959 - acc: 0.3047
+Epoch 97/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3568 - acc: 0.3281
+Epoch 98/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3666 - acc: 0.3203
+Epoch 99/100
+8/8 [==============================] - 10s 1s/step - loss: 1.3540 - acc: 0.3594
+Epoch 100/100
+8/8 [==============================] - 10s 1s/step - loss: 1.4147 - acc: 0.2656
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">references</span> <span class="o">-</span> 
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">en</span><span class="o">.</span><span class="n">wikipedia</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">wiki</span><span class="o">/</span><span class="n">Apple</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">britannica</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">plant</span><span class="o">/</span><span class="n">apple</span><span class="o">-</span><span class="n">fruit</span><span class="o">-</span><span class="ow">and</span><span class="o">-</span><span class="n">tree</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">food</span><span class="o">.</span><span class="n">ndtv</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">food</span><span class="o">-</span><span class="n">drinks</span><span class="o">/</span><span class="n">apple</span><span class="o">-</span><span class="n">fruit</span><span class="o">-</span><span class="n">benefits</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="n">incredible</span><span class="o">-</span><span class="n">health</span><span class="o">-</span><span class="n">benefits</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">apple</span><span class="o">-</span><span class="n">that</span><span class="o">-</span><span class="n">you</span><span class="o">-</span><span class="n">may</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">have</span><span class="o">-</span><span class="n">known</span><span class="o">-</span><span class="mi">1761603</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+</section>
+      </section>
+      <footer>
+        <p><small>&copy; Implementation of Machine Learning Algorithms &mdash; Theme based on Sundown by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <!-- Scale fix -->
+    <script>
+      var metas = document.getElementsByTagName('meta');
+      var i;
+      
+      if (navigator.userAgent.match(/iPhone/i)) {
+        for (i=0; i<metas.length; i++) {
+          if (metas[i].name == "viewport") {
+            metas[i].content = "width=device-width, minimum-scale=1.0, maximum-scale=1.0";
+          }
+        }
+      
+        document.addEventListener("gesturestart", gestureStart, false);
+      }
+
+      function gestureStart() {
+        for (i=0; i<metas.length; i++) {
+          if (metas[i].name == "viewport") {
+            metas[i].content = "width=device-width, minimum-scale=0.25, maximum-scale=1.6";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

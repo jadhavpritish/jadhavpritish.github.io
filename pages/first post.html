@@ -21,6 +21,7 @@
 
 <p>
     <div class="view"><a href="https://jadhavpritish.github.io/pages/first post.html">Binary Classification using Logictic Regression using numpy</a></div>
+    <div class="view"><a href="https://jadhavpritish.github.io/pages/image_text_classification.html">Product Classificatication Using Image and Text (Deep Learning)</a></div>
     <div class="view"><a href="https://jadhavpritish.github.io/pages/Regression algorithm.html">Linear regression using numpy</a></div>
   <div class="view"><a href="https://jadhavpritish.github.io/archives.html">Archives</a></div>
 </p>
@@ -1015,7 +1016,26 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Lets Start by import python libraries that will help us accomplish the task</p>
+<p>Classification Algorithms  -</p>
+<p>Classification is a branch of supervised machine learning algorithms where target values are discrete.</p>
+<p><strong>Problem Definition</strong> - <br/> 
+Suppose you are working as Supervising officer at a food packaging company where your department handles packaging of 'Apples' and 'Bananas'.
+<br/>
+<img src="./data/binary_classification/notebook_images/apples_conveyor1.jpg"/>
+However, a bottleneck in the packaging process is the fact that currently, fruits are sorted manually by a team of 10 people. 
+<br/>
+<img src="./data/binary_classification/notebook_images/manual_sorting_example.jpg"/>
+<br/>
+However, in order to improve productivity, you would like to add more layer of processing to the packaging process wherein a camera captures the image of the incoming fruit and automatically sorts it into categories 'Apples' v/s 'Bananas'.</p>
+<p>In this case, a traditional classification algorithm like Logistic Regression can definitely help us. So, lets dive right into it.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Lets-Start-by-import-python-libraries-that-will-help-us-accomplish-the-task">Lets Start by import python libraries that will help us accomplish the task<a class="anchor-link" href="#Lets-Start-by-import-python-libraries-that-will-help-us-accomplish-the-task">¶</a></h3>
 </div>
 </div>
 </div>
@@ -1041,8 +1061,8 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>$ Notations \ that \ we \ will \ be \ using \ throughout \ are \ as \ follows - $</p>
-<p>\begin{align} X - Input \ data \end{align}<br/>
-\begin{align} Y - labels \end{align}<br/>
+<p>\begin{align} X - Input \ data \end{align} <br/>
+\begin{align} Y - Target \ labels \end{align}<br/>
 \begin{align} W - \ weights \ vector \ (to \ be \ estimated \ using \ training \ data) \end{align}<br/>
 \begin{align} b - \ intercept \ for \ the \ decision \ boundary \end{align}<br/></p>
 <p>$ Notations \ for \ tracking \ dimensions \ are \ as \ follows- $
@@ -1270,16 +1290,13 @@ Therefore, for one training example, the gradient wrt weights can be concisely c
 \\
 \frac{\partial L}{\partial b} = \frac{1}{m} \sum_{i =1}^{m} (A - Y^{(i)}) \tag{16}\label{16}
 \end{align}</p>
-<p><strong>Step 4.1</strong> Gradient Descent Equations - 
+<p><strong>Step 4.1</strong> The weights can be updated using gradient descent equations as follows - 
 \begin{align}
 \\
 W = W - \frac{\partial L}{\partial W} \tag{17} \label{17}
 \\
 b = b - \frac{\partial L}{\partial b} \tag{18} \label{18}
-\end{align}
-The weights can be updated as follows -</p>
-<p>For Succesfully training a Logistic Regression model, we need to compute gradient necesaary for implementing Gradient Descent Algorithm.</p>
-<p>Lets go over the proof of computing gradients for Logistic Regression.</p>
+\end{align}</p>
 </div>
 </div>
 </div>
