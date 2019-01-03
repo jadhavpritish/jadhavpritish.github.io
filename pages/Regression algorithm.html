@@ -1044,7 +1044,7 @@ h6:hover .anchor-link {
 </style>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [117]:</div>
+<div class="prompt input_prompt">In [42]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -1059,7 +1059,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [190]:</div>
+<div class="prompt input_prompt">In [43]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">load_diabetes_data</span><span class="p">():</span>
@@ -1073,7 +1073,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [191]:</div>
+<div class="prompt input_prompt">In [44]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">get_scale_object</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
@@ -1089,7 +1089,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [192]:</div>
+<div class="prompt input_prompt">In [45]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">raw_X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">load_diabetes_data</span><span class="p">()</span>
@@ -1106,7 +1106,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[ 0.03807591 -0.00188202  0.08529891 -0.08906294  0.00538306] [ 0.66666667  0.48333333  0.88333333  0.08333333  0.51666667]
+<pre>[ 0.03807591 -0.00188202  0.08529891 -0.08906294  0.00538306] [0.66666667 0.48333333 0.88333333 0.08333333 0.51666667]
 (10, 442) (1, 442)
 </pre>
 </div>
@@ -1116,7 +1116,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [193]:</div>
+<div class="prompt input_prompt">In [46]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">initialize_dimensions</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -1130,7 +1130,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [194]:</div>
+<div class="prompt input_prompt">In [56]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">initialize_weight_vectors</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
@@ -1146,7 +1146,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [195]:</div>
+<div class="prompt input_prompt">In [57]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="n">W</span><span class="o">.</span><span class="n">shape</span>
@@ -1172,11 +1172,11 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [196]:</div>
+<div class="prompt input_prompt">In [70]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">compute_regression_cost</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-    <span class="n">cost</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> 
+    <span class="n">cost</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> 
     <span class="k">return</span> <span class="n">cost</span>
 </pre></div>
 </div>
@@ -1185,7 +1185,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [197]:</div>
+<div class="prompt input_prompt">In [71]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">compute_regression_gradients</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
@@ -1199,7 +1199,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [198]:</div>
+<div class="prompt input_prompt">In [72]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">propagation</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
@@ -1224,7 +1224,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [201]:</div>
+<div class="prompt input_prompt">In [75]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">train_linear_regression</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">print_cost</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
@@ -1237,7 +1237,6 @@ h6:hover .anchor-link {
     <span class="n">costs</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
         <span class="n">grad</span><span class="p">,</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">propagation</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
-        
         <span class="n">dw</span> <span class="o">=</span> <span class="n">grad</span><span class="p">[</span><span class="s1">'dw'</span><span class="p">]</span>
         <span class="n">db</span> <span class="o">=</span> <span class="n">grad</span><span class="p">[</span><span class="s1">'db'</span><span class="p">]</span>
         
@@ -1268,7 +1267,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [202]:</div>
+<div class="prompt input_prompt">In [76]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span>
@@ -1296,107 +1295,107 @@ h6:hover .anchor-link {
 There are 10 features and 442 training examples
 W has a shape of 1 rows and 10 columns
 b has a shape of 1 rows and 1 columns
-Cost after iteration 0: 999278251829.000000 | rmse after iteration 0: 149.977957
-Cost after iteration 100: 46869619.415281 | rmse after iteration 100: 62.941357
-Cost after iteration 200: 26974656.805608 | rmse after iteration 200: 59.476737
-Cost after iteration 300: 11084746.768251 | rmse after iteration 300: 57.450443
-Cost after iteration 400: 3473716.022191 | rmse after iteration 400: 56.206504
-Cost after iteration 500: 708338.635647 | rmse after iteration 500: 55.418231
-Cost after iteration 600: 30274.600914 | rmse after iteration 600: 54.903908
-Cost after iteration 700: 56772.425665 | rmse after iteration 700: 54.559025
-Cost after iteration 800: 225884.102271 | rmse after iteration 800: 54.321991
-Cost after iteration 900: 354750.504582 | rmse after iteration 900: 54.155510
-Cost after iteration 1000: 410071.521504 | rmse after iteration 1000: 54.036346
-Cost after iteration 1100: 406687.408941 | rmse after iteration 1100: 53.949611
-Cost after iteration 1200: 368061.322605 | rmse after iteration 1200: 53.885519
-Cost after iteration 1300: 313484.228526 | rmse after iteration 1300: 53.837494
-Cost after iteration 1400: 255671.434569 | rmse after iteration 1400: 53.801033
-Cost after iteration 1500: 201777.952038 | rmse after iteration 1500: 53.773002
-Cost after iteration 1600: 155109.521984 | rmse after iteration 1600: 53.751191
-Cost after iteration 1700: 116613.990498 | rmse after iteration 1700: 53.734022
-Cost after iteration 1800: 85949.368722 | rmse after iteration 1800: 53.720355
-Cost after iteration 1900: 62169.875155 | rmse after iteration 1900: 53.709359
-Cost after iteration 2000: 44130.686677 | rmse after iteration 2000: 53.700421
-Cost after iteration 2100: 30706.121982 | rmse after iteration 2100: 53.693085
-Cost after iteration 2200: 20892.810319 | rmse after iteration 2200: 53.687010
-Cost after iteration 2300: 13846.486931 | rmse after iteration 2300: 53.681934
-Cost after iteration 2400: 8883.302832 | rmse after iteration 2400: 53.677658
-Cost after iteration 2500: 5464.213198 | rmse after iteration 2500: 53.674028
-Cost after iteration 2600: 3173.007984 | rmse after iteration 2600: 53.670922
-Cost after iteration 2700: 1693.605943 | rmse after iteration 2700: 53.668245
-Cost after iteration 2800: 789.312340 | rmse after iteration 2800: 53.665923
-Cost after iteration 2900: 285.094085 | rmse after iteration 2900: 53.663892
-Cost after iteration 3000: 53.052117 | rmse after iteration 3000: 53.662105
-Cost after iteration 3100: 0.848253 | rmse after iteration 3100: 53.660521
-Cost after iteration 3200: 62.673909 | rmse after iteration 3200: 53.659108
-Cost after iteration 3300: 192.312304 | rmse after iteration 3300: 53.657838
-Cost after iteration 3400: 357.875091 | rmse after iteration 3400: 53.656688
-Cost after iteration 3500: 537.850606 | rmse after iteration 3500: 53.655642
-Cost after iteration 3600: 718.163585 | rmse after iteration 3600: 53.654682
-Cost after iteration 3700: 890.005446 | rmse after iteration 3700: 53.653795
-Cost after iteration 3800: 1048.245859 | rmse after iteration 3800: 53.652972
-Cost after iteration 3900: 1190.279156 | rmse after iteration 3900: 53.652203
-Cost after iteration 4000: 1315.193691 | rmse after iteration 4000: 53.651479
-Cost after iteration 4100: 1423.179411 | rmse after iteration 4100: 53.650795
-Cost after iteration 4200: 1515.110004 | rmse after iteration 4200: 53.650145
-Cost after iteration 4300: 1592.252154 | rmse after iteration 4300: 53.649524
-Cost after iteration 4400: 1656.066668 | rmse after iteration 4400: 53.648929
-Cost after iteration 4500: 1708.075532 | rmse after iteration 4500: 53.648355
-Cost after iteration 4600: 1749.775816 | rmse after iteration 4600: 53.647801
-Cost after iteration 4700: 1782.586537 | rmse after iteration 4700: 53.647263
-Cost after iteration 4800: 1807.818396 | rmse after iteration 4800: 53.646740
-Cost after iteration 4900: 1826.659120 | rmse after iteration 4900: 53.646229
-Cost after iteration 5000: 1840.169200 | rmse after iteration 5000: 53.645729
-Cost after iteration 5100: 1849.284354 | rmse after iteration 5100: 53.645240
-Cost after iteration 5200: 1854.822101 | rmse after iteration 5200: 53.644759
-Cost after iteration 5300: 1857.490674 | rmse after iteration 5300: 53.644286
-Cost after iteration 5400: 1857.899043 | rmse after iteration 5400: 53.643820
-Cost after iteration 5500: 1856.567233 | rmse after iteration 5500: 53.643361
-Cost after iteration 5600: 1853.936422 | rmse after iteration 5600: 53.642907
-Cost after iteration 5700: 1850.378488 | rmse after iteration 5700: 53.642458
-Cost after iteration 5800: 1846.204837 | rmse after iteration 5800: 53.642014
-Cost after iteration 5900: 1841.674432 | rmse after iteration 5900: 53.641575
-Cost after iteration 6000: 1837.000979 | rmse after iteration 6000: 53.641139
-Cost after iteration 6100: 1832.359318 | rmse after iteration 6100: 53.640708
-Cost after iteration 6200: 1827.891045 | rmse after iteration 6200: 53.640279
-Cost after iteration 6300: 1823.709438 | rmse after iteration 6300: 53.639854
-Cost after iteration 6400: 1819.903732 | rmse after iteration 6400: 53.639432
-Cost after iteration 6500: 1816.542831 | rmse after iteration 6500: 53.639013
-Cost after iteration 6600: 1813.678504 | rmse after iteration 6600: 53.638597
-Cost after iteration 6700: 1811.348142 | rmse after iteration 6700: 53.638183
-Cost after iteration 6800: 1809.577111 | rmse after iteration 6800: 53.637772
-Cost after iteration 6900: 1808.380775 | rmse after iteration 6900: 53.637363
-Cost after iteration 7000: 1807.766215 | rmse after iteration 7000: 53.636957
-Cost after iteration 7100: 1807.733698 | rmse after iteration 7100: 53.636552
-Cost after iteration 7200: 1808.277920 | rmse after iteration 7200: 53.636150
-Cost after iteration 7300: 1809.389066 | rmse after iteration 7300: 53.635750
-Cost after iteration 7400: 1811.053704 | rmse after iteration 7400: 53.635352
-Cost after iteration 7500: 1813.255541 | rmse after iteration 7500: 53.634956
-Cost after iteration 7600: 1815.976065 | rmse after iteration 7600: 53.634562
-Cost after iteration 7700: 1819.195073 | rmse after iteration 7700: 53.634170
-Cost after iteration 7800: 1822.891129 | rmse after iteration 7800: 53.633780
-Cost after iteration 7900: 1827.041941 | rmse after iteration 7900: 53.633391
-Cost after iteration 8000: 1831.624670 | rmse after iteration 8000: 53.633005
-Cost after iteration 8100: 1836.616195 | rmse after iteration 8100: 53.632620
-Cost after iteration 8200: 1841.993332 | rmse after iteration 8200: 53.632236
-Cost after iteration 8300: 1847.733006 | rmse after iteration 8300: 53.631855
-Cost after iteration 8400: 1853.812402 | rmse after iteration 8400: 53.631475
-Cost after iteration 8500: 1860.209079 | rmse after iteration 8500: 53.631096
-Cost after iteration 8600: 1866.901069 | rmse after iteration 8600: 53.630719
-Cost after iteration 8700: 1873.866947 | rmse after iteration 8700: 53.630344
-Cost after iteration 8800: 1881.085894 | rmse after iteration 8800: 53.629971
-Cost after iteration 8900: 1888.537739 | rmse after iteration 8900: 53.629598
-Cost after iteration 9000: 1896.202989 | rmse after iteration 9000: 53.629228
-Cost after iteration 9100: 1904.062856 | rmse after iteration 9100: 53.628859
-Cost after iteration 9200: 1912.099270 | rmse after iteration 9200: 53.628491
-Cost after iteration 9300: 1920.294884 | rmse after iteration 9300: 53.628125
-Cost after iteration 9400: 1928.633076 | rmse after iteration 9400: 53.627760
-Cost after iteration 9500: 1937.097947 | rmse after iteration 9500: 53.627396
-Cost after iteration 9600: 1945.674311 | rmse after iteration 9600: 53.627034
-Cost after iteration 9700: 1954.347687 | rmse after iteration 9700: 53.626673
-Cost after iteration 9800: 1963.104282 | rmse after iteration 9800: 53.626314
-Cost after iteration 9900: 1971.930981 | rmse after iteration 9900: 53.625956
-0.51504871602
+Cost after iteration 0: 14537.240950 | rmse after iteration 0: 149.977957
+Cost after iteration 100: 1983.709876 | rmse after iteration 100: 62.941357
+Cost after iteration 200: 1770.285648 | rmse after iteration 200: 59.476737
+Cost after iteration 300: 1651.177065 | rmse after iteration 300: 57.450443
+Cost after iteration 400: 1580.135928 | rmse after iteration 400: 56.206504
+Cost after iteration 500: 1535.939507 | rmse after iteration 500: 55.418231
+Cost after iteration 600: 1507.448721 | rmse after iteration 600: 54.903908
+Cost after iteration 700: 1488.498400 | rmse after iteration 700: 54.559025
+Cost after iteration 800: 1475.546513 | rmse after iteration 800: 54.321991
+Cost after iteration 900: 1466.485455 | rmse after iteration 900: 54.155510
+Cost after iteration 1000: 1460.018007 | rmse after iteration 1000: 54.036346
+Cost after iteration 1100: 1455.320303 | rmse after iteration 1100: 53.949611
+Cost after iteration 1200: 1451.854343 | rmse after iteration 1200: 53.885519
+Cost after iteration 1300: 1449.260317 | rmse after iteration 1300: 53.837494
+Cost after iteration 1400: 1447.292708 | rmse after iteration 1400: 53.801033
+Cost after iteration 1500: 1445.781137 | rmse after iteration 1500: 53.773002
+Cost after iteration 1600: 1444.605662 | rmse after iteration 1600: 53.751191
+Cost after iteration 1700: 1443.680780 | rmse after iteration 1700: 53.734022
+Cost after iteration 1800: 1442.944841 | rmse after iteration 1800: 53.720355
+Cost after iteration 1900: 1442.352919 | rmse after iteration 1900: 53.709359
+Cost after iteration 2000: 1441.871934 | rmse after iteration 2000: 53.700421
+Cost after iteration 2100: 1441.477285 | rmse after iteration 2100: 53.693085
+Cost after iteration 2200: 1441.150485 | rmse after iteration 2200: 53.687010
+Cost after iteration 2300: 1440.877504 | rmse after iteration 2300: 53.681934
+Cost after iteration 2400: 1440.647590 | rmse after iteration 2400: 53.677658
+Cost after iteration 2500: 1440.452414 | rmse after iteration 2500: 53.674028
+Cost after iteration 2600: 1440.285470 | rmse after iteration 2600: 53.670922
+Cost after iteration 2700: 1440.141623 | rmse after iteration 2700: 53.668245
+Cost after iteration 2800: 1440.016788 | rmse after iteration 2800: 53.665923
+Cost after iteration 2900: 1439.907686 | rmse after iteration 2900: 53.663892
+Cost after iteration 3000: 1439.811668 | rmse after iteration 3000: 53.662105
+Cost after iteration 3100: 1439.726576 | rmse after iteration 3100: 53.660521
+Cost after iteration 3200: 1439.650645 | rmse after iteration 3200: 53.659108
+Cost after iteration 3300: 1439.582419 | rmse after iteration 3300: 53.657838
+Cost after iteration 3400: 1439.520696 | rmse after iteration 3400: 53.656688
+Cost after iteration 3500: 1439.464474 | rmse after iteration 3500: 53.655642
+Cost after iteration 3600: 1439.412919 | rmse after iteration 3600: 53.654682
+Cost after iteration 3700: 1439.365333 | rmse after iteration 3700: 53.653795
+Cost after iteration 3800: 1439.321131 | rmse after iteration 3800: 53.652972
+Cost after iteration 3900: 1439.279818 | rmse after iteration 3900: 53.652203
+Cost after iteration 4000: 1439.240978 | rmse after iteration 4000: 53.651479
+Cost after iteration 4100: 1439.204262 | rmse after iteration 4100: 53.650795
+Cost after iteration 4200: 1439.169371 | rmse after iteration 4200: 53.650145
+Cost after iteration 4300: 1439.136053 | rmse after iteration 4300: 53.649524
+Cost after iteration 4400: 1439.104095 | rmse after iteration 4400: 53.648929
+Cost after iteration 4500: 1439.073315 | rmse after iteration 4500: 53.648355
+Cost after iteration 4600: 1439.043558 | rmse after iteration 4600: 53.647801
+Cost after iteration 4700: 1439.014693 | rmse after iteration 4700: 53.647263
+Cost after iteration 4800: 1438.986608 | rmse after iteration 4800: 53.646740
+Cost after iteration 4900: 1438.959207 | rmse after iteration 4900: 53.646229
+Cost after iteration 5000: 1438.932409 | rmse after iteration 5000: 53.645729
+Cost after iteration 5100: 1438.906142 | rmse after iteration 5100: 53.645240
+Cost after iteration 5200: 1438.880349 | rmse after iteration 5200: 53.644759
+Cost after iteration 5300: 1438.854976 | rmse after iteration 5300: 53.644286
+Cost after iteration 5400: 1438.829981 | rmse after iteration 5400: 53.643820
+Cost after iteration 5500: 1438.805326 | rmse after iteration 5500: 53.643361
+Cost after iteration 5600: 1438.780977 | rmse after iteration 5600: 53.642907
+Cost after iteration 5700: 1438.756908 | rmse after iteration 5700: 53.642458
+Cost after iteration 5800: 1438.733094 | rmse after iteration 5800: 53.642014
+Cost after iteration 5900: 1438.709514 | rmse after iteration 5900: 53.641575
+Cost after iteration 6000: 1438.686150 | rmse after iteration 6000: 53.641139
+Cost after iteration 6100: 1438.662987 | rmse after iteration 6100: 53.640708
+Cost after iteration 6200: 1438.640011 | rmse after iteration 6200: 53.640279
+Cost after iteration 6300: 1438.617210 | rmse after iteration 6300: 53.639854
+Cost after iteration 6400: 1438.594574 | rmse after iteration 6400: 53.639432
+Cost after iteration 6500: 1438.572094 | rmse after iteration 6500: 53.639013
+Cost after iteration 6600: 1438.549761 | rmse after iteration 6600: 53.638597
+Cost after iteration 6700: 1438.527570 | rmse after iteration 6700: 53.638183
+Cost after iteration 6800: 1438.505513 | rmse after iteration 6800: 53.637772
+Cost after iteration 6900: 1438.483585 | rmse after iteration 6900: 53.637363
+Cost after iteration 7000: 1438.461781 | rmse after iteration 7000: 53.636957
+Cost after iteration 7100: 1438.440098 | rmse after iteration 7100: 53.636552
+Cost after iteration 7200: 1438.418530 | rmse after iteration 7200: 53.636150
+Cost after iteration 7300: 1438.397075 | rmse after iteration 7300: 53.635750
+Cost after iteration 7400: 1438.375729 | rmse after iteration 7400: 53.635352
+Cost after iteration 7500: 1438.354490 | rmse after iteration 7500: 53.634956
+Cost after iteration 7600: 1438.333354 | rmse after iteration 7600: 53.634562
+Cost after iteration 7700: 1438.312319 | rmse after iteration 7700: 53.634170
+Cost after iteration 7800: 1438.291383 | rmse after iteration 7800: 53.633780
+Cost after iteration 7900: 1438.270545 | rmse after iteration 7900: 53.633391
+Cost after iteration 8000: 1438.249801 | rmse after iteration 8000: 53.633005
+Cost after iteration 8100: 1438.229150 | rmse after iteration 8100: 53.632620
+Cost after iteration 8200: 1438.208591 | rmse after iteration 8200: 53.632236
+Cost after iteration 8300: 1438.188121 | rmse after iteration 8300: 53.631855
+Cost after iteration 8400: 1438.167740 | rmse after iteration 8400: 53.631475
+Cost after iteration 8500: 1438.147446 | rmse after iteration 8500: 53.631096
+Cost after iteration 8600: 1438.127237 | rmse after iteration 8600: 53.630719
+Cost after iteration 8700: 1438.107113 | rmse after iteration 8700: 53.630344
+Cost after iteration 8800: 1438.087071 | rmse after iteration 8800: 53.629971
+Cost after iteration 8900: 1438.067111 | rmse after iteration 8900: 53.629598
+Cost after iteration 9000: 1438.047232 | rmse after iteration 9000: 53.629228
+Cost after iteration 9100: 1438.027432 | rmse after iteration 9100: 53.628859
+Cost after iteration 9200: 1438.007711 | rmse after iteration 9200: 53.628491
+Cost after iteration 9300: 1437.988067 | rmse after iteration 9300: 53.628125
+Cost after iteration 9400: 1437.968500 | rmse after iteration 9400: 53.627760
+Cost after iteration 9500: 1437.949008 | rmse after iteration 9500: 53.627396
+Cost after iteration 9600: 1437.929590 | rmse after iteration 9600: 53.627034
+Cost after iteration 9700: 1437.910246 | rmse after iteration 9700: 53.626673
+Cost after iteration 9800: 1437.890975 | rmse after iteration 9800: 53.626314
+Cost after iteration 9900: 1437.871776 | rmse after iteration 9900: 53.625956
+0.5150487160198238
 </pre>
 </div>
 </div>
