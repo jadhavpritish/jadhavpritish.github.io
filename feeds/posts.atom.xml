@@ -6428,10 +6428,10 @@ h6:hover .anchor-link {
 &lt;p&gt;&lt;strong&gt;Problem Definition&lt;/strong&gt; - &lt;br&gt; 
 Suppose you are working as Supervising officer at a food packaging company where your department handles packaging of 'Apples' and 'Bananas'.
 &lt;br&gt;
-&lt;img src="./data/binary_classification/notebook_images/apples_conveyor1.jpg"&gt;
+&lt;img src="./images/binary_classification/notebook_images/apples_conveyor1.jpg"&gt;
 However, a bottleneck in the packaging process is the fact that currently, fruits are sorted manually by a team of 10 people. 
 &lt;br&gt;
-&lt;img src="./data/binary_classification/notebook_images/manual_sorting_example.jpg"&gt;
+&lt;img src="./images/binary_classification/notebook_images/manual_sorting_example.jpg"&gt;
 &lt;br&gt;
 However, in order to improve productivity, you would like to add more layer of processing to the packaging process wherein a camera captures the image of the incoming fruit and automatically sorts it into categories 'Apples' v/s 'Bananas'.&lt;/p&gt;
 &lt;p&gt;In this case, a traditional classification algorithm like Logistic Regression can definitely help us. So, lets dive right into it.&lt;/p&gt;
