@@ -5,22 +5,29 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/</loc>
-<lastmod>2019-04-17T21:43:42-00:00</lastmod>
+<lastmod>2019-05-24T12:21:52-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/archives.html</loc>
-<lastmod>2019-04-17T21:43:42-00:00</lastmod>
+<lastmod>2019-05-24T12:21:52-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/tags.html</loc>
-<lastmod>2019-04-17T21:43:42-00:00</lastmod>
+<lastmod>2019-05-24T12:21:52-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/2019/05/Key Phrase Extraction Using Texrank..html</loc>
+<lastmod>2019-05-24T18:00:00+05:30</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -54,21 +61,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/category/posts</loc>
-<lastmod>2018-12-03T18:00:00+05:53</lastmod>
+<lastmod>2019-05-24T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/python</loc>
-<lastmod>2018-12-03T18:00:00+05:53</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://jadhavpritish.github.io/tag/linear-programming</loc>
-<lastmod>2018-12-03T18:00:00+05:53</lastmod>
+<loc>https://jadhavpritish.github.io/tag/nlp</loc>
+<lastmod>2019-05-24T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -81,8 +81,22 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/numpy</loc>
-<lastmod>2018-06-08T18:00:00+05:53</lastmod>
+<loc>https://jadhavpritish.github.io/tag/linear-programming</loc>
+<lastmod>2018-12-03T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/tag/python</loc>
+<lastmod>2019-05-24T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/tag/pagerank</loc>
+<lastmod>2019-05-24T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -95,8 +109,29 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://jadhavpritish.github.io/tag/numpy</loc>
+<lastmod>2018-06-08T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/tag/nltk</loc>
+<lastmod>2019-05-24T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://jadhavpritish.github.io/author/pritish-jadhav</loc>
 <lastmod>2018-12-03T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/author/pritish-sunil-jadhav</loc>
+<lastmod>2019-05-24T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
