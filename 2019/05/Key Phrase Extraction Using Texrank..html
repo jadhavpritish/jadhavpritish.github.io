@@ -1231,15 +1231,21 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Problem-Statement">Problem Statement<a class="anchor-link" href="#Problem-Statement">¶</a></h3><p>Suppose you are working for a Newspaper Publisher and you are assigned with the task of assigning tags to each of the articles only using the text mentioned in that article. There are more than 1 lakh articles to be tagged.</p>
+<h3 id="Problem-Statement">Problem Statement<a class="anchor-link" href="#Problem-Statement">¶</a></h3><p>Suppose you are working for a Newspaper Publisher and you are assigned a task of tagging each of the articles <b>using text mentioned in that article</b>. You donwload the corpus of data and realise that there are more than 1 lakh articles to be tagged. You have two options to choose from -</p>
+<ol>
+<li>Manually tagging articles</li>
+<li>Designing an Automated System for phrase extraction.</li>
+</ol>
 <p>An attempt to manually accomplish the task has following disadvantages -</p>
 <ol>
 <li>Manual processes are subjective with hardly any quality control. </li>
 <li>The sunk cost (money plus time) associated with the manual excercise is huge. </li>
-<li>A manual extraction model is not scalable. With time constraints, the only option available will to add more team members which will diminish the returns on the project. </li>
+<li>A manual extraction model is not scalable. With time constraints, the only option available will to add more resources which will diminish the returns on the project. </li>
 <li>The results will not be reproducible.</li>
 </ol>
-<p>We need an Extractive NLP model which can do the task for us at scale. TextRank is inspired from Google's PageRank algorithm which leverages Markov chains for ranking web pages. The Pagerank algorithm is named after Google cofounder - Larry Page. The Pagerank Algorithm outputs the probability distribution used to represent the likelihood that a person clicking randomly on links will arrive on a particular page.</p>
+<p>Its evident that manual process has a number of disadvantages. This leaves us with option 2 of 'Designing an Automated System for phrase extraction'.</p>
+<p><b> How can we automate the process?</b></p>
+<p>To accomplish the task we need an Extractive NLP (Natural Language Processing) model which can do the task for us at scale. TextRank is inspired from Google's PageRank algorithm which leverages Markov chains for ranking web pages. The Pagerank algorithm is named after Google cofounder - Larry Page. The Pagerank Algorithm outputs the probability distribution used to represent the likelihood that a person clicking randomly on links will arrive on a particular page.</p>
 <p>In this article, we shall try to extend pagerank algorithm to textual data and implement it from sctrach using python.</p>
 </div>
 </div>
@@ -1259,7 +1265,7 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Data---">Data  -<a class="anchor-link" href="#Data---">¶</a></h3><p>We shall be using the "all-the-news" data published on <a href="https://www.kaggle.com/snapcrack/all-the-news">kaggle</a></p>
+<h3 id="Data---">Data  -<a class="anchor-link" href="#Data---">¶</a></h3><p>We shall be using "all-the-news" data published on <a href="https://www.kaggle.com/snapcrack/all-the-news">kaggle</a></p>
 <p>The Description of dataset is as follows -</p>
 <ol>
 <li>unnamed - index column</li>
