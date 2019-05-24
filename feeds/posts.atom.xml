@@ -1151,7 +1151,7 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Problem-Statement"&gt;Problem Statement&lt;a class="anchor-link" href="#Problem-Statement"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Suppose you are working for a Newspaper Publisher and you are assigned a task of tagging each of the articles &lt;b&gt;using text mentioned in that article&lt;/b&gt;. You donwload the corpus of data and realise that there are more than 1 lakh articles to be tagged. You have two options to choose from -&lt;/p&gt;
+&lt;h3 id="Problem-Statement"&gt;Problem Statement&lt;a class="anchor-link" href="#Problem-Statement"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Suppose you are working for a Newspaper Publisher and you are assigned a task of tagging each of the articles &lt;b&gt;using text mentioned in the articles&lt;/b&gt;. You donwload the corpus of data and realise that there are more than 1 lakh articles to be tagged. You have two options to choose from -&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Manually tagging articles&lt;/li&gt;
 &lt;li&gt;Designing an Automated System for phrase extraction.&lt;/li&gt;
