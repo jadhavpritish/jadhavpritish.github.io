@@ -5,27 +5,27 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/</loc>
-<lastmod>2019-05-24T12:39:02-00:00</lastmod>
+<lastmod>2019-06-03T15:12:15-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/archives.html</loc>
-<lastmod>2019-05-24T12:39:02-00:00</lastmod>
+<lastmod>2019-06-03T15:12:15-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/tags.html</loc>
-<lastmod>2019-05-24T12:39:02-00:00</lastmod>
+<lastmod>2019-06-03T15:12:15-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2019/05/Key Phrase Extraction Using Texrank..html</loc>
+<loc>https://jadhavpritish.github.io/2019/05/TextRank Algorithm for Key-Phrase Extraction / Text Summarization..html</loc>
 <lastmod>2019-05-24T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
@@ -46,7 +46,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2018/07/first post.html</loc>
+<loc>https://jadhavpritish.github.io/2018/07/Logistic Regression from scratch..html</loc>
 <lastmod>2018-07-08T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
@@ -81,6 +81,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://jadhavpritish.github.io/tag/dream11-prediction</loc>
+<lastmod>2018-12-03T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/tag/classification</loc>
+<lastmod>2018-07-08T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://jadhavpritish.github.io/tag/linear-programming</loc>
 <lastmod>2018-12-03T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
@@ -95,6 +109,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://jadhavpritish.github.io/tag/resource-allocation</loc>
+<lastmod>2018-12-03T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/tag/machine-learning</loc>
+<lastmod>2018-07-08T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://jadhavpritish.github.io/tag/pagerank</loc>
 <lastmod>2019-05-24T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
@@ -102,8 +130,22 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://jadhavpritish.github.io/tag/logistic-regression</loc>
+<lastmod>2018-07-08T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://jadhavpritish.github.io/tag/fantasy-sports</loc>
 <lastmod>2018-12-03T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/tag/supervised-learning</loc>
+<lastmod>2018-07-08T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
