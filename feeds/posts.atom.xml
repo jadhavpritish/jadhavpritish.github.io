@@ -1165,7 +1165,7 @@ h6:hover .anchor-link {
 &lt;li&gt;The results will not be reproducible.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Its evident that manual process has a number of disadvantages.
-&lt;img src="../../images/key_phrase_extraction/notebook_images/frustrated_meme.jpg"/&gt;&lt;br/&gt;&lt;/p&gt;
+&lt;img src="./../../images/key_phrase_extraction/notebook_images/frustrated_meme.jpg"/&gt;&lt;br/&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;This leaves us with option 2 of 'Designing an Automated System for phrase extraction'.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;b&gt; How can we automate the process?&lt;/b&gt;&lt;/p&gt;
 &lt;p&gt;To accomplish the task we need an Extractive NLP (Natural Language Processing) model which can do the task for us at scale. TextRank is inspired from Google's PageRank algorithm which leverages Markov chains for ranking web pages. The Pagerank algorithm is named after Google cofounder - Larry Page. The Pagerank Algorithm outputs the probability distribution used to represent the likelihood that a person clicking randomly on links will arrive on a particular page.&lt;/p&gt;
