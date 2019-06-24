@@ -1291,49 +1291,50 @@ h6:hover .anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Before we jump into the implementation bits, it would be helpful to chalk out the roadmap for succesfully building and training a Deep Neural Network.</p>
-<p><strong>1. Loading the data-</strong></p>
-<pre><code>* First we shall implement the code for successfully reading the cifar-10 dataset. 
-
-</code></pre>
-<p><strong>2. Visualizing data-</strong></p>
-<pre><code>* Visualizing different aspects of our data often helps us to understand the problem statement and underlying dataset better. 
-* This visualization step can be as detailed as one would like it to be. 
-* This includes performing Exploratory analysis, Outlier Analysis, Image Visualization, Class distribution etc. 
-* Data Visualization and pre-processing steps are often under-rated but the analysis directly influences the choice of certaon hyper parameters in your ML model. 
-* For instance, consider a dataset with severe class imbalance, say a 99:1 ratio. That is, for every 99 positive data points, we have 1 negative data point. Obviously, choosing accuracy as our evaluation metric will result in incorrect results. In such cases, a quick visualization of class distribution will help us choose better evaluation metrics. Perhaps, something like recall, F1 score, beta F1-score. 
-
-</code></pre>
-<p><strong>3. Preparing Data for Training , Validation and Prediction -</strong></p>
-<pre><code>* Often, loading entire data set in memory is not efficient. 
-* Different Deep Learning frameworks offer various wrappers for loading datasets using generators.
-* In order to gain better insights into how data batches should be generated, we shall implement a custom data generator. 
-
-</code></pre>
-<p><strong>4. Defining / Building the Model -</strong></p>
-<pre><code>* In this section, we shall build the actual model. 
-* The focus of this section would be to familiarize ourselves with keras syntax for adding complex layers. 
-* In this section, we shall also highlight good practices which can possibly help our model to learn faster. 
-
-</code></pre>
-<p><strong>5. Visual the Model -</strong></p>
-<pre><code>* Before we train the model, it often helps to visualize the neural network that has been implemented. 
-* This step also helps in debugging the issues that may have been embedded in our model unknowingly resulting in code errors. 
-
-</code></pre>
+<p><b>1. Loading the data-</b> <br/></p>
+<ul>
+<li>First we shall implement the code for successfully reading the cifar-10 dataset. <br/></li>
+</ul>
+<p><b>2. Visualizing data-</b> <br/></p>
+<ul>
+<li>Visualizing different aspects of our data often helps us to understand the problem statement and underlying dataset better. <br/></li>
+<li>This visualization step can be as detailed as one would like it to be. </li>
+<li>This includes performing Exploratory analysis, Outlier Analysis, Image Visualization, Class distribution etc. </li>
+<li>Data Visualization and pre-processing steps are often under-rated but the analysis directly influences the choice of certaon hyper parameters in your ML model. </li>
+<li>For instance, consider a dataset with severe class imbalance, say a 99:1 ratio. That is, for every 99 positive data points, we have 1 negative data point. Obviously, choosing accuracy as our evaluation metric will result in incorrect results. In such cases, a quick visualization of class distribution will help us choose better evaluation metrics. Perhaps, something like recall, F1 score, beta F1-score. </li>
+</ul>
+<p><b>3. Preparing Data for Training , Validation and Prediction -</b></p>
+<ul>
+<li>Often, loading entire data set in memory is not efficient. </li>
+<li>Different Deep Learning frameworks offer various wrappers for loading datasets using generators.</li>
+<li>In order to gain better insights into how data batches should be generated, we shall implement a custom data generator. </li>
+</ul>
+<p><b>4. Defining / Building the Model -</b></p>
+<ul>
+<li>In this section, we shall build the actual model. </li>
+<li>The focus of this section would be to familiarize ourselves with keras syntax for adding complex layers. </li>
+<li>In this section, we shall also highlight good practices which can possibly help our model to learn faster. </li>
+</ul>
+<p><b>5. Visual the Model -</b></p>
+<ul>
+<li>Before we train the model, it often helps to visualize the neural network that has been implemented. </li>
+<li>This step also helps in debugging the issues that may have been embedded in our model unknowingly resulting in code errors. </li>
+</ul>
 <p><strong>6. Training the model -</strong></p>
-<pre><code>* Once a model has been defined and data ready to be flown through it, the next logical step is to actually train the model. 
-* We shall train a model using training and validation data. 
-
-</code></pre>
+<ul>
+<li>Once a model has been defined and data ready to be flown through it, the next logical step is to actually train the model. </li>
+<li>We shall train a model using training and validation data. </li>
+</ul>
 <p><strong>7. Predicting -</strong></p>
-<pre><code>* DNN are know to overfit easily. 
-* It is often helpful to test the model for out of bag data points. This will help us understand how well the model generalizes on unseen data. 
-
-
-</code></pre>
+<ul>
+<li>DNN are know to overfit easily. </li>
+<li>It is often helpful to test the model for out of bag data points. This will help us understand how well the model generalizes on unseen data. </li>
+</ul>
 <p><strong>8. Trouble Shooting / FAQs</strong></p>
-<pre><code>* In this last section , we shall focus on a few issues that one may encounter while training DNNs. 
-* I will keep updating this list to ensure that all the possible pitfalls are documented. </code></pre>
+<ul>
+<li>In this last section , we shall focus on a few issues that one may encounter while training DNNs. </li>
+<li>I will keep updating this list to ensure that all the possible pitfalls are documented. </li>
+</ul>
 </div>
 </div>
 </div>

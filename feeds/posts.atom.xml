@@ -1210,49 +1210,50 @@ h6:hover .anchor-link {
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Before we jump into the implementation bits, it would be helpful to chalk out the roadmap for succesfully building and training a Deep Neural Network.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1. Loading the data-&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;* First we shall implement the code for successfully reading the cifar-10 dataset. 
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;2. Visualizing data-&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;* Visualizing different aspects of our data often helps us to understand the problem statement and underlying dataset better. 
-* This visualization step can be as detailed as one would like it to be. 
-* This includes performing Exploratory analysis, Outlier Analysis, Image Visualization, Class distribution etc. 
-* Data Visualization and pre-processing steps are often under-rated but the analysis directly influences the choice of certaon hyper parameters in your ML model. 
-* For instance, consider a dataset with severe class imbalance, say a 99:1 ratio. That is, for every 99 positive data points, we have 1 negative data point. Obviously, choosing accuracy as our evaluation metric will result in incorrect results. In such cases, a quick visualization of class distribution will help us choose better evaluation metrics. Perhaps, something like recall, F1 score, beta F1-score. 
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;3. Preparing Data for Training , Validation and Prediction -&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;* Often, loading entire data set in memory is not efficient. 
-* Different Deep Learning frameworks offer various wrappers for loading datasets using generators.
-* In order to gain better insights into how data batches should be generated, we shall implement a custom data generator. 
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;4. Defining / Building the Model -&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;* In this section, we shall build the actual model. 
-* The focus of this section would be to familiarize ourselves with keras syntax for adding complex layers. 
-* In this section, we shall also highlight good practices which can possibly help our model to learn faster. 
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;5. Visual the Model -&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;* Before we train the model, it often helps to visualize the neural network that has been implemented. 
-* This step also helps in debugging the issues that may have been embedded in our model unknowingly resulting in code errors. 
-
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;b&gt;1. Loading the data-&lt;/b&gt; &lt;br/&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;First we shall implement the code for successfully reading the cifar-10 dataset. &lt;br/&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;b&gt;2. Visualizing data-&lt;/b&gt; &lt;br/&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Visualizing different aspects of our data often helps us to understand the problem statement and underlying dataset better. &lt;br/&gt;&lt;/li&gt;
+&lt;li&gt;This visualization step can be as detailed as one would like it to be. &lt;/li&gt;
+&lt;li&gt;This includes performing Exploratory analysis, Outlier Analysis, Image Visualization, Class distribution etc. &lt;/li&gt;
+&lt;li&gt;Data Visualization and pre-processing steps are often under-rated but the analysis directly influences the choice of certaon hyper parameters in your ML model. &lt;/li&gt;
+&lt;li&gt;For instance, consider a dataset with severe class imbalance, say a 99:1 ratio. That is, for every 99 positive data points, we have 1 negative data point. Obviously, choosing accuracy as our evaluation metric will result in incorrect results. In such cases, a quick visualization of class distribution will help us choose better evaluation metrics. Perhaps, something like recall, F1 score, beta F1-score. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;b&gt;3. Preparing Data for Training , Validation and Prediction -&lt;/b&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Often, loading entire data set in memory is not efficient. &lt;/li&gt;
+&lt;li&gt;Different Deep Learning frameworks offer various wrappers for loading datasets using generators.&lt;/li&gt;
+&lt;li&gt;In order to gain better insights into how data batches should be generated, we shall implement a custom data generator. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;b&gt;4. Defining / Building the Model -&lt;/b&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;In this section, we shall build the actual model. &lt;/li&gt;
+&lt;li&gt;The focus of this section would be to familiarize ourselves with keras syntax for adding complex layers. &lt;/li&gt;
+&lt;li&gt;In this section, we shall also highlight good practices which can possibly help our model to learn faster. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;b&gt;5. Visual the Model -&lt;/b&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Before we train the model, it often helps to visualize the neural network that has been implemented. &lt;/li&gt;
+&lt;li&gt;This step also helps in debugging the issues that may have been embedded in our model unknowingly resulting in code errors. &lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;6. Training the model -&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;* Once a model has been defined and data ready to be flown through it, the next logical step is to actually train the model. 
-* We shall train a model using training and validation data. 
-
-&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Once a model has been defined and data ready to be flown through it, the next logical step is to actually train the model. &lt;/li&gt;
+&lt;li&gt;We shall train a model using training and validation data. &lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;7. Predicting -&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;* DNN are know to overfit easily. 
-* It is often helpful to test the model for out of bag data points. This will help us understand how well the model generalizes on unseen data. 
-
-
-&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;DNN are know to overfit easily. &lt;/li&gt;
+&lt;li&gt;It is often helpful to test the model for out of bag data points. This will help us understand how well the model generalizes on unseen data. &lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;8. Trouble Shooting / FAQs&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;* In this last section , we shall focus on a few issues that one may encounter while training DNNs. 
-* I will keep updating this list to ensure that all the possible pitfalls are documented. &lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;In this last section , we shall focus on a few issues that one may encounter while training DNNs. &lt;/li&gt;
+&lt;li&gt;I will keep updating this list to ensure that all the possible pitfalls are documented. &lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
