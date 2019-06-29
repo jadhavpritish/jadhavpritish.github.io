@@ -1257,7 +1257,7 @@ h6:hover .anchor-link {
 &lt;li&gt;The second line loads the dataset. Note that the transform defined in step 1 has been passed as argument while loading data. 
 &lt;br/&gt;&lt;br/&gt;&lt;/li&gt;
 &lt;li&gt;The Third line of code is responsible of convert the data into an iterator object so that we can train a model in batches. We have set the 'train' flag to True to return the training bits. By analogy, a test loader can be defined by setting 'train' flag to False. The 'shuffle' flag is responsible for shuffling data after each training epoch. 
-For more information of DataLoader, refer &lt;a href="https://pytorch.org/docs/stable/data.html"&gt;offcial documentation&lt;/a&gt;. &lt;/li&gt;
+For more information of DataLoader, refer &lt;a href="https://pytorch.org/docs/stable/data.html"&gt;official documentation&lt;/a&gt;. &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;While we are at it, lets quickly check the output of Dataloader. We will have to convert the output of DataLoader (iterable) into an iterator object. Check out this &lt;a href="https://stackoverflow.com/questions/9884132/what-exactly-are-iterator-iterable-and-iteration"&gt;stackoverflow thread&lt;/a&gt; if you are confused between an iterable and an iterator.&lt;/p&gt;
 &lt;/div&gt;
@@ -12047,7 +12047,7 @@ However, in order to improve productivity, you would like to add more layer of p
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;## python libraries&lt;/span&gt;
@@ -12057,6 +12057,9 @@ However, in order to improve productivity, you would like to add more layer of p
 &lt;span class="c1"&gt;## import sklearn for loading mnist data&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.datasets&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;load_breast_cancer&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.preprocessing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;MinMaxScaler&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.core.display&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;
+&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;style&amp;gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&amp;lt;/style&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -12065,10 +12068,8 @@ However, in order to improve productivity, you would like to add more layer of p
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stderr output_text"&gt;
-&lt;pre&gt;/usr/local/lib/python2.7/dist-packages/sklearn/utils/fixes.py:313: FutureWarning: numpy not_equal will not check object identity in the future. The comparison did not return the same result as suggested by the identity (`is`)) and will change.
-  _nan_object_mask = _nan_object_array != _nan_object_array
-&lt;/pre&gt;
+&lt;div class="output_html rendered_html output_subarea"&gt;
+&lt;style&gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&lt;/style&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -12098,7 +12099,7 @@ However, in order to improve productivity, you would like to add more layer of p
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;load_breast_cancer_dataset&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
@@ -12116,7 +12117,7 @@ However, in order to improve productivity, you would like to add more layer of p
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;load_breast_cancer_dataset&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
@@ -12147,7 +12148,7 @@ However, in order to improve productivity, you would like to add more layer of p
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;scaler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;MinMaxScaler&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
@@ -12195,7 +12196,7 @@ However, in order to improve productivity, you would like to add more layer of p
 \begin{align} activations \ (A) = \sigma(Z) = \ \frac{1}{1 + e^{-(Z)}} \tag{6}\label{6} \end{align}&lt;p&gt;Note that the dimensions of activations are same as dimensions of preactivations.&lt;/p&gt;
 &lt;p&gt;&lt;br/&gt; &lt;br/&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Step 3.3&lt;/strong&gt; - Compute loss /error /cost using \ref{7}
-\begin{align} cost = - \ \frac{1}{2m} \sum_{i =1}^{m} y_i \log(A_i) + \ (1-y_i) \log(1-A_i) \tag{7} \label{7} \end{align}&lt;/p&gt;
+\begin{align} cost = - \ \frac{1}{m} \sum_{i =1}^{m} y_i \log(A_i) + \ (1-y_i) \log(1-A_i) \tag{7} \label{7} \end{align}&lt;/p&gt;
 &lt;p&gt;It is important to note that, cost/error/loss is a scaler which we would like to minimize using gradient descent.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Step 4&lt;/strong&gt; - Back Propagation
 &lt;br/&gt;&lt;br/&gt;
@@ -12203,11 +12204,11 @@ We shall derive the grdients using chain rule -&lt;/p&gt;
 \begin{equation} \frac{\partial L}{\partial W} \ = \  \frac{\partial L}{\partial A} \frac{\partial A}{\partial Z} \frac{\partial Z}{\partial W} \tag{8}\label{8} \end{equation}&lt;p&gt;&lt;br/&gt;
 Lets Start by computing the partial derivative - $\frac{\partial L}{\partial A}$
 &lt;br/&gt;
-\begin{align} \frac{\partial L}{\partial A} &amp;amp; = \frac{\partial }{\partial A} \Big[ - \ \frac{1}{2m} \sum_{i =1}^{m} y_i \log(A_i) + \ (1-y_i) \log(1-A_i)\Big] \end{align}&lt;/p&gt;
+\begin{align} \frac{\partial L}{\partial A} &amp;amp; = \frac{\partial }{\partial A} \Big[ - \  \sum_{i =1}^{m} y_i \log(A_i) + \ (1-y_i) \log(1-A_i)\Big] \end{align}&lt;/p&gt;
 &lt;p&gt;For one training example $i$ -&lt;/p&gt;
 \begin{align}
-\frac{\partial L}{\partial A} &amp;amp; = \frac{-1}{2} \Big[y^{(i)} \frac{\partial log(A)}{\partial A} + (1-y^{(i)}) \frac{\partial log(1-A)}{ \partial A} \Big] \\ 
-&amp;amp; = \frac{-1}{2} \Big[ \frac{y^{(i)}}{A} - \frac{1-y^{(i)}}{1-A}\Big] \tag{9} \label{9}
+\frac{\partial L}{\partial A} &amp;amp; = - \Big[y^{(i)} \frac{\partial log(A)}{\partial A} + (1-y^{(i)}) \frac{\partial log(1-A)}{ \partial A} \Big] \\ 
+&amp;amp; =  - \Big[ \frac{y^{(i)}}{A} - \frac{1-y^{(i)}}{1-A}\Big] \tag{9} \label{9}
 \end{align}&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 &lt;p&gt;Now lets compute the partial derivative $\frac{\partial A}{\partial Z}$
 &lt;br/&gt;
@@ -12238,13 +12239,13 @@ Adding and Subtracting 1 in numerator of equation \ref{10}
 \begin{align} \\
 \frac{\partial L}{\partial Z} &amp;amp; = \frac{\partial L}{\partial A} \frac{\partial A}{\partial Z}
 \\
-&amp;amp; = \frac{-1}{2} \Big[ \frac{y^{(i)}}{A} - \frac{1-y^{(i)}}{1-A}\Big] A(1-A)
+&amp;amp; = - \Big[ \frac{y^{(i)}}{A} - \frac{1-y^{(i)}}{1-A}\Big] A(1-A)
 \\
-&amp;amp; = \frac{-1}{2} \Big[ y^{(i)}(1 - A) - A (1 - y^{(-i)}) \Big]
+&amp;amp; = - \Big[ y^{(i)}(1 - A) - A (1 - y^{(-i)}) \Big]
 \\
-&amp;amp; = \frac{-1}{2} \Big[ y^{(i)} -  \require{cancel} \cancel{y^{(i)}A}  - A + \require{cancel} \cancel{y^{(i)}A }]
+&amp;amp; = - \Big[ y^{(i)} -  \require{cancel} \cancel{y^{(i)}A}  - A + \require{cancel} \cancel{y^{(i)}A }]
 \\
-&amp;amp; = \frac{1}{2} \Big[ A - y^{(-i)} \Big]
+&amp;amp; =  \Big[ A - y^{(-i)} \Big]
 \end{align}&lt;p&gt;Now, The last part of this derivation to compute gradients with respect to weights/coeffiecients.&lt;/p&gt;
 \begin{align}\\
 \frac{\partial L}{\partial W} &amp;amp; = \frac{\partial L}{\partial Z} \frac{\partial Z}{\partial W}
@@ -12304,7 +12305,7 @@ b = b - \frac{\partial L}{\partial b} \tag{18} \label{18}
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [5]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize_dimensions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -12325,7 +12326,7 @@ b = b - \frac{\partial L}{\partial b} \tag{18} \label{18}
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [11]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize_weights_with_zeros&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dim&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -12354,7 +12355,7 @@ b = b - \frac{\partial L}{\partial b} \tag{18} \label{18}
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [12]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sigmoid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -12370,7 +12371,7 @@ b = b - \frac{\partial L}{\partial b} \tag{18} \label{18}
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="The-cost-for-logistic-regression-is-given-by--"&gt;The cost for logistic regression is given by -&lt;a class="anchor-link" href="#The-cost-for-logistic-regression-is-given-by--"&gt;¶&lt;/a&gt;&lt;/h3&gt;\begin{equation} cost\ (L) = - \ \frac{1}{2m} \sum_{i =1}^{m} y_i \log(A_i) + \ (1-y_i) \log(1-A_i) \end{equation}&lt;p&gt;$Where,  \\  
+&lt;h3 id="The-cost-for-logistic-regression-is-given-by--"&gt;The cost for logistic regression is given by -&lt;a class="anchor-link" href="#The-cost-for-logistic-regression-is-given-by--"&gt;¶&lt;/a&gt;&lt;/h3&gt;\begin{equation} cost\ (L) = - \ \frac{1}{m} \sum_{i =1}^{m} y_i \log(A_i) + \ (1-y_i) \log(1-A_i) \end{equation}&lt;p&gt;$Where,  \\  
 Y = vector\ of\ size\ m \times 1. \\
 A = activations = \sigma {(z)} -\ vector\ of\ size\ m\ \times\ 1$&lt;/p&gt;
 &lt;/div&gt;
@@ -12378,7 +12379,7 @@ A = activations = \sigma {(z)} -\ vector\ of\ size\ m\ \times\ 1$&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [13]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;compute_sigmoid_cost&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -12391,7 +12392,7 @@ A = activations = \sigma {(z)} -\ vector\ of\ size\ m\ \times\ 1$&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [14]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;compute_sigmoid_gradients&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;activations&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -12405,17 +12406,17 @@ A = activations = \sigma {(z)} -\ vector\ of\ size\ m\ \times\ 1$&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [15]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;propagation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;propagation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="c1"&gt;# FORWARD PROPAGATION (FROM X TO COST)&lt;/span&gt;
 
     &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;activations&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sigmoid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compute_sigmoid_cost&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;activations&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
     &lt;span class="c1"&gt;# BACKWARD PROPAGATION (TO FIND GRAD)&lt;/span&gt;
-    &lt;span class="n"&gt;dw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compute_sigmoid_gradients&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;activations&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="n"&gt;dw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compute_sigmoid_gradients&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;activations&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
     &lt;span class="n"&gt;cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;squeeze&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cost&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     
@@ -12430,16 +12431,16 @@ A = activations = \sigma {(z)} -\ vector\ of\ size\ m\ \times\ 1$&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [11]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [22]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;train_logistic_regression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;learning_rate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.02&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_epochs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;print_cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;train_logistic_regression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;learning_rate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.02&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_epochs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;print_cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;  &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;initialize_dimensions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;initialize_weights_with_zeros&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
     
     &lt;span class="n"&gt;costs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;iteration&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n_epochs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;propagation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;propagation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         
         &lt;span class="n"&gt;dw&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'dw'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
         &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'db'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
@@ -12472,7 +12473,7 @@ A = activations = \sigma {(z)} -\ vector\ of\ size\ m\ \times\ 1$&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [12]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [23]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;kl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;train_logistic_regression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;print_cost&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -12486,15 +12487,55 @@ A = activations = \sigma {(z)} -\ vector\ of\ size\ m\ \times\ 1$&lt;/p&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;Cost after iteration 0: 0.693147 | accuracy after iteration 0: 77.328647
-Cost after iteration 100: 0.439778 | accuracy after iteration 100: 88.400703
-Cost after iteration 200: 0.364733 | accuracy after iteration 200: 89.279438
-Cost after iteration 300: 0.324110 | accuracy after iteration 300: 90.509666
-Cost after iteration 400: 0.296574 | accuracy after iteration 400: 91.212654
-Cost after iteration 500: 0.275710 | accuracy after iteration 500: 91.915641
-Cost after iteration 600: 0.258850 | accuracy after iteration 600: 92.267135
-Cost after iteration 700: 0.244658 | accuracy after iteration 700: 92.618629
-Cost after iteration 800: 0.232379 | accuracy after iteration 800: 94.024605
-Cost after iteration 900: 0.221546 | accuracy after iteration 900: 94.376098
+Cost after iteration 100: 0.664751 | accuracy after iteration 100: 81.722320
+Cost after iteration 200: 0.639736 | accuracy after iteration 200: 85.588752
+Cost after iteration 300: 0.617438 | accuracy after iteration 300: 85.764499
+Cost after iteration 400: 0.597469 | accuracy after iteration 400: 85.413005
+Cost after iteration 500: 0.579510 | accuracy after iteration 500: 85.940246
+Cost after iteration 600: 0.563289 | accuracy after iteration 600: 86.115993
+Cost after iteration 700: 0.548573 | accuracy after iteration 700: 86.115993
+Cost after iteration 800: 0.535165 | accuracy after iteration 800: 86.115993
+Cost after iteration 900: 0.522898 | accuracy after iteration 900: 86.467487
+Cost after iteration 1000: 0.511629 | accuracy after iteration 1000: 87.170475
+Cost after iteration 1100: 0.501238 | accuracy after iteration 1100: 87.346221
+Cost after iteration 1200: 0.491623 | accuracy after iteration 1200: 87.521968
+Cost after iteration 1300: 0.482694 | accuracy after iteration 1300: 87.697715
+Cost after iteration 1400: 0.474376 | accuracy after iteration 1400: 88.049209
+Cost after iteration 1500: 0.466605 | accuracy after iteration 1500: 88.224956
+Cost after iteration 1600: 0.459323 | accuracy after iteration 1600: 88.224956
+Cost after iteration 1700: 0.452482 | accuracy after iteration 1700: 88.224956
+Cost after iteration 1800: 0.446039 | accuracy after iteration 1800: 88.400703
+Cost after iteration 1900: 0.439957 | accuracy after iteration 1900: 88.400703
+Cost after iteration 2000: 0.434202 | accuracy after iteration 2000: 88.400703
+Cost after iteration 2100: 0.428747 | accuracy after iteration 2100: 88.400703
+Cost after iteration 2200: 0.423565 | accuracy after iteration 2200: 88.576450
+Cost after iteration 2300: 0.418633 | accuracy after iteration 2300: 88.576450
+Cost after iteration 2400: 0.413932 | accuracy after iteration 2400: 88.576450
+Cost after iteration 2500: 0.409443 | accuracy after iteration 2500: 88.576450
+Cost after iteration 2600: 0.405150 | accuracy after iteration 2600: 88.576450
+Cost after iteration 2700: 0.401038 | accuracy after iteration 2700: 88.752197
+Cost after iteration 2800: 0.397095 | accuracy after iteration 2800: 88.752197
+Cost after iteration 2900: 0.393308 | accuracy after iteration 2900: 88.752197
+Cost after iteration 3000: 0.389667 | accuracy after iteration 3000: 88.752197
+Cost after iteration 3100: 0.386162 | accuracy after iteration 3100: 88.927944
+Cost after iteration 3200: 0.382783 | accuracy after iteration 3200: 88.927944
+Cost after iteration 3300: 0.379524 | accuracy after iteration 3300: 88.927944
+Cost after iteration 3400: 0.376376 | accuracy after iteration 3400: 88.927944
+Cost after iteration 3500: 0.373333 | accuracy after iteration 3500: 88.927944
+Cost after iteration 3600: 0.370388 | accuracy after iteration 3600: 88.927944
+Cost after iteration 3700: 0.367536 | accuracy after iteration 3700: 89.103691
+Cost after iteration 3800: 0.364772 | accuracy after iteration 3800: 89.279438
+Cost after iteration 3900: 0.362090 | accuracy after iteration 3900: 89.455185
+Cost after iteration 4000: 0.359487 | accuracy after iteration 4000: 89.455185
+Cost after iteration 4100: 0.356958 | accuracy after iteration 4100: 89.630931
+Cost after iteration 4200: 0.354499 | accuracy after iteration 4200: 89.806678
+Cost after iteration 4300: 0.352106 | accuracy after iteration 4300: 89.806678
+Cost after iteration 4400: 0.349777 | accuracy after iteration 4400: 89.806678
+Cost after iteration 4500: 0.347508 | accuracy after iteration 4500: 89.982425
+Cost after iteration 4600: 0.345296 | accuracy after iteration 4600: 89.982425
+Cost after iteration 4700: 0.343139 | accuracy after iteration 4700: 90.158172
+Cost after iteration 4800: 0.341033 | accuracy after iteration 4800: 90.333919
+Cost after iteration 4900: 0.338978 | accuracy after iteration 4900: 90.333919
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -12505,7 +12546,7 @@ Cost after iteration 900: 0.221546 | accuracy after iteration 900: 94.376098
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Awesome !!!&lt;/p&gt;
-&lt;p&gt;We were able to achieve 94% accuracy using logistic regressions.&lt;/p&gt;
+&lt;p&gt;We were able to achieve 90% accuracy using logistic regressions.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
