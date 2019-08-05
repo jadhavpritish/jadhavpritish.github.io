@@ -5,22 +5,29 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/</loc>
-<lastmod>2019-06-29T20:03:43-00:00</lastmod>
+<lastmod>2019-08-05T22:35:14-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/archives.html</loc>
-<lastmod>2019-06-29T20:03:43-00:00</lastmod>
+<lastmod>2019-08-05T22:35:14-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/tags.html</loc>
-<lastmod>2019-06-29T20:03:43-00:00</lastmod>
+<lastmod>2019-08-05T22:35:14-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/2019/07/Generating MNIST data by leveraging Multivariate Normal Distribution..html</loc>
+<lastmod>2019-07-19T18:00:00+05:30</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -75,7 +82,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/category/posts</loc>
-<lastmod>2019-06-26T18:00:00+05:53</lastmod>
+<lastmod>2019-07-19T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -117,7 +124,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/tag/python</loc>
-<lastmod>2019-06-26T18:00:00+05:53</lastmod>
+<lastmod>2019-07-19T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -152,7 +159,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/tag/deep-learning</loc>
-<lastmod>2019-06-19T18:00:00+05:53</lastmod>
+<lastmod>2019-07-19T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -160,6 +167,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jadhavpritish.github.io/tag/machine-learning</loc>
 <lastmod>2018-07-08T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/tag/generative-modelling</loc>
+<lastmod>2019-07-19T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -229,7 +243,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/author/pritish-sunil-jadhav</loc>
-<lastmod>2019-06-26T18:00:00+05:53</lastmod>
+<lastmod>2019-07-19T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
