@@ -1151,7 +1151,7 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Building-Web-Application-Using-Flask"&gt;Building Web Application Using Flask&lt;a class="anchor-link" href="#Building-Web-Application-Using-Flask"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;h2 id="Building-Web-APIs-Using-Python-&amp;amp;-Flask"&gt;Building Web APIs Using Python &amp;amp; Flask&lt;a class="anchor-link" href="#Building-Web-APIs-Using-Python-&amp;amp;-Flask"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;There is a huge surge in number of Machine Learning based products which are being actively researched and developed across the globe. &lt;/li&gt;
 &lt;li&gt;One of the crucial factors in the delivery of an ML product is the ability to expose the trained model/predictions to the world.&lt;/li&gt;
 &lt;li&gt;In this article, I will provide a step-by-step guide for developing a web app using Flask. &lt;/li&gt;
@@ -1503,7 +1503,7 @@ In order to pass data as json, select the 'Body'&amp;gt;'raw' tab as shown in fi
 &lt;img src="./../../images/flask_images/flask_3.png"/&gt;&lt;/p&gt;
 &lt;p&gt;STEP 4 -&lt;/p&gt;
 &lt;p&gt;Lastly, enter the data for which you wish to get predictions and hit SEND !!! &lt;img src="./../../images/flask_images/flask_4.png"/&gt;&lt;/p&gt;
-&lt;p&gt;VOILA !! We have our predictions - &lt;img src="./../../images/flask_images/flask_5.png"/&gt;&lt;/p&gt;
+&lt;p&gt;VOILA !! We have our predictions - &lt;br/&gt; &lt;img src="./../../images/flask_images/flask_5.png"/&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
