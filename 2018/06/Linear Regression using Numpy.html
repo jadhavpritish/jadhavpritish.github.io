@@ -1265,6 +1265,7 @@ h6:hover .anchor-link {
 <h1 id="Linear-Regression">Linear Regression<a class="anchor-link" href="#Linear-Regression">¶</a></h1><p>Linear Regression is a statistical approach of modelling the realtionship between a scalar response (aka. dependent variable) and one or more explanatory variables (aka independent variables). Linear Regression is one of the most basic building block in Machine Learning algorithms.</p>
 <p>In most of the python libraries, linear regression model is available as a blackbox. However, it is imperative to understand what goes on under the hood in order to have better grasp of algorithm.</p>
 <p>This article will focus on implementing vanilla linear regression from scratch using numpy and pandas.</p>
+<p><img src="./../../images/linear_regression/LR_tell_me_more.jpeg"/><br/></p>
 <p>Lets start by importing some basic python libraries.</p>
 </div>
 </div>
@@ -1391,23 +1392,17 @@ Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani (2004) "Least
 \begin{align}\tag{3}\label{3} W = \ 1 \times \ n \end{align}<br/>
 \begin{align}\tag{4}\label{4}b = \ 1 \times \ 1 \end{align}<br/></p>
 <p>The pseudo-code for training a Linear Regression model is as follows -</p>
-<p><strong>Step 1</strong> - Given a Training DataSet X and corresponding labels Y, initialize values of number of training examples(m), number of features(n) and number of output units (k) as mentioned in equations \ref{1}, \ref{2}, \ref{3} and \ref{4}
-<br/><br/>
-<strong>Step 2</strong> - Initialize Weights matrix W and bias b using dimensions from Step 1. 
-<br/><br/></p>
-\begin{equation} for\ \ \ i_{epoch}\ \ \  in\ \ \ range(iterations):\end{equation}<p><strong>Step 3</strong> - Forward Propagation  - 
-<br/>
-<strong>Step 3.1</strong> compute preactivations using \ref{5}</p>
-\begin{align} y_{pred}  = h(\theta) = XW^T +b  \tag{5}\label{5} \end{align}<p>Lets validate if the dimensions match - 
+<h3 id="Step-1---Given-a-Training-DataSet-X-and-corresponding-labels-Y,-initialize-values-for-number-of-training-examples(m),-number-of-features(n)-and-number-of-output-units-(k)-as-mentioned-in-equations-\ref{1},-\ref{2},-\ref{3}-and-\ref{4}"><strong>Step 1</strong> - Given a Training DataSet X and corresponding labels Y, initialize values for number of training examples(m), number of features(n) and number of output units (k) as mentioned in equations \ref{1}, \ref{2}, \ref{3} and \ref{4}<a class="anchor-link" href="#Step-1---Given-a-Training-DataSet-X-and-corresponding-labels-Y,-initialize-values-for-number-of-training-examples(m),-number-of-features(n)-and-number-of-output-units-(k)-as-mentioned-in-equations-\ref{1},-\ref{2},-\ref{3}-and-\ref{4}">¶</a></h3><p><br/><br/></p>
+<h3 id="Step-2---Initialize-Weights-matrix-W-and-bias-b-using-dimensions-from-Step-1."><strong>Step 2</strong> - Initialize Weights matrix W and bias b using dimensions from Step 1.<a class="anchor-link" href="#Step-2---Initialize-Weights-matrix-W-and-bias-b-using-dimensions-from-Step-1.">¶</a></h3><p><br/><br/></p>
+\begin{equation} for\ \ \ i_{epoch}\ \ \  in\ \ \ range(iterations):\end{equation}<h3 id="Step-3---Forward-Propagation---"><strong>Step 3</strong> - Forward Propagation  -<a class="anchor-link" href="#Step-3---Forward-Propagation---">¶</a></h3><p><br/></p>
+<h4 id="Step-3.1-compute-preactivations-using-\ref{5}"><strong>Step 3.1</strong> compute preactivations using \ref{5}<a class="anchor-link" href="#Step-3.1-compute-preactivations-using-\ref{5}">¶</a></h4>\begin{align} y_{pred}  = h(\theta) = XW^T +b  \tag{5}\label{5} \end{align}<p>Lets validate if the dimensions match - 
 \begin{equation} dim(y_{pred}) = \mathbf{(\ m \times \ n )} \times \ \mathbf{(1 \times \ n)}^\intercal \ + \ (1 \times 1) \end{equation}</p>
 <p>We are good to move ahead.
  <br/><br/></p>
-<p><strong>Step 3.2</strong> - Compute loss /error /cost using \ref{6}
-\begin{align} cost = - \ \frac{1}{2m} \sum_{i =1}^{m} (y_{true} - y_{pred})^2 \tag{7} \label{6} \end{align}</p>
-<p>The above equation represents the <b>'mean squared error'</b>. It is important to note that, <b>cost/ error/ loss </b> is a <b>scaler</b> which we would like to minimize using gradient descent.</p>
-<p><strong>Step 4</strong> - Back Propagation
+<h4 id="Step-3.2---Compute-loss-/error-/cost-using-\ref{6}"><strong>Step 3.2</strong> - Compute loss /error /cost using \ref{6}<a class="anchor-link" href="#Step-3.2---Compute-loss-/error-/cost-using-\ref{6}">¶</a></h4>\begin{align} cost = - \ \frac{1}{2m} \sum_{i =1}^{m} (y_{true} - y_{pred})^2 \tag{7} \label{6} \end{align}<p>The above equation represents the <b>'mean squared error'</b>. It is important to note that, <b>cost/ error/ loss </b> is a <b>scaler</b> which we would like to minimize using gradient descent.</p>
+<h3 id="Step-4---Back-propagation--"><strong>Step 4</strong> - Back propagation -<a class="anchor-link" href="#Step-4---Back-propagation--">¶</a></h3><p>Back propagation technique will help in updating the weights such that the MSE loss is minimized. Lets dig into the nuts and bolts of back propagation.
 <br/><br/>
-We shall derive the grdients using chain rule -</p>
+We shall derive the gradients using chain rule -</p>
 \begin{equation} \frac{\partial L}{\partial W} \ = \  \frac{\partial L}{\partial h(\theta)} \frac{\partial h(\theta)}{\partial W}  \tag{8}\label{8} \end{equation}<p><br/>
 Lets Start by computing the partial derivative - $\frac{\partial L}{\partial h(\theta)}$
 <br/>
@@ -1466,13 +1461,12 @@ Lets Start by computing the partial derivative - $\frac{\partial L}{\partial h(\
 \frac{\partial L}{\partial W}  = \frac{1}{m}(h(\theta) - Y)^T X \tag{15}\label{15}
 \\
 \frac{\partial L}{\partial b} = \frac{1}{m} \sum_{i =1}^{m} (h(\theta) - Y^{(i)}) \tag{16}\label{16}
-\end{align}<p><strong>Step 4.1</strong> The weights can be updated using gradient descent equations as follows - 
-\begin{align}
+\end{align}<h3 id="Step-4.1-The-weights-can-be-updated-using-gradient-descent-equations-as-follows--"><strong>Step 4.1</strong> The weights can be updated using gradient descent equations as follows -<a class="anchor-link" href="#Step-4.1-The-weights-can-be-updated-using-gradient-descent-equations-as-follows--">¶</a></h3>\begin{align}
 \\
 W = W - \frac{\partial L}{\partial W} \tag{17} \label{17}
 \\
 b = b - \frac{\partial L}{\partial b} \tag{18} \label{18}
-\end{align}</p>
+\end{align}
 </div>
 </div>
 </div>
@@ -1929,6 +1923,13 @@ b has a shape of 1 rows and 1 columns
 <pre>'Model R2 score is 0.987019'</pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Incredible-!!">Incredible !!<a class="anchor-link" href="#Incredible-!!">¶</a></h3><p>We have successfully trained a Linear Regression Algorithm.</p>
 </div>
 </div>
 </div>
