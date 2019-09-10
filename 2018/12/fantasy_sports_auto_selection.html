@@ -1287,7 +1287,7 @@ In this Tutorial, I will try to automate the fantasy selection process so that t
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [1]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython2"><pre><span></span><span class="c1">##import python libraries</span>
@@ -1320,14 +1320,6 @@ In this Tutorial, I will try to automate the fantasy selection process so that t
 <div class="output">
 <div class="output_area">
 <div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/usr/local/lib/python2.7/dist-packages/sklearn/utils/fixes.py:313: FutureWarning: numpy not_equal will not check object identity in the future. The comparison did not return the same result as suggested by the identity (`is`)) and will change.
-  _nan_object_mask = _nan_object_array != _nan_object_array
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
 <div class="output_html rendered_html output_subarea">
 <style>.prompt{width: 0px; min-width: 0px; visibility: collapse}</style>
 </div>
@@ -1348,7 +1340,7 @@ In this Tutorial, I will try to automate the fantasy selection process so that t
 <p>a. Cost - Most of the fantasy websites (including Dream11) allocates a total budget which cannot be exceeded. <br/><br/>
 b. last_5_matches_points - This field is a list of points accured by a player in his last 5 matches. 
 <br/><br/>
-c. player_category - This field highlights the category of the player. In case of cricket, the possible categories are wicket-keeper, batsman, all-rounder, bowler. For a sport like football, the possible catgeories are - Goal keeper, Defender, Midfielder, Striker. This field is importnat because every fantasy website imposes a restriction on the number of players one can select from each of these categories. 
+c. player_category - This field highlights the category of the player. In case of cricket, the possible categories are wicket-keeper, batsman, all-rounder, bowler. For a sport like football, the possible catgeories are - Goal keeper, Defender, Midfielder, Striker. This field is important because every fantasy website imposes a restriction on the number of players one can select from each of these categories. 
 <br/><br/>
 d. player_name - This field highlights the player name on fantasy sports website.
 <br/><br/>
@@ -1358,7 +1350,7 @@ e. team_name - This column in the dataframe highlights the team name of the play
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [21]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython2"><pre><span></span><span class="n">raw_player_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data/dream11_performance_data.csv'</span><span class="p">,</span> <span class="n">converters</span><span class="o">=</span><span class="p">{</span><span class="s2">"last_5_matches_points"</span><span class="p">:</span> <span class="n">literal_eval</span><span class="p">})</span>
@@ -1437,7 +1429,7 @@ e. team_name - This column in the dataframe highlights the team name of the play
 <h3 id="Algorithm-Pseudo-Code-/-Workflow--">Algorithm Pseudo Code / Workflow -<a class="anchor-link" href="#Algorithm-Pseudo-Code-/-Workflow--">¶</a></h3><ol>
 <li><p>We will be viewing the selection problem as a Integer Linear Programming (ILP) problem with constraints.</p>
 </li>
-<li><p>The objective function for ILP will be to maximize the expected points.</p>
+<li><p>The objective function for ILP (Integer Linear Programming) will be to maximize the expected points.</p>
 </li>
 <li><p>The constraints will be defined as per the rules imposed by fantasy website (In this case, Dream11).</p>
 </li>
@@ -1460,7 +1452,7 @@ For Eg - A single column of player_category in pandas dataframe will be split in
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [37]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">col_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"player_category"</span><span class="p">,</span> <span class="s2">"team_name"</span><span class="p">]):</span>
@@ -1564,12 +1556,12 @@ player 2 - [50, 40 , 30, 20 , 10] <br/></p>
 <p>The approach of computing simple averages will yield averaged scores as follows - <br/>
 <strong>player 1 - 30</strong> <br/>
 <strong>player 2 - 30</strong> <br/></p>
-<p>The above stats imply that, both player 1 and player 2 accrue 30 points on an average. However it can be clearly seen that player 1 is growing in confidence and has a uptrend trend to his performance whereas player 2 has a downward trend to his performance. By taking simple average, we are losing an importnat insight.</p>
+<p>The above stats imply that, both player 1 and player 2 accrue 30 points on an average. However it can be clearly seen that player 1 is growing in confidence and has a uptrend trend to his performance whereas player 2 has a downward trend to his performance. By taking simple average, we are losing an important insight.</p>
 <p>Now, if we compute the averages using time decayed weights, the averaged points are as follows -
 <br/>
-<strong>player 1 - 26.06</strong> <br/>
-<strong>player 2 - 33.93</strong> <br/></p>
-<p>As it can seen from above numbers, even though both the players have amassed the same number of points,  the the trend in performances is now being captured with player 2 getting a higher average as compared to player 1.  Such subtle differences will help us build a robust model.</p>
+<strong>player 1 - 33.93</strong> <br/>
+<strong>player 2 - 26.06</strong> <br/></p>
+<p>As it can seen from above numbers, even though both the players have amassed the same number of points,  the trend in performances is now being captured with player 2 getting a higher average as compared to player 1.  Such subtle differences will help us build a robust model.</p>
 <p><br/></p>
 <p><strong>So, lets compute the time decayed weighted averages for the eligible players in the dataframe.</strong></p>
 </div>
@@ -1577,7 +1569,7 @@ player 2 - [50, 40 , 30, 20 , 10] <br/></p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [38]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">compute_weighted_points</span><span class="p">(</span><span class="n">points_vector</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">):</span>
