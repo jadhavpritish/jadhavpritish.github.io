@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Pritish - Data Science Scrapbook - Deep Learning</title><link href="https://jadhavpritish.github.io/" rel="alternate"></link><link href="https://jadhavpritish.github.io/feeds/deep-learning.atom.xml" rel="self"></link><id>https://jadhavpritish.github.io/</id><updated>2019-09-11T18:00:00+05:30</updated><entry><title>Hierarchical Attemtion Network For Multilabel Classification (Detailed Case study)</title><link href="https://jadhavpritish.github.io/2019/09/multilabel%20text%20classification.html" rel="alternate"></link><published>2019-09-11T18:00:00+05:30</published><updated>2019-09-11T18:00:00+05:30</updated><author><name>pritish jadhav</name></author><id>tag:jadhavpritish.github.io,2019-09-11:/2019/09/multilabel text classification.html</id><summary type="html">&lt;p&gt;In many real world data applications, often we encounter scenarios where each data point may belong to mutiple classes. A multilabel classifer is trained to predict the K most likely class among N possible classes. The article focuses on solving multilabel text classification problem using Hierarchical Attemtion Network.&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Pritish - Data Science Scrapbook - Deep Learning</title><link href="https://jadhavpritish.github.io/" rel="alternate"></link><link href="https://jadhavpritish.github.io/feeds/deep-learning.atom.xml" rel="self"></link><id>https://jadhavpritish.github.io/</id><updated>2019-09-11T18:00:00+05:30</updated><entry><title>Hierarchical Attention Network For Multilabel Classification (Detailed Case study)</title><link href="https://jadhavpritish.github.io/2019/09/multilabel%20text%20classification.html" rel="alternate"></link><published>2019-09-11T18:00:00+05:30</published><updated>2019-09-11T18:00:00+05:30</updated><author><name>pritish jadhav</name></author><id>tag:jadhavpritish.github.io,2019-09-11:/2019/09/multilabel text classification.html</id><summary type="html">&lt;p&gt;In many real world data applications, often we encounter scenarios where each data point may belong to mutiple classes. A multilabel classifer is trained to predict the K most likely classes among N possible classes. The article focuses on solving multilabel text classification problem using Hierarchical Attention Network.&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -2336,7 +2336,7 @@ Epoch 2/5
 Epoch 3/5
 18891/18891 [==============================] - 6793s 360ms/step - loss: 0.0052 - custom_score: 0.8778 - check_nonzero: 35.0802 - val_loss: 0.0039 - val_custom_score: 0.9105 - val_check_nonzero: 35.9709
 Epoch 4/5
-12639/18891 [===================&amp;gt;..........] - ETA: 37:22 - loss: 0.0047 - custom_score: 0.8889 - check_nonzero: 35.3180&lt;/pre&gt;
+13315/18891 [====================&amp;gt;.........] - ETA: 33:19 - loss: 0.0047 - custom_score: 0.8892 - check_nonzero: 35.3181&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
