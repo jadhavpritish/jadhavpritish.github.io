@@ -1153,15 +1153,15 @@ h6:hover .anchor-link {
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Multilabel-Text-Classification-Using-Custom-Embeddings-in-Keras."&gt;Multilabel Text Classification Using Custom Embeddings in Keras.&lt;a class="anchor-link" href="#Multilabel-Text-Classification-Using-Custom-Embeddings-in-Keras."&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Traditionally, classification problems are either formulated as -&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;b&gt;Binary Classification&lt;/b&gt; problems where each training example belongs to either a positive or a negative class. &lt;/li&gt;
-&lt;li&gt;&lt;b&gt;Multiclass Classification&lt;/b&gt; problem where each training example belongs one of the 'k' classes. &lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Binary Classification&lt;/b&gt; problems - where each training example belongs to either a positive or a negative class. &lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Multiclass Classification&lt;/b&gt; problem - where each training example belongs to one of the 'k' classes. &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;In this article, we shall explore a new problem statement -&lt;/p&gt;
 &lt;p&gt;&lt;b&gt;Multilabel Classification Problem -&lt;/b&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;In many real world data applications, often we encounter scenarios where each data point belongs mutiple classes.  &lt;/li&gt;
-&lt;li&gt;Suppose you are working for Recruting Firm which receives thousands of Resumes each day. You are tasked with the problem of tagging each resume with relevant set of skills which hiring committee cares about. &lt;/li&gt;
-&lt;li&gt;In such a scenario, it is possible to have a candidate who posses 'leadership' skills as well as 'coding' skills. &lt;/li&gt;
+&lt;li&gt;In many real world data applications, often we encounter scenarios where each data point belongs to multiple classes.  &lt;/li&gt;
+&lt;li&gt;Suppose you are working for Recruiting Firm which receives thousands of Resumes each day. You are tasked with the problem of tagging each resume with relevant set of skills which hiring committee cares about. &lt;/li&gt;
+&lt;li&gt;In such a scenario, it is possible to have a candidate who possesses 'leadership' skills as well as 'coding' skills. &lt;/li&gt;
 &lt;li&gt;Such a setup requires you to solve a multilabel classification problem. &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The following sections will cover -&lt;/p&gt;
@@ -1176,7 +1176,7 @@ h6:hover .anchor-link {
 &lt;li&gt;Inference. &lt;/li&gt;
 &lt;li&gt;Final Comments and References. &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Lets start by importing a whole bunch of python libraries that we will need for successful implementation of our algorithm.&lt;/p&gt;
+&lt;p&gt;Let's start by importing a whole bunch of python libraries that we will need for successful implementation of our algorithm.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1254,10 +1254,10 @@ h6:hover .anchor-link {
 &lt;li&gt;There are 3 levels, with 9, 70 and 219 classes respectively. A version of this dataset is a popular baseline for NLP/text classification tasks. &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;This version of the dataset is much tougher, especially if the L2/L3 levels are used as the targets.&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The Dataset consists of following columns -&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;The Dataset consists of the following columns -&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;b&gt;text&lt;/b&gt; - a free text column which describes the entity. &lt;/li&gt;
-&lt;li&gt;&lt;b&gt;l1&lt;/b&gt; - Base label in the hierachy. &lt;/li&gt;
+&lt;li&gt;&lt;b&gt;l1&lt;/b&gt; - Base label in the hierarchy. &lt;/li&gt;
 &lt;li&gt;&lt;b&gt;l2&lt;/b&gt; - Intermediate label in the hierarchy. &lt;/li&gt;
 &lt;li&gt;&lt;b&gt;l3&lt;/b&gt; - Top level label in the hierarchy. &lt;/li&gt;
 &lt;/ol&gt;
@@ -1381,7 +1381,7 @@ h6:hover .anchor-link {
 &lt;ol&gt;
 &lt;li&gt;merge title and synopsis data columns for better handling. We shall refer this column as raw_text&lt;/li&gt;
 &lt;li&gt;Split comma separated tags for each movie. &lt;/li&gt;
-&lt;li&gt;Remove punctuations and stopwords from raw_text. &lt;/li&gt;
+&lt;li&gt;Remove punctuation and stopwords from raw_text. &lt;/li&gt;
 &lt;li&gt;Lemmatize raw_text -  Lemmatization usually refers to doing things properly with the use of a vocabulary and morphological analysis of words, normally aiming to remove inflectional endings only and to return the base or dictionary form of a word, which is known as the lemma .
 For more information on lemmatization refer to the &lt;a href="https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html"&gt;stanford notes&lt;/a&gt;. &lt;/li&gt;
 &lt;/ol&gt;
@@ -1607,7 +1607,7 @@ Test data has 7229 datapoints
 &lt;li&gt;In order to train a classifier, we need to convert the string tags into a vector of 1s and 0s. &lt;/li&gt;
 &lt;li&gt;There are about 71 tags in the dataset. &lt;/li&gt;
 &lt;li&gt;Therefore, for each datapoint, we need to construct a 1 x 71 dimensional vector with each bit in the vector representing a tag. &lt;/li&gt;
-&lt;li&gt;Since datapoint can have multiple tags, the target label will consist of 1s at all indices corresponsing to the target tag attached to the datapoint. &lt;/li&gt;
+&lt;li&gt;Since datapoint can have multiple tags, the target label will consist of 1s at all indices corresponding to the target tag attached to the datapoint. &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;To accomplish this, we shall train a &lt;a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MultiLabelBinarizer.html"&gt;MultiLabelBinarizer&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -1663,7 +1663,7 @@ Test data has 7229 datapoints
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Custom-Embedding-Layer--"&gt;Custom Embedding Layer -&lt;a class="anchor-link" href="#Custom-Embedding-Layer--"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;Embedding layer in keras is responsible of representing the input sequence of text with a vector of a size defined in the model. &lt;/li&gt;
-&lt;li&gt;one of the most adopted techniques while woking with text is to train a tfidf vectorizer followed by a Dimensionality Reduction technique (PCA, Random Projections, etc) .&lt;/li&gt;
+&lt;li&gt;one of the most adopted techniques while working with text is to train a tfidf vectorizer followed by a Dimensionality Reduction technique (PCA, Random Projections, etc) .&lt;/li&gt;
 &lt;li&gt;The embedding layer in keras facilitates the execution of sequence mentioned above while training a classifier. &lt;/li&gt;
 &lt;li&gt;It is also possible to derive weights from a pretrained model like word2vec or gloVe. However, in this article we shall focus on training a custom Embedding layer. &lt;/li&gt;
 &lt;li&gt;The Embedding layer expect a fixed input size of dimensions (batch_size $\times$ max_sequence_length) where max_sequence_length determines the maximum length of input text sequence. &lt;/li&gt;
@@ -1705,15 +1705,15 @@ Test data has 7229 datapoints
 &lt;h2 id="Attention-Mechanism--"&gt;Attention Mechanism -&lt;a class="anchor-link" href="#Attention-Mechanism--"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Before we proceed further, I would like to take a pause and delve into the philosophical and mathematical details of Attention Mechanism.&lt;/p&gt;
 &lt;h3 id="Why-Attention-Mechanism-?"&gt;Why Attention Mechanism ?&lt;a class="anchor-link" href="#Why-Attention-Mechanism-?"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;Consider a simple spam vs not-spam binary text classification problem where input is a free flowing email text and you would like to predict if it is a spam or not-spam. &lt;/li&gt;
-&lt;li&gt;Typically, if you were to decide manually, you invariably look for trigger words (Nigerian Prince, Lottery Winner, No credit check, &amp;lt;suspicous link&amp;gt; , etc) which would hint towards to an email being spam.&lt;/li&gt;
+&lt;li&gt;Typically, if you were to decide manually, you invariably look for trigger words (Nigerian Prince, Lottery Winner, No credit check, &amp;lt;suspicious link&amp;gt; , etc) which would hint towards an email being spam.&lt;/li&gt;
 &lt;li&gt;These trigger words influence your decision no matter where they appear in text. In other words, subconsciously you end up assigning a higher weight to these trigger keywords which ultimately helps you reach a decision. &lt;/li&gt;
 &lt;li&gt;Attention Mechanism tries to replicate a similar behaviour where it attempts to assign a higher weightage to trigger keywords that ultimately helps our model in reaching a decision. &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="Aren't-the-likes-of-GRUs-and-LSTMs-suppose-to-do-something-similar?"&gt;Aren't the likes of GRUs and LSTMs suppose to do something similar?&lt;a class="anchor-link" href="#Aren't-the-likes-of-GRUs-and-LSTMs-suppose-to-do-something-similar?"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;Well, a typical RNN network suffers from the problem of vanishing gradients. As a result, earlier parts of a temporal data is unable to contribute towards final decision being made. &lt;/li&gt;
+&lt;li&gt;Well, a typical RNN network suffers from the problem of vanishing gradients. As a result, earlier parts of a temporal data is unable to contribute towards the final decision being made. &lt;/li&gt;
 &lt;li&gt;GRUs and LSTMs are able to ameliorate this problem by introducing memory cells and forget gates.&lt;/li&gt;
 &lt;li&gt;However, they can remember sequences of 100s but not definitely not 1000s. &lt;/li&gt;
-&lt;li&gt;Sure, one take a Global Max of returned activations and use them to predict classes but a "hard-max" takes the maximum value and forgets eveything else.  &lt;/li&gt;
+&lt;li&gt;Sure, one can take a Global Max of returned activations and use them to predict classes but a "hard-max" takes the maximum value and forgets everything else.  &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;ENTER ATTENTION MECHANISM !!&lt;/p&gt;
 &lt;p&gt;&lt;img src="./../../../images/multiclass_attention/entry_meme.jpg"/&gt;&lt;br/&gt;&lt;/p&gt;
@@ -1722,15 +1722,15 @@ Test data has 7229 datapoints
 &lt;/ul&gt;
 &lt;h3 id="Estimating-Attention-Weights-while-training--"&gt;Estimating Attention Weights while training -&lt;a class="anchor-link" href="#Estimating-Attention-Weights-while-training--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;Hopefully, the need for an Attention Mechanism is justified in the previous section. &lt;/li&gt;
-&lt;li&gt;In this section, lets go over some of the mathematical details to better understand the concept. This will help us while building the network as well. &lt;/li&gt;
+&lt;li&gt;In this section, let's go over some of the mathematical details to better understand the concept. This will help us while building the network as well. &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id="Lets-get-to-it--"&gt;Lets get to it -&lt;a class="anchor-link" href="#Lets-get-to-it--"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;h4 id="Let's-get-to-it--"&gt;Let's get to it -&lt;a class="anchor-link" href="#Let's-get-to-it--"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;It is evident that these weights are dynamic and hence cannot be pre-computed. &lt;/li&gt;
-&lt;li&gt;The following image by WildML summarises the attention mechansim in a block diagram format. &lt;/li&gt;
+&lt;li&gt;The following image by WildML summarises the attention mechanism in a block diagram format. &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src="./../../../images/multiclass_attention/attention_mechanism_image.png"/&gt;&lt;br/&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;As seen in above image, the output at time 't' is a weighted average of weights $\alpha^{&amp;lt;t,t'&amp;gt;}$ where t' = ${1, 2, 3....T_x}$&lt;/li&gt;
+&lt;li&gt;As seen in the above image, the output at time 't' is a weighted average of weights $\alpha^{&amp;lt;t,t'&amp;gt;}$ where t' = ${1, 2, 3....T_x}$&lt;/li&gt;
 &lt;li&gt;$\alpha^{&amp;lt;t,t'&amp;gt;}$ indicates the amount of attention that $y^{&amp;lt;t&amp;gt;}$ should pay to $a^{&amp;lt;t'&amp;gt;}$  &lt;br/&gt;&lt;/li&gt;
 &lt;li&gt;&lt;font size="3"&gt; \begin{align} 
    c^{&lt;t&gt;} = \sum_{t'=1}^{Tx} \alpha^{&lt;t,t'&gt;} * a^{&lt;t'&gt;}  \end{align} &lt;/t'&gt;&lt;/t,t'&gt;&lt;/t&gt;&lt;/font&gt;&lt;/li&gt;
@@ -1738,7 +1738,7 @@ Test data has 7229 datapoints
 &lt;h3 id="How-to-compute-$\alpha^{&amp;lt;t,t'&amp;gt;}$-?"&gt;How to compute $\alpha^{&amp;lt;t,t'&amp;gt;}$ ?&lt;a class="anchor-link" href="#How-to-compute-$\alpha^{&amp;lt;t,t'&amp;gt;}$-?"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;Since $\alpha^{&amp;lt;t,t'&amp;gt;}$ are weights at time t representing the probability distribution of attentions, a good way to model them would be to use Softmax (If you guessed it, be proud of yourselves !!)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Lets define -&lt;/p&gt;
+&lt;p&gt;Let's define -&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;font size="3"&gt; \begin{align}
   \alpha^{&lt;t,t'&gt;} = \frac{\exp{e^{&lt;t,t'&gt;}}}{\sum_{t=1}^{T_x} \exp{e^{&lt;t,t'&gt;}}} \end{align} &lt;/t,t'&gt;&lt;/t,t'&gt;&lt;/t,t'&gt;&lt;/font&gt;&lt;/p&gt;
@@ -1747,9 +1747,9 @@ Test data has 7229 datapoints
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Where to pay attention depends not only on hidden states ($a^{&amp;lt;t'&amp;gt;}$) but also on where we are in the output ($s^{&amp;lt;t-1&amp;gt;}$)  sequence of length $T_y$.&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;However, we dont know the function that maps hidden states and current output to $e^{&amp;lt;t,t'&amp;gt;}$. Hence we shall determine the function using a small neural network.&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;However, we don't know the function that maps hidden states and current output to $e^{&amp;lt;t,t'&amp;gt;}$. Hence we shall determine the function using a small neural network.&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;In text clasification, the output steps are limited to 1. This simplifies our problem statement. The magnified block diagram for attention mechanism is as follows - 
+&lt;li&gt;&lt;p&gt;In text classification, the output steps are limited to 1. This simplifies our problem statement. The magnified block diagram for attention mechanism is as follows - 
 &lt;img src="./../../../images/multiclass_attention/attention_magnified_diagram.png"/&gt;&lt;br/&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1760,10 +1760,10 @@ Test data has 7229 datapoints
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Hierarchical-Attention-Network--"&gt;Hierarchical Attention Network -&lt;a class="anchor-link" href="#Hierarchical-Attention-Network--"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;With the basics around attention network chalked out, lets take this a notch higher. &lt;/li&gt;
+&lt;li&gt;With the basics around attention network chalked out, let's take this a notch higher. &lt;/li&gt;
 &lt;li&gt;Hierarchical Attention Networks were introduced by Zichao Yang, Diyi Yang, Chris Dyer, Xiaodong He, Alex Smola, &amp;amp; Eduard Hovy at Carnegie Melon in association with Microsoft. &lt;/li&gt;
 &lt;li&gt;The proposed model exploits the herarchical structure in documents. &lt;/li&gt;
-&lt;li&gt;Each documents can be viewed as a group sentences with each sentence as collection of words. &lt;/li&gt;
+&lt;li&gt;Each document can be viewed as a group sentences with each sentence as collection of words. &lt;/li&gt;
 &lt;li&gt;The block diagram of the architecture is as follows - &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src="./../../../images/multiclass_attention/HAN.png"/&gt;&lt;br/&gt;&lt;/p&gt;
@@ -2066,9 +2066,27 @@ number of null word embeddings: 120322
 \begin{align}  \hat{y} = \frac{1}{1 + e^{-z}} \end{align}
 &lt;pre&gt;&lt;code&gt;     Where,  
 &lt;/code&gt;&lt;/pre&gt;
-\begin{align}                 z = WX + b \end{align}\begin{align}                            X = m \times n \end{align}\begin{align}                              W = n \times 1  \end{align}&lt;p&gt;The cross entropy loss function can hence be written as  -
+\begin{align}                 z = WX + b \end{align}\begin{align}                            X = m \times n \end{align}\begin{align}                              W = n \times 1  \end{align}&lt;p&gt;The cross entropy loss function for binary classification can hence be written as  -
 \begin{align} BCE &amp;amp; = - \sum_{i = 1}^{m} \sum_{j= 1}^{2} y_ilog(\hat{y_i})  \\
 &amp;amp; =  - \sum_{i = 1}^{m} y_i log(\hat{y_i}) + (1- y_i)log(1 - \hat{y_i}) \end{align}&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;For multilabel classification we shall assume that each label as an independent Binomial Random Variable. &lt;/li&gt;
+&lt;li&gt;As a result of this assumption, a loss of Binary loss function makes much more sense than a categorical cross entropy function. &lt;/li&gt;
+&lt;li&gt;Lastly, by the assumption of independence, since the probability that a data point belongs to class i is independent of whether of class j, the activation in the final layer of the network has to be "sigmoid" and not "softmax". &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For a multilabel classification problem, various different loss function can also be used. Check them out at the following links for more information.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://www.cs.put.poznan.pl/sigml/wp-content/uploads/2013/04/mlc-mlgroup.pdf"&gt;Multilabel Classification - Label Dependence, Loss Minimization and Reduction Algorithms by Krzysztof Dembczy´nski&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://people.revoledu.com/kardi/tutorial/Similarity/BinaryVariables.html"&gt;Distance for Binary Variables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://ceur-ws.org/Vol-2126/paper10.pdf"&gt;Approaches for the Improvement of the Multilabel Multiclass Classification with a huge Number of Classes by Martha Tatusch&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="Evaluation-Metric--"&gt;Evaluation Metric -&lt;a class="anchor-link" href="#Evaluation-Metric--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Typically, a standard metric for classification like accuracy can suffice. &lt;/li&gt;
+&lt;li&gt;However, it can often be misleading when target labels have only a small subset which is positive. In such cases, accuracy is often over-estimated. &lt;/li&gt;
+&lt;li&gt;To overcome this problem, we shall be using a custom loss function defined by Matthew R. Boutell in &lt;a href="https://www.rose-hulman.edu/~boutell/publications/boutell04PRmultilabel.pdf"&gt;Learning multi-label scene classification&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Please find below a snippet from the paper which describes the $\alpha evaluation$ metric - &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="./../../../images/multiclass_attention/alpha_evaluation.png"/&gt;&lt;br/&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2119,6 +2137,18 @@ number of null word embeddings: 120322
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Building-HAN-Model--"&gt;Building HAN Model -&lt;a class="anchor-link" href="#Building-HAN-Model--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;In order to build a Hierarchical Attention network, we will split it into two models for better visibility, debugging and code management. &lt;/li&gt;
+&lt;li&gt;First, we define a "word attention model" which takes a sentence as input and return activations based an attention mechanism. &lt;/li&gt;
+&lt;li&gt;Next we design a "sentence attention model" which is responsible for representing attention mechanism for each sentence at the input.&lt;/li&gt;
+&lt;li&gt;Note that, we shall be using TimeDistributed layer provided by keras to extract word attention representation for each sentence at the input. The TimeDistributed layer ensures that same weights are applied to each input in the sequence. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;In [28]:&lt;/div&gt;
@@ -2133,15 +2163,18 @@ number of null word embeddings: 120322
     &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BatchNormalization&lt;/span&gt;&lt;span class="p"&gt;()(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;h&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Bidirectional&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;GRU&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;128&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;return_sequences&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;recurrent_dropout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dropout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;))(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     
-    
+    &lt;span class="c1"&gt;## FCNN for estimating attention weights. &lt;/span&gt;
     &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Dense&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BatchNormalization&lt;/span&gt;&lt;span class="p"&gt;()(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Activation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'tanh'&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Dense&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BatchNormalization&lt;/span&gt;&lt;span class="p"&gt;()(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Activation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;softmax_over_time&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="c1"&gt;## weighted average of attention weights and GRU output sequence for words. &lt;/span&gt;
     &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;axes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)([&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
     &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Flatten&lt;/span&gt;&lt;span class="p"&gt;()(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    
     &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;inputs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;inp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;outputs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;word_attention_weights_model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;inputs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;inp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;outputs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
@@ -2163,21 +2196,27 @@ number of null word embeddings: 120322
     &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BatchNormalization&lt;/span&gt;&lt;span class="p"&gt;()(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;h&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Bidirectional&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;GRU&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;return_sequences&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;recurrent_dropout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dropout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;))(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     
-    
+    &lt;span class="c1"&gt;## FCNN for estimating attention weights.&lt;/span&gt;
     &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Dense&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;128&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BatchNormalization&lt;/span&gt;&lt;span class="p"&gt;()(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Activation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'tanh'&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Dense&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BatchNormalization&lt;/span&gt;&lt;span class="p"&gt;()(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Activation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;softmax_over_time&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="c1"&gt;## Weighted average of attention and sentence representation sequencs.  &lt;/span&gt;
     &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;axes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)([&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
     &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Flatten&lt;/span&gt;&lt;span class="p"&gt;()(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="c1"&gt;## Note that the activation for final layer is sigmoid and softmax. &lt;/span&gt;
     &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Dense&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;classes&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;activation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"sigmoid"&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
     &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;inputs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;inp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;outputs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;attention_weights_model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;inputs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;inp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;outputs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     
     &lt;span class="n"&gt;opt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;keras&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;optimizers&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Adam&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.01&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;beta_1&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;beta_2&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.999&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;epsilon&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;decay&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;amsgrad&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="c1"&gt;## Note that the loss function is 'binary_crossentropy'&lt;/span&gt;
     &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'binary_crossentropy'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;optimizer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'adam'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;metrics&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;custom_score&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;check_nonzero&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
     &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;attention_weights_model&lt;/span&gt;
@@ -2311,7 +2350,7 @@ ________________________________________________________________________________
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [51]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;history3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;text_only_model&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit_generator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;train_data_gen&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -2336,15 +2375,35 @@ Epoch 2/5
 Epoch 3/5
 18891/18891 [==============================] - 6793s 360ms/step - loss: 0.0052 - custom_score: 0.8778 - check_nonzero: 35.0802 - val_loss: 0.0039 - val_custom_score: 0.9105 - val_check_nonzero: 35.9709
 Epoch 4/5
-13315/18891 [====================&amp;gt;.........] - ETA: 33:19 - loss: 0.0047 - custom_score: 0.8892 - check_nonzero: 35.3181&lt;/pre&gt;
+18891/18891 [==============================] - 6924s 367ms/step - loss: 0.0046 - custom_score: 0.8906 - check_nonzero: 35.3497 - val_loss: 0.0036 - val_custom_score: 0.9171 - val_check_nonzero: 36.2400
+Epoch 5/5
+18891/18891 [==============================] - 6511s 345ms/step - loss: 0.0043 - custom_score: 0.8974 - check_nonzero: 35.4717 - val_loss: 0.0034 - val_custom_score: 0.9207 - val_check_nonzero: 36.1354
+&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Training-Analysis--"&gt;Training Analysis -&lt;a class="anchor-link" href="#Training-Analysis--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;It can be seen that the loss is decreasing consistently across epochs. &lt;/li&gt;
+&lt;li&gt;The custom_score keeps getting better. &lt;/li&gt;
+&lt;li&gt;The custom_score and loss on validation dataset is comparable with training phase which indicates that the model is not overfitting.  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="Investigating-Attention-Mechanism--"&gt;Investigating Attention Mechanism -&lt;a class="anchor-link" href="#Investigating-Attention-Mechanism--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;In order to gain more insights on how our model is training, let us perform a quick analysis of how model is estimated weights and which words are actually being paid attention to while predicting multilabel classes. &lt;/li&gt;
+&lt;li&gt;To facilitate this analysis, we have tapped our original models to spit out attention weighted activations.&lt;/li&gt;
+&lt;li&gt;Based on these activations, we can back trace the word in the input which are influencing the final decision. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Without much further a do, lets jump into the implementation !!&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [46]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [52]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sugg_num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;190&lt;/span&gt;
@@ -2378,17 +2437,17 @@ Epoch 4/5
 Sentence is 
  professional wrestling hardcore heaven event held philadelphia pennsylvania united statesbased professional wrestling promotion eastern championship wrestlingextreme championship wrestling annually 1994 1995 1996 1997 1999 2000.
 Focused words are 
- [(u'event', 0.2036726), (u'wrestling', 0.19768865), (u'wrestling', 0.17607746), (u'wrestling', 0.16117422)]
+ [(u'wrestling', 0.22687979), (u'event', 0.22041698), (u'wrestling', 0.178191)]
 *************************************************
 Sentence is 
  1997 1999 2000 iteration hardcore heaven aired payperview .
 Focused words are 
- [(u'iteration', 0.26029947), (u'aired', 0.20457841)]
+ [(u'iteration', 0.27779353), (u'aired', 0.27136996)]
 *************************************************
 Sentence is 
  footage six hardcore heaven event owned wwe .
 Focused words are 
- [(u'footage', 0.42749628), (u'event', 0.334772)]
+ [(u'footage', 0.3976578), (u'event', 0.36673942)]
 *************************************************
 &lt;/pre&gt;
 &lt;/div&gt;
@@ -2396,14 +2455,30 @@ Focused words are
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Results-and-Final-Comments--"&gt;Results and Final Comments -&lt;a class="anchor-link" href="#Results-and-Final-Comments--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;VOILA !!! We can now trace the path of how the model is reaching its decision.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;As seen from the output printed on the console, the input text is describing a wrestling event. &lt;/li&gt;
+&lt;li&gt;The model is iterating over different sentences and words with more "Attention" are being printed. &lt;/li&gt;
+&lt;li&gt;The model is able to correctly assign weights in each word which is indicative of wrestling despite having other words like philadelphia, pennsylvania, and unites states which hints towards "Place" as a potential label. &lt;/li&gt;
+&lt;li&gt;By assigning a lower weights to words that are not so important in the overall context of the document, the model is more robust and accurate. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id="Final-Comments--"&gt;Final Comments -&lt;a class="anchor-link" href="#Final-Comments--"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;To scope down the problem statement, the output sequence in our problem definition has a size 1. &lt;/li&gt;
+&lt;li&gt;Hence it suffices to ignore the previous decoder states while estimating attentions at time t. &lt;/li&gt;
+&lt;li&gt;In other words, $T_y$ in our case is 1 which largely simplifies the implementation. &lt;/li&gt;
+&lt;li&gt;The code will change if we are tasked with a use case that involves a temporal output. In such a situation, we will have to account for previous decoder states while estimating attentions. &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Finally, this article covers a lot of new concepts viz. -&lt;/p&gt;
+&lt;p&gt;a. Formulation of Multilabel classification &lt;br/&gt;
+ b. Attention Mechanism &lt;br/&gt;
+ c. Hierarchical Attention Network &lt;br/&gt;
+ d. Loss function and Activations for multilabel classification problem &lt;br/&gt;
+ e. custom loss function. &lt;br/&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Some of these may not be easy to digest. Feel free to reach out to me if you have any queries or would like to brainstorm ideas.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
