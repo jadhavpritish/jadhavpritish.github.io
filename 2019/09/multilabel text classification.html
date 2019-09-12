@@ -1395,13 +1395,13 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [3]:</div>
+<div class="prompt input_prompt">In [57]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython2"><pre><span></span><span class="c1">### load training data</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./data/dbpedia/DBPEDIA_train.csv'</span><span class="p">,</span> 
                   <span class="n">encoding</span> <span class="o">=</span> <span class="s2">"utf-8"</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1409,8 +1409,8 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[3]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1633,10 +1633,10 @@ Test data has 7229 datapoints
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [10]:</div>
+<div class="prompt input_prompt">In [56]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="n">train_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight hl-ipython2"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">train_data</span><span class="p">[[</span><span class="s1">'cleaned_text'</span><span class="p">,</span> <span class="s1">'l1'</span><span class="p">,</span> <span class="s1">'l2'</span><span class="p">,</span> <span class="s1">'l3'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1644,8 +1644,8 @@ Test data has 7229 datapoints
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[10]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -1664,59 +1664,47 @@ Test data has 7229 datapoints
 <thead>
 <tr style="text-align: right;">
 <th></th>
-<th>text</th>
+<th>cleaned_text</th>
 <th>l1</th>
 <th>l2</th>
 <th>l3</th>
-<th>raw_text</th>
-<th>cleaned_text</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <th>0</th>
-<td>The National Competition (previously called th...</td>
+<td>national competition previously called nationa...</td>
 <td>Agent</td>
 <td>SportsLeague</td>
 <td>RugbyLeague</td>
-<td>The National Competition (previously called th...</td>
-<td>national competition previously called nationa...</td>
 </tr>
 <tr>
 <th>1</th>
-<td>The CRBC was established in 1932 by the govern...</td>
+<td>crbc established 1932 government r.b . bennett...</td>
 <td>Agent</td>
 <td>Broadcaster</td>
 <td>BroadcastNetwork</td>
-<td>The CRBC was established in 1932 by the govern...</td>
-<td>crbc established 1932 government r.b . bennett...</td>
 </tr>
 <tr>
 <th>2</th>
-<td>Burger King v. Rudzewicz, 471 U.S. 462 (1985),...</td>
+<td>burger king v. rudzewicz 471 u.s. 462 1985 not...</td>
 <td>UnitOfWork</td>
 <td>LegalCase</td>
 <td>SupremeCourtOfTheUnitedStatesCase</td>
-<td>Burger King v. Rudzewicz, 471 U.S. 462 (1985),...</td>
-<td>burger king v. rudzewicz 471 u.s. 462 1985 not...</td>
 </tr>
 <tr>
 <th>3</th>
-<td>Lynda O'Connell (born 1981 in Cork) is a camog...</td>
+<td>lynda oconnell born 1981 cork camogie player a...</td>
 <td>Agent</td>
 <td>Athlete</td>
 <td>GaelicGamesPlayer</td>
-<td>Lynda O'Connell (born 1981 in Cork) is a camog...</td>
-<td>lynda oconnell born 1981 cork camogie player a...</td>
 </tr>
 <tr>
 <th>4</th>
-<td>The Sorel-Tracy Éperviers (Sorel-Tracy Hawks) ...</td>
+<td>soreltracy éperviers soreltracy hawk hockey te...</td>
 <td>Agent</td>
 <td>SportsTeam</td>
 <td>HockeyTeam</td>
-<td>The Sorel-Tracy Éperviers (Sorel-Tracy Hawks) ...</td>
-<td>soreltracy éperviers soreltracy hawk hockey te...</td>
 </tr>
 </tbody>
 </table>
