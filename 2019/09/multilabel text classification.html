@@ -1308,7 +1308,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [7]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -1363,6 +1363,13 @@ h6:hover .anchor-link {
 <div class="output">
 <div class="output_area">
 <div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Using TensorFlow backend.
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_html rendered_html output_subarea">
 <style>.prompt{width: 0px; min-width: 0px; visibility: collapse}</style>
 </div>
@@ -1378,7 +1385,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [35]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython2"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">12</span>
@@ -1415,12 +1422,12 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [57]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython2"><pre><span></span><span class="c1">### load training data</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./data/dbpedia/DBPEDIA_train.csv'</span><span class="p">,</span> 
-                  <span class="n">encoding</span> <span class="o">=</span> <span class="s2">"utf-8"</span><span class="p">)</span>
+                  <span class="n">encoding</span> <span class="o">=</span> <span class="s2">"utf-8"</span><span class="p">,</span> <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'raw_text'</span><span class="p">,</span> <span class="s1">'l1'</span><span class="p">,</span> <span class="s1">'l2'</span><span class="p">,</span><span class="s1">'l3'</span><span class="p">],</span><span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -1449,7 +1456,7 @@ h6:hover .anchor-link {
 <thead>
 <tr style="text-align: right;">
 <th></th>
-<th>text</th>
+<th>raw_text</th>
 <th>l1</th>
 <th>l2</th>
 <th>l3</th>
@@ -1499,27 +1506,6 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [4]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">columns</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[4]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Index([u'text', u'l1', u'l2', u'l3'], dtype='object')</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1531,20 +1517,6 @@ h6:hover .anchor-link {
 <li>Lemmatize raw_text -  Lemmatization usually refers to doing things properly with the use of a vocabulary and morphological analysis of words, normally aiming to remove inflectional endings only and to return the base or dictionary form of a word, which is known as the lemma .
 For more information on lemmatization refer to the <a href="https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html">stanford notes</a>. </li>
 </ol>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [5]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="c1"># data['raw_text'] = data[['title', 'plot_synopsis']].apply(lambda x: '. '.join(x), axis = 1)</span>
-<span class="c1"># data['processed_tags'] = data['tags'].apply(lambda x: x.split(', '))</span>
-
-<span class="n">data</span><span class="p">[</span><span class="s1">'raw_text'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">'text'</span><span class="p">]</span>
-</pre></div>
-</div>
 </div>
 </div>
 </div>
