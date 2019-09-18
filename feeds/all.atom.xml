@@ -6731,13 +6731,13 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Training-a-Classifier-using-Pytorch"&gt;Training a Classifier using Pytorch&lt;a class="anchor-link" href="#Training-a-Classifier-using-Pytorch"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;As a part of "Getting Acquainted with Deep Learning Frameworks" series, in the article we shall explore Pytorch Library. Pytorch is a deep learning library developed by Facebook Researchers. Pytorch consists of 3 important modules namely -&lt;/p&gt;
+&lt;h2 id="Training-a-Classifier-using-Pytorch"&gt;Training a Classifier using Pytorch&lt;a class="anchor-link" href="#Training-a-Classifier-using-Pytorch"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;As a part of "Getting Acquainted with Deep Learning Frameworks" series, in the article, we shall explore Pytorch Library. Pytorch is a deep learning library developed by Facebook Researchers. Pytorch consists of 3 important modules namely -&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Autograd Module - This module takes care of gradient computations. &lt;/li&gt;
 &lt;li&gt;Optim Module - The optim module implements optimizer algorithms for building neural networks. &lt;/li&gt;
-&lt;li&gt;NN Module - The NN module in pytorch implements different layers necesary for building complex neural networks.&lt;/li&gt;
+&lt;li&gt;NN Module - The NN module in PyTorch implements different layers necessary for building complex neural networks.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;In following sections, lets over steps involved in building a multiclass classifier using Pytorch.&lt;/p&gt;
+&lt;p&gt;In the following sections, lets over steps involved in building a multiclass classifier using Pytorch.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6783,7 +6783,7 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;As always, its helps to come up with a roaad map before digging into the implementation aspects. We shall complete our goal fo building and training a model using following steps -&lt;/p&gt;
+&lt;p&gt;As always, it helps to come up with a road map before digging into the implementation aspects. We shall complete our goal of building and training a model using the following steps -&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Load Dataset &lt;br/&gt;&lt;/li&gt;
 &lt;li&gt;Visualize some data &lt;br/&gt;&lt;/li&gt;
@@ -6799,7 +6799,7 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Loading-dataset-in-pytorch"&gt;Loading dataset in pytorch&lt;a class="anchor-link" href="#Loading-dataset-in-pytorch"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In this article, we shall be using the Fashion MNIST dataset which consists of 10 categories, viz.&lt;/p&gt;
+&lt;h3 id="Loading-dataset-in-PyTorch"&gt;Loading dataset in PyTorch&lt;a class="anchor-link" href="#Loading-dataset-in-PyTorch"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In this article, we shall be using the Fashion MNIST dataset which consists of 10 categories, viz.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;T-shirt/top &lt;/li&gt;
 &lt;li&gt;Trouser&lt;/li&gt;
@@ -6812,7 +6812,7 @@ h6:hover .anchor-link {
 &lt;li&gt;Bag &lt;/li&gt;
 &lt;li&gt;Ankle boot. &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Lets kick off the implementation by loading the Fashion MNIST Dataset&lt;/p&gt;
+&lt;p&gt;Let's kick off the implementation by loading the Fashion MNIST Dataset&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6840,24 +6840,24 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="Data-loading-explained--"&gt;Data loading explained -&lt;a class="anchor-link" href="#Data-loading-explained--"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;We shall be loading the data using Compose and DataLoader classes from pytorch's transforms and utils.data module respectively.&lt;/p&gt;
+&lt;h4 id="Data-loading-explained--"&gt;Data loading explained -&lt;a class="anchor-link" href="#Data-loading-explained--"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;We shall be loading the data using Compose and DataLoader classes from PyTorch's transforms and utils.data module respectively.&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;We can load the supported datasets by providng the path where data exists. If the data is not avialble, set 'download' argument as True. &lt;strong&gt;The api for loading dataset&lt;/strong&gt; is quite straightforward and can be further explored &lt;a href="https://pytorch.org/docs/stable/torchvision/datasets.html#fashion-mnist"&gt;here&lt;/a&gt;. 
+&lt;li&gt;We can load the supported datasets by providing the path where data exists. If the data is not available, set the 'download' argument as True. &lt;strong&gt;The API for loading dataset&lt;/strong&gt; is quite straightforward and can be further explored &lt;a href="https://pytorch.org/docs/stable/torchvision/datasets.html#fashion-mnist"&gt;here&lt;/a&gt;. 
 &lt;br/&gt;&lt;br/&gt;&lt;/li&gt;
-&lt;li&gt;The important point to note here is the use of transform argument while loading the data. The transform argument is used to define a function that accept a PIL image and returns  a transformed tensor. For the sake of simplicity, I will not be applying any transformations the input dataset. 
+&lt;li&gt;The important point to note here is the use of a transform argument while loading the data. The transform argument is used to define a function that accepts a PIL image and returns a transformed tensor. For the sake of simplicity, I will not be applying any transformations to the input dataset. 
 &lt;br/&gt;&lt;br/&gt;&lt;/li&gt;
-&lt;li&gt;However, the DataLoader expects tensors and not PIL images at its input hence, we shall be applying a single transformation which simply transforms the PIL images to tensors for them to be converted into iterables by DataLoader.
+&lt;li&gt;However, the DataLoader expects tensors and not PIL images at its input hence, we shall be applying a single transformation that simply transforms the PIL images to tensors for them to be converted into iterable by DataLoader.
 &lt;br/&gt;&lt;br/&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Note - All the datasets supported by pytorch are implemented as subclasses of torch.utils.data.Dataset i.e, they have &lt;strong&gt;getitem&lt;/strong&gt; and &lt;strong&gt;len&lt;/strong&gt; methods implemented. Hence, they can all be passed to a torch.utils.data.DataLoader which can load multiple samples parallelly using torch.multiprocessing workers.&lt;/p&gt;
-&lt;h4 id="Code-Explanation--"&gt;Code Explanation -&lt;a class="anchor-link" href="#Code-Explanation--"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Based on explanation provided above, lets review the code line by line -&lt;/p&gt;
+&lt;p&gt;Note - All the datasets supported by PyTorch are implemented as subclasses of torch.utils.data.Dataset i.e, they have &lt;strong&gt;getitem&lt;/strong&gt; and &lt;strong&gt;len&lt;/strong&gt; methods implemented. Hence, they can all be passed to a torch.utils.data.DataLoader which can load multiple samples parallelly using torch.multiprocessing workers.&lt;/p&gt;
+&lt;h4 id="Code-Explanation--"&gt;Code Explanation -&lt;a class="anchor-link" href="#Code-Explanation--"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Based on the explanation provided above, let's review the code line by line -&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;The first line defines the transform that needs to be applied to our data. In this case, it is simply type casting the input into tensors. 
+&lt;li&gt;The first line defines the transformation that needs to be applied to our data. In this case, it is simply type-casting the input into tensors. 
 &lt;br/&gt;&lt;br/&gt;&lt;/li&gt;
-&lt;li&gt;The second line loads the dataset. Note that the transform defined in step 1 has been passed as argument while loading data. 
+&lt;li&gt;The second line loads the dataset. Note that the transform defined in step 1 has been passed as an argument while loading data. 
 &lt;br/&gt;&lt;br/&gt;&lt;/li&gt;
-&lt;li&gt;The Third line of code is responsible of convert the data into an iterator object so that we can train a model in batches. We have set the 'train' flag to True to return the training bits. By analogy, a test loader can be defined by setting 'train' flag to False. The 'shuffle' flag is responsible for shuffling data after each training epoch. 
-For more information of DataLoader, refer &lt;a href="https://pytorch.org/docs/stable/data.html"&gt;official documentation&lt;/a&gt;. &lt;/li&gt;
+&lt;li&gt;The third line of code is responsible for converting the data into an iterator object so that we can train a model in batches. We have set the 'train' flag to True to return the training bits. By analogy, a test loader can be defined by setting the 'train' flag to False. The 'shuffle' flag is responsible for shuffling data after each training epoch. 
+For more information on DataLoader, refer &lt;a href="https://pytorch.org/docs/stable/data.html"&gt;official documentation&lt;/a&gt;. &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;While we are at it, lets quickly check the output of Dataloader. We will have to convert the output of DataLoader (iterable) into an iterator object. Check out this &lt;a href="https://stackoverflow.com/questions/9884132/what-exactly-are-iterator-iterable-and-iteration"&gt;stackoverflow thread&lt;/a&gt; if you are confused between an iterable and an iterator.&lt;/p&gt;
 &lt;/div&gt;
@@ -6901,21 +6901,21 @@ For more information of DataLoader, refer &lt;a href="https://pytorch.org/docs/s
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now that we have our Data ready, lets dig into defining and training a classification model.&lt;/p&gt;
+&lt;p&gt;Now that we have our data ready, let's dig into defining and training a classification model.&lt;/p&gt;
 &lt;h3 id="Building-a-model-in-PyTorch--"&gt;Building a model in PyTorch -&lt;a class="anchor-link" href="#Building-a-model-in-PyTorch--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;Similar to keras, torch provides us with a Sequential API where we can add modules/Layers to the container. &lt;/li&gt;
+&lt;li&gt;Similar to Keras, torch provides us with a Sequential API where we can add modules/Layers to the container. &lt;/li&gt;
 &lt;li&gt;The order in which layers are added to the container is important. It is important to keep track of dimensions while adding layers. &lt;/li&gt;
-&lt;li&gt;All the layers - Linear (fully connected), Convultion, LSTMs etc are available in torch.nn. &lt;/li&gt;
-&lt;li&gt;torch.nn also provides access to different activation functions. It is imperative to choose activation functions based on the type of problem you are trying to solve. For example, for regression, the output activation function can be relu whereas for binary classification it can sigmoid. &lt;/li&gt;
-&lt;li&gt;For more information regarding the Sequential API checkout pytorch's &lt;a href="https://pytorch.org/docs/stable/nn.html"&gt;master documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;All the layers - Linear (fully connected), Convolution, LSTMs, etc are available in torch.nn. &lt;/li&gt;
+&lt;li&gt;torch.nn also provides access to different activation functions. It is imperative to choose activation functions based on the type of problem you are trying to solve. For example, for regression, the output activation function can be Relu whereas for binary classification it can sigmoid. &lt;/li&gt;
+&lt;li&gt;For more information regarding the Sequential API checkout PyTorch's &lt;a href="https://pytorch.org/docs/stable/nn.html"&gt;master documentation&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="Data-Specific-Model--"&gt;Data Specific Model -&lt;a class="anchor-link" href="#Data-Specific-Model--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;As seen above, each batch of our train data has a shape [batch_size, 1, 28, 28] which implies that there is only one channel with height and width of 28 and 28 respectively. &lt;/li&gt;
-&lt;li&gt;In this article, lets keep things simple by using only Dense/ Linear/ Fully-connected layers. &lt;/li&gt;
-&lt;li&gt;In order to use Dense layers, we need to reshape our training example to a tensor of shape $[batch_size, n_channels \times width \times height]$. In this case, it will be $1 \times 28 \times 28 = 784$. Thus each batch of input data can be reshaped to a size of [batch_size, 784].  &lt;/li&gt;
-&lt;li&gt;Keeping in mind the dimensions from point 3, it is evident that our first Dense/Linear layer should have dimensions of 784 x $(n\_units)_1$ where $(n\_units)_1$ &lt;strong&gt;denotes the number of units in first layer of the network.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;In this article, let's keep things simple by using only Dense/ Linear/ Fully-connected layers. &lt;/li&gt;
+&lt;li&gt;To use Dense layers, we need to reshape our training example to a tensor of shape $[batch_size, n_channels \times width \times height]$. In this case, it will be $1 \times 28 \times 28 = 784$. Thus each batch of input data can be reshaped to a size of [batch_size, 784].  &lt;/li&gt;
+&lt;li&gt;Keeping in mind the dimensions from point 3, it is evident that our first Dense/Linear layer should have dimensions of 784 x $(n\_units)_1$ where $(n\_units)_1$ &lt;strong&gt;denotes the number of units in the first layer of the network.&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;We shall be adding 2 more hidden layers with sizes 128 and 64 respectively. &lt;/li&gt;
-&lt;li&gt;The last layer is the output layers consisting on 10 neurons which is equivalent to the number of classes in out dataset. &lt;/li&gt;
+&lt;li&gt;The last layer is the output layers consisting of 10 neurons which is equivalent to the number of classes in our dataset. &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6946,29 +6946,29 @@ For more information of DataLoader, refer &lt;a href="https://pytorch.org/docs/s
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h3 id="Model-Explanation--"&gt;Model Explanation -&lt;a class="anchor-link" href="#Model-Explanation--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;As seen above, we have added 4 fully connected layers to our model using relu activation.&lt;/li&gt;
-&lt;li&gt;Notice the activation function in the last layer - LogSoftmax. As the names suggests LogSoftmax takes the log of softmax function. &lt;/li&gt;
+&lt;li&gt;As seen above, we have added 4 fully connected layers to our model using Relu activation.&lt;/li&gt;
+&lt;li&gt;Notice the activation function in the last layer - LogSoftmax. As the names suggest LogSoftmax takes the log of softmax function. &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Mathematically,&lt;/p&gt;
-$$Softmax = \large \frac{e^{z}}{\sum_{j = 1}^{n\_classes} e^{z_j}}$$$$ \therefore Log(Softmax) = \log \big[ \large \frac{e^{z}}{\sum_{j = 1}^{n\_classes} e^{z_j}} \big]$$$$ = \log \big[ e^{z} \bigl] - \bigr[ \sum_{j = 1}^{n\_classes} e^{z_j} \big]$$&lt;p&gt;People tend to prefer log likelihood over likelihood functions for following reasons -&lt;/p&gt;
+$$Softmax = \large \frac{e^{z}}{\sum_{j = 1}^{n\_classes} e^{z_j}}$$$$ \therefore Log(Softmax) = \log \big[ \large \frac{e^{z}}{\sum_{j = 1}^{n\_classes} e^{z_j}} \big]$$$$ = \log \big[ e^{z} \bigl] - \bigr[ \sum_{j = 1}^{n\_classes} e^{z_j} \big]$$&lt;p&gt;People tend to prefer log-likelihood over likelihood functions for the following reasons -&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Log Likelihoods are more numerically stable since by taking a log, divisions are converted to subtractions. &lt;/li&gt;
-&lt;li&gt;Log Likelihhod are less computationally expensive since exponential from the equations are eliminated. &lt;/li&gt;
-&lt;li&gt;Lastly, Log likelihood tends to punish bigger mistakes in log likelihood space. &lt;/li&gt;
+&lt;li&gt;Log-Likelihood is less computationally expensive since exponential from the equations are eliminated. &lt;/li&gt;
+&lt;li&gt;Lastly, Log-likelihood tends to punish bigger mistakes in log-likelihood space. &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Let’s consider a case were your true class is 1 and your model estimates the probability of the true class is .9. If you loss function is the L1 Loss function, the value of the loss function is 0.1. On the other hand, if you are using the log-likelihood then the value of the loss function is 0.105 (assuming natural log).&lt;/p&gt;
+&lt;p&gt;Let’s consider a case were your true class is 1 and your model estimates the probability of the true class is .9. If your loss function is the L1 Loss function, the value of the loss function is 0.1. On the other hand, if you are using the log-likelihood then the value of the loss function is 0.105 (assuming natural log).&lt;/p&gt;
 &lt;p&gt;On the other hand, if your estimated probability is 0.3 and you are using the likelihood function the value of your loss function is 0.7. If you are using the log-likelihood function the value of your loss function is 1.20.&lt;/p&gt;
-&lt;p&gt;Now if we consider these two cases, using the standard likelihood function (akin to softmax), the error increases by a factor of 7 (.7/.1) between those two examples. Using the log-likelihood function (akin to log-softmax) the error increases by a factor of ~11 (1.20/.105). The point is, even though logsoftmax and softmax are monotonic, their effect on the relative values of the loss function changes.&lt;/p&gt;
+&lt;p&gt;Now if we consider these two cases, using the standard likelihood function (akin to softmax), the error increases by a factor of 7 (.7/.1) between those two examples. Using the log-likelihood function (akin to log-softmax) the error increases by a factor of ~11 (1.20/.105). The point is, even though log softmax and softmax are monotonic, their effect on the relative values of the loss function changes.&lt;/p&gt;
 &lt;p&gt;For further deep dive into why likelihood are used, refer to this &lt;a href="https://math.stackexchange.com/questions/892832/why-we-consider-log-likelihood-instead-of-likelihood-in-gaussian-distribution"&gt;Stackoverflow&lt;/a&gt; thread.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Also, notice the dim = 1 in the pytorch Activation. It basically signifies that log softmax is to be computed across columns.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Also, notice the dim = 1 in the Pytorch Activation. It signifies that log softmax is to be computed across columns.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Step 4 and 5 -&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In this section we shall define a loss function and optimizer.&lt;/p&gt;
+&lt;p&gt;In this section, we shall define a loss function and optimizer.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Since this is a classification problem we shall be using a Negative log likelihood function. &lt;/li&gt;
+&lt;li&gt;Since this is a classification problem we shall be using a Negative log-likelihood function. &lt;/li&gt;
 &lt;li&gt;You can choose to use CrossEntropyLoss() which internally takes the Logsoftmax and NLL. If you choose to use CrossEntropyLoss, make sure to use a Softmax() function in the output layer instead of LogSoftmax().&lt;/li&gt;
 &lt;li&gt;Read the master documentation &lt;a href="https://pytorch.org/docs/stable/nn.html#torch.nn.CrossEntropyLoss"&gt;here&lt;/a&gt; for more information. &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;While defining an optimizer, pytorch requires us to pass model parameters which are to be optimized.&lt;/p&gt;
+&lt;p&gt;While defining an optimizer, PyTorch requires us to pass model parameters that are to be optimized.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6992,7 +6992,7 @@ $$Softmax = \large \frac{e^{z}}{\sum_{j = 1}^{n\_classes} e^{z_j}}$$$$ \therefor
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;&lt;strong&gt;The Fun Part&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Now, we get to the business end of the article. In this section, we shall train a classifier by iterating over min batches.   For the sake of convenience, I have added comments to the code below so that each code block can be discussed in later sections.&lt;/p&gt;
+&lt;p&gt;Now, we get to the business end of the article. In this section, we shall train a classifier by iterating over mini-batches.   For the sake of convenience, I have added comments to the code below so that each code block can be discussed in later sections.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7109,7 +7109,7 @@ In code block 1, we have simple initialized training_loss and training_accuracy 
 &lt;br/&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;code block 2 - &lt;br/&gt;
-In code block 2, we have reshaped our input batch so that it matches the dimensions expected by our neural network model. Tensors can be reshaped in pytorch by using .view method. 
+In code block 2, we have reshaped our input batch so that it matches the dimensions expected by our neural network model. Tensors can be reshaped in PyTorch by using the .view method. 
 Note that for a tensor 't1' of shape (a, b, c), t1.view(a, b*c) is equivalent to t1.view(a, -1). 
 &lt;br/&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -7118,7 +7118,7 @@ In code block 3, we have simply clearing out the gradient values that may have b
 &lt;br/&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;code block 4 - &lt;br/&gt;
-In code 4, we pass the batch if images through the network. This is equivalent to a forward pass and can be implemented using .forward method. 
+In code 4, we pass the batch if images through the network. This is equivalent to a forward pass and can be implemented using the 'forward' method. 
 &lt;br/&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;code block 5 - &lt;br/&gt;
@@ -7132,8 +7132,8 @@ After the forward pass, we need to compute the loss to implement backward propag
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h3 id="Final-Comments--"&gt;Final Comments -&lt;a class="anchor-link" href="#Final-Comments--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;Hopefully, this article will help you to get started with pytorch. &lt;/li&gt;
-&lt;li&gt;I will try to cover more usecases (regression modelling), in upcoming articles. &lt;/li&gt;
+&lt;li&gt;Hopefully, this article will help you to get started with PyTorch. &lt;/li&gt;
+&lt;li&gt;I will try to cover more usecases, in upcoming articles. &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;
