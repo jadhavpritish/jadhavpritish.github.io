@@ -1310,7 +1310,6 @@ For eg - When a metadata for an image is something like - "Apple sales in India 
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">'ignore'</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">tqdm</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_colwidth'</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
@@ -1353,6 +1352,10 @@ For eg - When a metadata for an image is something like - "Apple sales in India 
 
 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">'&lt;style&gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&lt;/style&gt;'</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">"&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;"</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1376,6 +1379,18 @@ For eg - When a metadata for an image is something like - "Apple sales in India 
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>Using TensorFlow backend.
 </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<style>.prompt{width: 0px; min-width: 0px; visibility: collapse}</style>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<style>.container { width:100% !important; }</style>
 </div>
 </div>
 </div>
