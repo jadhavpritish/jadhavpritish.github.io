@@ -14,6 +14,7 @@
         <meta name="author" content="Pritish Sunil Jadhav" />
         <meta name="keywords" content="Python,Flask,Machine Learning." />
         <meta name="description" content="There is a huge surge in number of Machine Learning based products which are being actively researched and developed across the globe. One of the crucial factors in the delivery of an ML product is the ability to expose the trained model/predictions to the world. In this article, I will provide a step-by-step guide for developing a web app using Flask." />
+    	<img src="https://jadhavpritish.github.io/images/cover_images/regression_cover_image.png" alt="Cover image">
 
         <meta property="og:site_name" content="Pritish - Data Science Scrapbook" />
         <meta property="og:type" content="article"/>
@@ -1272,17 +1273,17 @@ h6:hover .anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Building-Web-APIs-Using-Python-&amp;-Flask">Building Web APIs Using Python &amp; Flask<a class="anchor-link" href="#Building-Web-APIs-Using-Python-&amp;-Flask">¶</a></h2><ul>
-<li>There is a huge surge in number of Machine Learning based products which are being actively researched and developed across the globe. </li>
+<li>There is a huge surge in the number of Machine Learning based products which are being actively researched and developed across the globe. </li>
 <li>One of the crucial factors in the delivery of an ML product is the ability to expose the trained model/predictions to the world.</li>
 <li>In this article, I will provide a step-by-step guide for developing a web app using Flask. </li>
 </ul>
 <p>A typical web application consists of -</p>
 <ol>
-<li>A Web Server which uses HTTP to serve files which are inturn translated into web pages for the end users. Typical examples of a webservers would be NGINX, Apache Tomcat, Lightspeed etc. </li>
-<li>A Web Server Gateway Interface  (WSGI) - WSGI is the bridge between a web server and python framework/Application. A typical example of Python WSGI would be gunicorn. </li>
-<li>Application Framework which provides a developer friendly environment for developing web application. Flask is the popular micro-framework which we shall explore in this article. </li>
+<li>A Web Server that uses HTTP to serve files that are in turn translated into web pages for the end-users. Typical examples of web servers would be NGINX, Apache Tomcat, Lightspeed, etc. </li>
+<li>A Web Server Gateway Interface  (WSGI) - WSGI is the bridge between a web server and a python framework/Application. A typical example of Python WSGI would be Gunicorn. </li>
+<li>Application Framework which provides a developer-friendly environment for developing web applications. Flask is the popular micro-framework which we shall explore in this article. </li>
 </ol>
-<p>Without further ado, lets jump into the implementation details. Rest of the blog will cover following topics -</p>
+<p>Without further ado, let's jump into the implementation details. Rest of the blog will cover the following topics -</p>
 <ol>
 <li>Training a basic model. <br/></li>
 <li>Saving and Loading ML models using pickle. <br/></li>
@@ -1323,7 +1324,7 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.-Model-Training">1. Model Training<a class="anchor-link" href="#1.-Model-Training">¶</a></h3><p>To limit the scope of this article, we shall proceed by training a basic classifer for the famous <a href="https://archive.ics.uci.edu/ml/datasets/Iris">IRIS</a> dataset. The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant.</p>
+<h3 id="1.-Model-Training">1. Model Training<a class="anchor-link" href="#1.-Model-Training">¶</a></h3><p>To limit the scope of this article, we shall proceed by training a basic classifier for the famous <a href="https://archive.ics.uci.edu/ml/datasets/Iris">IRIS</a> dataset. The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant.</p>
 <p><b>Attribute Information: </b></p>
 <ol>
 <li>sepal length in cm </li>
@@ -1335,7 +1336,7 @@ h6:hover .anchor-link {
 -- Iris Versicolour <br/> 
 -- Iris Virginica <br/></li>
 </ol>
-<p>Pleas note that we won't be focussing on aspects like model complexity, architecture and incremental improvement in training accuracy since it beyond the scope of this article.</p>
+<p>Please note that we won't be focussing on aspects like model complexity, architecture and incremental improvement in training accuracy since it beyond the scope of this article.</p>
 </div>
 </div>
 </div>
@@ -1466,9 +1467,9 @@ test data has 8 rows
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Awesome-!!!">Awesome !!!<a class="anchor-link" href="#Awesome-!!!">¶</a></h3><p>So, we have managed to quickly train a model which has cross validated training accuarcy of <b>97%</b> and a test accuracy of WHOPPING (melodrama alert !!) of 100%.</p>
-<p>Next lets save our trained models using pickle so that we can access them later in our flask application.</p>
-<p>As a exercise, one can validate that loaded models have the same training accuracy.</p>
+<h3 id="Awesome-!!!">Awesome !!!<a class="anchor-link" href="#Awesome-!!!">¶</a></h3><p>So, we have managed to quickly train a model that has cross-validated training accuracy of <b>97%</b> and a test accuracy of WHOPPING (melodrama alert !!) of 100%.</p>
+<p>Next, let's save our trained models using pickle so that we can access them later in our flask application.</p>
+<p>As an exercise, one can validate that loaded models have the same training accuracy.</p>
 </div>
 </div>
 </div>
@@ -1491,33 +1492,33 @@ test data has 8 rows
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Flask-Application--">Flask Application -<a class="anchor-link" href="#Flask-Application--">¶</a></h3><p>Create a python script with following content. To help us better understand the script, lets disect the application using manageable codeblocks. The entire flask application consists of 5 codeblocks.</p>
+<h3 id="Flask-Application--">Flask Application -<a class="anchor-link" href="#Flask-Application--">¶</a></h3><p>Create a python script with the following content. To help us better understand the script, let's dissect the application using manageable code blocks. The entire flask application consists of 5 code blocks.</p>
 <p><b>Codeblock 1 - </b><br/>
 a. Create an instance of "Flask" class. <br/>
 b. We shall pass '<strong>name</strong>' as the first argument while creating an instance. <br/>
 c. <strong>name</strong> is a special variable in python which evaluates the name of the current module. We need to pass this information so that Flask knows where to look for HTML templates, static files etc.<br/> 
 To learn more about "<strong>name</strong>" variable, refer <a href="https://www.geeksforgeeks.org/__name__-special-variable-python/">this</a> elabroate blog. <br/></p>
 <p><b>Codeblock 2 - </b><br/>
-a. Before our app start serving predictions for incoming data, we need load saved models. <br/>
-b. This can be accomplished by leveraging the decorator "before_first_request". As the name suggests, the decorator will call a function which can be configured to load parameters that we will need while making predictions. <br/>
+a. Before our app starts serving predictions for incoming data, we need load saved models. <br/>
+b. This can be accomplished by leveraging the decorator "before_first_request". As the name suggests, the decorator will call a function that can be configured to load parameters that we will need while making predictions. <br/>
 c. The function in this block simply loads the pickle models which we had saved earlier. <br/>
 d. The model variables are defined as 'global' so that we can access them outside of the scope of this initialization function. <br/></p>
 <p><b>Codeblock 3 - </b><br/>
-a. This is a standard python function which accept an input, normalizes it and computes predicts using loaded models. <br/>
-b. The operations are self-explanatory. Note that the predictions are converted to list so that they can be return in the response object.</p>
+a. This is a standard python function that accepts an input, normalizes it and computes predicts using loaded models. <br/>
+b. The operations are self-explanatory. Note that the predictions are converted to the list so that they can be returned in the response object.</p>
 <p><b>Codeblock 4 - </b> <br/>
-a. The route() decorator tells Flask which url should trigger our function. <br/>
-b. Note that we shall be using 'POST' method in this article. <br/>
-c. GET method differs from POST method in the way parameters are passed. <br/>
-d. The input parameters for our function using GET method are passed through the url where the paramters are passed a part of body while using POST method. <br/>
-e. Evidently, POST method is more secure as compared a GET method. <br/></p>
+a. The route() decorator tells Flask which URL should trigger our function. <br/>
+b. Note that we shall be using the 'POST' method in this article. <br/>
+c. The GET method differs from the POST method in the way parameters are passed. <br/>
+d. The input parameters for our function using the GET method are passed through the URL where the parameters are passed a part of the body while using the POST method. <br/>
+e. The POST method is more secure as compared to a GET method. <br/></p>
 <p><b>Codeblock 5 -</b><br/></p>
 <ol>
 <li>In the last block, we will simply trigger the flask app if the module is executed in a standalone mode. <br/></li>
 <li>Note that there are various parameters available including port, debug mode and use of multithread. <br/></li>
 </ol>
-<h3 id="RUN-THE-SCRIPT--">RUN THE SCRIPT -<a class="anchor-link" href="#RUN-THE-SCRIPT--">¶</a></h3><p>Andddd, thats it, our app is ready to go live. Go ahead and run the script !! This will host the service on ypur local machine.</p>
-<p>In the last and final section, we shall test our application using postman !</p>
+<h3 id="RUN-THE-SCRIPT--">RUN THE SCRIPT -<a class="anchor-link" href="#RUN-THE-SCRIPT--">¶</a></h3><p>And, that's it, our app is ready to go live. Go ahead and run the script !! This will host the service on your local machine.</p>
+<p>In the last and final section, we shall test our application using postman!</p>
 </div>
 </div>
 </div>
@@ -1611,9 +1612,9 @@ Use a production WSGI server instead.</li>
 <li>Debugger is active!</li>
 <li>Debugger PIN: 129-173-235</li>
 </ul>
-<p>In this section, we shall use postman to test our service for computing predictions. The data passed while testing will typical be the out-of-bag dataset. Hence, this will be the true test of our trained models.</p>
+<p>In this section, we shall use Postman to test our service for computing predictions. The data passed while testing will typically be the out-of-bag dataset. Hence, this will be the true test of our trained models.</p>
 <p>Go ahead and fire up your postman !!</p>
-<p>Note - If you dont have postman installed, I would encourage you to install it first through <a href="https://www.getpostman.com/downloads/">official website</a></p>
+<p>Note - If you don't have postman installed, I would encourage you to install it first through <a href="https://www.getpostman.com/downloads/">official website</a></p>
 <p>STEP 1 - 
 Your postman screen would look something like this <img src="./../../images/flask_images/flask_1.png"/>.</p>
 <p>STEP 2- 
@@ -1630,10 +1631,9 @@ In order to pass data as json, select the 'Body'&gt;'raw' tab as shown in figure
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Final Comments -</p>
-<ol>
+<h3 id="Final-Comments--">Final Comments -<a class="anchor-link" href="#Final-Comments--">¶</a></h3><ol>
 <li>If you are concerned about the quality of predictions, the predictions are indeed correct which confirms that everything is working smoothly.</li>
-<li>As you may have noticed, this article only covers the third part of Web Application pipeline. In the next tutorial, I will cover the WSGI aspect of Web App development using gunicorn.</li>
+<li>As you may have noticed, this article only covers the third part of the Web Application pipeline. In the next tutorial, I will cover the WSGI aspect of Web App development using Gunicorn.</li>
 </ol>
 </div>
 </div>
