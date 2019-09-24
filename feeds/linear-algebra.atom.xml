@@ -1152,7 +1152,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h3 id="The-Curious-Case-of-Convex-Functions"&gt;The Curious Case of Convex Functions&lt;a class="anchor-link" href="#The-Curious-Case-of-Convex-Functions"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;Any introductory course for Machine Learning covers algorithms like Linear Regression and Logistic Regression with varying degrees of detail.&lt;/li&gt;
+&lt;li&gt;Most of the introductory courses for Machine Learning cover algorithms like Linear Regression and Logistic Regression with varying degrees of detail.&lt;/li&gt;
 &lt;li&gt;The resources are plentiful for grasping the nitty gitties involved. However, I rarely found traditional courses diving into proving the convexity of MSE loss function. &lt;/li&gt;
 &lt;li&gt;Most of the online resources often skim through the part where they define the cost function for Regression Algorithms using MSE where the cost function is claimed to be a convex function. &lt;/li&gt;
 &lt;li&gt;The convexity property unlocks a crucial advantage where the local minima of a convex function is also a global minima.&lt;/li&gt;
