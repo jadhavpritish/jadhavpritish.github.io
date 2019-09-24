@@ -5,21 +5,21 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/</loc>
-<lastmod>2019-09-18T14:03:06-00:00</lastmod>
+<lastmod>2019-09-24T22:33:19-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/archives.html</loc>
-<lastmod>2019-09-18T14:03:06-00:00</lastmod>
+<lastmod>2019-09-24T22:33:19-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/tags.html</loc>
-<lastmod>2019-09-18T14:03:06-00:00</lastmod>
+<lastmod>2019-09-24T22:33:19-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -27,6 +27,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jadhavpritish.github.io/2019/09/multilabel text classification.html</loc>
 <lastmod>2019-09-11T18:00:00+05:30</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/2019/08/The Curious Case of Convex Functions.html</loc>
+<lastmod>2019-08-24T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -116,6 +123,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://jadhavpritish.github.io/category/linear-algebra</loc>
+<lastmod>2019-08-24T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://jadhavpritish.github.io/category/machine-learning</loc>
 <lastmod>2018-07-08T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
@@ -158,6 +172,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://jadhavpritish.github.io/tag/matrices</loc>
+<lastmod>2019-08-24T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://jadhavpritish.github.io/tag/multiclass-classification-ptroch</loc>
 <lastmod>2019-06-26T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
@@ -174,6 +195,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jadhavpritish.github.io/tag/generative-modelling</loc>
 <lastmod>2019-07-19T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/tag/logistic-regression</loc>
+<lastmod>2018-07-08T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -249,6 +277,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://jadhavpritish.github.io/tag/convexity</loc>
+<lastmod>2019-08-24T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://jadhavpritish.github.io/tag/linear-programming</loc>
 <lastmod>2018-12-03T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
@@ -263,8 +298,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/logistic-regression</loc>
-<lastmod>2018-07-08T18:00:00+05:53</lastmod>
+<loc>https://jadhavpritish.github.io/tag/optimization</loc>
+<lastmod>2019-08-24T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
