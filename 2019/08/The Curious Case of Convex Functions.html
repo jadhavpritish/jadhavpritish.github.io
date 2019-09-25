@@ -11,7 +11,7 @@
 
 <link rel="canonical" href="https://jadhavpritish.github.io/2019/08/The Curious Case of Convex Functions.html">
 
-        <meta name="author" content="pritish jadhav" />
+        <meta name="author" content="Pritish Sunil Jadhav" />
         <meta name="keywords" content="python,Matrices,Convexity,Optimization." />
         <meta name="description" content="The convexity property of a function unlocks a crucial advantage where the local minima of a convex function is also a global minima. This ensures that a model can be trained where the loss function is minimized to its globally minimum value. In this blog post, we shall work through the concepts needed to prove the convexity of a function." />
     	<img src="https://jadhavpritish.github.io/images/cover_images/regression_cover_image.png" alt="Cover image">
@@ -27,7 +27,7 @@
             <meta property="article:tag" content="Matrices" />
             <meta property="article:tag" content="Convexity" />
             <meta property="article:tag" content="Optimization." />
-            <meta property="article:author" content="pritish jadhav" />
+            <meta property="article:author" content="Pritish Sunil Jadhav" />
 
 
 
@@ -1597,13 +1597,13 @@ H_f = \begin{bmatrix}
 \frac{\partial^2 f}{\partial x_1 \partial x_2} &amp;
 \cdots &amp;
 \frac{\partial ^2 f}{\partial x_1 \partial x_n} \\
-\frac{\partial ^2 f}{\partial x_2 \partial x1} &amp; 
+\frac{\partial ^2 f}{\partial x_2 \partial x_1} &amp; 
 \frac{\partial^2 f}{\partial {x_2}^2 } &amp;
 \cdots &amp;
 \frac{\partial^2 f}{\partial x_2 \partial x_n} \\
 \vdots &amp;  \ddots &amp; \cdots &amp; \vdots\\
-\frac{\partial ^2 f}{\partial x_n \partial x1} &amp; 
-\frac{\partial^2 f}{\partial x_n \partial x2 } &amp;
+\frac{\partial ^2 f}{\partial x_n \partial x_1} &amp; 
+\frac{\partial^2 f}{\partial x_n \partial x_2 } &amp;
 \cdots &amp;
 \frac{\partial^2 f}{\partial {x_n}^2 } \\
 \end{bmatrix}
@@ -1631,7 +1631,7 @@ A \; n \times n \; square \; matrix \; X \; is \; Negative \; Semidefinite \; if
 <li>However, while checking for Matrix Definiteness, manually validating the condition of every value of x is definitely not an option. </li>
 <li>So let us try and break this down even further.</li>
 </ul>
-<h3 id="Eigen-Value-and-Eigen-Vector--">Eigen Value and Eigen Vector -<a class="anchor-link" href="#Eigen-Value-and-Eigen-Vector--">¶</a></h3><p>We know that an eigenvector is a vector whose direction remains unchanged when a linear transformation is applied to it.</p>
+<h3 id="Eigen-Values-and-Eigen-Vector--">Eigen Values and Eigen Vector -<a class="anchor-link" href="#Eigen-Values-and-Eigen-Vector--">¶</a></h3><p>We know that an eigenvector is a vector whose direction remains unchanged when a linear transformation is applied to it.</p>
 <p>Mathematically,</p>
 $$
 \begin{align}
@@ -1733,11 +1733,11 @@ Matrix is Postive Definite as well as Positive Semidefinite
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Principal-Minors-of-a-Matrix--">Principal Minors of a Matrix -<a class="anchor-link" href="#Principal-Minors-of-a-Matrix--">¶</a></h4><ul>
+<h3 id="Principal-Minors-of-a-Matrix--">Principal Minors of a Matrix -<a class="anchor-link" href="#Principal-Minors-of-a-Matrix--">¶</a></h3><ul>
 <li>For a Square Matrix X, a Pricipal Submatrix of order k is obtained by deleting <strong>any</strong> (n-k) rows and corresponding (n-k) columns. </li>
 <li>The determinant of such a Pricipal Submatrix is called as the Principal Minor of matrix X. </li>
 </ul>
-<h4 id="Leading-Principal-Minors-of-a-Matrix--">Leading Principal Minors of a Matrix -<a class="anchor-link" href="#Leading-Principal-Minors-of-a-Matrix--">¶</a></h4><ul>
+<h3 id="Leading-Principal-Minors-of-a-Matrix--">Leading Principal Minors of a Matrix -<a class="anchor-link" href="#Leading-Principal-Minors-of-a-Matrix--">¶</a></h3><ul>
 <li>For a Square Matrix X, a Leading Pricipal Submatrix of order k is obtained by deleting <strong>last</strong> (n-k) rows and corresponding (n-k) columns. </li>
 <li>The determinant of such a Leading Pricipal Submatrix is called as the Leading Principal Minor of matrix X. </li>
 </ul>
@@ -1756,7 +1756,7 @@ Matrix is Postive Definite as well as Positive Semidefinite
 <li>f(x) is <strong>strictly concave</strong> in $S$ if $X^H$ is a Negative Definite Matrix. </li>
 <li>f(x) is <strong>concave</strong> in $S$ if $X^H$ is a Negative Semi-Definite Matrix.</li>
 </ul>
-<h4 id="Example--">Example -<a class="anchor-link" href="#Example--">¶</a></h4><p>Consider an equation of Quadratic form -</p>
+<h3 id="Example--">Example -<a class="anchor-link" href="#Example--">¶</a></h3><p>Consider an equation of Quadratic form -</p>
 $$
 \begin{align}
 f(x_1, x_2, x_3) = 5x_1^2 - 2x_1x_2 + 2x_2^2 + x_3x_2 + x_3^2
