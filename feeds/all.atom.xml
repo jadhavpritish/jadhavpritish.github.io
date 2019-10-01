@@ -5476,7 +5476,7 @@ Matrix is Postive Definite as well as Positive Semidefinite
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Alternate Definition for Dtermining Matrix Defniteness -&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Computing Eigne values for large matrices often involves solving linear equations. &lt;/li&gt;
+&lt;li&gt;Computing Eigen values for large matrices often involves solving linear equations. &lt;/li&gt;
 &lt;li&gt;Large Matrices will will involve solving linear equations in large number of variables. &lt;/li&gt;
 &lt;li&gt;Hence, It may not always to be feasible to solve for Eigen Values.&lt;/li&gt;
 &lt;/ol&gt;
