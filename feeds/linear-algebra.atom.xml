@@ -1179,7 +1179,7 @@ $$
 $$&lt;p&gt;Where,&lt;/p&gt;
 &lt;center&gt;
 n = number of features.&lt;br/&gt;
-&lt;/center&gt;&lt;p&gt;For the sake of convenience/readability, &lt;strong&gt; let's assume n = 3&lt;/strong&gt;. The eq.(2) can thus be written as -&lt;/p&gt;
+&lt;/center&gt;&lt;p&gt;For the sake of convenience/readability, &lt;strong&gt;let's assume n = 3&lt;/strong&gt;. The eq.(2) can thus be written as -&lt;/p&gt;
 $$
 \begin{align}
 \hat{y}^{(i)} &amp;amp;= \sum_{j = 1}^{n}(w_jx_{j}^{(i)} )
