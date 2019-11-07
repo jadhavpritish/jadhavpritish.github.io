@@ -5,22 +5,29 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/</loc>
-<lastmod>2019-10-13T18:55:25-00:00</lastmod>
+<lastmod>2019-11-07T14:10:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/archives.html</loc>
-<lastmod>2019-10-13T18:55:25-00:00</lastmod>
+<lastmod>2019-11-07T14:10:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/tags.html</loc>
-<lastmod>2019-10-13T18:55:25-00:00</lastmod>
+<lastmod>2019-11-07T14:10:34-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/2019/10/Bending the ELBO.html</loc>
+<lastmod>2019-10-15T18:00:00+05:30</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -131,7 +138,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/category/linear-algebra</loc>
-<lastmod>2019-08-25T18:00:00+05:53</lastmod>
+<lastmod>2019-10-15T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -159,7 +166,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/tag/deep-learning</loc>
-<lastmod>2019-09-11T18:00:00+05:53</lastmod>
+<lastmod>2019-10-15T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -243,7 +250,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/tag/python</loc>
-<lastmod>2019-09-11T18:00:00+05:53</lastmod>
+<lastmod>2019-10-15T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -326,6 +333,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://jadhavpritish.github.io/tag/variational-autoencoders</loc>
+<lastmod>2019-10-15T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://jadhavpritish.github.io/tag/nltk</loc>
 <lastmod>2019-05-24T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
@@ -348,7 +362,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/author/pritish-sunil-jadhav</loc>
-<lastmod>2019-09-11T18:00:00+05:53</lastmod>
+<lastmod>2019-10-15T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
