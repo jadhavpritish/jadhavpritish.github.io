@@ -1151,7 +1151,7 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Understanding-Variational-Autoencoder-Cost-Function--"&gt;Understanding Variational Autoencoder Cost Function -&lt;a class="anchor-link" href="#Understanding-Variational-Autoencoder-Cost-Function--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In this article, the goal is to understand the ELBO (Evidence Lower Bound) cost function used in training Variational Autoencoder. Before moving forward, the article is designed with an assumption that the readers possess basic understanding of Generative Modelling and Variational Autoencoders.&lt;/p&gt;
+&lt;h3 id="Understanding-Variational-Autoencoder-Cost-Function--"&gt;Understanding Variational Autoencoder Cost Function -&lt;a class="anchor-link" href="#Understanding-Variational-Autoencoder-Cost-Function--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In this article, the goal is to understand the ELBO (Evidence Lower Bound) cost function used in training Variational Autoencoder. Before moving forward, the article is designed with an assumption that the readers possess a basic understanding of Generative Modelling and Variational Autoencoders.&lt;/p&gt;
 &lt;p&gt;The following sections shall cover -&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Pseudo Code for training VAE&lt;/li&gt;
@@ -1174,7 +1174,7 @@ $ update\  \theta : Gradient\ updates$ &lt;br/&gt;&lt;/p&gt;
 &lt;/ol&gt;
 &lt;ul&gt;
 &lt;li&gt;The KL divergence (also known as relative Entropy) is used to measure how different one distribution is from another. &lt;/li&gt;
-&lt;li&gt;It can be seen that, we it would be ideal to maximise both the quantities mentioned above. &lt;/li&gt;
+&lt;li&gt;It can be seen that it would be ideal to maximize both the quantities mentioned above. &lt;/li&gt;
 &lt;li&gt;This translates into an optimization problem for maximizing ELBO. &lt;/li&gt;
 &lt;li&gt;However, we typically try to minimize the cost while training and hence the cost function of VAE can be chosen to be -ELBO.&lt;/li&gt;
 &lt;/ul&gt;
