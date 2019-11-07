@@ -5,27 +5,27 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/</loc>
-<lastmod>2019-11-07T14:10:34-00:00</lastmod>
+<lastmod>2019-11-07T14:21:05-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/archives.html</loc>
-<lastmod>2019-11-07T14:10:34-00:00</lastmod>
+<lastmod>2019-11-07T14:21:05-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/tags.html</loc>
-<lastmod>2019-11-07T14:10:34-00:00</lastmod>
+<lastmod>2019-11-07T14:21:05-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2019/10/Bending the ELBO.html</loc>
+<loc>https://jadhavpritish.github.io/2019/10/Bending the ELBO in Variational Autoencoders.html</loc>
 <lastmod>2019-10-15T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
