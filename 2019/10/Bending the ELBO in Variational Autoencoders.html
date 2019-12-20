@@ -1275,7 +1275,7 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Understanding-Variational-Autoencoder-Cost-Function--">Understanding Variational Autoencoder Cost Function -<a class="anchor-link" href="#Understanding-Variational-Autoencoder-Cost-Function--">¶</a></h3><p>In this article, the goal is to understand the ELBO (Evidence Lower Bound) cost function used in training Variational Autoencoder. Before moving forward, the article is designed with an assumption that the readers possess a basic understanding of Generative Modelling and Variational Autoencoders.</p>
+<h3 id="Understanding-Variational-Autoencoder-Cost-Function--">Understanding Variational Autoencoder Cost Function -<a class="anchor-link" href="#Understanding-Variational-Autoencoder-Cost-Function--">&#182;</a></h3><p>In this article, the goal is to understand the ELBO (Evidence Lower Bound) cost function used in training Variational Autoencoder. Before moving forward, the article is designed with an assumption that the readers possess a basic understanding of Generative Modelling and Variational Autoencoders.</p>
 <p>The following sections shall cover -</p>
 <ol>
 <li>Pseudo Code for training VAE</li>
@@ -1283,15 +1283,15 @@ h6:hover .anchor-link {
 <li>KL Divergence - Definition and its importance.</li>
 <li>Deriving a trainable cost function. </li>
 </ol>
-<h3 id="1.-Pseudo-Code-for-training-VAE--">1. Pseudo Code for training VAE -<a class="anchor-link" href="#1.-Pseudo-Code-for-training-VAE--">¶</a></h3><p><img src="../../images/vae/vae_architecture.png"/> <br/></p>
-<p>While not converged: <br/>
-$ X_{batch} = MiniBatch(X, batchSize) $ <br/>
-$ q(z | x;\phi) = Encoder(X_{batch}) $ <br/>
-$ z \sim q(z | x;\phi) : Reparamaterization\ Trick $<br/>
-$ reconstructed\ image\ \sim \ p(x | z; \theta) = Generator(z) $<br/>
-$ loss \ =\  MSE(X_{batch}, resconstructed\ image) $ <br/>
-$ update\  \theta : Gradient\ updates$ <br/></p>
-<h3 id="2.-VAE-Cost-Function--">2. VAE Cost Function -<a class="anchor-link" href="#2.-VAE-Cost-Function--">¶</a></h3><p>The cost function for a Variational Encoder consists of two parts, namely -</p>
+<h3 id="1.-Pseudo-Code-for-training-VAE--">1. Pseudo Code for training VAE -<a class="anchor-link" href="#1.-Pseudo-Code-for-training-VAE--">&#182;</a></h3><p><img src="../../images/vae/vae_architecture.png"> <br></p>
+<p>While not converged: <br>
+$ X_{batch} = MiniBatch(X, batchSize) $ <br>
+$ q(z | x;\phi) = Encoder(X_{batch}) $ <br>
+$ z \sim q(z | x;\phi) : Reparamaterization\ Trick $<br>
+$ reconstructed\ image\ \sim \ p(x | z; \theta) = Generator(z) $<br>
+$ loss \ =\  MSE(X_{batch}, resconstructed\ image) $ <br>
+$ update\  \theta : Gradient\ updates$ <br></p>
+<h3 id="2.-VAE-Cost-Function--">2. VAE Cost Function -<a class="anchor-link" href="#2.-VAE-Cost-Function--">&#182;</a></h3><p>The cost function for a Variational Encoder consists of two parts, namely -</p>
 <ol>
 <li>The Log Likelihood function - $E[\ log \ p(x| z; \theta)\ ]$</li>
 <li>The KL divergence $ D_{KL}[\ q(z|x; \phi)\ ||\  p(x|z;\theta)\ ]$</li>
@@ -1305,28 +1305,28 @@ $ update\  \theta : Gradient\ updates$ <br/></p>
 <p>Mathematically,</p>
 \begin{align} \\
 ELBO = E[\ log \ p(x| z; \theta)\ ] - D_{KL}[\ q(z|x; \phi)\ ||\  p(z)\ ] \tag{1} \\
-\end{align}<p>and, <br/>
+\end{align}<p>and, <br>
 \begin{align}
 VAE_{cost} &amp; = -ELBO \\
 &amp; = - \big(E[\ log \ p(x| z; \theta)\ ] - D_{KL}[\ q(z|x; \phi)\ ||\  p(z)\ ]\big) \tag{2}\\
 \end{align}</p>
-<h3 id="3.-Kullback-Leibler-Divergence-and-its-Importance--">3. Kullback-Leibler Divergence and its Importance -<a class="anchor-link" href="#3.-Kullback-Leibler-Divergence-and-its-Importance--">¶</a></h3><ul>
+<h3 id="3.-Kullback-Leibler-Divergence-and-its-Importance--">3. Kullback-Leibler Divergence and its Importance -<a class="anchor-link" href="#3.-Kullback-Leibler-Divergence-and-its-Importance--">&#182;</a></h3><ul>
 <li>As we know, VAE works on the principles of variational inference where the bottleneck represents the parameters of a Multinormal Gaussian Distribution from which samples can be drawn. </li>
 <li>KL divergence provides a measure for comparing one distribution with other. </li>
 <li>Mathematically, the Relative Entropy (KL Divergence) is defined by - </li>
 </ul>
 \begin{align}
 D_{KL}(P || Q) = H(P, Q) - H(P) \tag{3}
-\end{align}<p><br/>
-Where, <br/>
+\end{align}<p><br>
+Where, <br>
 \begin{align}
 H(P, Q) = E_{x \sim P}[-log Q(x)] \tag{4}
-\end{align} <br/>
-and <br/>
+\end{align} <br>
+and <br>
 \begin{align}
 H(P) = E_{x \sim P}[-log P(x)] \tag{5}
 \end{align}
-<br/>
+<br>
 \begin{align}
 \therefore D_{KL}(P || Q) &amp;= E_{x \sim P}[-log Q(x)] - E_{x \sim P}[-log P(x)] \\
 &amp;= E_{x \sim P}[- log Q(x) - (- log P(x))] \\
@@ -1341,7 +1341,7 @@ D_{KL}(P || Q) = \sum_{i} \big(P(i) \  log \frac{P(i)}{Q(i)}\big) \tag{4}
 \begin{align}
 D_{KL}(P || Q) = \int \big(P(x) \  log \frac{P(x)}{Q(x)}\big) \ \partial{x} \tag{5}
 \end{align}</p>
-<h4 id="Properties-of-KL-Divergence--">Properties of KL Divergence -<a class="anchor-link" href="#Properties-of-KL-Divergence--">¶</a></h4><ol>
+<h4 id="Properties-of-KL-Divergence--">Properties of KL Divergence -<a class="anchor-link" href="#Properties-of-KL-Divergence--">&#182;</a></h4><ol>
 <li><p>KL divergence is Non-Negative.
 \begin{align}
 if P = Q then D_{KL} = 0 
@@ -1356,10 +1356,10 @@ D_{KL}(P \ || \ Q) \neq D_{KL}(Q \ || \ P)
 </ol>
 <ul>
 <li>The asymmetric property of KL divergence is as result of the asymmetric nature of cross entropy. </li>
-<li>$D_{KL}(P \ || Q\ ) can be used when you wish to approximate P using distribution Q.</li>
-<li>$D_{KL}(Q \ || P\ ) can be used when you wish to approximate Q using distribution P.</li>
+<li>$D_{KL}(P \ || Q\ )$ can be used when you wish to approximate P using distribution Q.</li>
+<li>$D_{KL}(Q \ || P\ )$ can be used when you wish to approximate Q using distribution P.</li>
 </ul>
-<h3 id="Derivation-of-ELBO---">Derivation of ELBO  -<a class="anchor-link" href="#Derivation-of-ELBO---">¶</a></h3><ul>
+<h3 id="Derivation-of-ELBO---">Derivation of ELBO  -<a class="anchor-link" href="#Derivation-of-ELBO---">&#182;</a></h3><ul>
 <li>Let us define $q(z | x;\phi)$ as the output of Encoder Network and let $p(z | x; \phi)$ as its true distribution.</li>
 <li>Ideally we would like q(z | x) to be similar to p(z | x). </li>
 <li>The relationship can be captured using KL Divergence. </li>
@@ -1370,16 +1370,15 @@ D_{KL}[q(z | x) || \ p(z | x)] &amp;= \int \big( q(z | x) log \frac{q(z | x)}{p(
 &amp;=E\big[log(q(z | x)) - log(p(z|x)))\big] \tag{6}
 \end{align}</li>
 </ul>
-<p>Using Bayes Theorem -<br/>
+<p>Using Bayes Theorem -<br>
 \begin{align}
 p(z | \ x) = \frac{p(x | \ z) p(z)}{p(x)} \tag{7}
 \end{align}</p>
-<p>From Eq.(6) and Eq.(7)
+<p>From Eq.(6) and Eq.(7)</p>
 \begin{align}
 D_{KL}[q(z\  | \ x) || \ p(z\  | x\ )] &amp;= E\big[log\ (q(z\ |\  x)) - log\big(\frac{p(x\ | \ z)\ p(z)}{p(x)}\big)\big]\\
 &amp;= E\big[log\ (q(z\ |\  x)) - log(p(x\ |\ z)) - log(p(z)) + log(p(x))\big] \tag{8}
-\end{align}</p>
-<p>Since $p(x)$ is independent of z, 
+\end{align}<p>Since $p(x)$ is independent of z, 
 \begin{align}
 E[log(p(x))] = log(p(x)) \tag{9}
 \end{align}</p>
@@ -1387,13 +1386,12 @@ E[log(p(x))] = log(p(x)) \tag{9}
 \begin{align}
 D_{KL}[q(z\  | \ x) || \ p(z\  | x\ )] &amp;= E\big[log\ (q(z\ |\  x)) - log(p(x\ |\ z)) - log(p(z))\big] + log(p(x)) \tag{10}
 \end{align}</p>
-<p>Rearranging terms in Eq(10), we get - 
+<p>Rearranging terms in Eq(10), we get -</p>
 \begin{align}
 log(p(x)) - D_{KL}[q(z\  | \ x) || \ p(z\  | x\ )] &amp;= E\big[log\ (p(x\ |\  z)) - log(q(z\ |\ x)) + 
-log(p(z))\big] \
-&amp;= E\big[log\ (p(x\ |\  z))\big] - E\big[ log \frac{q(z\ | \ x)}{p(z)}\big] \tag{11}</p>
-<p>\end{align}</p>
-<p>But, 
+log(p(z))\big] \\
+&amp;= E\big[log\ (p(x\ |\  z))\big] - E\big[ log \frac{q(z\ | \ x)}{p(z)}\big] \tag{11}
+\end{align}<p>But, 
 \begin{align}
 E\big[ log \frac{q(z\ | \ x)}{p(z)}\big] = D_{KL}(q(z\ | x)\ ||\ p(z)) \tag{12}
 \end{align}</p>
@@ -1401,15 +1399,18 @@ E\big[ log \frac{q(z\ | \ x)}{p(z)}\big] = D_{KL}(q(z\ | x)\ ||\ p(z)) \tag{12}
 \begin{align}
 log(p(x)) - D_{KL}[q(z\  | \ x) || \ p(z\  | x\ )] = E\big[log\ (p(x\ |\  z))\big] - D_{KL}(q(z\ | x)\ ||\ p(z)) \tag{13}
 \end{align}</p>
-<h5 id="Hence-Proved.">Hence Proved.<a class="anchor-link" href="#Hence-Proved.">¶</a></h5><h3 id="Final-Comments--">Final Comments -<a class="anchor-link" href="#Final-Comments--">¶</a></h3><ul>
+<h5 id="Hence-Proved.">Hence Proved.<a class="anchor-link" href="#Hence-Proved.">&#182;</a></h5><h3 id="Final-Comments--">Final Comments -<a class="anchor-link" href="#Final-Comments--">&#182;</a></h3><ul>
 <li>It is can seen that both LHS and RHS of above equation represent ELBO. </li>
 <li>For training a VAE, we shall use RHS of Eq(13) since it can be computed using data available. </li>
 <li>Typically, the prior p(z) is initialized with $\mu = 0 $ and $\sigma = 1$ . </li>
 <li>With term $D_{KL}(q(z\ | x)\ ||\ p(z)) $, we try to approximate $q(z\ | x\ )$ using $p(z)$ i.e We are forcing $q(z\ | x\ )$ to be more like $p(z)$. </li>
 </ul>
+
 </div>
 </div>
 </div>
+ 
+
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');

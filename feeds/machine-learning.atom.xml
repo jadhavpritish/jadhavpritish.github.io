@@ -1151,33 +1151,34 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h1 id="Classification-Algorithms---"&gt;Classification Algorithms  -&lt;a class="anchor-link" href="#Classification-Algorithms---"&gt;¶&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;Classification is a branch of supervised machine learning algorithms where target values are discrete.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Problem Definition&lt;/strong&gt; - &lt;br/&gt; 
+&lt;h1 id="Classification-Algorithms---"&gt;Classification Algorithms  -&lt;a class="anchor-link" href="#Classification-Algorithms---"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;Classification is a branch of supervised machine learning algorithms where target values are discrete.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Problem Definition&lt;/strong&gt; - &lt;br&gt; 
 Suppose you are working as Supervising officer at a food packaging company where your department handles packaging of 'Apples' and 'Bananas'.
-&lt;br/&gt;
-&lt;img src="../../images/binary_classification/notebook_images/apples_conveyor1.jpg"/&gt;&lt;br/&gt;
+&lt;br&gt;
+&lt;img src="../../images/binary_classification/notebook_images/apples_conveyor1.jpg"&gt;&lt;br&gt;
 However, a bottleneck in the packaging process is the fact that currently, fruits are sorted manually by a team of 10 people. 
-&lt;br/&gt;
-&lt;img src="../../images/binary_classification/notebook_images/manual_sorting_example.jpg"/&gt;
-&lt;br/&gt;
+&lt;br&gt;
+&lt;img src="../../images/binary_classification/notebook_images/manual_sorting_example.jpg"&gt;
+&lt;br&gt;
 However, in order to improve productivity, you would like to add more layer of processing to the packaging process wherein a camera captures the image of the incoming fruit and automatically sorts it into categories 'Apples' v/s 'Bananas'.&lt;/p&gt;
 &lt;p&gt;In this case, a traditional classification algorithm like Logistic Regression can definitely help us. So, lets dive right into it.&lt;/p&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Lets-Start-by-import-python-libraries-that-will-help-us-accomplish-the-task"&gt;Lets Start by import python libraries that will help us accomplish the task&lt;a class="anchor-link" href="#Lets-Start-by-import-python-libraries-that-will-help-us-accomplish-the-task"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="Lets-Start-by-import-python-libraries-that-will-help-us-accomplish-the-task"&gt;Lets Start by import python libraries that will help us accomplish the task&lt;a class="anchor-link" href="#Lets-Start-by-import-python-libraries-that-will-help-us-accomplish-the-task"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[1]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;## python libraries&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;## python libraries&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 
@@ -1186,174 +1187,217 @@ However, in order to improve productivity, you would like to add more layer of p
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.preprocessing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;MinMaxScaler&lt;/span&gt;
 
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.core.display&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;
-&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;style&amp;gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&amp;lt;/style&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"&amp;lt;style&amp;gt;.container { width:100% !important; }&amp;lt;/style&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;style&amp;gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&amp;lt;/style&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;lt;style&amp;gt;.container { width:100% !important; }&amp;lt;/style&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
+
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
 &lt;div class="output_subarea output_stream output_stderr output_text"&gt;
 &lt;pre&gt;/usr/local/lib/python2.7/dist-packages/sklearn/utils/fixes.py:313: FutureWarning: numpy not_equal will not check object identity in the future. The comparison did not return the same result as suggested by the identity (`is`)) and will change.
   _nan_object_mask = _nan_object_array != _nan_object_array
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_html rendered_html output_subarea"&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
 &lt;style&gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&lt;/style&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_html rendered_html output_subarea"&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
 &lt;style&gt;.container { width:100% !important; }&lt;/style&gt;
 &lt;/div&gt;
+
+&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;$Notations \ that \ we \ will \ be \ using \ throughout \ are \ as \ follows -$&lt;/p&gt;
-\begin{align}X - Input \ data \end{align}&lt;p&gt;&lt;br/&gt;
-\begin{align}Y - Target \ labels \end{align}&lt;br/&gt;
-\begin{align}W - \ weights \ vector \ (to \ be \ estimated \ using \ training \ data) \end{align}&lt;br/&gt;
-\begin{align}b - \ intercept \ for \ the \ decision \ boundary \end{align}&lt;br/&gt;&lt;/p&gt;
+\begin{align}X - Input \ data \end{align}&lt;p&gt;&lt;br&gt;
+\begin{align}Y - Target \ labels \end{align}&lt;br&gt;
+\begin{align}W - \ weights \ vector \ (to \ be \ estimated \ using \ training \ data) \end{align}&lt;br&gt;
+\begin{align}b - \ intercept \ for \ the \ decision \ boundary \end{align}&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;$Notations \ for \ tracking \ dimensions \ are \ as \ follows-$
-\begin{align}m - number \ of \ training \ examples \end{align}&lt;br/&gt;
-\begin{align}n - number \ of \ input \ features \end{align}&lt;br/&gt;
-\begin{align}k - \ size \ of \ labels \ vector (In \ case \ of \ binary \ classification,\ k\ =\ 1) \end{align} &lt;br/&gt;&lt;/p&gt;
+\begin{align}m - number \ of \ training \ examples \end{align}&lt;br&gt;
+\begin{align}n - number \ of \ input \ features \end{align}&lt;br&gt;
+\begin{align}k - \ size \ of \ labels \ vector (In \ case \ of \ binary \ classification,\ k\ =\ 1) \end{align} &lt;br&gt;&lt;/p&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Load-Cancer-dataset-provided-by-sklearn"&gt;Load Cancer dataset provided by sklearn&lt;a class="anchor-link" href="#Load-Cancer-dataset-provided-by-sklearn"&gt;¶&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="Load-Cancer-dataset-provided-by-sklearn"&gt;Load Cancer dataset provided by sklearn&lt;a class="anchor-link" href="#Load-Cancer-dataset-provided-by-sklearn"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[2]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;load_breast_cancer_dataset&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="sd"&gt;'''&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;load_breast_cancer_dataset&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="sd"&gt;    This function loads the dataset. It also prints the description of the dataset.&lt;/span&gt;
-&lt;span class="sd"&gt;    '''&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
     &lt;span class="n"&gt;data_dict&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;load_breast_cancer&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'data'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;data_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'target'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;#use transpose to match the dimesions defined above&lt;/span&gt;
+    &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;data&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;data_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;target&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;#use transpose to match the dimesions defined above&lt;/span&gt;
     &lt;span class="n"&gt;Y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reshape&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# reshape the label vector so that it has a dimesion of k x m&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[3]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;load_breast_cancer_dataset&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;load_breast_cancer_dataset&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 
-&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;"successfully loaded training data with &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; training data and &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; features"&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;successfully loaded training data with &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; training data and &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; features&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
+
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;successfully loaded training data with 569 training data and 30 features
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Leverage the built in normalization techniques provided by sklearn.&lt;/p&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[4]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;scaler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;MinMaxScaler&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;scaler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;MinMaxScaler&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit_transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
+
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;(569, 30) (569, 1)
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;$\ While \ implementing \ logistic \ Regression \ from \ scratch, \ it \ is \ important \ to \ keep \ track \ of \ dimensions.$&lt;/p&gt;
 &lt;p&gt;$\ For \ this \ tutorial, \ we \ shall \ use \ following \ dimensions -$&lt;/p&gt;
-\begin{equation*} \tag{1}\label{1} X =\ m \times \ n  \ \end{equation*}&lt;p&gt;&lt;br/&gt;
-\begin{align}\tag{2}\label{2} Y = \ m \times \ 1 \end{align} &lt;br/&gt;
-\begin{align}\tag{3}\label{3} W = \ 1 \times \ n \end{align}&lt;br/&gt;
-\begin{align}\tag{4}\label{4}b = \ 1 \times \ 1 \end{align}&lt;br/&gt;&lt;/p&gt;
+\begin{equation*} \tag{1}\label{1} X =\ m \times \ n  \ \end{equation*}&lt;p&gt;&lt;br&gt;
+\begin{align}\tag{2}\label{2} Y = \ m \times \ 1 \end{align} &lt;br&gt;
+\begin{align}\tag{3}\label{3} W = \ 1 \times \ n \end{align}&lt;br&gt;
+\begin{align}\tag{4}\label{4}b = \ 1 \times \ 1 \end{align}&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;The pseudo-code for training a Logistic Regression model is as follows -&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Step 1&lt;/strong&gt; - Given a Training DataSet X and corresponding labels Y, initialize values of number of training examples(m), number of features(n) and number of output units (k) as mentioned in equations \ref{1}, \ref{2}, \ref{3} and \ref{4}
-&lt;br/&gt;&lt;br/&gt;
+&lt;br&gt;&lt;br&gt;
 &lt;strong&gt;Step 2&lt;/strong&gt; - Initialize Weights matrix W and bias b using dimensions from Step 1. 
-&lt;br/&gt;&lt;br/&gt;&lt;/p&gt;
+&lt;br&gt;&lt;br&gt;&lt;/p&gt;
 \begin{equation} for\ \ \ i_{epoch}\ \ \  in\ \ \ range(iterations):\end{equation}&lt;p&gt;&lt;strong&gt;Step 3&lt;/strong&gt; - Forward Propagation  - 
-&lt;br/&gt;
+&lt;br&gt;
 &lt;strong&gt;Step 3.1&lt;/strong&gt; compute preactivations using \ref{5}&lt;/p&gt;
 \begin{align} pre\_activations \ (Z) = XW^T +b  \tag{5}\label{5} \end{align}&lt;p&gt;Lets validate if the dimensions match - 
 \begin{equation} preactivations \ (Z) = \mathbf{(\ m \times \ n )} \times \ \mathbf{(1 \times \ n)}^\intercal \ + \ (1 \times 1) \end{equation}&lt;/p&gt;
 &lt;p&gt;We are good to move ahead.
- &lt;br/&gt;&lt;br/&gt;
+ &lt;br&gt;&lt;br&gt;
 &lt;strong&gt;Step 3.2&lt;/strong&gt; - Compute Activation using equation \ref{6}&lt;/p&gt;
 \begin{align} activations \ (A) = \sigma(Z) = \ \frac{1}{1 + e^{-(Z)}} \tag{6}\label{6} \end{align}&lt;p&gt;Note that the dimensions of activations are same as dimensions of preactivations.&lt;/p&gt;
-&lt;p&gt;&lt;br/&gt; &lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt; &lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Step 3.3&lt;/strong&gt; - Compute loss /error /cost using \ref{7}
 \begin{align} cost = - \ \frac{1}{m} \sum_{i =1}^{m} y_i \log(A_i) + \ (1-y_i) \log(1-A_i) \tag{7} \label{7} \end{align}&lt;/p&gt;
 &lt;p&gt;It is important to note that, cost/error/loss is a scaler which we would like to minimize using gradient descent.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Step 4&lt;/strong&gt; - Back Propagation
-&lt;br/&gt;&lt;br/&gt;
+&lt;br&gt;&lt;br&gt;
 We shall derive the grdients using chain rule -&lt;/p&gt;
-\begin{equation} \frac{\partial L}{\partial W} \ = \  \frac{\partial L}{\partial A} \frac{\partial A}{\partial Z} \frac{\partial Z}{\partial W} \tag{8}\label{8} \end{equation}&lt;p&gt;&lt;br/&gt;
+\begin{equation} \frac{\partial L}{\partial W} \ = \  \frac{\partial L}{\partial A} \frac{\partial A}{\partial Z} \frac{\partial Z}{\partial W} \tag{8}\label{8} \end{equation}&lt;p&gt;&lt;br&gt;
 Lets Start by computing the partial derivative - $\frac{\partial L}{\partial A}$
-&lt;br/&gt;
+&lt;br&gt;
 \begin{align} \frac{\partial L}{\partial A} &amp;amp; = \frac{\partial }{\partial A} \Big[ - \  \sum_{i =1}^{m} y_i \log(A_i) + \ (1-y_i) \log(1-A_i)\Big] \end{align}&lt;/p&gt;
 &lt;p&gt;For one training example $i$ -&lt;/p&gt;
 \begin{align}
 \frac{\partial L}{\partial A} &amp;amp; = - \Big[y^{(i)} \frac{\partial log(A)}{\partial A} + (1-y^{(i)}) \frac{\partial log(1-A)}{ \partial A} \Big] \\ 
 &amp;amp; =  - \Big[ \frac{y^{(i)}}{A} - \frac{1-y^{(i)}}{1-A}\Big] \tag{9} \label{9}
-\end{align}&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
+\end{align}&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Now lets compute the partial derivative $\frac{\partial A}{\partial Z}$
-&lt;br/&gt;
+&lt;br&gt;
 \begin{align} \frac{\partial A}{\partial Z} &amp;amp; = \frac{\partial }{\partial Z} \Big[ \frac{1}{1 + e^{-(Z)}} \Big]
 \\
 &amp;amp; = \frac{\partial }{\partial Z} \Big[ \Big(1+ e^{(-Z)}\Big)^{-1} \Big]
@@ -1364,7 +1408,7 @@ Lets Start by computing the partial derivative - $\frac{\partial L}{\partial A}$
 \\
 &amp;amp; = \frac{e^{-z}}{(1+ e^{-Z})^2} \tag{10}\label{10}
 \end{align}
-&lt;br/&gt;
+&lt;br&gt;
 Adding and Subtracting 1 in numerator of equation \ref{10}
 \begin{align}
 \frac{\partial A}{\partial Z} &amp;amp; = \frac{1+e^{-Z} -1}{(1+e^{-Z})^2}
@@ -1373,7 +1417,7 @@ Adding and Subtracting 1 in numerator of equation \ref{10}
 \\
 &amp;amp; = \frac{1}{(1+e^{-Z})} - \frac{1}{(1+e^{-Z})^2} \tag{11}\label{11}
 \end{align}&lt;/p&gt;
-&lt;p&gt;from equation \ref{6} and \ref{11}, we get - &lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;from equation \ref{6} and \ref{11}, we get - &lt;br&gt;&lt;/p&gt;
 \begin{align}
 \frac{\partial A}{\partial Z} &amp;amp; = A- A^2 \\
 &amp;amp; = A(1-A) \tag{12}\label{12}
@@ -1442,116 +1486,128 @@ W = W - \frac{\partial L}{\partial W} \tag{17} \label{17}
 \\
 b = b - \frac{\partial L}{\partial b} \tag{18} \label{18}
 \end{align}&lt;/p&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [5]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[5]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize_dimensions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;'''&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize_dimensions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="sd"&gt;    This function initializes the values of m, n and k&lt;/span&gt;
 &lt;span class="sd"&gt;    m -&amp;gt; number of training examples&lt;/span&gt;
 &lt;span class="sd"&gt;    n -&amp;gt; number of features&lt;/span&gt;
 &lt;span class="sd"&gt;    k -&amp;gt; number of output labels (for binary classification, k= 1)&lt;/span&gt;
 &lt;span class="sd"&gt;    &lt;/span&gt;
-&lt;span class="sd"&gt;    '''&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
     &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;
     &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[6]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize_weights_with_zeros&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dim&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;'''&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize_weights_with_zeros&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dim&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="sd"&gt;    This function initializes the weights vector and bias vector&lt;/span&gt;
 &lt;span class="sd"&gt;    &lt;/span&gt;
 &lt;span class="sd"&gt;    The genaral formula for Weights matrix and bias vector is - &lt;/span&gt;
 &lt;span class="sd"&gt;    W --&amp;gt; number of output units x number of input features&lt;/span&gt;
 &lt;span class="sd"&gt;    b --&amp;gt; 1 x number of output units&lt;/span&gt;
 &lt;span class="sd"&gt;    &lt;/span&gt;
-&lt;span class="sd"&gt;    '''&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
     &lt;span class="n"&gt;W&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zeros&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dim&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
     &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zeros&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dim&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;W&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="The-formula-for-sigmoid-is-given-by--"&gt;The formula for sigmoid is given by -&lt;a class="anchor-link" href="#The-formula-for-sigmoid-is-given-by--"&gt;¶&lt;/a&gt;&lt;/h3&gt;\begin{equation} \sigma (z) = \ \frac{1}{1 + e^{-z}} \end{equation}
+&lt;h3 id="The-formula-for-sigmoid-is-given-by--"&gt;The formula for sigmoid is given by -&lt;a class="anchor-link" href="#The-formula-for-sigmoid-is-given-by--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;\begin{equation} \sigma (z) = \ \frac{1}{1 + e^{-z}} \end{equation}
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[7]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sigmoid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;'''&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sigmoid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
 &lt;span class="sd"&gt;    This function computes the sigmoid of vector (numpy array).&lt;/span&gt;
-&lt;span class="sd"&gt;    '''&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="The-cost-for-logistic-regression-is-given-by--"&gt;The cost for logistic regression is given by -&lt;a class="anchor-link" href="#The-cost-for-logistic-regression-is-given-by--"&gt;¶&lt;/a&gt;&lt;/h3&gt;\begin{equation} cost\ (L) = - \ \frac{1}{m} \sum_{i =1}^{m} y_i \log(A_i) + \ (1-y_i) \log(1-A_i) \end{equation}&lt;p&gt;$Where,  \\  
+&lt;h3 id="The-cost-for-logistic-regression-is-given-by--"&gt;The cost for logistic regression is given by -&lt;a class="anchor-link" href="#The-cost-for-logistic-regression-is-given-by--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;\begin{equation} cost\ (L) = - \ \frac{1}{m} \sum_{i =1}^{m} y_i \log(A_i) + \ (1-y_i) \log(1-A_i) \end{equation}&lt;p&gt;$Where,  \\  
 Y = vector\ of\ size\ m \times 1. \\
 A = activations = \sigma {(z)} -\ vector\ of\ size\ m\ \times\ 1$&lt;/p&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[8]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;compute_sigmoid_cost&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;compute_sigmoid_cost&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;))),&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;cost&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[9]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;compute_sigmoid_gradients&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;activations&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;compute_sigmoid_gradients&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;activations&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;dw&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;activations&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;activations&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;keepdims&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;dw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[10]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;propagation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;propagation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="c1"&gt;# FORWARD PROPAGATION (FROM X TO COST)&lt;/span&gt;
 
     &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -1562,21 +1618,23 @@ A = activations = \sigma {(z)} -\ vector\ of\ size\ m\ \times\ 1$&lt;/p&gt;
 
     &lt;span class="n"&gt;cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;squeeze&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cost&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     
-    &lt;span class="n"&gt;grads&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"dw"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-             &lt;span class="s2"&gt;"db"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;grads&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;dw&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+             &lt;span class="s2"&gt;&amp;quot;db&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
     
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;grads&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cost&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [11]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[11]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;train_logistic_regression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;learning_rate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_epochs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;print_cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;train_logistic_regression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;learning_rate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_epochs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;print_cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;  &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;initialize_dimensions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;initialize_weights_with_zeros&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
     
@@ -1584,8 +1642,8 @@ A = activations = \sigma {(z)} -\ vector\ of\ size\ m\ \times\ 1$&lt;/p&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;iteration&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n_epochs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;propagation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         
-        &lt;span class="n"&gt;dw&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'dw'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-        &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'db'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;dw&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dw&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;db&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
         
         &lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;learning_rate&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;dw&lt;/span&gt;
         &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;learning_rate&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;
@@ -1599,79 +1657,131 @@ A = activations = \sigma {(z)} -\ vector\ of\ size\ m\ \times\ 1$&lt;/p&gt;
             &lt;span class="n"&gt;activations&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sigmoid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
             &lt;span class="n"&gt;y_pred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;activations&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
             &lt;span class="n"&gt;accuracy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;float&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_pred&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
-            &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Cost after iteration &lt;/span&gt;&lt;span class="si"&gt;%i&lt;/span&gt;&lt;span class="s2"&gt;: &lt;/span&gt;&lt;span class="si"&gt;%f&lt;/span&gt;&lt;span class="s2"&gt; | accuracy after iteration &lt;/span&gt;&lt;span class="si"&gt;%i&lt;/span&gt;&lt;span class="s2"&gt;: &lt;/span&gt;&lt;span class="si"&gt;%f&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iteration&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cost&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;iteration&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;accuracy&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+            &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Cost after iteration &lt;/span&gt;&lt;span class="si"&gt;%i&lt;/span&gt;&lt;span class="s2"&gt;: &lt;/span&gt;&lt;span class="si"&gt;%f&lt;/span&gt;&lt;span class="s2"&gt; | accuracy after iteration &lt;/span&gt;&lt;span class="si"&gt;%i&lt;/span&gt;&lt;span class="s2"&gt;: &lt;/span&gt;&lt;span class="si"&gt;%f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iteration&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cost&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;iteration&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;accuracy&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
-    &lt;span class="n"&gt;params&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"w"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-              &lt;span class="s2"&gt;"b"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;params&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;w&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+              &lt;span class="s2"&gt;&amp;quot;b&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 
-    &lt;span class="n"&gt;grads&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"dw"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-             &lt;span class="s2"&gt;"db"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;grads&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;dw&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+             &lt;span class="s2"&gt;&amp;quot;db&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;grads&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;costs&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [12]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[12]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;kl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;train_logistic_regression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;print_cost&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;kl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;train_logistic_regression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;print_cost&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
+
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 0: 0.693147 | accuracy after iteration 0: 65.026362'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 0: 0.693147 | accuracy after iteration 0: 65.026362&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 500: 0.219201 | accuracy after iteration 500: 94.376098'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 500: 0.219201 | accuracy after iteration 500: 94.376098&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 1000: 0.169860 | accuracy after iteration 1000: 95.254833'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 1000: 0.169860 | accuracy after iteration 1000: 95.254833&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 1500: 0.147171 | accuracy after iteration 1500: 96.836555'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 1500: 0.147171 | accuracy after iteration 1500: 96.836555&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 2000: 0.133237 | accuracy after iteration 2000: 96.836555'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 2000: 0.133237 | accuracy after iteration 2000: 96.836555&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 2500: 0.123533 | accuracy after iteration 2500: 96.836555'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 2500: 0.123533 | accuracy after iteration 2500: 96.836555&amp;#39;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Awesome !!!&lt;/p&gt;
 &lt;p&gt;We were able to achieve 95% accuracy using logistic regressions.&lt;/p&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+ 
+
 
 &lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
@@ -2853,66 +2963,80 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h1 id="Linear-Regression"&gt;Linear Regression&lt;a class="anchor-link" href="#Linear-Regression"&gt;¶&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;Linear Regression is a statistical approach of modelling the realtionship between a scalar response (aka. dependent variable) and one or more explanatory variables (aka independent variables). Linear Regression is one of the most basic building block in Machine Learning algorithms.&lt;/p&gt;
+&lt;h1 id="Linear-Regression"&gt;Linear Regression&lt;a class="anchor-link" href="#Linear-Regression"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;Linear Regression is a statistical approach of modelling the realtionship between a scalar response (aka. dependent variable) and one or more explanatory variables (aka independent variables). Linear Regression is one of the most basic building block in Machine Learning algorithms.&lt;/p&gt;
 &lt;p&gt;In most of the python libraries, linear regression model is available as a blackbox. However, it is imperative to understand what goes on under the hood in order to have better grasp of algorithm.&lt;/p&gt;
 &lt;p&gt;This article will focus on implementing vanilla linear regression from scratch using numpy and pandas.&lt;/p&gt;
-&lt;p&gt;&lt;img src="./../../images/linear_regression/LR_tell_me_more.jpeg"/&gt;&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./../../images/linear_regression/LR_tell_me_more.jpeg"&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Lets start by importing some basic python libraries.&lt;/p&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[7]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;datasets&lt;/span&gt;
 
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.preprocessing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;MinMaxScaler&lt;/span&gt;
 
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.core.display&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;
-&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;style&amp;gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&amp;lt;/style&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;style&amp;gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&amp;lt;/style&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
+
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_html rendered_html output_subarea"&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
 &lt;style&gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&lt;/style&gt;
 &lt;/div&gt;
+
+&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;$Notations \ that \ we \ will \ be \ using \ throughout \ are \ as \ follows -$&lt;/p&gt;
-\begin{align}X - Input \ data \end{align}&lt;p&gt;&lt;br/&gt;
-\begin{align}Y - Target \ labels \end{align}&lt;br/&gt;
-\begin{align}W - \ weights \ vector \ (to \ be \ estimated \ using \ training \ data) \end{align}&lt;br/&gt;
-\begin{align}b - \ intercept \ for \ the \ decision \ boundary \end{align}&lt;br/&gt;&lt;/p&gt;
+\begin{align}X - Input \ data \end{align}&lt;p&gt;&lt;br&gt;
+\begin{align}Y - Target \ labels \end{align}&lt;br&gt;
+\begin{align}W - \ weights \ vector \ (to \ be \ estimated \ using \ training \ data) \end{align}&lt;br&gt;
+\begin{align}b - \ intercept \ for \ the \ decision \ boundary \end{align}&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&lt;u&gt; $ Notations \ for \ tracking \ dimensions \ are \ as \ follows- $ &lt;/u&gt;
-\begin{align}m - number \ of \ training \ examples \end{align}&lt;br/&gt;
-\begin{align}n - number \ of \ input \ features \end{align}&lt;br/&gt;
-\begin{align}k - \ size \ of \ labels \ vector (In \ case \ of \ binary \ classification,\ k\ =\ 1) \end{align} &lt;br/&gt;&lt;/p&gt;
+\begin{align}m - number \ of \ training \ examples \end{align}&lt;br&gt;
+\begin{align}n - number \ of \ input \ features \end{align}&lt;br&gt;
+\begin{align}k - \ size \ of \ labels \ vector (In \ case \ of \ binary \ classification,\ k\ =\ 1) \end{align} &lt;br&gt;&lt;/p&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Load-Diabetes-dataset-provided-by-sklearn"&gt;Load Diabetes dataset provided by sklearn&lt;a class="anchor-link" href="#Load-Diabetes-dataset-provided-by-sklearn"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;h2 id="Diabetes-dataset-"&gt;Diabetes dataset &lt;a class="anchor-link" href="#Diabetes-dataset-"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Ten baseline variables, age, sex, body mass index, average blood pressure, and six blood serum measurements were obtained for each of n = 442 diabetes patients, as well as the response of interest, a quantitative measure of disease progression one year after baseline.&lt;/p&gt;
+&lt;h2 id="Load-Diabetes-dataset-provided-by-sklearn"&gt;Load Diabetes dataset provided by sklearn&lt;a class="anchor-link" href="#Load-Diabetes-dataset-provided-by-sklearn"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;h2 id="Diabetes-dataset-"&gt;Diabetes dataset &lt;a class="anchor-link" href="#Diabetes-dataset-"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Ten baseline variables, age, sex, body mass index, average blood pressure, and six blood serum measurements were obtained for each of n = 442 diabetes patients, as well as the response of interest, a quantitative measure of disease progression one year after baseline.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Data Set Characteristics:&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;:Number of Instances: 442&lt;/p&gt;
 &lt;p&gt;:Number of Attributes: First 10 columns are numeric predictive values&lt;/p&gt;
 &lt;p&gt;:Target: Column 11 is a quantitative measure of disease progression one year after baseline&lt;/p&gt;
 &lt;p&gt;:Attribute Information:&lt;/p&gt;
+
 &lt;pre&gt;&lt;code&gt;  - Age
   - Sex
   - Body mass index
@@ -2931,37 +3055,41 @@ h6:hover .anchor-link {
 &lt;p&gt;For more information see:
 Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani (2004) "Least Angle Regression," Annals of Statistics (with discussion), 407-499.
 (&lt;a href="http://web.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf"&gt;http://web.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf&lt;/a&gt;)&lt;/p&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[8]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;load_diabetes_data&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;load_diabetes_data&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     
     &lt;span class="n"&gt;diabetes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;datasets&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;load_diabetes&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;diabetes&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'data'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;diabetes&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'target'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reshape&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;diabetes&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'target'&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;diabetes&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;data&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;diabetes&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;target&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reshape&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;diabetes&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;target&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Helper-functions-for-scaling-data."&gt;Helper functions for scaling data.&lt;a class="anchor-link" href="#Helper-functions-for-scaling-data."&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;We shall leverage the existing scaling function supported by Sklearn.&lt;/p&gt;
+&lt;h2 id="Helper-functions-for-scaling-data."&gt;Helper functions for scaling data.&lt;a class="anchor-link" href="#Helper-functions-for-scaling-data."&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;We shall leverage the existing scaling function supported by Sklearn.&lt;/p&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[9]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_scale_object&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_scale_object&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;scaler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;MinMaxScaler&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
     &lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;scaler&lt;/span&gt;
@@ -2969,36 +3097,38 @@ Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani (2004) "Least
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_scaled_data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;$\ While \ implementing \ Linear \ Regression \ from \ scratch, \ it \ is \ important \ to \ keep \ track \ of \ dimensions.$&lt;/p&gt;
 &lt;p&gt;$\ For \ this \ tutorial, \ we \ shall \ use \ following \ dimensions -$&lt;/p&gt;
-\begin{equation*} \tag{1}\label{1} X =\ m \times \ n  \ \end{equation*}&lt;p&gt;&lt;br/&gt;
-\begin{align}\tag{2}\label{2} Y = \ m \times \ 1 \end{align} &lt;br/&gt;
-\begin{align}\tag{3}\label{3} W = \ 1 \times \ n \end{align}&lt;br/&gt;
-\begin{align}\tag{4}\label{4}b = \ 1 \times \ 1 \end{align}&lt;br/&gt;&lt;/p&gt;
+\begin{equation*} \tag{1}\label{1} X =\ m \times \ n  \ \end{equation*}&lt;p&gt;&lt;br&gt;
+\begin{align}\tag{2}\label{2} Y = \ m \times \ 1 \end{align} &lt;br&gt;
+\begin{align}\tag{3}\label{3} W = \ 1 \times \ n \end{align}&lt;br&gt;
+\begin{align}\tag{4}\label{4}b = \ 1 \times \ 1 \end{align}&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;The pseudo-code for training a Linear Regression model is as follows -&lt;/p&gt;
-&lt;h3 id="Step-1--"&gt;&lt;strong&gt;Step 1&lt;/strong&gt; -&lt;a class="anchor-link" href="#Step-1--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Given a Training DataSet X and corresponding labels Y, initialize values for number of training examples(m), number of features(n) and number of output units (k) as mentioned in equations \ref{1}, \ref{2}, \ref{3} and \ref{4}
-&lt;br/&gt;&lt;br/&gt;&lt;/p&gt;
-&lt;h3 id="Step-2--"&gt;&lt;strong&gt;Step 2&lt;/strong&gt; -&lt;a class="anchor-link" href="#Step-2--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Initialize Weights matrix W and bias b using dimensions from Step 1. 
-&lt;br/&gt;&lt;br/&gt;&lt;/p&gt;
-\begin{equation} for\ \ \ i_{epoch}\ \ \  in\ \ \ range(iterations):\end{equation}&lt;h3 id="Step-3---Forward-Propagation---"&gt;&lt;strong&gt;Step 3&lt;/strong&gt; - Forward Propagation  -&lt;a class="anchor-link" href="#Step-3---Forward-Propagation---"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
-&lt;h4 id="Step-3.1-compute-preactivations-using-\ref{5}"&gt;&lt;strong&gt;Step 3.1&lt;/strong&gt; compute preactivations using \ref{5}&lt;a class="anchor-link" href="#Step-3.1-compute-preactivations-using-\ref{5}"&gt;¶&lt;/a&gt;&lt;/h4&gt;\begin{align} y_{pred}  = h(\theta) = XW^T +b  \tag{5}\label{5} \end{align}&lt;p&gt;Lets validate if the dimensions match - 
+&lt;h3 id="Step-1--"&gt;&lt;strong&gt;Step 1&lt;/strong&gt; -&lt;a class="anchor-link" href="#Step-1--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Given a Training DataSet X and corresponding labels Y, initialize values for number of training examples(m), number of features(n) and number of output units (k) as mentioned in equations \ref{1}, \ref{2}, \ref{3} and \ref{4}
+&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h3 id="Step-2--"&gt;&lt;strong&gt;Step 2&lt;/strong&gt; -&lt;a class="anchor-link" href="#Step-2--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Initialize Weights matrix W and bias b using dimensions from Step 1. 
+&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+\begin{equation} for\ \ \ i_{epoch}\ \ \  in\ \ \ range(iterations):\end{equation}&lt;h3 id="Step-3---Forward-Propagation---"&gt;&lt;strong&gt;Step 3&lt;/strong&gt; - Forward Propagation  -&lt;a class="anchor-link" href="#Step-3---Forward-Propagation---"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h4 id="Step-3.1-compute-preactivations-using-\ref{5}"&gt;&lt;strong&gt;Step 3.1&lt;/strong&gt; compute preactivations using \ref{5}&lt;a class="anchor-link" href="#Step-3.1-compute-preactivations-using-\ref{5}"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;\begin{align} y_{pred}  = h(\theta) = XW^T +b  \tag{5}\label{5} \end{align}&lt;p&gt;Lets validate if the dimensions match - 
 \begin{equation} dim(y_{pred}) = \mathbf{(\ m \times \ n )} \times \ \mathbf{(1 \times \ n)}^\intercal \ + \ (1 \times 1) \end{equation}&lt;/p&gt;
 &lt;p&gt;We are good to move ahead.
- &lt;br/&gt;&lt;br/&gt;&lt;/p&gt;
-&lt;h4 id="Step-3.2---Compute-loss-/error-/cost-using-\ref{6}"&gt;&lt;strong&gt;Step 3.2&lt;/strong&gt; - Compute loss /error /cost using \ref{6}&lt;a class="anchor-link" href="#Step-3.2---Compute-loss-/error-/cost-using-\ref{6}"&gt;¶&lt;/a&gt;&lt;/h4&gt;\begin{align} cost = - \ \frac{1}{2m} \sum_{i =1}^{m} (y_{true} - y_{pred})^2 \tag{7} \label{6} \end{align}&lt;p&gt;The above equation represents the &lt;b&gt;'mean squared error'&lt;/b&gt;. It is important to note that, &lt;b&gt;cost/ error/ loss &lt;/b&gt; is a &lt;b&gt;scaler&lt;/b&gt; which we would like to minimize using gradient descent.&lt;/p&gt;
-&lt;h3 id="Step-4---Back-propagation--"&gt;&lt;strong&gt;Step 4&lt;/strong&gt; - Back propagation -&lt;a class="anchor-link" href="#Step-4---Back-propagation--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Back propagation technique will help in updating the weights such that the MSE loss is minimized. Lets dig into the nuts and bolts of back propagation.
-&lt;br/&gt;&lt;br/&gt;
+ &lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h4 id="Step-3.2---Compute-loss-/error-/cost-using-\ref{6}"&gt;&lt;strong&gt;Step 3.2&lt;/strong&gt; - Compute loss /error /cost using \ref{6}&lt;a class="anchor-link" href="#Step-3.2---Compute-loss-/error-/cost-using-\ref{6}"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;\begin{align} cost = - \ \frac{1}{2m} \sum_{i =1}^{m} (y_{true} - y_{pred})^2 \tag{7} \label{6} \end{align}&lt;p&gt;The above equation represents the &lt;b&gt;'mean squared error'&lt;/b&gt;. It is important to note that, &lt;b&gt;cost/ error/ loss &lt;/b&gt; is a &lt;b&gt;scaler&lt;/b&gt; which we would like to minimize using gradient descent.&lt;/p&gt;
+&lt;h3 id="Step-4---Back-propagation--"&gt;&lt;strong&gt;Step 4&lt;/strong&gt; - Back propagation -&lt;a class="anchor-link" href="#Step-4---Back-propagation--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Back propagation technique will help in updating the weights such that the MSE loss is minimized. Lets dig into the nuts and bolts of back propagation.
+&lt;br&gt;&lt;br&gt;
 We shall derive the gradients using chain rule -&lt;/p&gt;
-\begin{equation} \frac{\partial L}{\partial W} \ = \  \frac{\partial L}{\partial h(\theta)} \frac{\partial h(\theta)}{\partial W}  \tag{8}\label{8} \end{equation}&lt;p&gt;&lt;br/&gt;
+\begin{equation} \frac{\partial L}{\partial W} \ = \  \frac{\partial L}{\partial h(\theta)} \frac{\partial h(\theta)}{\partial W}  \tag{8}\label{8} \end{equation}&lt;p&gt;&lt;br&gt;
 Lets Start by computing the partial derivative - $\frac{\partial L}{\partial h(\theta)}$
-&lt;br/&gt;
+&lt;br&gt;
 \begin{align} \frac{\partial L}{\partial h(\theta)} &amp;amp; = \frac{\partial }{\partial h(\theta)} \Big[ - \ \frac{1}{2m} \sum_{i =1}^{m} (y_{true} - h(\theta))^2 \Big] \end{align}&lt;/p&gt;
 &lt;p&gt;For one training example $i$ -&lt;/p&gt;
 \begin{align}
@@ -3006,7 +3136,7 @@ Lets Start by computing the partial derivative - $\frac{\partial L}{\partial h(\
 &amp;amp; = \frac{-1}{2} 2\Big[ y_{true} - h(\theta)\Big] \\
 &amp;amp; = -\Big[ y_{true} - h(\theta)\Big] \\
 &amp;amp; = \Big[h(\theta) - y_{true} \Big]  \tag{9} \label{9}
-\end{align}&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
+\end{align}&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Now, The last part of this derivation to compute gradients with respect to weights/coeffiecients.&lt;/p&gt;
 \begin{align}\\
 \frac{\partial L}{\partial W} &amp;amp; = \frac{\partial L}{\partial h(\theta)} \frac{\partial h(\theta)}{\partial W}
@@ -3054,7 +3184,7 @@ Lets Start by computing the partial derivative - $\frac{\partial L}{\partial h(\
 \frac{\partial L}{\partial W}  = \frac{1}{m}(h(\theta) - Y)^T X \tag{15}\label{15}
 \\
 \frac{\partial L}{\partial b} = \frac{1}{m} \sum_{i =1}^{m} (h(\theta) - Y^{(i)}) \tag{16}\label{16}
-\end{align}&lt;h3 id="Step-4.1-The-weights-can-be-updated-using-gradient-descent-equations-as-follows--"&gt;&lt;strong&gt;Step 4.1&lt;/strong&gt; The weights can be updated using gradient descent equations as follows -&lt;a class="anchor-link" href="#Step-4.1-The-weights-can-be-updated-using-gradient-descent-equations-as-follows--"&gt;¶&lt;/a&gt;&lt;/h3&gt;\begin{align}
+\end{align}&lt;h3 id="Step-4.1-The-weights-can-be-updated-using-gradient-descent-equations-as-follows--"&gt;&lt;strong&gt;Step 4.1&lt;/strong&gt; The weights can be updated using gradient descent equations as follows -&lt;a class="anchor-link" href="#Step-4.1-The-weights-can-be-updated-using-gradient-descent-equations-as-follows--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;\begin{align}
 \\
 W = W - \frac{\partial L}{\partial W} \tag{17} \label{17}
 \\
@@ -3066,116 +3196,128 @@ b = b - \frac{\partial L}{\partial b} \tag{18} \label{18}
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Implement-Step-1-"&gt;Implement Step 1-&lt;a class="anchor-link" href="#Implement-Step-1-"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="Implement-Step-1-"&gt;Implement Step 1-&lt;a class="anchor-link" href="#Implement-Step-1-"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[10]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;raw_X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;load_diabetes_data&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;raw_X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;load_diabetes_data&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="n"&gt;scaler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_scale_object&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;raw_X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_scaled_data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;scaler&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;raw_X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Helper-functions-for-initializing-vectors"&gt;Helper functions for initializing vectors&lt;a class="anchor-link" href="#Helper-functions-for-initializing-vectors"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="Helper-functions-for-initializing-vectors"&gt;Helper functions for initializing vectors&lt;a class="anchor-link" href="#Helper-functions-for-initializing-vectors"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [11]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[11]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize_dimensions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize_dimensions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [12]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[12]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize_weight_vectors&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dim&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize_weight_vectors&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dim&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;W&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zeros&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dim&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zeros&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;W&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Initialize-weights-vector"&gt;Initialize weights vector&lt;a class="anchor-link" href="#Initialize-weights-vector"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="Initialize-weights-vector"&gt;Initialize weights vector&lt;a class="anchor-link" href="#Initialize-weights-vector"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [13]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[13]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;initialize_dimensions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;initialize_dimensions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;W&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;initialize_weight_vectors&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="functions-for-computing-cost-and-gradient-descent--"&gt;functions for computing cost and gradient descent -&lt;a class="anchor-link" href="#functions-for-computing-cost-and-gradient-descent--"&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id="functions-for-computing-cost-and-gradient-descent--"&gt;functions for computing cost and gradient descent -&lt;a class="anchor-link" href="#functions-for-computing-cost-and-gradient-descent--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [14]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[14]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;compute_regression_cost&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_pred&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;compute_regression_cost&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_pred&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_pred&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;cost&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [15]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[15]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;compute_regression_gradients&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_pred&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;compute_regression_gradients&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y_pred&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;dw&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;y_pred&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;y_pred&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;keepdims&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;dw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [16]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[16]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;propagation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;propagation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="c1"&gt;# FORWARD PROPAGATION (FROM X TO COST)&lt;/span&gt;
 
     &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -3186,33 +3328,35 @@ b = b - \frac{\partial L}{\partial b} \tag{18} \label{18}
 
     &lt;span class="n"&gt;cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;squeeze&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cost&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     
-    &lt;span class="n"&gt;grads&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"dw"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-             &lt;span class="s2"&gt;"db"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;grads&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;dw&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+             &lt;span class="s2"&gt;&amp;quot;db&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
     
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;grads&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cost&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [27]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[27]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;train_linear_regression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;learning_rate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_epochs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;4000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;print_cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;train_linear_regression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;learning_rate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_epochs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;4000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;print_cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;initialize_dimensions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;"There are &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; features and &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; training examples"&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;There are &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; features and &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; training examples&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;initialize_weight_vectors&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;"W has a shape of &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; rows and &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; columns"&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;"b has a shape of &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; rows and &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; columns"&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;W has a shape of &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; rows and &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; columns&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;b has a shape of &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; rows and &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; columns&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
     
     &lt;span class="n"&gt;costs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;iteration&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n_epochs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;propagation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         
-        &lt;span class="n"&gt;dw&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'dw'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-        &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'db'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;dw&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dw&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;grad&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;db&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
         
         &lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;learning_rate&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;dw&lt;/span&gt;
         &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;learning_rate&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;
@@ -3225,28 +3369,30 @@ b = b - \frac{\partial L}{\partial b} \tag{18} \label{18}
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;print_cost&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;iteration&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
             &lt;span class="n"&gt;y_pred&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
             &lt;span class="n"&gt;accuracy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;y_pred&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-            &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Cost after iteration &lt;/span&gt;&lt;span class="si"&gt;%i&lt;/span&gt;&lt;span class="s2"&gt;: &lt;/span&gt;&lt;span class="si"&gt;%f&lt;/span&gt;&lt;span class="s2"&gt; | rmse after iteration &lt;/span&gt;&lt;span class="si"&gt;%i&lt;/span&gt;&lt;span class="s2"&gt;: &lt;/span&gt;&lt;span class="si"&gt;%f&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iteration&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cost&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;iteration&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;accuracy&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+            &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Cost after iteration &lt;/span&gt;&lt;span class="si"&gt;%i&lt;/span&gt;&lt;span class="s2"&gt;: &lt;/span&gt;&lt;span class="si"&gt;%f&lt;/span&gt;&lt;span class="s2"&gt; | rmse after iteration &lt;/span&gt;&lt;span class="si"&gt;%i&lt;/span&gt;&lt;span class="s2"&gt;: &lt;/span&gt;&lt;span class="si"&gt;%f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;iteration&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cost&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;iteration&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;accuracy&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
-    &lt;span class="n"&gt;params&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"w"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-              &lt;span class="s2"&gt;"b"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;params&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;w&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+              &lt;span class="s2"&gt;&amp;quot;b&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 
-    &lt;span class="n"&gt;grads&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"dw"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-             &lt;span class="s2"&gt;"db"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;grads&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;dw&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+             &lt;span class="s2"&gt;&amp;quot;db&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;grads&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;costs&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [28]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[28]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;train_linear_regression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;print_cost&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;train_linear_regression&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;print_cost&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="n"&gt;y_predicted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"w"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"b"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;y_predicted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;w&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;b&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 
 &lt;span class="n"&gt;rmse&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;y_predicted&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
@@ -3254,15 +3400,22 @@ b = b - \frac{\partial L}{\partial b} \tag{18} \label{18}
 &lt;span class="n"&gt;sst&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
 &lt;span class="n"&gt;R2_score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1.0&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ssr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sst&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Model R2 score is &lt;/span&gt;&lt;span class="si"&gt;%f&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;R2_score&lt;/span&gt;)
+&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Model R2 score is &lt;/span&gt;&lt;span class="si"&gt;%f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;R2_score&lt;/span&gt;)
 &lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
+
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
+
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;There are 10 features and 442 training examples
 W has a shape of 1 rows and 10 columns
@@ -3270,262 +3423,554 @@ b has a shape of 1 rows and 1 columns
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 0: 226081052.450000 | rmse after iteration 0: 116.990459'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 0: 226081052.450000 | rmse after iteration 0: 116.990459&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 100: 10493.139458 | rmse after iteration 100: 54.158847'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 100: 10493.139458 | rmse after iteration 100: 54.158847&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 200: 16809.508859 | rmse after iteration 200: 50.085980'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 200: 16809.508859 | rmse after iteration 200: 50.085980&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 300: 16084.961670 | rmse after iteration 300: 47.451121'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 300: 16084.961670 | rmse after iteration 300: 47.451121&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 400: 13590.549152 | rmse after iteration 400: 45.204037'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 400: 13590.549152 | rmse after iteration 400: 45.204037&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 500: 11199.814693 | rmse after iteration 500: 43.133430'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 500: 11199.814693 | rmse after iteration 500: 43.133430&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 600: 9242.379808 | rmse after iteration 600: 41.182861'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 600: 9242.379808 | rmse after iteration 600: 41.182861&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 700: 7682.854204 | rmse after iteration 700: 39.331607'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 700: 7682.854204 | rmse after iteration 700: 39.331607&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 800: 6434.096605 | rmse after iteration 800: 37.569269'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 800: 6434.096605 | rmse after iteration 800: 37.569269&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 900: 5421.965490 | rmse after iteration 900: 35.889176'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 900: 5421.965490 | rmse after iteration 900: 35.889176&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 1000: 4591.795565 | rmse after iteration 1000: 34.286292'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 1000: 4591.795565 | rmse after iteration 1000: 34.286292&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 1100: 3904.114787 | rmse after iteration 1100: 32.756418'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 1100: 3904.114787 | rmse after iteration 1100: 32.756418&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 1200: 3330.014526 | rmse after iteration 1200: 31.295852'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 1200: 3330.014526 | rmse after iteration 1200: 31.295852&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 1300: 2847.813155 | rmse after iteration 1300: 29.901218'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 1300: 2847.813155 | rmse after iteration 1300: 29.901218&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 1400: 2440.854775 | rmse after iteration 1400: 28.569382'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 1400: 2440.854775 | rmse after iteration 1400: 28.569382&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 1500: 2096.074458 | rmse after iteration 1500: 27.297403'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 1500: 2096.074458 | rmse after iteration 1500: 27.297403&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 1600: 1803.047922 | rmse after iteration 1600: 26.082505'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 1600: 1803.047922 | rmse after iteration 1600: 26.082505&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 1700: 1553.344583 | rmse after iteration 1700: 24.922061'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 1700: 1553.344583 | rmse after iteration 1700: 24.922061&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 1800: 1340.073395 | rmse after iteration 1800: 23.813577'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 1800: 1340.073395 | rmse after iteration 1800: 23.813577&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 1900: 1157.554376 | rmse after iteration 1900: 22.754681'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 1900: 1157.554376 | rmse after iteration 1900: 22.754681&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 2000: 1001.074527 | rmse after iteration 2000: 21.743118'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 2000: 1001.074527 | rmse after iteration 2000: 21.743118&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 2100: 866.702205 | rmse after iteration 2100: 20.776741'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 2100: 866.702205 | rmse after iteration 2100: 20.776741&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 2200: 751.143162 | rmse after iteration 2200: 19.853506'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 2200: 751.143162 | rmse after iteration 2200: 19.853506&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 2300: 651.627104 | rmse after iteration 2300: 18.971463'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 2300: 651.627104 | rmse after iteration 2300: 18.971463&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 2400: 565.817114 | rmse after iteration 2400: 18.128757'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 2400: 565.817114 | rmse after iteration 2400: 18.128757&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 2500: 491.736553 | rmse after iteration 2500: 17.323615'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 2500: 491.736553 | rmse after iteration 2500: 17.323615&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 2600: 427.709570 | rmse after iteration 2600: 16.554348'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 2600: 427.709570 | rmse after iteration 2600: 16.554348&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 2700: 372.312324 | rmse after iteration 2700: 15.819347'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 2700: 372.312324 | rmse after iteration 2700: 15.819347&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 2800: 324.332770 | rmse after iteration 2800: 15.117073'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 2800: 324.332770 | rmse after iteration 2800: 15.117073&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 2900: 282.737338 | rmse after iteration 2900: 14.446059'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 2900: 282.737338 | rmse after iteration 2900: 14.446059&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 3000: 246.643212 | rmse after iteration 3000: 13.804907'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 3000: 246.643212 | rmse after iteration 3000: 13.804907&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 3100: 215.295183 | rmse after iteration 3100: 13.192279'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 3100: 215.295183 | rmse after iteration 3100: 13.192279&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 3200: 188.046277 | rmse after iteration 3200: 12.606901'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 3200: 188.046277 | rmse after iteration 3200: 12.606901&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 3300: 164.341477 | rmse after iteration 3300: 12.047553'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 3300: 164.341477 | rmse after iteration 3300: 12.047553&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 3400: 143.704036 | rmse after iteration 3400: 11.513074'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 3400: 143.704036 | rmse after iteration 3400: 11.513074&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 3500: 125.723922 | rmse after iteration 3500: 11.002354'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 3500: 125.723922 | rmse after iteration 3500: 11.002354&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 3600: 110.048066 | rmse after iteration 3600: 10.514331'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 3600: 110.048066 | rmse after iteration 3600: 10.514331&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 3700: 96.372095 | rmse after iteration 3700: 10.047994'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 3700: 96.372095 | rmse after iteration 3700: 10.047994&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 3800: 84.433325 | rmse after iteration 3800: 9.602376'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 3800: 84.433325 | rmse after iteration 3800: 9.602376&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Cost after iteration 3900: 74.004814 | rmse after iteration 3900: 9.176553'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Cost after iteration 3900: 74.004814 | rmse after iteration 3900: 9.176553&amp;#39;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;/div&gt;
+
 &lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_text output_subarea"&gt;
-&lt;pre&gt;'Model R2 score is 0.987019'&lt;/pre&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea "&gt;
+&lt;pre&gt;&amp;#39;Model R2 score is 0.987019&amp;#39;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Incredible-!!"&gt;Incredible !!&lt;a class="anchor-link" href="#Incredible-!!"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We have successfully trained a Linear Regression Algorithm.&lt;/p&gt;
+&lt;h3 id="Incredible-!!"&gt;Incredible !!&lt;a class="anchor-link" href="#Incredible-!!"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We have successfully trained a Linear Regression Algorithm.&lt;/p&gt;
+
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+ 
+
 
 &lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
