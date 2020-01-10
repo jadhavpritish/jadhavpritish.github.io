@@ -2053,7 +2053,7 @@ on TextRank Using Domain Knowledge&lt;/a&gt;&lt;/li&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="Python"></category><category term="Pagerank"></category><category term="NLP"></category><category term="NLTK"></category></entry><entry><title>Auto Dream11 Selector</title><link href="https://jadhavpritish.github.io/2018/12/fantasy_sports_auto_selection.html" rel="alternate"></link><published>2018-12-03T18:00:00+05:30</published><updated>2018-12-03T18:00:00+05:30</updated><author><name>pritish jadhav</name></author><id>tag:jadhavpritish.github.io,2018-12-03:/2018/12/fantasy_sports_auto_selection.html</id><summary type="html">&lt;p&gt;With all the buzz around Indian Premier League (IPL), FIFA World Cup, Cricket World Cup-2019, fantasy sports websites like Dream11 are gaining traction. Fanatsy Sports Portal allows sports fans like me to be a part of it. Having said that, it is very difficult to keep track of all the players and their performance across the sports.  In this Tutorial, I will try to automate the fantasy selection process so that the probability of winning a fantasy league is maximized.&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
+</content><category term="Python"></category><category term="Pagerank"></category><category term="NLP"></category><category term="NLTK"></category></entry><entry><title>Winning Fantasy Sports using Data Science</title><link href="https://jadhavpritish.github.io/2018/12/fantasy_sports_auto_selection.html" rel="alternate"></link><published>2018-12-03T18:00:00+05:30</published><updated>2018-12-03T18:00:00+05:30</updated><author><name>pritish jadhav</name></author><id>tag:jadhavpritish.github.io,2018-12-03:/2018/12/fantasy_sports_auto_selection.html</id><summary type="html">&lt;p&gt;With all the buzz around Indian Premier League (IPL), FIFA World Cup, Cricket World Cup-2019, fantasy sports websites like Dream11 are gaining traction. Fanatsy Sports Portal allows sports fans like me to be a part of it. Having said that, it is very difficult to keep track of all the players and their performance across the sports.  In this Tutorial, I will try to automate the fantasy selection process so that the probability of winning a fantasy league is maximized.&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -3205,12 +3205,11 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h1 id="Auto-Dream11-Selector"&gt;Auto Dream11 Selector&lt;a class="anchor-link" href="#Auto-Dream11-Selector"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;With all the buzz around Indian Premier League (IPL), FIFA World Cup, Cricket World Cup-2019, fantasy sports websites like Dream11 are gaining traction. Fanatsy Sports Portal allows sports fans like me to be a part of it. Having said that, it is very difficult to keep track of all the players and their performance across the sports.&lt;/p&gt;
+&lt;h1 id="Winning-Fantasy-Sports-using-Data-Science"&gt;Winning Fantasy Sports using Data Science&lt;a class="anchor-link" href="#Winning-Fantasy-Sports-using-Data-Science"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;With all the buzz around Indian Premier League (IPL), FIFA World Cup, Cricket World Cup-2019, fantasy sports websites like Dream11 are gaining traction. Fantasy Sports Portal allows sports fans like me to be a part of it. Having said that, it is very difficult to keep track of all the players and their performance across the sports.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;
-In this Tutorial, I will try to automate the fantasy selection process so that the probability of winning a fantasy league is maximized.&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;
-&lt;strong&gt;Lets get right to it by loading and inspecting the player data for an upcoming match between Chennai Superkings vs Mumbai Indians.&lt;/strong&gt;&lt;/p&gt;
-
+In this tutorial, I will try to automate the fantasy selection process so that the probability of winning a fantasy league is maximized.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h3 id="Let's-get-right-to-it-by-loading-and-inspecting-the-player-data-for-an-upcoming-match-between-Chennai-Superkings-vs-Mumbai-Indians."&gt;Let's get right to it by loading and inspecting the player data for an upcoming match between Chennai Superkings vs Mumbai Indians.&lt;a class="anchor-link" href="#Let's-get-right-to-it-by-loading-and-inspecting-the-player-data-for-an-upcoming-match-between-Chennai-Superkings-vs-Mumbai-Indians."&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3282,22 +3281,22 @@ In this Tutorial, I will try to automate the fantasy selection process so that t
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Data-Description--"&gt;Data Description -&lt;a class="anchor-link" href="#Data-Description--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The input file for auto selecting players has following fields -&lt;/p&gt;
-&lt;p&gt;a. Cost - Most of the fantasy websites (including Dream11) allocates a total budget which cannot be exceeded. &lt;br&gt;&lt;br&gt;
-b. last_5_matches_points - This field is a list of points accured by a player in his last 5 matches. 
+&lt;h2 id="Data-Description--"&gt;Data Description -&lt;a class="anchor-link" href="#Data-Description--"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The input file for auto-selecting players has the following fields -&lt;/p&gt;
+&lt;p&gt;a. Cost - Most of the fantasy websites (including Dream11) allocate a total budget which cannot be exceeded. &lt;br&gt;&lt;br&gt;
+b. last_5_matches_points - This field is a list of points accrued by a player in his last 5 matches. 
 &lt;br&gt;&lt;br&gt;
-c. player_category - This field highlights the category of the player. In case of cricket, the possible categories are wicket-keeper, batsman, all-rounder, bowler. For a sport like football, the possible catgeories are - Goal keeper, Defender, Midfielder, Striker. This field is important because every fantasy website imposes a restriction on the number of players one can select from each of these categories. 
+c. player_category - This field highlights the category of the player. In the case of cricket, the possible categories are wicket-keeper, batsman, all-rounder, bowler. For a sport like football, the possible categories are - Goalkeeper, Defender, Midfielder, Striker. This field is important because every fantasy website restricts the number of players one can select from each of these categories. 
 &lt;br&gt;&lt;br&gt;
-d. player_name - This field highlights the player name on fantasy sports website.
+d. player_name - This field highlights the player name on a fantasy sports website.
 &lt;br&gt;&lt;br&gt;
-e. team_name - This column in the dataframe highlights the team name of the player.&lt;/p&gt;
+e. team_name - This column in the data frame highlights the team name of the player.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[4]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[2]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;raw_player_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;data/dream11_performance_data.csv&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;converters&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;last_5_matches_points&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;literal_eval&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
@@ -3385,16 +3384,16 @@ e. team_name - This column in the dataframe highlights the team name of the play
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h3 id="Algorithm-Pseudo-Code-/-Workflow--"&gt;Algorithm Pseudo Code / Workflow -&lt;a class="anchor-link" href="#Algorithm-Pseudo-Code-/-Workflow--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;We will be viewing the selection problem as a Integer Linear Programming (ILP) problem with constraints.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The objective function for ILP (Integer Linear Programming) will be to maximize the expected points.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The constraints will be defined as per the rules imposed by fantasy website (In this case, Dream11).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Once a ILP problem is defined, it can be easily solved using the PuLP library in python.&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;We will be viewing the selection problem as an Integer Linear Programming (ILP) problem with constraints.
+&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;The objective function for ILP (Integer Linear Programming) will be to maximize the expected points. 
+&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;The constraints will be defined as per the rules imposed by the fantasy website (In this case, Dream11).
+&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Once an ILP problem is defined, it can be easily solved using the PuLP library in python. 
+&lt;br&gt;
+For more mathematical details, I will be adding references at the end of the tutorial&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;For more mathematical details, I will be adding references at the end of the tutorial&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3402,9 +3401,8 @@ e. team_name - This column in the dataframe highlights the team name of the play
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;strong&gt;As one can imagine, we cannot work directly with text data. Hence, we will be using the "get_dummies" function in pandas to convert categorical data into one hot encoded vectors.&lt;/strong&gt; 
-&lt;br&gt;&lt;br&gt;
-For Eg - A single column of player_category in pandas dataframe will be split into number of unique values of player category. In this case, each player can either be a wicketkeeper, batsman, alrounder or a bowler. As a result, the player category for each player will be represented by a 4 dimensional one-hot encoded vector.&lt;/p&gt;
+&lt;h3 id="As-one-can-imagine,-we-cannot-work-directly-with-text-data.-Hence,-we-will-be-using-the-&amp;quot;get_dummies&amp;quot;-function-in-pandas-to-convert-categorical-data-into-one-hot-encoded-vectors."&gt;As one can imagine, we cannot work directly with text data. Hence, we will be using the "get_dummies" function in pandas to convert categorical data into one-hot encoded vectors.&lt;a class="anchor-link" href="#As-one-can-imagine,-we-cannot-work-directly-with-text-data.-Hence,-we-will-be-using-the-&amp;quot;get_dummies&amp;quot;-function-in-pandas-to-convert-categorical-data-into-one-hot-encoded-vectors."&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;br&gt;
+For Eg - A single column of player_category in pandas data frame will be split into the number of unique values of the player category. In this case, each player can either be a wicketkeeper, batsman, allrounder or a bowler. As a result, the player category for each player will be represented by a 4-dimensional one-hot encoded vector.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 
 &lt;/div&gt;
@@ -3412,7 +3410,7 @@ For Eg - A single column of player_category in pandas dataframe will be split in
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[5]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[3]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_dummies&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;player_category&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;team_name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]):&lt;/span&gt;
@@ -3516,32 +3514,34 @@ For Eg - A single column of player_category in pandas dataframe will be split in
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;In this Section, we will start crunching numbers so that an optimal objective function can be designed. One of the most important features which dictates where a player should be included in a fantasy team in his recent performance. The column - "last_5_matches_points" is a list of points accrued by a player in his last 5 matches.&lt;/p&gt;
-&lt;p&gt;Now, Instead of taking a simple average of this points, we will be using a weighted average where weights are time decayed. 
-&lt;br&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;This will ensure that the very recent form of a player is captured and leveraged by the selection algorithm. To better illustrate the importance of weighted average, lets consider following scenario.&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;br&gt;
-Say, the poinsts for player 1 and player 2 in last 5 matches are as follows -&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;In this section, we will start crunching numbers so that an optimal objective function can be designed. One of the most important features which dictate where a player should be included in a fantasy team in his recent performance. The column - "last_5_matches_points" is a list of points accrued by a player in his last 5 matches.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Now, Instead of taking a simple average of these points, we will be using a weighted average where weights are time decayed. This will ensure that the very recent form of a player is captured and leveraged by the selection algorithm. To better illustrate the importance of the weighted average, let us consider the following scenario.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br&gt;
+Say, the points for player 1 and player 2 in last 5 matches are as follows -&lt;/p&gt;
 &lt;p&gt;player 1 - [10, 20 , 30 , 40 , 50] &lt;br&gt;
 player 2 - [50, 40 , 30, 20 , 10] &lt;br&gt;&lt;/p&gt;
 &lt;p&gt;The approach of computing simple averages will yield averaged scores as follows - &lt;br&gt;
 &lt;strong&gt;player 1 - 30&lt;/strong&gt; &lt;br&gt;
 &lt;strong&gt;player 2 - 30&lt;/strong&gt; &lt;br&gt;&lt;/p&gt;
-&lt;p&gt;The above stats imply that, both player 1 and player 2 accrue 30 points on an average. However it can be clearly seen that player 1 is growing in confidence and has a uptrend trend to his performance whereas player 2 has a downward trend to his performance. By taking simple average, we are losing an important insight.&lt;/p&gt;
+&lt;p&gt;The above stats imply that both player 1 and player 2 accrue 30 points on average. However, it can be seen that player 1 is growing in confidence and has an upward trend to his performance whereas player 2 has a downward trend to his performance. By taking a simple average, we are losing an important insight.&lt;/p&gt;
 &lt;p&gt;Now, if we compute the averages using time decayed weights, the averaged points are as follows -
 &lt;br&gt;
 &lt;strong&gt;player 1 - 33.93&lt;/strong&gt; &lt;br&gt;
 &lt;strong&gt;player 2 - 26.06&lt;/strong&gt; &lt;br&gt;&lt;/p&gt;
-&lt;p&gt;As it can seen from above numbers, even though both the players have amassed the same number of points,  the trend in performances is now being captured with player 2 getting a higher average as compared to player 1.  Such subtle differences will help us build a robust model.&lt;/p&gt;
+&lt;p&gt;As can seen from the above numbers, even though both the players have amassed the same number of points,  the trend in performances is now being captured with player 2 getting a higher average as compared to player 1.  Such subtle differences will help us build a robust model.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;So, lets compute the time decayed weighted averages for the eligible players in the dataframe.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;So, let's compute the time decayed weighted averages for the eligible players in the data frame.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[3]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[4]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;compute_weighted_points&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;points_vector&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alpha&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.20&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -3557,7 +3557,7 @@ player 2 - [50, 40 , 30, 20 , 10] &lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[39]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[5]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;weighted_player_points&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;last_5_matches_points&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;compute_weighted_points&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -3581,6 +3581,19 @@ player 2 - [50, 40 , 30, 20 , 10] &lt;br&gt;&lt;/p&gt;
 
 &lt;div class="output_html rendered_html output_subarea "&gt;
 &lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
 &lt;table border="1" class="dataframe"&gt;
   &lt;thead&gt;
     &lt;tr style="text-align: right;"&gt;
@@ -3635,7 +3648,7 @@ player 2 - [50, 40 , 30, 20 , 10] &lt;br&gt;&lt;/p&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now, lets define the constraints for selecting players as defined by Dream11. These constraints are to be honoured by the algorithm while trying to maximize points.
+&lt;p&gt;Now, let's define the constraints for selecting players as defined by Dream11. These constraints are to be honored by the algorithm while trying to maximize points.
 &lt;br&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;For more information, check out dream11 &lt;a href="https://www.dream11.com/games/cricket/how-to-play"&gt;FAQs&lt;/a&gt;.&lt;/p&gt;
 
@@ -4041,29 +4054,16 @@ VARIABLES
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Before, we wrap up this tutorial, I would like to highlight the features as well as the enhancement opportunities for the existing algorithm - &lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;a.&lt;/strong&gt; The existing algorithm is completely automated and literally spits out the Dream team that maximises the probability of scoring highest points. &lt;br&gt;
-&lt;strong&gt;b.&lt;/strong&gt; In addition to that, it also conveys the estimated points that can be accrued through the selected team. The value would help us check the acccuracy of the system.&lt;br&gt;
+&lt;p&gt;Before we wrap up this tutorial, I would like to highlight the features as well as the enhancement opportunities for the existing algorithm - &lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;a.&lt;/strong&gt; The existing algorithm is completely automated and spits out the Dream team that maximizes the probability of scoring the highest points. &lt;br&gt;
+&lt;strong&gt;b.&lt;/strong&gt; In addition to that, it also conveys the estimated points that can be accrued through the selected team. The value would help us check the accuracy of the system.&lt;br&gt;
 &lt;strong&gt;c.&lt;/strong&gt; The algorithm is sensitive to player performance trends and it adjusts accordingly.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Enhancements -&lt;/strong&gt; &lt;br&gt;
 &lt;strong&gt;a.&lt;/strong&gt; The input data needs to be stored in a database. Currently, I am relying on manual efforts to fetch the required data. &lt;br&gt;
-&lt;strong&gt;b.&lt;/strong&gt; The algorithm is not sensitive to injury news and other team updates. This is a significant miss and we will have to rely on scrapping and detecting such information through NLP on sports websites. It is an open ended question.&lt;br&gt;&lt;/p&gt;
+&lt;strong&gt;b.&lt;/strong&gt; The algorithm is not sensitive to injury news and other team updates. This is a significant miss and we will have to rely on scrapping and detecting such information through NLP on sports websites. It is an open-ended question.&lt;br&gt;&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[&amp;nbsp;]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
 &lt;/div&gt;
  
 
@@ -4096,4 +4096,4 @@ VARIABLES
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="python"></category><category term="Linear Programming"></category><category term="Fantasy Sports"></category><category term="dream11 prediction"></category><category term="resource allocation"></category></entry></feed>
+</content><category term="python"></category><category term="Integer Linear Programming"></category><category term="Fantasy Sports"></category><category term="dream11 prediction"></category><category term="resource allocation"></category></entry></feed>

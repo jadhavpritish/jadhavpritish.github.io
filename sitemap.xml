@@ -5,21 +5,21 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/</loc>
-<lastmod>2019-12-24T15:26:52-00:00</lastmod>
+<lastmod>2020-01-10T23:06:04-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/archives.html</loc>
-<lastmod>2019-12-24T15:26:52-00:00</lastmod>
+<lastmod>2020-01-10T23:06:04-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/tags.html</loc>
-<lastmod>2019-12-24T15:26:52-00:00</lastmod>
+<lastmod>2020-01-10T23:06:04-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -172,6 +172,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://jadhavpritish.github.io/tag/integer-linear-programming</loc>
+<lastmod>2018-12-03T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://jadhavpritish.github.io/tag/deep-learning</loc>
 <lastmod>2019-12-15T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
@@ -300,13 +307,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jadhavpritish.github.io/tag/convexity</loc>
 <lastmod>2019-08-25T18:00:00+05:53</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://jadhavpritish.github.io/tag/linear-programming</loc>
-<lastmod>2018-12-03T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
