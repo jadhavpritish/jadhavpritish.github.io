@@ -34,7 +34,7 @@
         <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/bootstrap.flatly.min.css" type="text/css"/>
     <link href="https://jadhavpritish.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="https://jadhavpritish.github.io/theme/css/pygments/bw.css" rel="stylesheet">
+    <link href="https://jadhavpritish.github.io/theme/css/pygments/solarizedlight.css" rel="stylesheet">
     <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/style.css" type="text/css"/>
         <link href="https://jadhavpritish.github.io/extras/custom.css" rel="stylesheet">
 
@@ -1275,7 +1275,7 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Building-Web-APIs-Using-Python-&amp;-Flask">Building Web APIs Using Python &amp; Flask<a class="anchor-link" href="#Building-Web-APIs-Using-Python-&amp;-Flask">&#182;</a></h2><ul>
+<h2 id="Building-Web-APIs-Using-Python-&amp;-Flask">Building Web APIs Using Python &amp; Flask<a class="anchor-link" href="#Building-Web-APIs-Using-Python-&amp;-Flask">¶</a></h2><ul>
 <li>There is a huge surge in the number of Machine Learning based products which are being actively researched and developed across the globe. </li>
 <li>One of the crucial factors in the delivery of an ML product is the ability to expose the trained model/predictions to the world.</li>
 <li>In this article, I will provide a step-by-step guide for developing a web app using Flask. </li>
@@ -1288,21 +1288,20 @@ h6:hover .anchor-link {
 </ol>
 <p>Without further ado, let's jump into the implementation details. Rest of the blog will cover the following topics -</p>
 <ol>
-<li>Training a basic model. <br></li>
-<li>Saving and Loading ML models using pickle. <br></li>
-<li>Server app using Flask. <br></li>
-<li>Using Postman for drawing Inference from the trained model. <br></li>
+<li>Training a basic model. <br/></li>
+<li>Saving and Loading ML models using pickle. <br/></li>
+<li>Server app using Flask. <br/></li>
+<li>Using Postman for drawing Inference from the trained model. <br/></li>
 </ol>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">import</span> <span class="nn">sklearn</span> 
@@ -1322,303 +1321,236 @@ h6:hover .anchor-link {
 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span> <span class="o">=</span> <span class="n">warn</span>
 
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">HTML</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;style&gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&lt;/style&gt;&#39;</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;&quot;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">'&lt;style&gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&lt;/style&gt;'</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">"&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;"</span><span class="p">))</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
 <style>.prompt{width: 0px; min-width: 0px; visibility: collapse}</style>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
 <style>.container { width:100% !important; }</style>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.-Model-Training">1. Model Training<a class="anchor-link" href="#1.-Model-Training">&#182;</a></h3><p>To limit the scope of this article, we shall proceed by training a basic classifier for the famous <a href="https://archive.ics.uci.edu/ml/datasets/Iris">IRIS</a> dataset. The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant.</p>
+<h3 id="1.-Model-Training">1. Model Training<a class="anchor-link" href="#1.-Model-Training">¶</a></h3><p>To limit the scope of this article, we shall proceed by training a basic classifier for the famous <a href="https://archive.ics.uci.edu/ml/datasets/Iris">IRIS</a> dataset. The data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant.</p>
 <p><b>Attribute Information: </b></p>
 <ol>
 <li>sepal length in cm </li>
 <li>sepal width in cm </li>
 <li>petal length in cm </li>
 <li>petal width in cm </li>
-<li>class: <br>
--- Iris Setosa <br> 
--- Iris Versicolour <br> 
--- Iris Virginica <br></li>
+<li>class: <br/>
+-- Iris Setosa <br/> 
+-- Iris Versicolour <br/> 
+-- Iris Virginica <br/></li>
 </ol>
 <p>Please note that we won't be focussing on aspects like model complexity, architecture and incremental improvement in training accuracy since it beyond the scope of this article.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Loading data</span>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## Loading data</span>
 <span class="n">iris_data</span> <span class="o">=</span>  <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">iris_data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="n">iris_data</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">iris_data</span><span class="p">[</span><span class="s1">'data'</span><span class="p">],</span> <span class="n">iris_data</span><span class="p">[</span><span class="s1">'target'</span><span class="p">]</span>
 <span class="n">train_x</span><span class="p">,</span> <span class="n">test_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;training data has </span><span class="si">%d</span><span class="s2"> rows&quot;</span><span class="o">%</span><span class="k">len</span>(train_x))
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test data has </span><span class="si">%d</span><span class="s2"> rows&quot;</span><span class="o">%</span><span class="k">len</span>(test_x))
+<span class="nb">print</span><span class="p">(</span><span class="s2">"training data has </span><span class="si">%d</span><span class="s2"> rows"</span><span class="o">%</span><span class="k">len</span>(train_x))
+<span class="nb">print</span><span class="p">(</span><span class="s2">"test data has </span><span class="si">%d</span><span class="s2"> rows"</span><span class="o">%</span><span class="k">len</span>(test_x))
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>training data has 142 rows
 test data has 8 rows
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Normalizing data</span>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## Normalizing data</span>
 <span class="n">std_scaler_model</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
 <span class="n">normalized_train_x</span> <span class="o">=</span> <span class="n">std_scaler_model</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_x</span><span class="p">)</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Fitting a Machine Learning Model using Cross Validation</span>
-<span class="n">logistic_reg_model</span> <span class="o">=</span> <span class="n">LogisticRegressionCV</span><span class="p">(</span><span class="n">penalty</span> <span class="o">=</span> <span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">multi_class</span><span class="o">=</span><span class="s1">&#39;multinomial&#39;</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> 
-                                       <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## Fitting a Machine Learning Model using Cross Validation</span>
+<span class="n">logistic_reg_model</span> <span class="o">=</span> <span class="n">LogisticRegressionCV</span><span class="p">(</span><span class="n">penalty</span> <span class="o">=</span> <span class="s1">'l2'</span><span class="p">,</span> <span class="n">multi_class</span><span class="o">=</span><span class="s1">'multinomial'</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> 
+                                       <span class="n">solver</span> <span class="o">=</span> <span class="s1">'lbfgs'</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="s1">'accuracy'</span><span class="p">)</span>
 <span class="n">logistic_reg_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">normalized_train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.
 [Parallel(n_jobs=1)]: Done   3 out of   3 | elapsed:    0.4s finished
 </pre>
 </div>
 </div>
-
 <div class="output_area">
-
-    <div class="prompt output_prompt">Out[8]:</div>
-
-
-
-
+<div class="prompt output_prompt">Out[8]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>LogisticRegressionCV(Cs=10, class_weight=None, cv=&#39;warn&#39;, dual=False,
+<pre>LogisticRegressionCV(Cs=10, class_weight=None, cv='warn', dual=False,
                      fit_intercept=True, intercept_scaling=1.0, l1_ratios=None,
-                     max_iter=1000, multi_class=&#39;multinomial&#39;, n_jobs=None,
-                     penalty=&#39;l2&#39;, random_state=None, refit=True,
-                     scoring=&#39;accuracy&#39;, solver=&#39;lbfgs&#39;, tol=0.0001, verbose=1)</pre>
-</div>
-
-</div>
-
+                     max_iter=1000, multi_class='multinomial', n_jobs=None,
+                     penalty='l2', random_state=None, refit=True,
+                     scoring='accuracy', solver='lbfgs', tol=0.0001, verbose=1)</pre>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">training_accuracy</span> <span class="o">=</span> <span class="n">logistic_reg_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">normalized_train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training accuracy using cross validation is </span><span class="si">%f</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">training_accuracy</span><span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">training_accuracy</span> <span class="o">=</span> <span class="n">logistic_reg_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">normalized_train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Training accuracy using cross validation is </span><span class="si">%f</span><span class="s2">"</span><span class="o">%</span><span class="p">(</span><span class="n">training_accuracy</span><span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Training accuracy using cross validation is 97.887324
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">normalized_test_x</span> <span class="o">=</span> <span class="n">std_scaler_model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_x</span><span class="p">)</span>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">normalized_test_x</span> <span class="o">=</span> <span class="n">std_scaler_model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_x</span><span class="p">)</span>
 <span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">logistic_reg_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">normalized_test_x</span><span class="p">,</span> <span class="n">test_y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test accuracy is </span><span class="si">%f</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">test_accuracy</span><span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Test accuracy is </span><span class="si">%f</span><span class="s2">"</span><span class="o">%</span><span class="p">(</span><span class="n">test_accuracy</span><span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Test accuracy is 100.000000
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Awesome-!!!">Awesome !!!<a class="anchor-link" href="#Awesome-!!!">&#182;</a></h3><p>So, we have managed to quickly train a model that has cross-validated training accuracy of <b>97%</b> and a test accuracy of WHOPPING (melodrama alert !!) of 100%.</p>
+<h3 id="Awesome-!!!">Awesome !!!<a class="anchor-link" href="#Awesome-!!!">¶</a></h3><p>So, we have managed to quickly train a model that has cross-validated training accuracy of <b>97%</b> and a test accuracy of WHOPPING (melodrama alert !!) of 100%.</p>
 <p>Next, let's save our trained models using pickle so that we can access them later in our flask application.</p>
 <p>As an exercise, one can validate that loaded models have the same training accuracy.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## save models as pickle files - </span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;scaler_model.pkl&#39;</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_scaler</span><span class="p">:</span>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## save models as pickle files - </span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'.'</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'scaler_model.pkl'</span><span class="p">),</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_scaler</span><span class="p">:</span>
     <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">std_scaler_model</span><span class="p">,</span> <span class="n">f_scaler</span><span class="p">)</span>
     
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;classifier_model.pkl&#39;</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_model</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'.'</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'classifier_model.pkl'</span><span class="p">),</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_model</span><span class="p">:</span>
     <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">logistic_reg_model</span><span class="p">,</span> <span class="n">f_model</span><span class="p">)</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Flask-Application--">Flask Application -<a class="anchor-link" href="#Flask-Application--">&#182;</a></h3><p>Create a python script with the following content. To help us better understand the script, let's dissect the application using manageable code blocks. The entire flask application consists of 5 code blocks.</p>
-<p><b>Codeblock 1 - </b><br>
-a. Create an instance of "Flask" class. <br>
-b. We shall pass '<strong>name</strong>' as the first argument while creating an instance. <br>
-c. <strong>name</strong> is a special variable in python which evaluates the name of the current module. We need to pass this information so that Flask knows where to look for HTML templates, static files etc.<br> 
-To learn more about "<strong>name</strong>" variable, refer <a href="https://www.geeksforgeeks.org/__name__-special-variable-python/">this</a> elabroate blog. <br></p>
-<p><b>Codeblock 2 - </b><br>
-a. Before our app starts serving predictions for incoming data, we need load saved models. <br>
-b. This can be accomplished by leveraging the decorator "before_first_request". As the name suggests, the decorator will call a function that can be configured to load parameters that we will need while making predictions. <br>
-c. The function in this block simply loads the pickle models which we had saved earlier. <br>
-d. The model variables are defined as 'global' so that we can access them outside of the scope of this initialization function. <br></p>
-<p><b>Codeblock 3 - </b><br>
-a. This is a standard python function that accepts an input, normalizes it and computes predicts using loaded models. <br>
+<h3 id="Flask-Application--">Flask Application -<a class="anchor-link" href="#Flask-Application--">¶</a></h3><p>Create a python script with the following content. To help us better understand the script, let's dissect the application using manageable code blocks. The entire flask application consists of 5 code blocks.</p>
+<p><b>Codeblock 1 - </b><br/>
+a. Create an instance of "Flask" class. <br/>
+b. We shall pass '<strong>name</strong>' as the first argument while creating an instance. <br/>
+c. <strong>name</strong> is a special variable in python which evaluates the name of the current module. We need to pass this information so that Flask knows where to look for HTML templates, static files etc.<br/> 
+To learn more about "<strong>name</strong>" variable, refer <a href="https://www.geeksforgeeks.org/__name__-special-variable-python/">this</a> elabroate blog. <br/></p>
+<p><b>Codeblock 2 - </b><br/>
+a. Before our app starts serving predictions for incoming data, we need load saved models. <br/>
+b. This can be accomplished by leveraging the decorator "before_first_request". As the name suggests, the decorator will call a function that can be configured to load parameters that we will need while making predictions. <br/>
+c. The function in this block simply loads the pickle models which we had saved earlier. <br/>
+d. The model variables are defined as 'global' so that we can access them outside of the scope of this initialization function. <br/></p>
+<p><b>Codeblock 3 - </b><br/>
+a. This is a standard python function that accepts an input, normalizes it and computes predicts using loaded models. <br/>
 b. The operations are self-explanatory. Note that the predictions are converted to the list so that they can be returned in the response object.</p>
-<p><b>Codeblock 4 - </b> <br>
-a. The route() decorator tells Flask which URL should trigger our function. <br>
-b. Note that we shall be using the 'POST' method in this article. <br>
-c. The GET method differs from the POST method in the way parameters are passed. <br>
-d. The input parameters for our function using the GET method are passed through the URL where the parameters are passed a part of the body while using the POST method. <br>
-e. The POST method is more secure as compared to a GET method. <br></p>
-<p><b>Codeblock 5 -</b><br></p>
+<p><b>Codeblock 4 - </b> <br/>
+a. The route() decorator tells Flask which URL should trigger our function. <br/>
+b. Note that we shall be using the 'POST' method in this article. <br/>
+c. The GET method differs from the POST method in the way parameters are passed. <br/>
+d. The input parameters for our function using the GET method are passed through the URL where the parameters are passed a part of the body while using the POST method. <br/>
+e. The POST method is more secure as compared to a GET method. <br/></p>
+<p><b>Codeblock 5 -</b><br/></p>
 <ol>
-<li>In the last block, we will simply trigger the flask app if the module is executed in a standalone mode. <br></li>
-<li>Note that there are various parameters available including port, debug mode and use of multithread. <br></li>
+<li>In the last block, we will simply trigger the flask app if the module is executed in a standalone mode. <br/></li>
+<li>Note that there are various parameters available including port, debug mode and use of multithread. <br/></li>
 </ol>
-<h3 id="RUN-THE-SCRIPT--">RUN THE SCRIPT -<a class="anchor-link" href="#RUN-THE-SCRIPT--">&#182;</a></h3><p>And, that's it, our app is ready to go live. Go ahead and run the script !! This will host the service on your local machine.</p>
+<h3 id="RUN-THE-SCRIPT--">RUN THE SCRIPT -<a class="anchor-link" href="#RUN-THE-SCRIPT--">¶</a></h3><p>And, that's it, our app is ready to go live. Go ahead and run the script !! This will host the service on your local machine.</p>
 <p>In the last and final section, we shall test our application using postman!</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## iris_server.py</span>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## iris_server.py</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">jsonify</span>
@@ -1636,66 +1568,62 @@ e. The POST method is more secure as compared to a GET method. <br></p>
     
     <span class="k">global</span> <span class="n">l_std_scaler_model</span>
     <span class="k">global</span> <span class="n">l_logistic_reg_model</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;scaler_model.pkl&#39;</span><span class="p">),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_scaler</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'.'</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'scaler_model.pkl'</span><span class="p">),</span> <span class="s1">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_scaler</span><span class="p">:</span>
         <span class="n">l_std_scaler_model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_scaler</span><span class="p">)</span>
     
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;loaded scaler model successfully&quot;</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;classifier_model.pkl&#39;</span><span class="p">),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_model</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"loaded scaler model successfully"</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'.'</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'classifier_model.pkl'</span><span class="p">),</span> <span class="s1">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_model</span><span class="p">:</span>
         <span class="n">l_logistic_reg_model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f_model</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;loaded classifier successfully&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"loaded classifier successfully"</span><span class="p">)</span>
 <span class="c1">### codeblock-2 ends</span>
 
 <span class="c1">### codeblock-3 starts - computing predictions</span>
 <span class="k">def</span> <span class="nf">get_predictions</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Trying to predict classes for input data&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Trying to predict classes for input data"</span><span class="p">)</span>
     <span class="n">norm_x</span> <span class="o">=</span> <span class="n">l_std_scaler_model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">preds</span> <span class="o">=</span> <span class="n">l_logistic_reg_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">norm_x</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">preds</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 <span class="c1">### codeblock-3 ends</span>
 
 <span class="c1">### codeblock-4 starts - endpoint for receiving and serving prediction requests</span>
-<span class="nd">@iris_app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/irisprediction&#39;</span><span class="p">,</span> <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="nd">@iris_app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/irisprediction'</span><span class="p">,</span> <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'POST'</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">predict_iris</span><span class="p">():</span>
     
     <span class="k">try</span><span class="p">:</span>
         <span class="n">input_dict</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">input_data</span> <span class="o">=</span> <span class="n">input_dict</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">]</span>
+        <span class="n">input_data</span> <span class="o">=</span> <span class="n">input_dict</span><span class="p">[</span><span class="s1">'inputs'</span><span class="p">]</span>
         <span class="n">input_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">input_data</span><span class="p">)</span>
         <span class="n">predicted_data</span> <span class="o">=</span> <span class="n">get_predictions</span><span class="p">(</span><span class="n">input_arr</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;iris_predictions&quot;</span><span class="p">:</span> <span class="n">predicted_data</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;SUCCESS&quot;</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">"iris_predictions"</span><span class="p">:</span> <span class="n">predicted_data</span><span class="p">,</span> <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"SUCCESS"</span><span class="p">})</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error occured - </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">e</span>)
-        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;iris_prediction&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;FAILED&quot;</span><span class="p">})</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"error occured - </span><span class="si">%s</span><span class="s2">"</span><span class="o">%</span><span class="k">e</span>)
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">"iris_prediction"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"FAILED"</span><span class="p">})</span>
 <span class="c1">### codeblock-4 ends</span>
 
 <span class="c1">### codeblock-5 starts</span>
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
     <span class="n">iris_app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">port</span><span class="o">=</span> <span class="mi">5050</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="c1">### codeblock-5 ends</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## python iris_server.py</span>
+<div class="input_area">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## python iris_server.py</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Using-Flask-Service-for-predictions--">Using Flask Service for predictions -<a class="anchor-link" href="#Using-Flask-Service-for-predictions--">&#182;</a></h3><p>Once you run the 'iris_server.py' script, you should some logs as follows-</p>
+<h3 id="Using-Flask-Service-for-predictions--">Using Flask Service for predictions -<a class="anchor-link" href="#Using-Flask-Service-for-predictions--">¶</a></h3><p>Once you run the 'iris_server.py' script, you should some logs as follows-</p>
 <ul>
 <li>Serving Flask app "iris_server" (lazy loading)</li>
 <li>Environment: production
@@ -1711,32 +1639,28 @@ Use a production WSGI server instead.</li>
 <p>Go ahead and fire up your postman !!</p>
 <p>Note - If you don't have postman installed, I would encourage you to install it first through <a href="https://www.getpostman.com/downloads/">official website</a></p>
 <p>STEP 1 - 
-Your postman screen would look something like this <img src="./../../images/flask_images/flask_1.png">.</p>
+Your postman screen would look something like this <img src="./../../images/flask_images/flask_1.png"/>.</p>
 <p>STEP 2- 
-Next, select the 'POST' method at the left corner and enter the url as shown in figure below - <img src = "./../../images/flask_images/flask_2.png"></p>
+Next, select the 'POST' method at the left corner and enter the url as shown in figure below - <img src="./../../images/flask_images/flask_2.png"/></p>
 <p>STEP 3 - 
 In order to pass data as json, select the 'Body'&gt;'raw' tab as shown in figure. Under the drop down menu, select "JSON (application/json)". 
-<img src= "./../../images/flask_images/flask_3.png"></p>
+<img src="./../../images/flask_images/flask_3.png"/></p>
 <p>STEP 4 -</p>
-<p>Lastly, enter the data for which you wish to get predictions and hit SEND !!! <img src = "./../../images/flask_images/flask_4.png"></p>
-<p>VOILA !! We have our predictions - <br> <img src = "./../../images/flask_images/flask_5.png"></p>
-
+<p>Lastly, enter the data for which you wish to get predictions and hit SEND !!! <img src="./../../images/flask_images/flask_4.png"/></p>
+<p>VOILA !! We have our predictions - <br/> <img src="./../../images/flask_images/flask_5.png"/></p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Final-Comments--">Final Comments -<a class="anchor-link" href="#Final-Comments--">&#182;</a></h3><ol>
+<h3 id="Final-Comments--">Final Comments -<a class="anchor-link" href="#Final-Comments--">¶</a></h3><ol>
 <li>If you are concerned about the quality of predictions, the predictions are indeed correct which confirms that everything is working smoothly.</li>
 <li>As you may have noticed, this article only covers the third part of the Web Application pipeline. In the next tutorial, I will cover the WSGI aspect of Web App development using Gunicorn.</li>
 </ol>
-
 </div>
 </div>
 </div>
- 
-
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');

@@ -35,7 +35,7 @@
         <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/bootstrap.flatly.min.css" type="text/css"/>
     <link href="https://jadhavpritish.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="https://jadhavpritish.github.io/theme/css/pygments/bw.css" rel="stylesheet">
+    <link href="https://jadhavpritish.github.io/theme/css/pygments/solarizedlight.css" rel="stylesheet">
     <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/style.css" type="text/css"/>
         <link href="https://jadhavpritish.github.io/extras/custom.css" rel="stylesheet">
 
@@ -1280,23 +1280,23 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Winning-Fantasy-Sports-using-Data-Science">Winning Fantasy Sports using Data Science<a class="anchor-link" href="#Winning-Fantasy-Sports-using-Data-Science">&#182;</a></h1><p>With all the buzz around Indian Premier League (IPL), FIFA World Cup, Cricket World Cup-2019, fantasy sports websites like Dream11 are gaining traction. Fantasy Sports Portal allows sports fans like me to be a part of it. Having said that, it is very difficult to keep track of all the players and their performance across the sports.</p>
-<p><br>
+<h1 id="Winning-Fantasy-Sports-using-Data-Science">Winning Fantasy Sports using Data Science<a class="anchor-link" href="#Winning-Fantasy-Sports-using-Data-Science">¶</a></h1><p>With all the buzz around Indian Premier League (IPL), FIFA World Cup, Cricket World Cup-2019, fantasy sports websites like Dream11 are gaining traction. Fantasy Sports Portal allows sports fans like me to be a part of it. Having said that, it is very difficult to keep track of all the players and their performance across the sports.</p>
+<p><br/>
 In this tutorial, I will try to automate the fantasy selection process so that the probability of winning a fantasy league is maximized.</p>
-<p><br></p>
-<h3 id="Let's-get-right-to-it-by-loading-and-inspecting-the-player-data-for-an-upcoming-match-between-Chennai-Superkings-vs-Mumbai-Indians.">Let's get right to it by loading and inspecting the player data for an upcoming match between Chennai Superkings vs Mumbai Indians.<a class="anchor-link" href="#Let's-get-right-to-it-by-loading-and-inspecting-the-player-data-for-an-upcoming-match-between-Chennai-Superkings-vs-Mumbai-Indians.">&#182;</a></h3>
+<p><br/></p>
+<h3 id="Let's-get-right-to-it-by-loading-and-inspecting-the-player-data-for-an-upcoming-match-between-Chennai-Superkings-vs-Mumbai-Indians.">Let's get right to it by loading and inspecting the player data for an upcoming match between Chennai Superkings vs Mumbai Indians.<a class="anchor-link" href="#Let's-get-right-to-it-by-loading-and-inspecting-the-player-data-for-an-upcoming-match-between-Chennai-Superkings-vs-Mumbai-Indians.">¶</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">##import python libraries</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="c1">##import python libraries</span>
 
 <span class="kn">from</span> <span class="nn">IPython.core.interactiveshell</span> <span class="kn">import</span> <span class="n">InteractiveShell</span>
-<span class="n">InteractiveShell</span><span class="o">.</span><span class="n">ast_node_interactivity</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="n">InteractiveShell</span><span class="o">.</span><span class="n">ast_node_interactivity</span> <span class="o">=</span> <span class="s2">"none"</span>
 
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
@@ -1313,278 +1313,236 @@ In this tutorial, I will try to automate the fantasy selection process so that t
 
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelBinarizer</span>
 <span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span><span class="n">HTML</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;style&gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&lt;/style&gt;&#39;</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;&quot;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">'&lt;style&gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&lt;/style&gt;'</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">"&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;"</span><span class="p">))</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
 <style>.prompt{width: 0px; min-width: 0px; visibility: collapse}</style>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
 <style>.container { width:100% !important; }</style>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Data-Description--">Data Description -<a class="anchor-link" href="#Data-Description--">&#182;</a></h2><p>The input file for auto-selecting players has the following fields -</p>
-<p>a. Cost - Most of the fantasy websites (including Dream11) allocate a total budget which cannot be exceeded. <br><br>
+<h2 id="Data-Description--">Data Description -<a class="anchor-link" href="#Data-Description--">¶</a></h2><p>The input file for auto-selecting players has the following fields -</p>
+<p>a. Cost - Most of the fantasy websites (including Dream11) allocate a total budget which cannot be exceeded. <br/><br/>
 b. last_5_matches_points - This field is a list of points accrued by a player in his last 5 matches. 
-<br><br>
+<br/><br/>
 c. player_category - This field highlights the category of the player. In the case of cricket, the possible categories are wicket-keeper, batsman, all-rounder, bowler. For a sport like football, the possible categories are - Goalkeeper, Defender, Midfielder, Striker. This field is important because every fantasy website restricts the number of players one can select from each of these categories. 
-<br><br>
+<br/><br/>
 d. player_name - This field highlights the player name on a fantasy sports website.
-<br><br>
+<br/><br/>
 e. team_name - This column in the data frame highlights the team name of the player.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">raw_player_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/dream11_performance_data.csv&#39;</span><span class="p">,</span> <span class="n">converters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;last_5_matches_points&quot;</span><span class="p">:</span> <span class="n">literal_eval</span><span class="p">})</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;font size=2&gt;&#39;</span><span class="o">+</span><span class="n">raw_player_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;&lt;/font&gt;&#39;</span><span class="p">))</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="n">raw_player_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data/dream11_performance_data.csv'</span><span class="p">,</span> <span class="n">converters</span><span class="o">=</span><span class="p">{</span><span class="s2">"last_5_matches_points"</span><span class="p">:</span> <span class="n">literal_eval</span><span class="p">})</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">'&lt;font size=2&gt;'</span><span class="o">+</span><span class="n">raw_player_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span><span class="o">+</span><span class="s1">'&lt;/font&gt;'</span><span class="p">))</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<font size=2><table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>cost</th>
-      <th>last_5_matches_points</th>
-      <th>player_category</th>
-      <th>player_name</th>
-      <th>team_name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>9.0</td>
-      <td>[25, 20, 15, 30, 18]</td>
-      <td>wicket_keeper</td>
-      <td>M.S. dhoni</td>
-      <td>CSK</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>10.0</td>
-      <td>[30, 10, 23, 22, 16]</td>
-      <td>batsman</td>
-      <td>Suresh Raina</td>
-      <td>CSK</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>8.5</td>
-      <td>[17, 13, 14, 27, 35]</td>
-      <td>wicket_keeper</td>
-      <td>kishan</td>
-      <td>MI</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>10.5</td>
-      <td>[15, 7, 9, 40, 3]</td>
-      <td>batsman</td>
-      <td>rohit_sharma</td>
-      <td>MI</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>9.5</td>
-      <td>[20, 18, 15, 22, 20]</td>
-      <td>batsman</td>
-      <td>lewis</td>
-      <td>MI</td>
-    </tr>
-  </tbody>
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<font size="2"><table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>cost</th>
+<th>last_5_matches_points</th>
+<th>player_category</th>
+<th>player_name</th>
+<th>team_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>9.0</td>
+<td>[25, 20, 15, 30, 18]</td>
+<td>wicket_keeper</td>
+<td>M.S. dhoni</td>
+<td>CSK</td>
+</tr>
+<tr>
+<th>1</th>
+<td>10.0</td>
+<td>[30, 10, 23, 22, 16]</td>
+<td>batsman</td>
+<td>Suresh Raina</td>
+<td>CSK</td>
+</tr>
+<tr>
+<th>2</th>
+<td>8.5</td>
+<td>[17, 13, 14, 27, 35]</td>
+<td>wicket_keeper</td>
+<td>kishan</td>
+<td>MI</td>
+</tr>
+<tr>
+<th>3</th>
+<td>10.5</td>
+<td>[15, 7, 9, 40, 3]</td>
+<td>batsman</td>
+<td>rohit_sharma</td>
+<td>MI</td>
+</tr>
+<tr>
+<th>4</th>
+<td>9.5</td>
+<td>[20, 18, 15, 22, 20]</td>
+<td>batsman</td>
+<td>lewis</td>
+<td>MI</td>
+</tr>
+</tbody>
 </table></font>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Algorithm-Pseudo-Code-/-Workflow--">Algorithm Pseudo Code / Workflow -<a class="anchor-link" href="#Algorithm-Pseudo-Code-/-Workflow--">&#182;</a></h3><ol>
+<h3 id="Algorithm-Pseudo-Code-/-Workflow--">Algorithm Pseudo Code / Workflow -<a class="anchor-link" href="#Algorithm-Pseudo-Code-/-Workflow--">¶</a></h3><ol>
 <li>We will be viewing the selection problem as an Integer Linear Programming (ILP) problem with constraints.
-<br></li>
+<br/></li>
 <li>The objective function for ILP (Integer Linear Programming) will be to maximize the expected points. 
-<br></li>
+<br/></li>
 <li>The constraints will be defined as per the rules imposed by the fantasy website (In this case, Dream11).
-<br></li>
+<br/></li>
 <li>Once an ILP problem is defined, it can be easily solved using the PuLP library in python. 
-<br>
+<br/>
 For more mathematical details, I will be adding references at the end of the tutorial</li>
 </ol>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="As-one-can-imagine,-we-cannot-work-directly-with-text-data.-Hence,-we-will-be-using-the-&quot;get_dummies&quot;-function-in-pandas-to-convert-categorical-data-into-one-hot-encoded-vectors.">As one can imagine, we cannot work directly with text data. Hence, we will be using the "get_dummies" function in pandas to convert categorical data into one-hot encoded vectors.<a class="anchor-link" href="#As-one-can-imagine,-we-cannot-work-directly-with-text-data.-Hence,-we-will-be-using-the-&quot;get_dummies&quot;-function-in-pandas-to-convert-categorical-data-into-one-hot-encoded-vectors.">&#182;</a></h3><p><br>
+<h3 id='As-one-can-imagine,-we-cannot-work-directly-with-text-data.-Hence,-we-will-be-using-the-"get_dummies"-function-in-pandas-to-convert-categorical-data-into-one-hot-encoded-vectors.'>As one can imagine, we cannot work directly with text data. Hence, we will be using the "get_dummies" function in pandas to convert categorical data into one-hot encoded vectors.<a class="anchor-link" href='#As-one-can-imagine,-we-cannot-work-directly-with-text-data.-Hence,-we-will-be-using-the-"get_dummies"-function-in-pandas-to-convert-categorical-data-into-one-hot-encoded-vectors.'>¶</a></h3><p><br/>
 For Eg - A single column of player_category in pandas data frame will be split into the number of unique values of the player category. In this case, each player can either be a wicketkeeper, batsman, allrounder or a bowler. As a result, the player category for each player will be represented by a 4-dimensional one-hot encoded vector.</p>
-<p><br></p>
-
+<p><br/></p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">col_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;player_category&quot;</span><span class="p">,</span> <span class="s2">&quot;team_name&quot;</span><span class="p">]):</span>
-    <span class="n">dummies_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">raw_player_data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;player_category&quot;</span><span class="p">,</span> <span class="s2">&quot;team_name&quot;</span><span class="p">])</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">col_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"player_category"</span><span class="p">,</span> <span class="s2">"team_name"</span><span class="p">]):</span>
+    <span class="n">dummies_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">raw_player_data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"player_category"</span><span class="p">,</span> <span class="s2">"team_name"</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">dummies_data</span>
 
 <span class="n">processed_player_data</span> <span class="o">=</span> <span class="n">get_dummies</span><span class="p">(</span><span class="n">raw_player_data</span><span class="p">)</span>
  
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;font size=2&gt;&#39;</span><span class="o">+</span><span class="n">processed_player_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;cost&#39;</span><span class="p">,</span> <span class="s1">&#39;last_5_matches_points&#39;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;&lt;/font&gt;&#39;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">'&lt;font size=2&gt;'</span><span class="o">+</span><span class="n">processed_player_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'cost'</span><span class="p">,</span> <span class="s1">'last_5_matches_points'</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span><span class="o">+</span><span class="s1">'&lt;/font&gt;'</span><span class="p">))</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<font size=2><table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>player_name</th>
-      <th>player_category_all_rounder</th>
-      <th>player_category_batsman</th>
-      <th>player_category_bowler</th>
-      <th>player_category_wicket_keeper</th>
-      <th>team_name_CSK</th>
-      <th>team_name_MI</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>M.S. dhoni</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Suresh Raina</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>kishan</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>rohit_sharma</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>lewis</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-  </tbody>
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<font size="2"><table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>player_name</th>
+<th>player_category_all_rounder</th>
+<th>player_category_batsman</th>
+<th>player_category_bowler</th>
+<th>player_category_wicket_keeper</th>
+<th>team_name_CSK</th>
+<th>team_name_MI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>M.S. dhoni</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>Suresh Raina</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<th>2</th>
+<td>kishan</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<th>3</th>
+<td>rohit_sharma</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<th>4</th>
+<td>lewis</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
 </table></font>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -1595,68 +1553,57 @@ For Eg - A single column of player_category in pandas data frame will be split i
 <li><p>Now, Instead of taking a simple average of these points, we will be using a weighted average where weights are time decayed. This will ensure that the very recent form of a player is captured and leveraged by the selection algorithm. To better illustrate the importance of the weighted average, let us consider the following scenario.</p>
 </li>
 </ul>
-<p><br>
+<p><br/>
 Say, the points for player 1 and player 2 in last 5 matches are as follows -</p>
-<p>player 1 - [10, 20 , 30 , 40 , 50] <br>
-player 2 - [50, 40 , 30, 20 , 10] <br></p>
-<p>The approach of computing simple averages will yield averaged scores as follows - <br>
-<strong>player 1 - 30</strong> <br>
-<strong>player 2 - 30</strong> <br></p>
+<p>player 1 - [10, 20 , 30 , 40 , 50] <br/>
+player 2 - [50, 40 , 30, 20 , 10] <br/></p>
+<p>The approach of computing simple averages will yield averaged scores as follows - <br/>
+<strong>player 1 - 30</strong> <br/>
+<strong>player 2 - 30</strong> <br/></p>
 <p>The above stats imply that both player 1 and player 2 accrue 30 points on average. However, it can be seen that player 1 is growing in confidence and has an upward trend to his performance whereas player 2 has a downward trend to his performance. By taking a simple average, we are losing an important insight.</p>
 <p>Now, if we compute the averages using time decayed weights, the averaged points are as follows -
-<br>
-<strong>player 1 - 33.93</strong> <br>
-<strong>player 2 - 26.06</strong> <br></p>
+<br/>
+<strong>player 1 - 33.93</strong> <br/>
+<strong>player 2 - 26.06</strong> <br/></p>
 <p>As can seen from the above numbers, even though both the players have amassed the same number of points,  the trend in performances is now being captured with player 2 getting a higher average as compared to player 1.  Such subtle differences will help us build a robust model.</p>
-<p><br></p>
+<p><br/></p>
 <p><strong>So, let's compute the time decayed weighted averages for the eligible players in the data frame.</strong></p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">compute_weighted_points</span><span class="p">(</span><span class="n">points_vector</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">):</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">compute_weighted_points</span><span class="p">(</span><span class="n">points_vector</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">):</span>
     <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points_vector</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">alpha</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
     <span class="n">exponential_weighted_average</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points_vector</span><span class="p">),</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">exponential_weighted_average</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">processed_player_data</span><span class="p">[</span><span class="s1">&#39;weighted_player_points&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">processed_player_data</span><span class="p">[</span><span class="s1">&#39;last_5_matches_points&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">compute_weighted_points</span><span class="p">)</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="n">processed_player_data</span><span class="p">[</span><span class="s1">'weighted_player_points'</span><span class="p">]</span> <span class="o">=</span> <span class="n">processed_player_data</span><span class="p">[</span><span class="s1">'last_5_matches_points'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">compute_weighted_points</span><span class="p">)</span>
 <span class="n">processed_player_data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">processed_player_data</span><span class="p">[[</span><span class="s1">&#39;player_name&#39;</span><span class="p">,</span> <span class="s1">&#39;last_5_matches_points&#39;</span><span class="p">,</span> <span class="s1">&#39;weighted_player_points&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">processed_player_data</span><span class="p">[[</span><span class="s1">'player_name'</span><span class="p">,</span> <span class="s1">'last_5_matches_points'</span><span class="p">,</span> <span class="s1">'weighted_player_points'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
 <div>
-<style scoped>
+<style scoped="">
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -1670,72 +1617,68 @@ player 2 - [50, 40 , 30, 20 , 10] <br></p>
     }
 </style>
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>player_name</th>
-      <th>last_5_matches_points</th>
-      <th>weighted_player_points</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>M.S. dhoni</td>
-      <td>[25, 20, 15, 30, 18]</td>
-      <td>21.457434</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Suresh Raina</td>
-      <td>[30, 10, 23, 22, 16]</td>
-      <td>19.613900</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>kishan</td>
-      <td>[17, 13, 14, 27, 35]</td>
-      <td>23.303382</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>rohit_sharma</td>
-      <td>[15, 7, 9, 40, 3]</td>
-      <td>15.016017</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>lewis</td>
-      <td>[20, 18, 15, 22, 20]</td>
-      <td>19.193689</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>player_name</th>
+<th>last_5_matches_points</th>
+<th>weighted_player_points</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>M.S. dhoni</td>
+<td>[25, 20, 15, 30, 18]</td>
+<td>21.457434</td>
+</tr>
+<tr>
+<th>1</th>
+<td>Suresh Raina</td>
+<td>[30, 10, 23, 22, 16]</td>
+<td>19.613900</td>
+</tr>
+<tr>
+<th>2</th>
+<td>kishan</td>
+<td>[17, 13, 14, 27, 35]</td>
+<td>23.303382</td>
+</tr>
+<tr>
+<th>3</th>
+<td>rohit_sharma</td>
+<td>[15, 7, 9, 40, 3]</td>
+<td>15.016017</td>
+</tr>
+<tr>
+<th>4</th>
+<td>lewis</td>
+<td>[20, 18, 15, 22, 20]</td>
+<td>19.193689</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now, let's define the constraints for selecting players as defined by Dream11. These constraints are to be honored by the algorithm while trying to maximize points.
-<br><br></p>
+<br/><br/></p>
 <p>For more information, check out dream11 <a href="https://www.dream11.com/games/cricket/how-to-play">FAQs</a>.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In [41]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">max_players</span> <span class="o">=</span> <span class="mi">11</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="n">max_players</span> <span class="o">=</span> <span class="mi">11</span>
 <span class="n">max_batsman</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">max_allrounders</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">max_bowlers</span> <span class="o">=</span> <span class="mi">5</span>
@@ -1744,144 +1687,122 @@ player 2 - [50, 40 , 30, 20 , 10] <br></p>
 <span class="n">max_team1_players</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="n">max_team2_players</span> <span class="o">=</span> <span class="mi">7</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In [42]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">prob</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpProblem</span><span class="p">(</span><span class="s1">&#39;Dreamteam&#39;</span><span class="p">,</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpMaximize</span><span class="p">)</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="n">prob</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpProblem</span><span class="p">(</span><span class="s1">'Dreamteam'</span><span class="p">,</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpMaximize</span><span class="p">)</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In [43]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># define decision variables for each row in the input dataframe</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="c1"># define decision variables for each row in the input dataframe</span>
 
 <span class="n">decision_variables</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">rownum</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">processed_player_data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">variable</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;x_{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">rownum</span><span class="p">)))</span>
-    <span class="n">variable</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpVariable</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">lowBound</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">upBound</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cat</span> <span class="o">=</span> <span class="s1">&#39;Integer&#39;</span> <span class="p">)</span> 
+    <span class="n">variable</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">'x_{}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">rownum</span><span class="p">)))</span>
+    <span class="n">variable</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpVariable</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">lowBound</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">upBound</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cat</span> <span class="o">=</span> <span class="s1">'Integer'</span> <span class="p">)</span> 
     <span class="n">decision_variables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
     
 <span class="k">print</span> <span class="n">decision_variables</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>[x_0, x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8, x_9, x_10, x_11, x_12, x_13, x_14, x_15]
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In [44]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Create optimization Function</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="c1"># Create optimization Function</span>
 <span class="k">print</span> <span class="n">processed_player_data</span><span class="o">.</span><span class="n">columns</span>
-<span class="n">total_points</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">total_points</span> <span class="o">=</span> <span class="s1">''</span>
 <span class="k">for</span> <span class="n">rownum</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">processed_player_data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;weighted_player_points&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
+    <span class="n">formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'weighted_player_points'</span><span class="p">]</span> <span class="o">*</span> <span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
     <span class="n">total_points</span><span class="o">+=</span> <span class="n">formula</span>
 <span class="n">prob</span> <span class="o">+=</span> <span class="n">total_points</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Index([u&#39;index&#39;, u&#39;cost&#39;, u&#39;last_5_matches_points&#39;, u&#39;player_name&#39;,
-       u&#39;player_category_all_rounder&#39;, u&#39;player_category_batsman&#39;,
-       u&#39;player_category_bowler&#39;, u&#39;player_category_wicket_keeper&#39;,
-       u&#39;team_name_CSK&#39;, u&#39;team_name_MI&#39;, u&#39;weighted_player_points&#39;],
-      dtype=&#39;object&#39;)
+<pre>Index([u'index', u'cost', u'last_5_matches_points', u'player_name',
+       u'player_category_all_rounder', u'player_category_batsman',
+       u'player_category_bowler', u'player_category_wicket_keeper',
+       u'team_name_CSK', u'team_name_MI', u'weighted_player_points'],
+      dtype='object')
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In [45]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#set constrainst for keeper</span>
-<span class="n">total_keepers</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-<span class="n">total_batsman</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-<span class="n">total_allrounder</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-<span class="n">total_bowler</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-<span class="n">total_players</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-<span class="n">total_cost</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-<span class="n">total_team2</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-<span class="n">total_team1</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="c1">#set constrainst for keeper</span>
+<span class="n">total_keepers</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">total_batsman</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">total_allrounder</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">total_bowler</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">total_players</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">total_cost</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">total_team2</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="n">total_team1</span> <span class="o">=</span> <span class="s1">''</span>
 
 <span class="k">for</span> <span class="n">rownum</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">processed_player_data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">keeper_formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;player_category_wicket_keeper&#39;</span><span class="p">]</span><span class="o">*</span> <span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
+    <span class="n">keeper_formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'player_category_wicket_keeper'</span><span class="p">]</span><span class="o">*</span> <span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
     <span class="n">total_keepers</span> <span class="o">+=</span> <span class="n">keeper_formula</span>
     
-    <span class="n">batsman_formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;player_category_batsman&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
+    <span class="n">batsman_formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'player_category_batsman'</span><span class="p">]</span> <span class="o">*</span> <span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
     <span class="n">total_batsman</span> <span class="o">+=</span> <span class="n">batsman_formula</span>
     
-    <span class="n">allrounder_formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;player_category_all_rounder&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
+    <span class="n">allrounder_formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'player_category_all_rounder'</span><span class="p">]</span> <span class="o">*</span> <span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
     <span class="n">total_allrounder</span><span class="o">+=</span><span class="n">allrounder_formula</span>
     
-    <span class="n">bowler_formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;player_category_bowler&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
+    <span class="n">bowler_formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'player_category_bowler'</span><span class="p">]</span><span class="o">*</span><span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
     <span class="n">total_bowler</span> <span class="o">+=</span> <span class="n">bowler_formula</span>
     
     <span class="n">total_players_formula</span> <span class="o">=</span> <span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
     <span class="n">total_players</span> <span class="o">+=</span> <span class="n">total_players_formula</span>
     
-    <span class="n">total_cost_formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;cost&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
+    <span class="n">total_cost_formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'cost'</span><span class="p">]</span><span class="o">*</span><span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
     <span class="n">total_cost</span> <span class="o">+=</span> <span class="n">total_cost_formula</span>
     
-    <span class="n">formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;team_name_CSK&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
+    <span class="n">formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'team_name_CSK'</span><span class="p">]</span><span class="o">*</span><span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
     <span class="n">total_team1</span> <span class="o">+=</span> <span class="n">formula</span>
     
-    <span class="n">formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;team_name_MI&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
+    <span class="n">formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'team_name_MI'</span><span class="p">]</span><span class="o">*</span><span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
     <span class="n">total_team2</span> <span class="o">+=</span> <span class="n">formula</span>
     
 <span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_keepers</span> <span class="o">==</span> <span class="n">max_keepers</span><span class="p">)</span>
@@ -1896,24 +1817,17 @@ player 2 - [50, 40 , 30, 20 , 10] <br></p>
 
 
 <span class="k">print</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
-<span class="n">prob</span><span class="o">.</span><span class="n">writeLP</span><span class="p">(</span><span class="s1">&#39;Dreamteam.lp&#39;</span><span class="p">)</span>
+<span class="n">prob</span><span class="o">.</span><span class="n">writeLP</span><span class="p">(</span><span class="s1">'Dreamteam.lp'</span><span class="p">)</span>
 
 <span class="n">optimization_result</span> <span class="o">=</span> <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Dreamteam:
 MAXIMIZE
@@ -1959,189 +1873,168 @@ VARIABLES
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In [48]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">variable_name</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="n">variable_name</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">variable_value</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">prob</span><span class="o">.</span><span class="n">variables</span><span class="p">():</span>
     <span class="n">variable_name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="n">variable_value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">varValue</span><span class="p">)</span>
     
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="n">variable_name</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">variable_value</span><span class="p">})</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'index'</span><span class="p">:</span> <span class="n">variable_name</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">:</span> <span class="n">variable_value</span><span class="p">})</span>
 <span class="k">for</span> <span class="n">rownum</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(\d+)&#39;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">])</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">rownum</span><span class="p">,</span> <span class="s1">&#39;index&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">'(\d+)'</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s1">'index'</span><span class="p">])</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">rownum</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;index&#39;</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">processed_player_data</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s1">&#39;index&#39;</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;weighted_player_points&#39;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
-<span class="n">selected_cols_final</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;player_name&#39;</span><span class="p">,</span> <span class="s1">&#39;team_name_CSK&#39;</span><span class="p">,</span> <span class="s1">&#39;team_name_MI&#39;</span><span class="p">,</span> <span class="s1">&#39;weighted_player_points&#39;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">'index'</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">processed_player_data</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s1">'index'</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">'value'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">'weighted_player_points'</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+<span class="n">selected_cols_final</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'player_name'</span><span class="p">,</span> <span class="s1">'team_name_CSK'</span><span class="p">,</span> <span class="s1">'team_name_MI'</span><span class="p">,</span> <span class="s1">'weighted_player_points'</span><span class="p">]</span>
 <span class="n">final_set_of_players_to_be_selected</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">selected_cols_final</span><span class="p">]</span>
 
 <span class="n">display</span><span class="p">(</span><span class="n">final_set_of_players_to_be_selected</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;We can accrue an estimated points of </span><span class="si">%f</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">final_set_of_players_to_be_selected</span><span class="p">[</span><span class="s1">&#39;weighted_player_points&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"We can accrue an estimated points of </span><span class="si">%f</span><span class="s2">"</span><span class="o">%</span><span class="p">(</span><span class="n">final_set_of_players_to_be_selected</span><span class="p">[</span><span class="s1">'weighted_player_points'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
 <div>
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>player_name</th>
-      <th>team_name_CSK</th>
-      <th>team_name_MI</th>
-      <th>weighted_player_points</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>5</th>
-      <td>rayadu</td>
-      <td>1</td>
-      <td>0</td>
-      <td>35.673886</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>markande</td>
-      <td>0</td>
-      <td>1</td>
-      <td>30.687700</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>hardik</td>
-      <td>0</td>
-      <td>1</td>
-      <td>23.409929</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>kishan</td>
-      <td>0</td>
-      <td>1</td>
-      <td>23.303382</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>watson</td>
-      <td>1</td>
-      <td>0</td>
-      <td>20.841982</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>surya</td>
-      <td>0</td>
-      <td>1</td>
-      <td>20.802670</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Suresh Raina</td>
-      <td>1</td>
-      <td>0</td>
-      <td>19.613900</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>lewis</td>
-      <td>0</td>
-      <td>1</td>
-      <td>19.193689</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>chahar</td>
-      <td>1</td>
-      <td>0</td>
-      <td>18.666565</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>bravo</td>
-      <td>1</td>
-      <td>0</td>
-      <td>18.507023</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>bumrah</td>
-      <td>0</td>
-      <td>1</td>
-      <td>16.100621</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>player_name</th>
+<th>team_name_CSK</th>
+<th>team_name_MI</th>
+<th>weighted_player_points</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>5</th>
+<td>rayadu</td>
+<td>1</td>
+<td>0</td>
+<td>35.673886</td>
+</tr>
+<tr>
+<th>13</th>
+<td>markande</td>
+<td>0</td>
+<td>1</td>
+<td>30.687700</td>
+</tr>
+<tr>
+<th>8</th>
+<td>hardik</td>
+<td>0</td>
+<td>1</td>
+<td>23.409929</td>
+</tr>
+<tr>
+<th>2</th>
+<td>kishan</td>
+<td>0</td>
+<td>1</td>
+<td>23.303382</td>
+</tr>
+<tr>
+<th>7</th>
+<td>watson</td>
+<td>1</td>
+<td>0</td>
+<td>20.841982</td>
+</tr>
+<tr>
+<th>6</th>
+<td>surya</td>
+<td>0</td>
+<td>1</td>
+<td>20.802670</td>
+</tr>
+<tr>
+<th>1</th>
+<td>Suresh Raina</td>
+<td>1</td>
+<td>0</td>
+<td>19.613900</td>
+</tr>
+<tr>
+<th>4</th>
+<td>lewis</td>
+<td>0</td>
+<td>1</td>
+<td>19.193689</td>
+</tr>
+<tr>
+<th>15</th>
+<td>chahar</td>
+<td>1</td>
+<td>0</td>
+<td>18.666565</td>
+</tr>
+<tr>
+<th>10</th>
+<td>bravo</td>
+<td>1</td>
+<td>0</td>
+<td>18.507023</td>
+</tr>
+<tr>
+<th>11</th>
+<td>bumrah</td>
+<td>0</td>
+<td>1</td>
+<td>16.100621</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>We can accrue an estimated points of 246.801346
 </pre>
 </div>
 </div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="There-you-GO-!!-We-have-our-Dream-Team-!!">There you GO !! We have our Dream Team !!<a class="anchor-link" href="#There-you-GO-!!-We-have-our-Dream-Team-!!">&#182;</a></h3><p>All that needs to be done is to select the team in the app and start earning money !!</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Before we wrap up this tutorial, I would like to highlight the features as well as the enhancement opportunities for the existing algorithm - <br></p>
-<p><strong>a.</strong> The existing algorithm is completely automated and spits out the Dream team that maximizes the probability of scoring the highest points. <br>
-<strong>b.</strong> In addition to that, it also conveys the estimated points that can be accrued through the selected team. The value would help us check the accuracy of the system.<br>
+<h3 id="There-you-GO-!!-We-have-our-Dream-Team-!!">There you GO !! We have our Dream Team !!<a class="anchor-link" href="#There-you-GO-!!-We-have-our-Dream-Team-!!">¶</a></h3><p>All that needs to be done is to select the team in the app and start earning money !!</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Before we wrap up this tutorial, I would like to highlight the features as well as the enhancement opportunities for the existing algorithm - <br/></p>
+<p><strong>a.</strong> The existing algorithm is completely automated and spits out the Dream team that maximizes the probability of scoring the highest points. <br/>
+<strong>b.</strong> In addition to that, it also conveys the estimated points that can be accrued through the selected team. The value would help us check the accuracy of the system.<br/>
 <strong>c.</strong> The algorithm is sensitive to player performance trends and it adjusts accordingly.</p>
-<p><strong>Enhancements -</strong> <br>
-<strong>a.</strong> The input data needs to be stored in a database. Currently, I am relying on manual efforts to fetch the required data. <br>
-<strong>b.</strong> The algorithm is not sensitive to injury news and other team updates. This is a significant miss and we will have to rely on scrapping and detecting such information through NLP on sports websites. It is an open-ended question.<br></p>
-
+<p><strong>Enhancements -</strong> <br/>
+<strong>a.</strong> The input data needs to be stored in a database. Currently, I am relying on manual efforts to fetch the required data. <br/>
+<strong>b.</strong> The algorithm is not sensitive to injury news and other team updates. This is a significant miss and we will have to rely on scrapping and detecting such information through NLP on sports websites. It is an open-ended question.<br/></p>
 </div>
 </div>
 </div>
- 
-
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');

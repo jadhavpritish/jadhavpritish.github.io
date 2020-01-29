@@ -34,7 +34,7 @@
         <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/bootstrap.flatly.min.css" type="text/css"/>
     <link href="https://jadhavpritish.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="https://jadhavpritish.github.io/theme/css/pygments/bw.css" rel="stylesheet">
+    <link href="https://jadhavpritish.github.io/theme/css/pygments/solarizedlight.css" rel="stylesheet">
     <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/style.css" type="text/css"/>
         <link href="https://jadhavpritish.github.io/extras/custom.css" rel="stylesheet">
 
@@ -1275,80 +1275,66 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Linear-Regression">Linear Regression<a class="anchor-link" href="#Linear-Regression">&#182;</a></h1><p>Linear Regression is a statistical approach of modelling the realtionship between a scalar response (aka. dependent variable) and one or more explanatory variables (aka independent variables). Linear Regression is one of the most basic building block in Machine Learning algorithms.</p>
+<h1 id="Linear-Regression">Linear Regression<a class="anchor-link" href="#Linear-Regression">¶</a></h1><p>Linear Regression is a statistical approach of modelling the realtionship between a scalar response (aka. dependent variable) and one or more explanatory variables (aka independent variables). Linear Regression is one of the most basic building block in Machine Learning algorithms.</p>
 <p>In most of the python libraries, linear regression model is available as a blackbox. However, it is imperative to understand what goes on under the hood in order to have better grasp of algorithm.</p>
 <p>This article will focus on implementing vanilla linear regression from scratch using numpy and pandas.</p>
-<p><img src="./../../images/linear_regression/LR_tell_me_more.jpeg"><br></p>
+<p><img src="./../../images/linear_regression/LR_tell_me_more.jpeg"/><br/></p>
 <p>Lets start by importing some basic python libraries.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
 
 <span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span><span class="n">HTML</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;style&gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&lt;/style&gt;&#39;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">'&lt;style&gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&lt;/style&gt;'</span><span class="p">))</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
 <style>.prompt{width: 0px; min-width: 0px; visibility: collapse}</style>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>$Notations \ that \ we \ will \ be \ using \ throughout \ are \ as \ follows -$</p>
-\begin{align}X - Input \ data \end{align}<p><br>
-\begin{align}Y - Target \ labels \end{align}<br>
-\begin{align}W - \ weights \ vector \ (to \ be \ estimated \ using \ training \ data) \end{align}<br>
-\begin{align}b - \ intercept \ for \ the \ decision \ boundary \end{align}<br></p>
+\begin{align}X - Input \ data \end{align}<p><br/>
+\begin{align}Y - Target \ labels \end{align}<br/>
+\begin{align}W - \ weights \ vector \ (to \ be \ estimated \ using \ training \ data) \end{align}<br/>
+\begin{align}b - \ intercept \ for \ the \ decision \ boundary \end{align}<br/></p>
 <p><u> $ Notations \ for \ tracking \ dimensions \ are \ as \ follows- $ </u>
-\begin{align}m - number \ of \ training \ examples \end{align}<br>
-\begin{align}n - number \ of \ input \ features \end{align}<br>
-\begin{align}k - \ size \ of \ labels \ vector (In \ case \ of \ binary \ classification,\ k\ =\ 1) \end{align} <br></p>
-
+\begin{align}m - number \ of \ training \ examples \end{align}<br/>
+\begin{align}n - number \ of \ input \ features \end{align}<br/>
+\begin{align}k - \ size \ of \ labels \ vector (In \ case \ of \ binary \ classification,\ k\ =\ 1) \end{align} <br/></p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Load-Diabetes-dataset-provided-by-sklearn">Load Diabetes dataset provided by sklearn<a class="anchor-link" href="#Load-Diabetes-dataset-provided-by-sklearn">&#182;</a></h2><h2 id="Diabetes-dataset-">Diabetes dataset <a class="anchor-link" href="#Diabetes-dataset-">&#182;</a></h2><p>Ten baseline variables, age, sex, body mass index, average blood pressure, and six blood serum measurements were obtained for each of n = 442 diabetes patients, as well as the response of interest, a quantitative measure of disease progression one year after baseline.</p>
+<h2 id="Load-Diabetes-dataset-provided-by-sklearn">Load Diabetes dataset provided by sklearn<a class="anchor-link" href="#Load-Diabetes-dataset-provided-by-sklearn">¶</a></h2><h2 id="Diabetes-dataset-">Diabetes dataset <a class="anchor-link" href="#Diabetes-dataset-">¶</a></h2><p>Ten baseline variables, age, sex, body mass index, average blood pressure, and six blood serum measurements were obtained for each of n = 442 diabetes patients, as well as the response of interest, a quantitative measure of disease progression one year after baseline.</p>
 <p><strong>Data Set Characteristics:</strong></p>
 <p>:Number of Instances: 442</p>
 <p>:Number of Attributes: First 10 columns are numeric predictive values</p>
 <p>:Target: Column 11 is a quantitative measure of disease progression one year after baseline</p>
 <p>:Attribute Information:</p>
-
 <pre><code>  - Age
   - Sex
   - Body mass index
@@ -1367,41 +1353,37 @@ h6:hover .anchor-link {
 <p>For more information see:
 Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani (2004) "Least Angle Regression," Annals of Statistics (with discussion), 407-499.
 (<a href="http://web.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf">http://web.stanford.edu/~hastie/Papers/LARS/LeastAngle_2002.pdf</a>)</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">load_diabetes_data</span><span class="p">():</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">load_diabetes_data</span><span class="p">():</span>
     
     <span class="n">diabetes</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span>
-    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">diabetes</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="n">diabetes</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">diabetes</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]),</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">diabetes</span><span class="p">[</span><span class="s1">'data'</span><span class="p">],</span> <span class="n">diabetes</span><span class="p">[</span><span class="s1">'target'</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">diabetes</span><span class="p">[</span><span class="s1">'target'</span><span class="p">]),</span> <span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Helper-functions-for-scaling-data.">Helper functions for scaling data.<a class="anchor-link" href="#Helper-functions-for-scaling-data.">&#182;</a></h2><p>We shall leverage the existing scaling function supported by Sklearn.</p>
-
+<h2 id="Helper-functions-for-scaling-data.">Helper functions for scaling data.<a class="anchor-link" href="#Helper-functions-for-scaling-data.">¶</a></h2><p>We shall leverage the existing scaling function supported by Sklearn.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">get_scale_object</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">get_scale_object</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
     <span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">scaler</span>
@@ -1409,38 +1391,36 @@ Bradley Efron, Trevor Hastie, Iain Johnstone and Robert Tibshirani (2004) "Least
 <span class="k">def</span> <span class="nf">get_scaled_data</span><span class="p">(</span><span class="n">scaler</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>$\ While \ implementing \ Linear \ Regression \ from \ scratch, \ it \ is \ important \ to \ keep \ track \ of \ dimensions.$</p>
 <p>$\ For \ this \ tutorial, \ we \ shall \ use \ following \ dimensions -$</p>
-\begin{equation*} \tag{1}\label{1} X =\ m \times \ n  \ \end{equation*}<p><br>
-\begin{align}\tag{2}\label{2} Y = \ m \times \ 1 \end{align} <br>
-\begin{align}\tag{3}\label{3} W = \ 1 \times \ n \end{align}<br>
-\begin{align}\tag{4}\label{4}b = \ 1 \times \ 1 \end{align}<br></p>
+\begin{equation*} \tag{1}\label{1} X =\ m \times \ n  \ \end{equation*}<p><br/>
+\begin{align}\tag{2}\label{2} Y = \ m \times \ 1 \end{align} <br/>
+\begin{align}\tag{3}\label{3} W = \ 1 \times \ n \end{align}<br/>
+\begin{align}\tag{4}\label{4}b = \ 1 \times \ 1 \end{align}<br/></p>
 <p>The pseudo-code for training a Linear Regression model is as follows -</p>
-<h3 id="Step-1--"><strong>Step 1</strong> -<a class="anchor-link" href="#Step-1--">&#182;</a></h3><p>Given a Training DataSet X and corresponding labels Y, initialize values for number of training examples(m), number of features(n) and number of output units (k) as mentioned in equations \ref{1}, \ref{2}, \ref{3} and \ref{4}
-<br><br></p>
-<h3 id="Step-2--"><strong>Step 2</strong> -<a class="anchor-link" href="#Step-2--">&#182;</a></h3><p>Initialize Weights matrix W and bias b using dimensions from Step 1. 
-<br><br></p>
-\begin{equation} for\ \ \ i_{epoch}\ \ \  in\ \ \ range(iterations):\end{equation}<h3 id="Step-3---Forward-Propagation---"><strong>Step 3</strong> - Forward Propagation  -<a class="anchor-link" href="#Step-3---Forward-Propagation---">&#182;</a></h3><p><br></p>
-<h4 id="Step-3.1-compute-preactivations-using-\ref{5}"><strong>Step 3.1</strong> compute preactivations using \ref{5}<a class="anchor-link" href="#Step-3.1-compute-preactivations-using-\ref{5}">&#182;</a></h4>\begin{align} y_{pred}  = h(\theta) = XW^T +b  \tag{5}\label{5} \end{align}<p>Lets validate if the dimensions match - 
+<h3 id="Step-1--"><strong>Step 1</strong> -<a class="anchor-link" href="#Step-1--">¶</a></h3><p>Given a Training DataSet X and corresponding labels Y, initialize values for number of training examples(m), number of features(n) and number of output units (k) as mentioned in equations \ref{1}, \ref{2}, \ref{3} and \ref{4}
+<br/><br/></p>
+<h3 id="Step-2--"><strong>Step 2</strong> -<a class="anchor-link" href="#Step-2--">¶</a></h3><p>Initialize Weights matrix W and bias b using dimensions from Step 1. 
+<br/><br/></p>
+\begin{equation} for\ \ \ i_{epoch}\ \ \  in\ \ \ range(iterations):\end{equation}<h3 id="Step-3---Forward-Propagation---"><strong>Step 3</strong> - Forward Propagation  -<a class="anchor-link" href="#Step-3---Forward-Propagation---">¶</a></h3><p><br/></p>
+<h4 id="Step-3.1-compute-preactivations-using-\ref{5}"><strong>Step 3.1</strong> compute preactivations using \ref{5}<a class="anchor-link" href="#Step-3.1-compute-preactivations-using-\ref{5}">¶</a></h4>\begin{align} y_{pred}  = h(\theta) = XW^T +b  \tag{5}\label{5} \end{align}<p>Lets validate if the dimensions match - 
 \begin{equation} dim(y_{pred}) = \mathbf{(\ m \times \ n )} \times \ \mathbf{(1 \times \ n)}^\intercal \ + \ (1 \times 1) \end{equation}</p>
 <p>We are good to move ahead.
- <br><br></p>
-<h4 id="Step-3.2---Compute-loss-/error-/cost-using-\ref{6}"><strong>Step 3.2</strong> - Compute loss /error /cost using \ref{6}<a class="anchor-link" href="#Step-3.2---Compute-loss-/error-/cost-using-\ref{6}">&#182;</a></h4>\begin{align} cost = - \ \frac{1}{2m} \sum_{i =1}^{m} (y_{true} - y_{pred})^2 \tag{7} \label{6} \end{align}<p>The above equation represents the <b>'mean squared error'</b>. It is important to note that, <b>cost/ error/ loss </b> is a <b>scaler</b> which we would like to minimize using gradient descent.</p>
-<h3 id="Step-4---Back-propagation--"><strong>Step 4</strong> - Back propagation -<a class="anchor-link" href="#Step-4---Back-propagation--">&#182;</a></h3><p>Back propagation technique will help in updating the weights such that the MSE loss is minimized. Lets dig into the nuts and bolts of back propagation.
-<br><br>
+ <br/><br/></p>
+<h4 id="Step-3.2---Compute-loss-/error-/cost-using-\ref{6}"><strong>Step 3.2</strong> - Compute loss /error /cost using \ref{6}<a class="anchor-link" href="#Step-3.2---Compute-loss-/error-/cost-using-\ref{6}">¶</a></h4>\begin{align} cost = - \ \frac{1}{2m} \sum_{i =1}^{m} (y_{true} - y_{pred})^2 \tag{7} \label{6} \end{align}<p>The above equation represents the <b>'mean squared error'</b>. It is important to note that, <b>cost/ error/ loss </b> is a <b>scaler</b> which we would like to minimize using gradient descent.</p>
+<h3 id="Step-4---Back-propagation--"><strong>Step 4</strong> - Back propagation -<a class="anchor-link" href="#Step-4---Back-propagation--">¶</a></h3><p>Back propagation technique will help in updating the weights such that the MSE loss is minimized. Lets dig into the nuts and bolts of back propagation.
+<br/><br/>
 We shall derive the gradients using chain rule -</p>
-\begin{equation} \frac{\partial L}{\partial W} \ = \  \frac{\partial L}{\partial h(\theta)} \frac{\partial h(\theta)}{\partial W}  \tag{8}\label{8} \end{equation}<p><br>
+\begin{equation} \frac{\partial L}{\partial W} \ = \  \frac{\partial L}{\partial h(\theta)} \frac{\partial h(\theta)}{\partial W}  \tag{8}\label{8} \end{equation}<p><br/>
 Lets Start by computing the partial derivative - $\frac{\partial L}{\partial h(\theta)}$
-<br>
+<br/>
 \begin{align} \frac{\partial L}{\partial h(\theta)} &amp; = \frac{\partial }{\partial h(\theta)} \Big[ - \ \frac{1}{2m} \sum_{i =1}^{m} (y_{true} - h(\theta))^2 \Big] \end{align}</p>
 <p>For one training example $i$ -</p>
 \begin{align}
@@ -1448,7 +1428,7 @@ Lets Start by computing the partial derivative - $\frac{\partial L}{\partial h(\
 &amp; = \frac{-1}{2} 2\Big[ y_{true} - h(\theta)\Big] \\
 &amp; = -\Big[ y_{true} - h(\theta)\Big] \\
 &amp; = \Big[h(\theta) - y_{true} \Big]  \tag{9} \label{9}
-\end{align}<p><br></p>
+\end{align}<p><br/></p>
 <p>Now, The last part of this derivation to compute gradients with respect to weights/coeffiecients.</p>
 \begin{align}\\
 \frac{\partial L}{\partial W} &amp; = \frac{\partial L}{\partial h(\theta)} \frac{\partial h(\theta)}{\partial W}
@@ -1496,7 +1476,7 @@ Lets Start by computing the partial derivative - $\frac{\partial L}{\partial h(\
 \frac{\partial L}{\partial W}  = \frac{1}{m}(h(\theta) - Y)^T X \tag{15}\label{15}
 \\
 \frac{\partial L}{\partial b} = \frac{1}{m} \sum_{i =1}^{m} (h(\theta) - Y^{(i)}) \tag{16}\label{16}
-\end{align}<h3 id="Step-4.1-The-weights-can-be-updated-using-gradient-descent-equations-as-follows--"><strong>Step 4.1</strong> The weights can be updated using gradient descent equations as follows -<a class="anchor-link" href="#Step-4.1-The-weights-can-be-updated-using-gradient-descent-equations-as-follows--">&#182;</a></h3>\begin{align}
+\end{align}<h3 id="Step-4.1-The-weights-can-be-updated-using-gradient-descent-equations-as-follows--"><strong>Step 4.1</strong> The weights can be updated using gradient descent equations as follows -<a class="anchor-link" href="#Step-4.1-The-weights-can-be-updated-using-gradient-descent-equations-as-follows--">¶</a></h3>\begin{align}
 \\
 W = W - \frac{\partial L}{\partial W} \tag{17} \label{17}
 \\
@@ -1508,128 +1488,116 @@ b = b - \frac{\partial L}{\partial b} \tag{18} \label{18}
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Implement-Step-1-">Implement Step 1-<a class="anchor-link" href="#Implement-Step-1-">&#182;</a></h3>
+<h3 id="Implement-Step-1-">Implement Step 1-<a class="anchor-link" href="#Implement-Step-1-">¶</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">raw_X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">load_diabetes_data</span><span class="p">()</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="n">raw_X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">load_diabetes_data</span><span class="p">()</span>
 <span class="n">scaler</span> <span class="o">=</span> <span class="n">get_scale_object</span><span class="p">(</span><span class="n">raw_X</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">get_scaled_data</span><span class="p">(</span><span class="n">scaler</span><span class="p">,</span> <span class="n">raw_X</span><span class="p">)</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Helper-functions-for-initializing-vectors">Helper functions for initializing vectors<a class="anchor-link" href="#Helper-functions-for-initializing-vectors">&#182;</a></h3>
+<h3 id="Helper-functions-for-initializing-vectors">Helper functions for initializing vectors<a class="anchor-link" href="#Helper-functions-for-initializing-vectors">¶</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">initialize_dimensions</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">initialize_dimensions</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
     <span class="k">return</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">initialize_weight_vectors</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">initialize_weight_vectors</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
     <span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="n">dim</span><span class="p">)</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Initialize-weights-vector">Initialize weights vector<a class="anchor-link" href="#Initialize-weights-vector">&#182;</a></h3>
+<h3 id="Initialize-weights-vector">Initialize weights vector<a class="anchor-link" href="#Initialize-weights-vector">¶</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">initialize_dimensions</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">initialize_dimensions</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="n">W</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">initialize_weight_vectors</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="functions-for-computing-cost-and-gradient-descent--">functions for computing cost and gradient descent -<a class="anchor-link" href="#functions-for-computing-cost-and-gradient-descent--">&#182;</a></h3>
+<h3 id="functions-for-computing-cost-and-gradient-descent--">functions for computing cost and gradient descent -<a class="anchor-link" href="#functions-for-computing-cost-and-gradient-descent--">¶</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">compute_regression_cost</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">compute_regression_cost</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
     <span class="n">cost</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> 
     <span class="k">return</span> <span class="n">cost</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">compute_regression_gradients</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">compute_regression_gradients</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
     <span class="n">dw</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">m</span><span class="p">)</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">((</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
     <span class="n">db</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">dw</span><span class="p">,</span> <span class="n">db</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">propagation</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">propagation</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
     <span class="c1"># FORWARD PROPAGATION (FROM X TO COST)</span>
 
     <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">w</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
@@ -1640,35 +1608,33 @@ b = b - \frac{\partial L}{\partial b} \tag{18} \label{18}
 
     <span class="n">cost</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span>
     
-    <span class="n">grads</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;dw&quot;</span><span class="p">:</span> <span class="n">dw</span><span class="p">,</span>
-             <span class="s2">&quot;db&quot;</span><span class="p">:</span> <span class="n">db</span><span class="p">}</span>
+    <span class="n">grads</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"dw"</span><span class="p">:</span> <span class="n">dw</span><span class="p">,</span>
+             <span class="s2">"db"</span><span class="p">:</span> <span class="n">db</span><span class="p">}</span>
     
     <span class="k">return</span> <span class="n">grads</span><span class="p">,</span> <span class="n">cost</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In [27]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">train_linear_regression</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">4000</span><span class="p">,</span> <span class="n">print_cost</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">train_linear_regression</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">4000</span><span class="p">,</span> <span class="n">print_cost</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">initialize_dimensions</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-    <span class="k">print</span> <span class="s2">&quot;There are </span><span class="si">%d</span><span class="s2"> features and </span><span class="si">%d</span><span class="s2"> training examples&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s2">"There are </span><span class="si">%d</span><span class="s2"> features and </span><span class="si">%d</span><span class="s2"> training examples"</span><span class="o">%</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
     <span class="n">w</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">initialize_weight_vectors</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
-    <span class="k">print</span> <span class="s2">&quot;W has a shape of </span><span class="si">%d</span><span class="s2"> rows and </span><span class="si">%d</span><span class="s2"> columns&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">print</span> <span class="s2">&quot;b has a shape of </span><span class="si">%d</span><span class="s2"> rows and </span><span class="si">%d</span><span class="s2"> columns&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span> <span class="s2">"W has a shape of </span><span class="si">%d</span><span class="s2"> rows and </span><span class="si">%d</span><span class="s2"> columns"</span><span class="o">%</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">print</span> <span class="s2">"b has a shape of </span><span class="si">%d</span><span class="s2"> rows and </span><span class="si">%d</span><span class="s2"> columns"</span><span class="o">%</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     
     <span class="n">costs</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
         <span class="n">grad</span><span class="p">,</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">propagation</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
         
-        <span class="n">dw</span> <span class="o">=</span> <span class="n">grad</span><span class="p">[</span><span class="s1">&#39;dw&#39;</span><span class="p">]</span>
-        <span class="n">db</span> <span class="o">=</span> <span class="n">grad</span><span class="p">[</span><span class="s1">&#39;db&#39;</span><span class="p">]</span>
+        <span class="n">dw</span> <span class="o">=</span> <span class="n">grad</span><span class="p">[</span><span class="s1">'dw'</span><span class="p">]</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">grad</span><span class="p">[</span><span class="s1">'db'</span><span class="p">]</span>
         
         <span class="n">w</span> <span class="o">=</span> <span class="n">w</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">dw</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">db</span>
@@ -1681,30 +1647,28 @@ b = b - \frac{\partial L}{\partial b} \tag{18} \label{18}
         <span class="k">if</span> <span class="n">print_cost</span> <span class="ow">and</span> <span class="n">iteration</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">w</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
             <span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">Y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-            <span class="n">display</span><span class="p">(</span><span class="s2">&quot;Cost after iteration </span><span class="si">%i</span><span class="s2">: </span><span class="si">%f</span><span class="s2"> | rmse after iteration </span><span class="si">%i</span><span class="s2">: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">iteration</span><span class="p">,</span> <span class="n">cost</span><span class="p">,</span> <span class="n">iteration</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">))</span>
+            <span class="n">display</span><span class="p">(</span><span class="s2">"Cost after iteration </span><span class="si">%i</span><span class="s2">: </span><span class="si">%f</span><span class="s2"> | rmse after iteration </span><span class="si">%i</span><span class="s2">: </span><span class="si">%f</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">iteration</span><span class="p">,</span> <span class="n">cost</span><span class="p">,</span> <span class="n">iteration</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">))</span>
 
-    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="n">w</span><span class="p">,</span>
-              <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">b</span><span class="p">}</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"w"</span><span class="p">:</span> <span class="n">w</span><span class="p">,</span>
+              <span class="s2">"b"</span><span class="p">:</span> <span class="n">b</span><span class="p">}</span>
 
-    <span class="n">grads</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;dw&quot;</span><span class="p">:</span> <span class="n">dw</span><span class="p">,</span>
-             <span class="s2">&quot;db&quot;</span><span class="p">:</span> <span class="n">db</span><span class="p">}</span>
+    <span class="n">grads</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"dw"</span><span class="p">:</span> <span class="n">dw</span><span class="p">,</span>
+             <span class="s2">"db"</span><span class="p">:</span> <span class="n">db</span><span class="p">}</span>
 
     <span class="k">return</span> <span class="n">params</span><span class="p">,</span> <span class="n">grads</span><span class="p">,</span> <span class="n">costs</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In [28]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">params</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">train_linear_regression</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">print_cost</span><span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="n">params</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">train_linear_regression</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">print_cost</span><span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
 
-<span class="n">y_predicted</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;w&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">])</span>
+<span class="n">y_predicted</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">"w"</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">params</span><span class="p">[</span><span class="s2">"b"</span><span class="p">])</span>
 
 <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y_predicted</span> <span class="o">-</span> <span class="n">Y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 
@@ -1712,22 +1676,15 @@ b = b - \frac{\partial L}{\partial b} \tag{18} \label{18}
 <span class="n">sst</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span> <span class="o">-</span> <span class="n">Y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 
 <span class="n">R2_score</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="p">(</span><span class="n">ssr</span><span class="o">/</span><span class="n">sst</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="s2">&quot;Model R2 score is </span><span class="si">%f</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">R2_score</span>)
+<span class="n">display</span><span class="p">(</span><span class="s2">"Model R2 score is </span><span class="si">%f</span><span class="s2">"</span><span class="o">%</span><span class="k">R2_score</span>)
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>There are 10 features and 442 training examples
 W has a shape of 1 rows and 10 columns
@@ -1735,554 +1692,262 @@ b has a shape of 1 rows and 1 columns
 </pre>
 </div>
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 0: 226081052.450000 | rmse after iteration 0: 116.990459&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 0: 226081052.450000 | rmse after iteration 0: 116.990459'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 100: 10493.139458 | rmse after iteration 100: 54.158847&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 100: 10493.139458 | rmse after iteration 100: 54.158847'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 200: 16809.508859 | rmse after iteration 200: 50.085980&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 200: 16809.508859 | rmse after iteration 200: 50.085980'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 300: 16084.961670 | rmse after iteration 300: 47.451121&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 300: 16084.961670 | rmse after iteration 300: 47.451121'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 400: 13590.549152 | rmse after iteration 400: 45.204037&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 400: 13590.549152 | rmse after iteration 400: 45.204037'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 500: 11199.814693 | rmse after iteration 500: 43.133430&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 500: 11199.814693 | rmse after iteration 500: 43.133430'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 600: 9242.379808 | rmse after iteration 600: 41.182861&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 600: 9242.379808 | rmse after iteration 600: 41.182861'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 700: 7682.854204 | rmse after iteration 700: 39.331607&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 700: 7682.854204 | rmse after iteration 700: 39.331607'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 800: 6434.096605 | rmse after iteration 800: 37.569269&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 800: 6434.096605 | rmse after iteration 800: 37.569269'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 900: 5421.965490 | rmse after iteration 900: 35.889176&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 900: 5421.965490 | rmse after iteration 900: 35.889176'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 1000: 4591.795565 | rmse after iteration 1000: 34.286292&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 1000: 4591.795565 | rmse after iteration 1000: 34.286292'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 1100: 3904.114787 | rmse after iteration 1100: 32.756418&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 1100: 3904.114787 | rmse after iteration 1100: 32.756418'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 1200: 3330.014526 | rmse after iteration 1200: 31.295852&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 1200: 3330.014526 | rmse after iteration 1200: 31.295852'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 1300: 2847.813155 | rmse after iteration 1300: 29.901218&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 1300: 2847.813155 | rmse after iteration 1300: 29.901218'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 1400: 2440.854775 | rmse after iteration 1400: 28.569382&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 1400: 2440.854775 | rmse after iteration 1400: 28.569382'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 1500: 2096.074458 | rmse after iteration 1500: 27.297403&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 1500: 2096.074458 | rmse after iteration 1500: 27.297403'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 1600: 1803.047922 | rmse after iteration 1600: 26.082505&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 1600: 1803.047922 | rmse after iteration 1600: 26.082505'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 1700: 1553.344583 | rmse after iteration 1700: 24.922061&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 1700: 1553.344583 | rmse after iteration 1700: 24.922061'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 1800: 1340.073395 | rmse after iteration 1800: 23.813577&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 1800: 1340.073395 | rmse after iteration 1800: 23.813577'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 1900: 1157.554376 | rmse after iteration 1900: 22.754681&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 1900: 1157.554376 | rmse after iteration 1900: 22.754681'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 2000: 1001.074527 | rmse after iteration 2000: 21.743118&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 2000: 1001.074527 | rmse after iteration 2000: 21.743118'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 2100: 866.702205 | rmse after iteration 2100: 20.776741&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 2100: 866.702205 | rmse after iteration 2100: 20.776741'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 2200: 751.143162 | rmse after iteration 2200: 19.853506&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 2200: 751.143162 | rmse after iteration 2200: 19.853506'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 2300: 651.627104 | rmse after iteration 2300: 18.971463&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 2300: 651.627104 | rmse after iteration 2300: 18.971463'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 2400: 565.817114 | rmse after iteration 2400: 18.128757&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 2400: 565.817114 | rmse after iteration 2400: 18.128757'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 2500: 491.736553 | rmse after iteration 2500: 17.323615&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 2500: 491.736553 | rmse after iteration 2500: 17.323615'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 2600: 427.709570 | rmse after iteration 2600: 16.554348&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 2600: 427.709570 | rmse after iteration 2600: 16.554348'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 2700: 372.312324 | rmse after iteration 2700: 15.819347&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 2700: 372.312324 | rmse after iteration 2700: 15.819347'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 2800: 324.332770 | rmse after iteration 2800: 15.117073&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 2800: 324.332770 | rmse after iteration 2800: 15.117073'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 2900: 282.737338 | rmse after iteration 2900: 14.446059&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 2900: 282.737338 | rmse after iteration 2900: 14.446059'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 3000: 246.643212 | rmse after iteration 3000: 13.804907&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 3000: 246.643212 | rmse after iteration 3000: 13.804907'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 3100: 215.295183 | rmse after iteration 3100: 13.192279&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 3100: 215.295183 | rmse after iteration 3100: 13.192279'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 3200: 188.046277 | rmse after iteration 3200: 12.606901&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 3200: 188.046277 | rmse after iteration 3200: 12.606901'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 3300: 164.341477 | rmse after iteration 3300: 12.047553&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 3300: 164.341477 | rmse after iteration 3300: 12.047553'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 3400: 143.704036 | rmse after iteration 3400: 11.513074&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 3400: 143.704036 | rmse after iteration 3400: 11.513074'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 3500: 125.723922 | rmse after iteration 3500: 11.002354&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 3500: 125.723922 | rmse after iteration 3500: 11.002354'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 3600: 110.048066 | rmse after iteration 3600: 10.514331&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 3600: 110.048066 | rmse after iteration 3600: 10.514331'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 3700: 96.372095 | rmse after iteration 3700: 10.047994&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 3700: 96.372095 | rmse after iteration 3700: 10.047994'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 3800: 84.433325 | rmse after iteration 3800: 9.602376&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 3800: 84.433325 | rmse after iteration 3800: 9.602376'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Cost after iteration 3900: 74.004814 | rmse after iteration 3900: 9.176553&#39;</pre>
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Cost after iteration 3900: 74.004814 | rmse after iteration 3900: 9.176553'</pre>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_text output_subarea ">
-<pre>&#39;Model R2 score is 0.987019&#39;</pre>
-</div>
-
-</div>
-
+<div class="prompt"></div>
+<div class="output_text output_subarea">
+<pre>'Model R2 score is 0.987019'</pre>
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Incredible-!!">Incredible !!<a class="anchor-link" href="#Incredible-!!">&#182;</a></h3><p>We have successfully trained a Linear Regression Algorithm.</p>
-
+<h3 id="Incredible-!!">Incredible !!<a class="anchor-link" href="#Incredible-!!">¶</a></h3><p>We have successfully trained a Linear Regression Algorithm.</p>
 </div>
 </div>
 </div>
- 
-
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');

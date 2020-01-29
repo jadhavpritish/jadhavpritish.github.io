@@ -35,7 +35,7 @@
         <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/bootstrap.flatly.min.css" type="text/css"/>
     <link href="https://jadhavpritish.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="https://jadhavpritish.github.io/theme/css/pygments/bw.css" rel="stylesheet">
+    <link href="https://jadhavpritish.github.io/theme/css/pygments/solarizedlight.css" rel="stylesheet">
     <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/style.css" type="text/css"/>
         <link href="https://jadhavpritish.github.io/extras/custom.css" rel="stylesheet">
 
@@ -1278,7 +1278,7 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Proving-Convexity-of-Mean-Squared-Error-Loss---Case-Study">Proving Convexity of Mean Squared Error Loss - Case Study<a class="anchor-link" href="#Proving-Convexity-of-Mean-Squared-Error-Loss---Case-Study">&#182;</a></h2><ul>
+<h2 id="Proving-Convexity-of-Mean-Squared-Error-Loss---Case-Study">Proving Convexity of Mean Squared Error Loss - Case Study<a class="anchor-link" href="#Proving-Convexity-of-Mean-Squared-Error-Loss---Case-Study">¶</a></h2><ul>
 <li>In this blog post, we shall quickly cover the convexity proof for Mean Squared Error Loss function used in a traditional Regression setting.</li>
 <li>In case you haven't checked out my previous blog - <a href="https://jadhavpritish.github.io/2019/08/The%20Curious%20Case%20of%20Convex%20Functions.html">The Curious Case of Convex Functions</a>, I would highly recommend you to check it out. The blog focuses on all the basic building blocks for proving convexity. </li>
 </ul>
@@ -1287,17 +1287,17 @@ h6:hover .anchor-link {
 <li>The MSE loss for a Regression Algorithm.</li>
 <li>Conditions for checking Convexity. </li>
 </ol>
-<h3 id="1.-MSE-Loss-Function--">1. MSE Loss Function -<a class="anchor-link" href="#1.-MSE-Loss-Function--">&#182;</a></h3><p>The MSE loss function in a Regression setting is defined as -</p>
+<h3 id="1.-MSE-Loss-Function--">1. MSE Loss Function -<a class="anchor-link" href="#1.-MSE-Loss-Function--">¶</a></h3><p>The MSE loss function in a Regression setting is defined as -</p>
 $$
 \begin{align}
 J(W) = \frac{1}{2m}\sum_{i=1}^{m} [y^{(i)} - \hat{y}^{(i)}]^2 \tag{1}
 \end{align}
 $$<p>Where,</p>
 <center>
-m = number of training examples.<br>
-$J(w)$ = Loss as a function of Regression Coeffients. <br>
-$y^{(i)}$ = true value for the $ith$ training example. <br>
-$\hat{y}^{(i)}$ = predicted value for the $ith$ training example.<br>
+m = number of training examples.<br/>
+$J(w)$ = Loss as a function of Regression Coeffients. <br/>
+$y^{(i)}$ = true value for the $ith$ training example. <br/>
+$\hat{y}^{(i)}$ = predicted value for the $ith$ training example.<br/>
 </center><p>For $ith$ training example, $\hat{y}^{(i)}$ is defined as -</p>
 $$
 \begin{align}
@@ -1305,7 +1305,7 @@ $$
 \end{align}
 $$<p>Where,</p>
 <center>
-n = number of features.<br>
+n = number of features.<br/>
 </center><p>For the sake of convenience/readability, <strong>let's assume n = 3</strong>. The eq.(2) can thus be written as -</p>
 $$
 \begin{align}
@@ -1325,7 +1325,7 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-Checking-for-Convexity-of-J(W)-">2. Checking for Convexity of J(W)-<a class="anchor-link" href="#2.-Checking-for-Convexity-of-J(W)-">&#182;</a></h3><p>For checking the convexity of Mean-Squared-Error function, we shall perform the following checks -</p>
+<h3 id="2.-Checking-for-Convexity-of-J(W)-">2. Checking for Convexity of J(W)-<a class="anchor-link" href="#2.-Checking-for-Convexity-of-J(W)-">¶</a></h3><p>For checking the convexity of Mean-Squared-Error function, we shall perform the following checks -</p>
 <ul>
 <li>Step 1 - Computing the Hessian of J(W)</li>
 <li>Step 2- Computing the Principal Minors of the Hessian.</li>
@@ -1333,7 +1333,7 @@ $$
 <li>Step 4 - Comment on Convexity based on convexity tests. </li>
 </ul>
 <p>Let us get down to it right away-</p>
-<h4 id="Step-1---Hessian-of-$J(w)$--">Step 1 - Hessian of $J(w)$ -<a class="anchor-link" href="#Step-1---Hessian-of-$J(w)$--">&#182;</a></h4>$$
+<h4 id="Step-1---Hessian-of-$J(w)$--">Step 1 - Hessian of $J(w)$ -<a class="anchor-link" href="#Step-1---Hessian-of-$J(w)$--">¶</a></h4>$$
 \begin{align}
 J^H = \begin{bmatrix} 
 \frac{\partial ^2 J}{\partial w_1^2} &amp; 
@@ -1402,16 +1402,16 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Step-2---Computing-the-Principal-Minors---">Step 2 - Computing the Principal Minors  -<a class="anchor-link" href="#Step-2---Computing-the-Principal-Minors---">&#182;</a></h4><p>From <a href="https://jadhavpritish.github.io/2019/08/The%20Curious%20Case%20of%20Convex%20Functions.html">previous blog post</a>, a function is convex if all the principal minors are greater than or equal to zero i.e. $\bigtriangleup_k$ $\geq 0 \;\; \forall$ k .</p>
-<h5 id="compute-$\bigtriangleup_1$---">compute $\bigtriangleup_1$  -<a class="anchor-link" href="#compute-$\bigtriangleup_1$---">&#182;</a></h5><p>Principal Minors of order 1 ($\bigtriangleup_1$) can be obtained by deleting any 3-1 = 2 rows and corresponding columns.</p>
+<h4 id="Step-2---Computing-the-Principal-Minors---">Step 2 - Computing the Principal Minors  -<a class="anchor-link" href="#Step-2---Computing-the-Principal-Minors---">¶</a></h4><p>From <a href="https://jadhavpritish.github.io/2019/08/The%20Curious%20Case%20of%20Convex%20Functions.html">previous blog post</a>, a function is convex if all the principal minors are greater than or equal to zero i.e. $\bigtriangleup_k$ $\geq 0 \;\; \forall$ k .</p>
+<h5 id="compute-$\bigtriangleup_1$---">compute $\bigtriangleup_1$  -<a class="anchor-link" href="#compute-$\bigtriangleup_1$---">¶</a></h5><p>Principal Minors of order 1 ($\bigtriangleup_1$) can be obtained by deleting any 3-1 = 2 rows and corresponding columns.</p>
 <p>a. By deleting row 2 and 3 along with corresponding columns
 $ \bigtriangleup_1 $ = x_1^2</p>
 <p>b. By deleting row 1 and 3 along with corresponding columns
 $ \bigtriangleup_1 $ = x_2^2</p>
 <p>c. By deleting row 1 and 2 along with corresponding columns
 $ \bigtriangleup_1 $ = x_3^2</p>
-<h5 id="compute-$\bigtriangleup_2$---">compute $\bigtriangleup_2$  -<a class="anchor-link" href="#compute-$\bigtriangleup_2$---">&#182;</a></h5><p>Principal Minors of order 2 can be obtained by deleting any 3-2 = 1 row and corresponding column.</p>
-<p>a. By deleting row 1 and corresponding column 1 - <br></p>
+<h5 id="compute-$\bigtriangleup_2$---">compute $\bigtriangleup_2$  -<a class="anchor-link" href="#compute-$\bigtriangleup_2$---">¶</a></h5><p>Principal Minors of order 2 can be obtained by deleting any 3-2 = 1 row and corresponding column.</p>
+<p>a. By deleting row 1 and corresponding column 1 - <br/></p>
 $$
 \begin{align}
 \bigtriangleup_2 &amp; = \begin{vmatrix}
@@ -1446,7 +1446,7 @@ x_2x_1 &amp; x_2^2
 &amp; = 0 
 \end{align}
 $$</p>
-<h5 id="compute-$\bigtriangleup_3$---">compute $\bigtriangleup_3$  -<a class="anchor-link" href="#compute-$\bigtriangleup_3$---">&#182;</a></h5><p>Principal Minors of order 3 can be obtained by computing determinant of J(W).</p>
+<h5 id="compute-$\bigtriangleup_3$---">compute $\bigtriangleup_3$  -<a class="anchor-link" href="#compute-$\bigtriangleup_3$---">¶</a></h5><p>Principal Minors of order 3 can be obtained by computing determinant of J(W).</p>
 $$
 \begin{align}
 \bigtriangleup_3 &amp; = \begin{vmatrix}J^H \end{vmatrix} 
@@ -1463,13 +1463,13 @@ x_3^2 \\
 &amp;= x_1^2 * (x_2^2x_3^2 - x_2^2x_3^2) - x_1x_2 * (x_1x_2x_3^2 - x_1x_2x_3^2) + x_1x_3(x_1x_2^2x_3 - x_1x_2^2x_3) \\
 &amp;= 0 
 \end{align}
-$$<h4 id="Step-3---Comment-on-Definiteness-of-Hessian-of-J(w)--">Step 3 - Comment on Definiteness of Hessian of J(w) -<a class="anchor-link" href="#Step-3---Comment-on-Definiteness-of-Hessian-of-J(w)--">&#182;</a></h4><ul>
+$$<h4 id="Step-3---Comment-on-Definiteness-of-Hessian-of-J(w)--">Step 3 - Comment on Definiteness of Hessian of J(w) -<a class="anchor-link" href="#Step-3---Comment-on-Definiteness-of-Hessian-of-J(w)--">¶</a></h4><ul>
 <li>The principal minors of order 1 have a squared form. We know that a squared function is always positive. </li>
 <li>The principal minors of order 2 and 3 are equal zero. </li>
 <li>It can be concluded that $\bigtriangleup_k \geq 0 \;\; \forall k$</li>
 <li>Hence the Hessian of J(w) is Positive Semidefinite. </li>
 </ul>
-<h4 id="Step-4-Comment-on-convexity--">Step 4 Comment on convexity -<a class="anchor-link" href="#Step-4-Comment-on-convexity--">&#182;</a></h4><p>Before we comment on the convexity of J(W), let's revise the conditions for convexity -</p>
+<h4 id="Step-4-Comment-on-convexity--">Step 4 Comment on convexity -<a class="anchor-link" href="#Step-4-Comment-on-convexity--">¶</a></h4><p>Before we comment on the convexity of J(W), let's revise the conditions for convexity -</p>
 <p>If $X^H$ is the Hessian Matrix of f(x) then -</p>
 <ul>
 <li>f(x) is <strong>strictly convex</strong> in $S$ if $X^H$ is a Postive Definite Matrix. </li>
@@ -1478,24 +1478,20 @@ $$<h4 id="Step-3---Comment-on-Definiteness-of-Hessian-of-J(w)--">Step 3 - Commen
 <li>f(x) is <strong>concave</strong> in $S$ if $X^H$ is a Negative Semi-Definite Matrix.</li>
 </ul>
 <p><strong>Since the Hessian of J(w) is Positive Semidefinite, it can be concluded that the function J(w) is convex.</strong></p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Final-Comments--">Final Comments -<a class="anchor-link" href="#Final-Comments--">&#182;</a></h3><ul>
+<h3 id="Final-Comments--">Final Comments -<a class="anchor-link" href="#Final-Comments--">¶</a></h3><ul>
 <li>This blog post is aimed at proving the convexity of MSE loss function in a Regression setting by simplifying the problem. </li>
 <li>There are different ways of proving the convexity but I found this easier to comprehend. </li>
 <li>Feel free to try out the process for different loss functions that you may have encountered. </li>
 </ul>
-
 </div>
 </div>
 </div>
- 
-
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');

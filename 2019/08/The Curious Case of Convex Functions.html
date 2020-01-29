@@ -35,7 +35,7 @@
         <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/bootstrap.flatly.min.css" type="text/css"/>
     <link href="https://jadhavpritish.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="https://jadhavpritish.github.io/theme/css/pygments/bw.css" rel="stylesheet">
+    <link href="https://jadhavpritish.github.io/theme/css/pygments/solarizedlight.css" rel="stylesheet">
     <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/style.css" type="text/css"/>
         <link href="https://jadhavpritish.github.io/extras/custom.css" rel="stylesheet">
 
@@ -1278,25 +1278,25 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="The-Curious-Case-of-Convex-Functions">The Curious Case of Convex Functions<a class="anchor-link" href="#The-Curious-Case-of-Convex-Functions">&#182;</a></h3><ul>
+<h3 id="The-Curious-Case-of-Convex-Functions">The Curious Case of Convex Functions<a class="anchor-link" href="#The-Curious-Case-of-Convex-Functions">¶</a></h3><ul>
 <li>Most of the introductory courses for Machine Learning cover algorithms like Linear Regression and Logistic Regression with varying degrees of detail.</li>
 <li>The resources are plentiful for grasping the nitty gitties involved. However, I rarely found traditional courses diving into proving the convexity of MSE loss function. </li>
 <li>Most of the online resources often skim through the part where they define the cost function for Regression Algorithms using MSE where the cost function is claimed to be a convex function. </li>
 <li>The convexity property unlocks a crucial advantage where the local minima of a convex function is also a global minima.</li>
 <li>This ensures that a model can be trained where the loss function is minimized to its globally minimum value. </li>
 </ul>
-<p><br>
-<img src="../../images/convex_functions/convex_function_image.png"> <br></p>
-<h3 id="Proving-Convexity--">Proving Convexity -<a class="anchor-link" href="#Proving-Convexity--">&#182;</a></h3><ul>
+<p><br/>
+<img src="../../images/convex_functions/convex_function_image.png"/> <br/></p>
+<h3 id="Proving-Convexity--">Proving Convexity -<a class="anchor-link" href="#Proving-Convexity--">¶</a></h3><ul>
 <li>In this blog post, we shall work through the concepts needed to prove the convexity of a function. </li>
 <li>So hang in tight and by the end of this article, you would have a better understanding of - </li>
 </ul>
-<p>a. Symmetric Matrices. <br>
-b. Hessian Matrices. <br>
-c. Postive and Negative Definite/Semidefinite Matrices. <br>
-d. Proving convexity of functions. <br></p>
+<p>a. Symmetric Matrices. <br/>
+b. Hessian Matrices. <br/>
+c. Postive and Negative Definite/Semidefinite Matrices. <br/>
+d. Proving convexity of functions. <br/></p>
 <p>Without much further ado, let's jump into it.</p>
-<h3 id="Basics-of-Matrices--">Basics of Matrices -<a class="anchor-link" href="#Basics-of-Matrices--">&#182;</a></h3><p>We shall touch base on some of the basic concepts in Matrices that will help us in proving the convexity of a function. These basics are typically covered in Undergraduate Courses and should sound familiar to you.</p>
+<h3 id="Basics-of-Matrices--">Basics of Matrices -<a class="anchor-link" href="#Basics-of-Matrices--">¶</a></h3><p>We shall touch base on some of the basic concepts in Matrices that will help us in proving the convexity of a function. These basics are typically covered in Undergraduate Courses and should sound familiar to you.</p>
 <p><u><b> 1. Square Matrix - </b></u></p>
 <p>Given a matrix X of dimensions $m \times n$, X is a square matrix iff (if and only if) m = n. In other words, A matrix 'X' is called a square matrix if the number of matrix rows is equal to the number of columns.</p>
 $$
@@ -1304,66 +1304,48 @@ $$
 X = \begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \\ 8 &amp; 9 &amp; 10 \end{bmatrix}_{3 \times 3} 
 \end{align}
 $$<p>In the above example, since the number of rows (m) = number of columns (3),<b> X can be termed as a square matrix. </b></p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[108]:</div>
+<div class="prompt input_prompt">In [108]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">## basic python imports</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="c1">## basic python imports</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span><span class="n">HTML</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_spd_matrix</span>
 
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;style&gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&lt;/style&gt;&#39;</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;&quot;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">'&lt;style&gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&lt;/style&gt;'</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">"&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;"</span><span class="p">))</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
 <style>.prompt{width: 0px; min-width: 0px; visibility: collapse}</style>
 </div>
-
 </div>
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
 <style>.container { width:100% !important; }</style>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[109]:</div>
+<div class="prompt input_prompt">In [109]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">### python function for checking whether a matrix is a square matrix. </span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="c1">### python function for checking whether a matrix is a square matrix. </span>
 
 
 <span class="k">def</span> <span class="nf">check_square_matrix</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -1377,102 +1359,83 @@ $$<p>In the above example, since the number of rows (m) = number of columns (3),
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Is Matrix A a Square Matrix: - {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_square_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Is Matrix B a Square Matrix  - {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_square_matrix</span><span class="p">(</span><span class="n">B</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix A a Square Matrix: - {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_square_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix B a Square Matrix  - {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_square_matrix</span><span class="p">(</span><span class="n">B</span><span class="p">)))</span>
       
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Is Matrix A a Square Matrix: - True
 Is Matrix B a Square Matrix  - False
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.-Symmetric-Matrix--">2. Symmetric Matrix -<a class="anchor-link" href="#2.-Symmetric-Matrix--">&#182;</a></h3><p>A <b>square</b> matrix 'X' is termed as symmetric if $x_{ij} = x_{ji}$ for all i and j where i, j denotes the ith row and jth column respectively. In other words, a matrix X is syemmetric if the transpose of X if equal to matrix X.</p>
+<h3 id="2.-Symmetric-Matrix--">2. Symmetric Matrix -<a class="anchor-link" href="#2.-Symmetric-Matrix--">¶</a></h3><p>A <b>square</b> matrix 'X' is termed as symmetric if $x_{ij} = x_{ji}$ for all i and j where i, j denotes the ith row and jth column respectively. In other words, a matrix X is syemmetric if the transpose of X if equal to matrix X.</p>
 <p>i.e, 
 $$
 \begin{align}
 X^T = X
 \end{align}
 $$</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[110]:</div>
+<div class="prompt input_prompt">In [110]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">## function for checking if a matrix is symmetric</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="c1">## function for checking if a matrix is symmetric</span>
 
 <span class="k">def</span> <span class="nf">check_symmetry</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">check_square_matrix</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">==</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
-            <span class="k">return</span> <span class="s2">&quot;is a Symmetric Matrix&quot;</span>
+            <span class="k">return</span> <span class="s2">"is a Symmetric Matrix"</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;not a Symmetric Matrix&quot;</span>
+            <span class="k">return</span> <span class="s2">"not a Symmetric Matrix"</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;not a Symmetric Matrix since it is not Square Matrix&quot;</span>
+        <span class="k">return</span> <span class="s2">"not a Symmetric Matrix since it is not Square Matrix"</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[111]:</div>
+<div class="prompt input_prompt">In [111]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">## pseudo generate a symmetric matrix </span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="c1">## pseudo generate a symmetric matrix </span>
 
 <span class="n">base_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 <span class="n">SA</span> <span class="o">=</span> <span class="p">(</span><span class="n">base_matrix</span> <span class="o">+</span> <span class="n">base_matrix</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-<span class="k">print</span> <span class="s2">&quot;Matrix A - </span><span class="se">\n</span><span class="s2"> {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">SA</span><span class="p">))</span>
+<span class="k">print</span> <span class="s2">"Matrix A - </span><span class="se">\n</span><span class="s2"> {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">SA</span><span class="p">))</span>
 <span class="c1">## generate a random matrix</span>
 <span class="n">SB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="k">print</span> <span class="s2">&quot;Matrix B - </span><span class="se">\n</span><span class="s2"> {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SB</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">"Matrix B - </span><span class="se">\n</span><span class="s2"> {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SB</span><span class="p">)</span>
 
 <span class="n">SC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
-<span class="k">print</span> <span class="s2">&quot;Matrix C - </span><span class="se">\n</span><span class="s2"> {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SC</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">"Matrix C - </span><span class="se">\n</span><span class="s2"> {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SC</span><span class="p">)</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Matrix A - 
  [[34 16 12]
@@ -1488,34 +1451,25 @@ Matrix C -
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[112]:</div>
+<div class="prompt input_prompt">In [112]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Is Matrix A {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_symmetry</span><span class="p">(</span><span class="n">SA</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Is Matrix B {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_symmetry</span><span class="p">(</span><span class="n">SB</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Is Matrix C {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_symmetry</span><span class="p">(</span><span class="n">SC</span><span class="p">)))</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix A {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_symmetry</span><span class="p">(</span><span class="n">SA</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix B {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_symmetry</span><span class="p">(</span><span class="n">SB</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix C {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_symmetry</span><span class="p">(</span><span class="n">SC</span><span class="p">)))</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Is Matrix A is a Symmetric Matrix
 Is Matrix B not a Symmetric Matrix
@@ -1523,79 +1477,67 @@ Is Matrix C not a Symmetric Matrix since it is not Square Matrix
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.-Hermitian-Matrix--">3. Hermitian Matrix -<a class="anchor-link" href="#3.-Hermitian-Matrix--">&#182;</a></h3><p>A square matrix X is self-adjoint or a Hermitian matrix if -</p>
+<h3 id="3.-Hermitian-Matrix--">3. Hermitian Matrix -<a class="anchor-link" href="#3.-Hermitian-Matrix--">¶</a></h3><p>A square matrix X is self-adjoint or a Hermitian matrix if -</p>
 $$
 \begin{align}
 \overline{X^{T}} = X = X^{H}
 \end{align}
 $$<p>Note that the terms <strong>self-adjoint and Hermitian can be used interchangeably</strong>.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[113]:</div>
+<div class="prompt input_prompt">In [113]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">check_hermitian</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">check_hermitian</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
     
     <span class="k">if</span> <span class="n">check_square_matrix</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span> <span class="o">==</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
-            <span class="k">return</span> <span class="s2">&quot;is a Hermitian Matrix&quot;</span>
+            <span class="k">return</span> <span class="s2">"is a Hermitian Matrix"</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;is not a Hermitian Matrix&quot;</span>
+            <span class="k">return</span> <span class="s2">"is not a Hermitian Matrix"</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;is not a Hermitian Matrix since it is not a Square Matrix&quot;</span>
+        <span class="k">return</span> <span class="s2">"is not a Hermitian Matrix since it is not a Square Matrix"</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[114]:</div>
+<div class="prompt input_prompt">In [114]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">## pseudo generate a symmetric matrix </span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="c1">## pseudo generate a symmetric matrix </span>
 
 <span class="c1">##generate a random complex matrix with entries between -20 and 10.</span>
 <span class="n">base_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 <span class="c1">## trick to force symmetric nature</span>
 <span class="n">HA</span> <span class="o">=</span> <span class="p">(</span><span class="n">base_matrix</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">base_matrix</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
-<span class="k">print</span> <span class="s2">&quot;Matrix A - </span><span class="se">\n</span><span class="s2"> {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">HA</span><span class="p">))</span>
+<span class="k">print</span> <span class="s2">"Matrix A - </span><span class="se">\n</span><span class="s2"> {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">HA</span><span class="p">))</span>
 
 <span class="c1">## generate a random complex matrix that is not symmetric</span>
 <span class="n">HB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="k">print</span> <span class="s2">&quot;Matrix B - </span><span class="se">\n</span><span class="s2"> {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">HB</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">"Matrix B - </span><span class="se">\n</span><span class="s2"> {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">HB</span><span class="p">)</span>
 
 <span class="n">HC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-<span class="k">print</span> <span class="s2">&quot;Matrix C - </span><span class="se">\n</span><span class="s2"> {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">HC</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">"Matrix C - </span><span class="se">\n</span><span class="s2"> {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">HC</span><span class="p">)</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Matrix A - 
  [[-16. +0.j  -5. -8.j  -4.+20.j]
@@ -1614,34 +1556,25 @@ Matrix C -
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[115]:</div>
+<div class="prompt input_prompt">In [115]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Is Matrix A {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_hermitian</span><span class="p">(</span><span class="n">HA</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Is Matrix B {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_hermitian</span><span class="p">(</span><span class="n">HB</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Is Matrix C {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_hermitian</span><span class="p">(</span><span class="n">HC</span><span class="p">)))</span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix A {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_hermitian</span><span class="p">(</span><span class="n">HA</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix B {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_hermitian</span><span class="p">(</span><span class="n">HB</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix C {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_hermitian</span><span class="p">(</span><span class="n">HC</span><span class="p">)))</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Is Matrix A is a Hermitian Matrix
 Is Matrix B is not a Hermitian Matrix
@@ -1649,15 +1582,13 @@ Is Matrix C is not a Hermitian Matrix since it is not a Square Matrix
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.-Hessian-Matrix--">4. Hessian Matrix -<a class="anchor-link" href="#4.-Hessian-Matrix--">&#182;</a></h3><p>The Hessian of a multivariate function $f(x_1, x_2, ...x_n)$ is a way for organizing second-order partial derivatives in the form of a matrix.</p>
+<h3 id="4.-Hessian-Matrix--">4. Hessian Matrix -<a class="anchor-link" href="#4.-Hessian-Matrix--">¶</a></h3><p>The Hessian of a multivariate function $f(x_1, x_2, ...x_n)$ is a way for organizing second-order partial derivatives in the form of a matrix.</p>
 <p>Consider a multivariate fucntion $ f(x_1, x_2, ...x_n) $ then its Hessian can be defined as follows -</p>
 $$
 \begin{align}
@@ -1678,14 +1609,13 @@ H_f = \begin{bmatrix}
 \end{bmatrix}
 \end{align}
 $$<p>Note that a Hessian matrix by definition is a Square and Symmetric matrix.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="5.-Positive-Definite-and-Semidefinte-Matrices--">5. Positive Definite and Semidefinte Matrices -<a class="anchor-link" href="#5.-Positive-Definite-and-Semidefinte-Matrices--">&#182;</a></h3><p>You may have seen references about these matrices at multiple places but the definition and ways to prove definitiveness remains elusive to many. Let us start with the text definition -</p>
+<h3 id="5.-Positive-Definite-and-Semidefinte-Matrices--">5. Positive Definite and Semidefinte Matrices -<a class="anchor-link" href="#5.-Positive-Definite-and-Semidefinte-Matrices--">¶</a></h3><p>You may have seen references about these matrices at multiple places but the definition and ways to prove definitiveness remains elusive to many. Let us start with the text definition -</p>
 \begin{align}
 A \; n \times n \; square \; matrix \; X \; is \; Postive \; Definite \; if \;\;\; a^TXa \; &gt; \; 0 \; \forall a \; \in \; \mathbb R^n.
 \end{align}<p>Similarly,</p>
@@ -1694,14 +1624,14 @@ A \; n \times n \; square \; matrix \; X \; is \; Postive \; Semidefinite \; if 
 \end{align}<p>The same logic can be easily extended to Negative Definite and Negative Semidefinite matrices.</p>
 \begin{align}
 A \; n \times n \; square \; matrix \; X \; is \; Negative \; Definite \; if \;\; a^TXa \; &lt; \; 0 \; \forall a \; \in \; \mathbb R^n.
-\end{align}<p>And finally, <br></p>
+\end{align}<p>And finally, <br/></p>
 \begin{align}
 A \; n \times n \; square \; matrix \; X \; is \; Negative \; Semidefinite \; if \;\; a^TXa \leq 0 \; \forall \; a \in \; \mathbb R^n. 
 \end{align}<ul>
 <li>However, while checking for Matrix Definiteness, manually validating the condition of every value of x is definitely not an option. </li>
 <li>So let us try and break this down even further.</li>
 </ul>
-<h3 id="Eigen-Values-and-Eigen-Vector--">Eigen Values and Eigen Vector -<a class="anchor-link" href="#Eigen-Values-and-Eigen-Vector--">&#182;</a></h3><p>We know that an eigenvector is a vector whose direction remains unchanged when a linear transformation is applied to it.</p>
+<h3 id="Eigen-Values-and-Eigen-Vector--">Eigen Values and Eigen Vector -<a class="anchor-link" href="#Eigen-Values-and-Eigen-Vector--">¶</a></h3><p>We know that an eigenvector is a vector whose direction remains unchanged when a linear transformation is applied to it.</p>
 <p>Mathematically,</p>
 $$
 \begin{align}
@@ -1720,29 +1650,28 @@ $$
 a^TXa = \lambda a^T a = \lambda &lt;a, a&gt; \tag{3}
 \end{align}
 $$
-where, <br>
+where, <br/>
 $&lt;x, y&gt;$ represent the dot product, $x^Ty$</p>
-<h3 id="Analysis">Analysis<a class="anchor-link" href="#Analysis">&#182;</a></h3><ul>
+<h3 id="Analysis">Analysis<a class="anchor-link" href="#Analysis">¶</a></h3><ul>
 <li>It is easy to see that the dot product of a with $a^T$ will always be positive. </li>
 <li>Referring back to the definition of positive definite matrix and eq(3), $a^TXa$ can be greater than zero if and only if $\lambda$ is greater than zero. </li>
 </ul>
-<h3 id="Derived-Definition-for-Matrix-Definiteness--">Derived Definition for Matrix Definiteness -<a class="anchor-link" href="#Derived-Definition-for-Matrix-Definiteness--">&#182;</a></h3><p>Based on pointers mentioned in above Analysis we can tweak the formal definitions of Matrix Definiteness as follows -</p>
+<h3 id="Derived-Definition-for-Matrix-Definiteness--">Derived Definition for Matrix Definiteness -<a class="anchor-link" href="#Derived-Definition-for-Matrix-Definiteness--">¶</a></h3><p>Based on pointers mentioned in above Analysis we can tweak the formal definitions of Matrix Definiteness as follows -</p>
 <ol>
 <li>A Symmetric Matrix 'X' is Positive Definite if $\lambda_{i} &gt; \; 0 \;\; \forall i$</li>
 <li>A Symmetric Matrix 'X' is Positive Semi-Definite if $\lambda_{i} \geq \; 0 \;\; \forall i$</li>
 <li>A Symmetric Matrix 'X' is Negative Definite if $\lambda_{i} &lt; \; 0 \;\; \forall i$</li>
 <li>A Symmetric Matrix 'X' is Negative Semi-Definite if $\lambda_{i} \leq \; 0 \;\; \forall i$</li>
 </ol>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[116]:</div>
+<div class="prompt input_prompt">In [116]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">### computing eigen values in python - </span>
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="c1">### computing eigen values in python - </span>
 
 <span class="k">def</span> <span class="nf">compute_eigen_values</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
     <span class="n">eigen_values</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -1750,46 +1679,37 @@ $&lt;x, y&gt;$ represent the dot product, $x^Ty$</p>
 
 <span class="k">def</span> <span class="nf">check_definiteness</span><span class="p">(</span><span class="n">eigen_values</span><span class="p">):</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">eigen_values</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s2">&quot;Matrix is Postive Definite as well as Positive Semidefinite&quot;</span>
+        <span class="k">return</span> <span class="s2">"Matrix is Postive Definite as well as Positive Semidefinite"</span>
     <span class="k">elif</span> <span class="p">(</span><span class="n">eigen_values</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s2">&quot;Matrix is Postive Semi Definite only&quot;</span>
+        <span class="k">return</span> <span class="s2">"Matrix is Postive Semi Definite only"</span>
     <span class="k">elif</span> <span class="p">(</span><span class="n">eigen_values</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s2">&quot;Matrix is Negative Definite as well as Negative Semidefinite&quot;</span>
+        <span class="k">return</span> <span class="s2">"Matrix is Negative Definite as well as Negative Semidefinite"</span>
     <span class="k">elif</span> <span class="p">(</span><span class="n">eigen_values</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s2">&quot;Matrix is Negative SemiDefinite&quot;</span>
+        <span class="k">return</span> <span class="s2">"Matrix is Negative SemiDefinite"</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;Matrix is neither positive definite nor negative definite&quot;</span>
+        <span class="k">return</span> <span class="s2">"Matrix is neither positive definite nor negative definite"</span>
     
 <span class="n">base_eig_matrix</span> <span class="o">=</span> <span class="n">make_spd_matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">EA</span> <span class="o">=</span> <span class="n">base_eig_matrix</span> <span class="o">+</span> <span class="n">base_eig_matrix</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
 <span class="n">ea_eigen_values</span> <span class="o">=</span> <span class="n">compute_eigen_values</span><span class="p">(</span><span class="n">EA</span><span class="p">)</span>
-<span class="k">print</span> <span class="s2">&quot;Eigen values are </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">ea_eigen_values</span>
+<span class="k">print</span> <span class="s2">"Eigen values are </span><span class="si">%s</span><span class="s2">"</span><span class="o">%</span><span class="k">ea_eigen_values</span>
 <span class="k">print</span> <span class="n">check_definiteness</span><span class="p">(</span><span class="n">ea_eigen_values</span><span class="p">)</span>
 </pre></div>
-
-    </div>
 </div>
 </div>
-
+</div>
 <div class="output_wrapper">
 <div class="output">
-
-
 <div class="output_area">
-
-    <div class="prompt"></div>
-
-
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Eigen values are [6.54206241 0.08543726 0.82923445]
 Matrix is Postive Definite as well as Positive Semidefinite
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -1801,35 +1721,33 @@ Matrix is Postive Definite as well as Positive Semidefinite
 <li>Hence, It may not always to be feasible to solve for Eigen Values.</li>
 </ol>
 <p>An Alternate Theorem for Determing Defniteness of Matrices comes to the rescue -</p>
-<h3 id="Theorem--">Theorem -<a class="anchor-link" href="#Theorem--">&#182;</a></h3><ol>
+<h3 id="Theorem--">Theorem -<a class="anchor-link" href="#Theorem--">¶</a></h3><ol>
 <li>A Symmetric Matrix 'X' is Positive Definite if $D_k &gt; \; 0 \;\; \forall k$ Where, $D_k$ represents the kth <strong>Leading Principal Minor.</strong></li>
 <li>A Symmetric Matrix 'X' is Positive Semi-Definite if $\bigtriangleup_k \geq \; 0 \;\; \forall k$ Where, $\bigtriangleup_k$ represents the kth <strong>Principal Minor.</strong> </li>
 <li>A Symmetric Matrix 'X' is Negative Definite if $D_k &lt; \; 0 \;\; \forall k$ Where, $D_k$ represents the kth <strong>Leading Principal Minor.</strong></li>
 <li>A Symmetric Matrix 'X' is Negative Semi-Definite if $\bigtriangleup_k \leq \; 0 \;\; \forall k$ Where, $\bigtriangleup_k$ represents the kth <strong>Principal Minor.</strong> </li>
 </ol>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Principal-Minors-of-a-Matrix--">Principal Minors of a Matrix -<a class="anchor-link" href="#Principal-Minors-of-a-Matrix--">&#182;</a></h3><ul>
+<h3 id="Principal-Minors-of-a-Matrix--">Principal Minors of a Matrix -<a class="anchor-link" href="#Principal-Minors-of-a-Matrix--">¶</a></h3><ul>
 <li>For a Square Matrix X, a Pricipal Submatrix of order k is obtained by deleting <strong>any</strong> (n-k) rows and corresponding (n-k) columns. </li>
 <li>The determinant of such a Pricipal Submatrix is called as the Principal Minor of matrix X. </li>
 </ul>
-<h3 id="Leading-Principal-Minors-of-a-Matrix--">Leading Principal Minors of a Matrix -<a class="anchor-link" href="#Leading-Principal-Minors-of-a-Matrix--">&#182;</a></h3><ul>
+<h3 id="Leading-Principal-Minors-of-a-Matrix--">Leading Principal Minors of a Matrix -<a class="anchor-link" href="#Leading-Principal-Minors-of-a-Matrix--">¶</a></h3><ul>
 <li>For a Square Matrix X, a Leading Pricipal Submatrix of order k is obtained by deleting <strong>last</strong> (n-k) rows and corresponding (n-k) columns. </li>
 <li>The determinant of such a Leading Pricipal Submatrix is called as the Leading Principal Minor of matrix X. </li>
 </ul>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Proving-/-Checking-Convexity-of-a-function--">Proving / Checking Convexity of a function -<a class="anchor-link" href="#Proving-/-Checking-Convexity-of-a-function--">&#182;</a></h3><p>With all the relevant definitions and theorem covered in previous sections, we are now ready to define checks for determining the convexity of functions.</p>
+<h3 id="Proving-/-Checking-Convexity-of-a-function--">Proving / Checking Convexity of a function -<a class="anchor-link" href="#Proving-/-Checking-Convexity-of-a-function--">¶</a></h3><p>With all the relevant definitions and theorem covered in previous sections, we are now ready to define checks for determining the convexity of functions.</p>
 <p>A function f(x) defined over n variables on an open convex set $S$ can be tested for convexity using following criteria -</p>
 <p>If $X^H$ is the Hessian Matrix of f(x) then -</p>
 <ul>
@@ -1838,12 +1756,12 @@ Matrix is Postive Definite as well as Positive Semidefinite
 <li>f(x) is <strong>strictly concave</strong> in $S$ if $X^H$ is a Negative Definite Matrix. </li>
 <li>f(x) is <strong>concave</strong> in $S$ if $X^H$ is a Negative Semi-Definite Matrix.</li>
 </ul>
-<h3 id="Example--">Example -<a class="anchor-link" href="#Example--">&#182;</a></h3><p>Consider an equation of Quadratic form -</p>
+<h3 id="Example--">Example -<a class="anchor-link" href="#Example--">¶</a></h3><p>Consider an equation of Quadratic form -</p>
 $$
 \begin{align}
 f(x_1, x_2, x_3) = 5x_1^2 - 2x_1x_2 + 2x_2^2 + x_3x_2 + x_3^2
 \end{align}
-$$<h3 id="STEP-1---Computing-the-Hessian">STEP 1 - Computing the Hessian<a class="anchor-link" href="#STEP-1---Computing-the-Hessian">&#182;</a></h3><p>The Hessian of $f(x_1, x_2, x_3)$ can be defined as follows - 
+$$<h3 id="STEP-1---Computing-the-Hessian">STEP 1 - Computing the Hessian<a class="anchor-link" href="#STEP-1---Computing-the-Hessian">¶</a></h3><p>The Hessian of $f(x_1, x_2, x_3)$ can be defined as follows - 
 $$
 \begin{align}
 X^H = \begin{bmatrix}
@@ -1900,7 +1818,7 @@ $$</p>
 \begin{align}
 X^H = \begin{bmatrix}10 &amp; -2 &amp; 0 \\ -2 &amp; 4 &amp; 1 \\ 0 &amp; 1 &amp; 2\end{bmatrix}
 \end{align}
-$$<h3 id="Step-2---Compute-Leading-Principal-Minors--">Step 2 - Compute Leading Principal Minors -<a class="anchor-link" href="#Step-2---Compute-Leading-Principal-Minors--">&#182;</a></h3><p>for k = 3,  delete last (3-3) =0 rows and (3-3) = 0 columns
+$$<h3 id="Step-2---Compute-Leading-Principal-Minors--">Step 2 - Compute Leading Principal Minors -<a class="anchor-link" href="#Step-2---Compute-Leading-Principal-Minors--">¶</a></h3><p>for k = 3,  delete last (3-3) =0 rows and (3-3) = 0 columns
 $$
 \begin{align} \\
 D_{k} &amp; = D_{3} 
@@ -1933,17 +1851,16 @@ D_{k} &amp; = D_{1}
 \end{align}
 $$</p>
 <p>Since $D_1  &gt; 0 $, $D_2 &gt;0 $ and $D_3 &gt; 0$, Hessian of $f(x_1, x_2, x_3)$ is Positive Definite.</p>
-<h3 id="Step-3---Comment-on-Convexity--">Step 3 - Comment on Convexity -<a class="anchor-link" href="#Step-3---Comment-on-Convexity--">&#182;</a></h3><ul>
+<h3 id="Step-3---Comment-on-Convexity--">Step 3 - Comment on Convexity -<a class="anchor-link" href="#Step-3---Comment-on-Convexity--">¶</a></h3><ul>
 <li>Since Hessian of $f(x_1, x_2, x_3)$ is Positive Definite, the function is <strong>strictly convex.</strong></li>
 </ul>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Properties-of-Convex-functions---">Properties of Convex functions  -<a class="anchor-link" href="#Properties-of-Convex-functions---">&#182;</a></h3><ul>
+<h3 id="Properties-of-Convex-functions---">Properties of Convex functions  -<a class="anchor-link" href="#Properties-of-Convex-functions---">¶</a></h3><ul>
 <li>Constant functions of the form $f(x) = c$ are both convex and concave. </li>
 <li>$f(x) = x$ is both convex and concave. </li>
 <li>Functions of the form $f(x) = x^r$ with $r \geq 1$ are convex on the Interval $0 &lt; x &lt; \infty$ </li>
@@ -1953,13 +1870,12 @@ $$</p>
 <li>If $f(x)$ is convex, then $g(x) = cf(x)$ is also convex for any positive value of c.</li>
 <li>If $f(x)$ and $g(x)$ are convex then their sum $h(x) = f(x) + g(x)$ is also convex. </li>
 </ul>
-<h3 id="Final-Comments----">Final Comments   -<a class="anchor-link" href="#Final-Comments----">&#182;</a></h3><ul>
+<h3 id="Final-Comments----">Final Comments   -<a class="anchor-link" href="#Final-Comments----">¶</a></h3><ul>
 <li>We have investigated convex functions in depth while studying different ways of proving convexity. </li>
 <li>In the next part of the article, we shall prove convexity of MSE loss function used in linear regression. </li>
 <li>Convex functions are easy to minimise thus resulting in its usage across research domains. </li>
 <li>So, the next time you want to plug in a different loss function in place of MSE while training a linear regression model, you might as well check its convexity. </li>
 </ul>
-
 </div>
 </div>
 </div>
@@ -1967,17 +1883,14 @@ $$</p>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>References -</p>
-<p>[1] <a href="https://www.visiondummy.com/2014/03/eigenvalues-eigenvectors/">Eigen Values and Eigen Vectors</a> <br>
-[2] <a href="https://en.wikipedia.org/wiki/Definiteness_of_a_matrix">Formal Definitions for Matrix Definiteness</a> <br>
-[3] <a href="https://www.dr-eriksen.no/teaching/GRA6035/2010/lecture5.pdf">Principal Minors and Hessian Matrix by Dr. Eivind Eriksen</a><br>
-[4] <a href="https://www.purplemath.com/modules/minors.htm">Computing Minors and Cofactors</a><br>
+<p>[1] <a href="https://www.visiondummy.com/2014/03/eigenvalues-eigenvectors/">Eigen Values and Eigen Vectors</a> <br/>
+[2] <a href="https://en.wikipedia.org/wiki/Definiteness_of_a_matrix">Formal Definitions for Matrix Definiteness</a> <br/>
+[3] <a href="https://www.dr-eriksen.no/teaching/GRA6035/2010/lecture5.pdf">Principal Minors and Hessian Matrix by Dr. Eivind Eriksen</a><br/>
+[4] <a href="https://www.purplemath.com/modules/minors.htm">Computing Minors and Cofactors</a><br/>
 [5] <a href="http://www.math.cmu.edu/~lohp/docs/math/mop2013/convexity-soln.pdf">Properties of convex functions</a></p>
-
 </div>
 </div>
 </div>
- 
-
 
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');

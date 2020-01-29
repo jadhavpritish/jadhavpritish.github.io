@@ -1151,19 +1151,19 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="A-Closed-Form-Solution-of-KL-Divergence-in-Varitaional-Autoencoders--"&gt;A Closed Form Solution of KL Divergence in Varitaional Autoencoders -&lt;a class="anchor-link" href="#A-Closed-Form-Solution-of-KL-Divergence-in-Varitaional-Autoencoders--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In this article, I would like to cover the proof for the closed form solution of KL Divergence used in the cost function of Variational Autoencoder. The ELBO cost function is given by -&lt;/p&gt;
+&lt;h3 id="A-Closed-Form-Solution-of-KL-Divergence-in-Varitaional-Autoencoders--"&gt;A Closed Form Solution of KL Divergence in Varitaional Autoencoders -&lt;a class="anchor-link" href="#A-Closed-Form-Solution-of-KL-Divergence-in-Varitaional-Autoencoders--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In this article, I would like to cover the proof for the closed form solution of KL Divergence used in the cost function of Variational Autoencoder. The ELBO cost function is given by -&lt;/p&gt;
 \begin{align} \\
 ELBO = E[\ log \ p(x| z; \theta)\ ] - D_{KL}[\ q(z|x; \phi)\ ||\  p(z)\ ] \tag{1} \\
-\end{align}&lt;p&gt;and, &lt;br&gt;
+\end{align}&lt;p&gt;and, &lt;br/&gt;
 \begin{align}
 VAE_{cost} &amp;amp; = -ELBO \\
 &amp;amp; = - \big(E[\ log \ p(x| z; \theta)\ ] - D_{KL}[\ q(z|x; \phi)\ ||\  p(z)\ ]\big) \tag{2}\\
 \end{align}&lt;/p&gt;
-&lt;p&gt;Where, &lt;br&gt;&lt;/p&gt;
-&lt;p&gt;$p(x| z; \theta)$ - probability distribution of reconstructed image given the latent representation z, parametrized by $\theta$. &lt;br&gt;
-$q(z|x; \phi)$ - probability density function of latent variables z given input image x, parametrized by $\phi$. &lt;br&gt;
+&lt;p&gt;Where, &lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;$p(x| z; \theta)$ - probability distribution of reconstructed image given the latent representation z, parametrized by $\theta$. &lt;br/&gt;
+$q(z|x; \phi)$ - probability density function of latent variables z given input image x, parametrized by $\phi$. &lt;br/&gt;
 $p(z)$ - marginal probability density of z. In Variational Autoencoders, p(z) is assumed to be Multivariate Normal Distribution with mean $\mu = 0$ and Covariance $\sum = I$&lt;/p&gt;
-&lt;h3 id="Insights--"&gt;Insights -&lt;a class="anchor-link" href="#Insights--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;h3 id="Insights--"&gt;Insights -&lt;a class="anchor-link" href="#Insights--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;For a latent representation z of &lt;strong&gt;size k&lt;/strong&gt; given input x, $q(z | x)$ is a Multivariate Normal with mean $\mu$ and variance $\sigma^2 $ representation. &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;where,&lt;/p&gt;
@@ -1221,21 +1221,20 @@ $$
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Linear-Algebra-Properties"&gt;Linear Algebra Properties&lt;a class="anchor-link" href="#Linear-Algebra-Properties"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;h2 id="Linear-Algebra-Properties"&gt;Linear Algebra Properties&lt;a class="anchor-link" href="#Linear-Algebra-Properties"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;E(x) = E(tr(x)) if x is a scalar&lt;/li&gt;
 &lt;li&gt;trace(AB) = trace(BA)&lt;/li&gt;
 &lt;li&gt;Cyclic property - tr(ABC) = tr(CAB) = tr(BCA)&lt;/li&gt;
 &lt;li&gt;tr(ABC) $\neq$ tr(ACB)&lt;/li&gt;
 &lt;li&gt;Linearity property - E(tr(x)) = tr(E(x))&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Deriving-the-Closed-form-Solution--"&gt;Deriving the Closed form Solution -&lt;a class="anchor-link" href="#Deriving-the-Closed-form-Solution--"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;h2 id="Deriving-the-Closed-form-Solution--"&gt;Deriving the Closed form Solution -&lt;a class="anchor-link" href="#Deriving-the-Closed-form-Solution--"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Consider two probability distributions given by F(x) and G(x) with mean $\mu_1$ and $mu_2$ respectively. &lt;/li&gt;
 &lt;li&gt;Let the Covariances for F(x) and G(x) be given by ${\sum}_1$ and ${\sum}_2$ respectively. &lt;/li&gt;
 &lt;/ul&gt;
@@ -1259,12 +1258,12 @@ D_{KL}(F(x) \ ||  \ G(x)) &amp;amp;= \sum_{x} \big[ F(x) \log \frac{F(x)}{G(x)} 
 &amp;amp;= \sum_{x} F(x) \big[ \frac{1}{2} log \frac{|{\Sigma}_2|}{|{\Sigma}_1|} - \frac{1}{2} (x - \mu_1)^T {{\Sigma}_1}^{-1} (x - \mu_1) + \frac{1}{2} (x - \mu_2)^T {{\Sigma}_2}^{-1} (x - \mu_2) \big] \\
 &amp;amp;= \frac{1}{2} \sum_{x} F(x) log \frac{|{\Sigma}_2|}{|{\Sigma}_1|} - \frac{1}{2}  \sum_{x} F(x) \big[ (x - \mu_1)^T {{\Sigma}_1}^{-1} (x - \mu_1) \big] + \frac{1}{2} \sum_{x} F(x) \big[(x - \mu_2)^T {{\Sigma}_2}^{-1} (x - \mu_2) \big] \tag{6}
 \end{align}&lt;p&gt;We shall evaluate eq.(6) by breaking it into sub parts.&lt;/p&gt;
-&lt;h3 id="Part-1--"&gt;Part 1 -&lt;a class="anchor-link" href="#Part-1--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;\begin{align}
+&lt;h3 id="Part-1--"&gt;Part 1 -&lt;a class="anchor-link" href="#Part-1--"&gt;¶&lt;/a&gt;&lt;/h3&gt;\begin{align}
 \frac{1}{2} \sum_{x} F(x) log \frac{|{\Sigma}_2|}{|{\Sigma}_1|}  =  \frac{1}{2} log \frac{|{\Sigma}_2|}{|{\Sigma}_1|} \sum_{x} F(x) 
 \end{align}&lt;p&gt;we know that, $\sum_{x} F(x)  = 1$&lt;/p&gt;
 \begin{align}
 \therefore \frac{1}{2} \sum_{x} F(x) log \frac{|{\Sigma}_2|}{|{\Sigma}_1|} =  \frac{1}{2} log \frac{|{\Sigma}_2|}{|{\Sigma}_1|} \tag{7}
-\end{align}&lt;h3 id="Part-2--"&gt;Part 2 -&lt;a class="anchor-link" href="#Part-2--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;\begin{align}
+\end{align}&lt;h3 id="Part-2--"&gt;Part 2 -&lt;a class="anchor-link" href="#Part-2--"&gt;¶&lt;/a&gt;&lt;/h3&gt;\begin{align}
 \frac{1}{2}  \sum_{x} F(x) \big[ (x - \mu_1)^T {{\Sigma}_1}^{-1} (x - \mu_1) \big] =  \frac{1}{2} E_{F(x)} \big[ (x - \mu_1)^T {{\Sigma}_1}^{-1} (x - \mu_1) \big]
 \end{align}&lt;p&gt;Using property 1 from &lt;a href="#Linear-Algebra-Properties"&gt;Linear Algebra Properties&lt;/a&gt;&lt;/p&gt;
 \begin{align}
@@ -1282,7 +1281,7 @@ D_{KL}(F(x) \ ||  \ G(x)) &amp;amp;= \sum_{x} \big[ F(x) \log \frac{F(x)}{G(x)} 
 &amp;amp;= \frac{1}{2}  Tr \big[ {\Sigma}_1 {{\Sigma}_1}^{-1} \big] \\
 &amp;amp;= \frac{1}{2}  Tr [I_k] \\
 &amp;amp;= \frac{1}{2} k \tag{8}
-\end{align}&lt;h3 id="Part-3--"&gt;Part 3 -&lt;a class="anchor-link" href="#Part-3--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Computing a closed form solution for part 3 of the eq(6) won't be as staright forward as part 2. Let is start by writing down the equation before we decide next steps.&lt;/p&gt;
+\end{align}&lt;h3 id="Part-3--"&gt;Part 3 -&lt;a class="anchor-link" href="#Part-3--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Computing a closed form solution for part 3 of the eq(6) won't be as staright forward as part 2. Let is start by writing down the equation before we decide next steps.&lt;/p&gt;
 &lt;p&gt;Part 3  = $\frac{1}{2} \sum_{x} F(x) \big[(x - \mu_2)^T {{\Sigma}_2}^{-1} (x - \mu_2) \big] \tag{9}$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Note that we cannot simply replace $\sum_{x} F(x) \big[(x - \mu_2)^T {{\Sigma}_2}^{-1} (x - \mu_2) \big]$ by Expectation term since $\mu_2$ and $\Sigma_2$ define distribution G(x) and not F(x). &lt;/li&gt;
@@ -1299,20 +1298,20 @@ part\ 3\  &amp;amp;= \frac{1}{2} \sum_{x} F(x) \big[[(x - \mu_1) + (\mu_1 -\mu_2
 &lt;li&gt;part 3.2 - $\frac{2}{2} \sum_{x} F(x) \big((x - \mu_1)^T {{\Sigma}_2}^{-1} (\mu_1 - \mu_2) \big)$&lt;/li&gt;
 &lt;li&gt;part 3.3 - $\frac{1}{2} \sum_{x} F(x) \big( (\mu_1 -\mu_2)^T {{\Sigma}_2}^{-1} (\mu_1 - \mu_2) \big)$&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="Part-3.1"&gt;Part 3.1&lt;a class="anchor-link" href="#Part-3.1"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;\begin{align}
+&lt;h3 id="Part-3.1"&gt;Part 3.1&lt;a class="anchor-link" href="#Part-3.1"&gt;¶&lt;/a&gt;&lt;/h3&gt;\begin{align}
 part\ 3.1\  &amp;amp;= \big( \frac{1}{2} \sum_{x} F(x) (x - \mu_1)^T {{\Sigma}_2}^{-1} (x - \mu_1) \big) \\
 &amp;amp;= \frac{1}{2} E_{F(x)}\big[ (x - \mu_1)^T {{\Sigma}_2}^{-1} (x - \mu_1) \big] \\
 &amp;amp;= \frac{1}{2} E_{F(x)}\big[Tr\big((x - \mu_1)^T {{\Sigma}_2}^{-1} (x - \mu_1) \big)\big] \\
 &amp;amp;= \frac{1}{2} Tr\big[E_{F(x)}\big((x - \mu_1)^T {{\Sigma}_2}^{-1} (x - \mu_1) \big)\big] \\
 &amp;amp;= \frac{1}{2} Tr\big[E_{F(x)}\big( (x - \mu_1)(x - \mu_1)^T {{\Sigma}_2}^{-1} \big)\big] \\
 &amp;amp;= \frac{1}{2} Tr[\Sigma_1 \Sigma_2^{-1}] \tag{11}
-\end{align}&lt;h3 id="Part-3.2"&gt;Part 3.2&lt;a class="anchor-link" href="#Part-3.2"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;\begin{align}
+\end{align}&lt;h3 id="Part-3.2"&gt;Part 3.2&lt;a class="anchor-link" href="#Part-3.2"&gt;¶&lt;/a&gt;&lt;/h3&gt;\begin{align}
 part\ 3.2 &amp;amp;= \frac{2}{2} \sum_{x} F(x) \big((x - \mu_1)^T {{\Sigma}_2}^{-1} (\mu_1 - \mu_2) \big) \\
 &amp;amp;= (\sum_{x} F(x) x - \mu_1)^T {{\Sigma}_2}^{-1} (\mu_1 - \mu_2) \\
 &amp;amp;= (\mu_1 - \mu_1)^T {{\Sigma}_2}^{-1} (\mu_1 - \mu_2) \\
 &amp;amp;= 0. {{\Sigma}_2}^{-1} (\mu_1 - \mu_2) \\
 &amp;amp;= 0 \tag{12}
-\end{align}&lt;h3 id="Part-3.3"&gt;Part 3.3&lt;a class="anchor-link" href="#Part-3.3"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;\begin{align}
+\end{align}&lt;h3 id="Part-3.3"&gt;Part 3.3&lt;a class="anchor-link" href="#Part-3.3"&gt;¶&lt;/a&gt;&lt;/h3&gt;\begin{align}
 \frac{1}{2} \sum_{x} F(x) \big( (\mu_1 -\mu_2)^T {{\Sigma}_2}^{-1} (\mu_1 - \mu_2) \big) &amp;amp;= \frac{1}{2} \big( (\mu_1 -\mu_2)^T {{\Sigma}_2}^{-1} (\mu_1 - \mu_2) \big) \tag{13}
 \end{align}&lt;p&gt;Substituting eq(11), eq(12) and eq(13) in eq(10), we get&lt;/p&gt;
 \begin{align}
@@ -1324,7 +1323,7 @@ part\ 3.2 &amp;amp;= \frac{2}{2} \sum_{x} F(x) \big((x - \mu_1)^T {{\Sigma}_2}^{
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Putting-it-all-together--"&gt;Putting it all together -&lt;a class="anchor-link" href="#Putting-it-all-together--"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Substituting eq(7), eq(8), eq(14) in eq(6), we get&lt;/p&gt;
+&lt;h2 id="Putting-it-all-together--"&gt;Putting it all together -&lt;a class="anchor-link" href="#Putting-it-all-together--"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Substituting eq(7), eq(8), eq(14) in eq(6), we get&lt;/p&gt;
 \begin{align}
 D_{KL}(F(x) \ ||  \ G(x)) &amp;amp;= \frac{1}{2} log \frac{|{\Sigma}_2|}{|{\Sigma}_1|} - \frac{1}{2} k + \frac{1}{2} Tr[\Sigma_1 \Sigma_2^{-1}] + \frac{1}{2} \big( (\mu_1 -\mu_2)^T {{\Sigma}_2}^{-1} (\mu_1 - \mu_2) \big) \\
 &amp;amp;= \frac{1}{2} \big[ log \frac{|{\Sigma}_2|}{|{\Sigma}_1|} - k + Tr[\Sigma_1 \Sigma_2^{-1}] + (\mu_1 -\mu_2)^T {{\Sigma}_2}^{-1} (\mu_1 - \mu_2) \big] \tag{14}
@@ -1335,7 +1334,7 @@ D_{KL}(F(x) \ ||  \ G(x)) &amp;amp;= \frac{1}{2} log \frac{|{\Sigma}_2|}{|{\Sigm
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="Equation-14-gives-us-a-closed-form-solution-for-Kl-divergence-between-two-multinormal-distributions."&gt;Equation 14 gives us a closed form solution for Kl divergence between two multinormal distributions.&lt;a class="anchor-link" href="#Equation-14-gives-us-a-closed-form-solution-for-Kl-divergence-between-two-multinormal-distributions."&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;In the last section of this blog post, we shall derive the closed form of KL divergence used in Variational Autoencoders.&lt;/p&gt;
+&lt;h4 id="Equation-14-gives-us-a-closed-form-solution-for-Kl-divergence-between-two-multinormal-distributions."&gt;Equation 14 gives us a closed form solution for Kl divergence between two multinormal distributions.&lt;a class="anchor-link" href="#Equation-14-gives-us-a-closed-form-solution-for-Kl-divergence-between-two-multinormal-distributions."&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;In the last section of this blog post, we shall derive the closed form of KL divergence used in Variational Autoencoders.&lt;/p&gt;
 &lt;p&gt;From eq(14), we know that,&lt;/p&gt;
 \begin{align}
 D_{KL}(F(x) \ ||  \ G(x)) = \frac{1}{2} \big[ log \frac{|{\Sigma}_2|}{|{\Sigma}_1|} - k + Tr[\Sigma_1 \Sigma_2^{-1}] + (\mu_1 -\mu_2)^T {{\Sigma}_2}^{-1} (\mu_1 - \mu_2) \big]
@@ -1344,8 +1343,8 @@ D_{KL}(F(x) \ ||  \ G(x)) = \frac{1}{2} \big[ log \frac{|{\Sigma}_2|}{|{\Sigma}_
 F(x) = q(z|x) \ \sim N(\mu, \Sigma) \\
 Q(x) = p(z) \ \sim N(0, I)
 \end{align}&lt;/p&gt;
-&lt;p&gt;where, &lt;br&gt;
-$q(z|x; \phi)$ - probability density function of latent variables z given input image x, parametrized by $\phi$. &lt;br&gt;
+&lt;p&gt;where, &lt;br/&gt;
+$q(z|x; \phi)$ - probability density function of latent variables z given input image x, parametrized by $\phi$. &lt;br/&gt;
 $p(z)$ - marginal probability density of z. In Variational Autoencoders, p(z) is assumed to be Multivariate Normal Distribution with mean $\mu = 0$ and Covariance $\sum = I$&lt;/p&gt;
 \begin{align}
 \therefore D_{KL}(q(z|x) \ ||  \ p(z)) &amp;amp;= \frac{1}{2} \big[ log \frac{|I|}{|\Sigma|} - k + Tr[\Sigma I^{-1}] + (\mu -0)^T I^{-1} (\mu - 0) \big] \\
@@ -1355,8 +1354,6 @@ $p(z)$ - marginal probability density of z. In Variational Autoencoders, p(z) is
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
- 
-
 
 &lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
@@ -2538,7 +2535,7 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Understanding-Variational-Autoencoder-Cost-Function--"&gt;Understanding Variational Autoencoder Cost Function -&lt;a class="anchor-link" href="#Understanding-Variational-Autoencoder-Cost-Function--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In this article, the goal is to understand the ELBO (Evidence Lower Bound) cost function used in training Variational Autoencoder. Before moving forward, the article is designed with an assumption that the readers possess a basic understanding of Generative Modelling and Variational Autoencoders.&lt;/p&gt;
+&lt;h3 id="Understanding-Variational-Autoencoder-Cost-Function--"&gt;Understanding Variational Autoencoder Cost Function -&lt;a class="anchor-link" href="#Understanding-Variational-Autoencoder-Cost-Function--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In this article, the goal is to understand the ELBO (Evidence Lower Bound) cost function used in training Variational Autoencoder. Before moving forward, the article is designed with an assumption that the readers possess a basic understanding of Generative Modelling and Variational Autoencoders.&lt;/p&gt;
 &lt;p&gt;The following sections shall cover -&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Pseudo Code for training VAE&lt;/li&gt;
@@ -2546,15 +2543,15 @@ h6:hover .anchor-link {
 &lt;li&gt;KL Divergence - Definition and its importance.&lt;/li&gt;
 &lt;li&gt;Deriving a trainable cost function. &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id="1.-Pseudo-Code-for-training-VAE--"&gt;1. Pseudo Code for training VAE -&lt;a class="anchor-link" href="#1.-Pseudo-Code-for-training-VAE--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;img src="../../images/vae/vae_architecture.png"&gt; &lt;br&gt;&lt;/p&gt;
-&lt;p&gt;While not converged: &lt;br&gt;
-$ X_{batch} = MiniBatch(X, batchSize) $ &lt;br&gt;
-$ q(z | x;\phi) = Encoder(X_{batch}) $ &lt;br&gt;
-$ z \sim q(z | x;\phi) : Reparamaterization\ Trick $&lt;br&gt;
-$ reconstructed\ image\ \sim \ p(x | z; \theta) = Generator(z) $&lt;br&gt;
-$ loss \ =\  MSE(X_{batch}, resconstructed\ image) $ &lt;br&gt;
-$ update\  \theta : Gradient\ updates$ &lt;br&gt;&lt;/p&gt;
-&lt;h3 id="2.-VAE-Cost-Function--"&gt;2. VAE Cost Function -&lt;a class="anchor-link" href="#2.-VAE-Cost-Function--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The cost function for a Variational Encoder consists of two parts, namely -&lt;/p&gt;
+&lt;h3 id="1.-Pseudo-Code-for-training-VAE--"&gt;1. Pseudo Code for training VAE -&lt;a class="anchor-link" href="#1.-Pseudo-Code-for-training-VAE--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;img src="../../images/vae/vae_architecture.png"/&gt; &lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;While not converged: &lt;br/&gt;
+$ X_{batch} = MiniBatch(X, batchSize) $ &lt;br/&gt;
+$ q(z | x;\phi) = Encoder(X_{batch}) $ &lt;br/&gt;
+$ z \sim q(z | x;\phi) : Reparamaterization\ Trick $&lt;br/&gt;
+$ reconstructed\ image\ \sim \ p(x | z; \theta) = Generator(z) $&lt;br/&gt;
+$ loss \ =\  MSE(X_{batch}, resconstructed\ image) $ &lt;br/&gt;
+$ update\  \theta : Gradient\ updates$ &lt;br/&gt;&lt;/p&gt;
+&lt;h3 id="2.-VAE-Cost-Function--"&gt;2. VAE Cost Function -&lt;a class="anchor-link" href="#2.-VAE-Cost-Function--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The cost function for a Variational Encoder consists of two parts, namely -&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;The Log Likelihood function - $E[\ log \ p(x| z; \theta)\ ]$&lt;/li&gt;
 &lt;li&gt;The KL divergence $ D_{KL}[\ q(z|x; \phi)\ ||\  p(x|z;\theta)\ ]$&lt;/li&gt;
@@ -2568,28 +2565,28 @@ $ update\  \theta : Gradient\ updates$ &lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Mathematically,&lt;/p&gt;
 \begin{align} \\
 ELBO = E[\ log \ p(x| z; \theta)\ ] - D_{KL}[\ q(z|x; \phi)\ ||\  p(z)\ ] \tag{1} \\
-\end{align}&lt;p&gt;and, &lt;br&gt;
+\end{align}&lt;p&gt;and, &lt;br/&gt;
 \begin{align}
 VAE_{cost} &amp;amp; = -ELBO \\
 &amp;amp; = - \big(E[\ log \ p(x| z; \theta)\ ] - D_{KL}[\ q(z|x; \phi)\ ||\  p(z)\ ]\big) \tag{2}\\
 \end{align}&lt;/p&gt;
-&lt;h3 id="3.-Kullback-Leibler-Divergence-and-its-Importance--"&gt;3. Kullback-Leibler Divergence and its Importance -&lt;a class="anchor-link" href="#3.-Kullback-Leibler-Divergence-and-its-Importance--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;h3 id="3.-Kullback-Leibler-Divergence-and-its-Importance--"&gt;3. Kullback-Leibler Divergence and its Importance -&lt;a class="anchor-link" href="#3.-Kullback-Leibler-Divergence-and-its-Importance--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;As we know, VAE works on the principles of variational inference where the bottleneck represents the parameters of a Multinormal Gaussian Distribution from which samples can be drawn. &lt;/li&gt;
 &lt;li&gt;KL divergence provides a measure for comparing one distribution with other. &lt;/li&gt;
 &lt;li&gt;Mathematically, the Relative Entropy (KL Divergence) is defined by - &lt;/li&gt;
 &lt;/ul&gt;
 \begin{align}
 D_{KL}(P || Q) = H(P, Q) - H(P) \tag{3}
-\end{align}&lt;p&gt;&lt;br&gt;
-Where, &lt;br&gt;
+\end{align}&lt;p&gt;&lt;br/&gt;
+Where, &lt;br/&gt;
 \begin{align}
 H(P, Q) = E_{x \sim P}[-log Q(x)] \tag{4}
-\end{align} &lt;br&gt;
-and &lt;br&gt;
+\end{align} &lt;br/&gt;
+and &lt;br/&gt;
 \begin{align}
 H(P) = E_{x \sim P}[-log P(x)] \tag{5}
 \end{align}
-&lt;br&gt;
+&lt;br/&gt;
 \begin{align}
 \therefore D_{KL}(P || Q) &amp;amp;= E_{x \sim P}[-log Q(x)] - E_{x \sim P}[-log P(x)] \\
 &amp;amp;= E_{x \sim P}[- log Q(x) - (- log P(x))] \\
@@ -2604,7 +2601,7 @@ D_{KL}(P || Q) = \sum_{i} \big(P(i) \  log \frac{P(i)}{Q(i)}\big) \tag{4}
 \begin{align}
 D_{KL}(P || Q) = \int \big(P(x) \  log \frac{P(x)}{Q(x)}\big) \ \partial{x} \tag{5}
 \end{align}&lt;/p&gt;
-&lt;h4 id="Properties-of-KL-Divergence--"&gt;Properties of KL Divergence -&lt;a class="anchor-link" href="#Properties-of-KL-Divergence--"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;&lt;ol&gt;
+&lt;h4 id="Properties-of-KL-Divergence--"&gt;Properties of KL Divergence -&lt;a class="anchor-link" href="#Properties-of-KL-Divergence--"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;KL divergence is Non-Negative.
 \begin{align}
 if P = Q then D_{KL} = 0 
@@ -2622,7 +2619,7 @@ D_{KL}(P \ || \ Q) \neq D_{KL}(Q \ || \ P)
 &lt;li&gt;$D_{KL}(P \ || Q\ )$ can be used when you wish to approximate P using distribution Q.&lt;/li&gt;
 &lt;li&gt;$D_{KL}(Q \ || P\ )$ can be used when you wish to approximate Q using distribution P.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="Derivation-of-ELBO---"&gt;Derivation of ELBO  -&lt;a class="anchor-link" href="#Derivation-of-ELBO---"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;h3 id="Derivation-of-ELBO---"&gt;Derivation of ELBO  -&lt;a class="anchor-link" href="#Derivation-of-ELBO---"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;Let us define $q(z | x;\phi)$ as the output of Encoder Network and let $p(z | x; \phi)$ as its true distribution.&lt;/li&gt;
 &lt;li&gt;Ideally we would like q(z | x) to be similar to p(z | x). &lt;/li&gt;
 &lt;li&gt;The relationship can be captured using KL Divergence. &lt;/li&gt;
@@ -2633,7 +2630,7 @@ D_{KL}[q(z | x) || \ p(z | x)] &amp;amp;= \int \big( q(z | x) log \frac{q(z | x)
 &amp;amp;=E\big[log(q(z | x)) - log(p(z|x)))\big] \tag{6}
 \end{align}&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Using Bayes Theorem -&lt;br&gt;
+&lt;p&gt;Using Bayes Theorem -&lt;br/&gt;
 \begin{align}
 p(z | \ x) = \frac{p(x | \ z) p(z)}{p(x)} \tag{7}
 \end{align}&lt;/p&gt;
@@ -2662,18 +2659,15 @@ E\big[ log \frac{q(z\ | \ x)}{p(z)}\big] = D_{KL}(q(z\ | x)\ ||\ p(z)) \tag{12}
 \begin{align}
 log(p(x)) - D_{KL}[q(z\  | \ x) || \ p(z\  | x\ )] = E\big[log\ (p(x\ |\  z))\big] - D_{KL}(q(z\ | x)\ ||\ p(z)) \tag{13}
 \end{align}&lt;/p&gt;
-&lt;h5 id="Hence-Proved."&gt;Hence Proved.&lt;a class="anchor-link" href="#Hence-Proved."&gt;&amp;#182;&lt;/a&gt;&lt;/h5&gt;&lt;h3 id="Final-Comments--"&gt;Final Comments -&lt;a class="anchor-link" href="#Final-Comments--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;h5 id="Hence-Proved."&gt;Hence Proved.&lt;a class="anchor-link" href="#Hence-Proved."&gt;¶&lt;/a&gt;&lt;/h5&gt;&lt;h3 id="Final-Comments--"&gt;Final Comments -&lt;a class="anchor-link" href="#Final-Comments--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;It is can seen that both LHS and RHS of above equation represent ELBO. &lt;/li&gt;
 &lt;li&gt;For training a VAE, we shall use RHS of Eq(13) since it can be computed using data available. &lt;/li&gt;
 &lt;li&gt;Typically, the prior p(z) is initialized with $\mu = 0 $ and $\sigma = 1$ . &lt;/li&gt;
 &lt;li&gt;With term $D_{KL}(q(z\ | x)\ ||\ p(z)) $, we try to approximate $q(z\ | x\ )$ using $p(z)$ i.e We are forcing $q(z\ | x\ )$ to be more like $p(z)$. &lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
- 
-
 
 &lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
@@ -3855,7 +3849,7 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Proving-Convexity-of-Mean-Squared-Error-Loss---Case-Study"&gt;Proving Convexity of Mean Squared Error Loss - Case Study&lt;a class="anchor-link" href="#Proving-Convexity-of-Mean-Squared-Error-Loss---Case-Study"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;h2 id="Proving-Convexity-of-Mean-Squared-Error-Loss---Case-Study"&gt;Proving Convexity of Mean Squared Error Loss - Case Study&lt;a class="anchor-link" href="#Proving-Convexity-of-Mean-Squared-Error-Loss---Case-Study"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;In this blog post, we shall quickly cover the convexity proof for Mean Squared Error Loss function used in a traditional Regression setting.&lt;/li&gt;
 &lt;li&gt;In case you haven't checked out my previous blog - &lt;a href="https://jadhavpritish.github.io/2019/08/The%20Curious%20Case%20of%20Convex%20Functions.html"&gt;The Curious Case of Convex Functions&lt;/a&gt;, I would highly recommend you to check it out. The blog focuses on all the basic building blocks for proving convexity. &lt;/li&gt;
 &lt;/ul&gt;
@@ -3864,17 +3858,17 @@ h6:hover .anchor-link {
 &lt;li&gt;The MSE loss for a Regression Algorithm.&lt;/li&gt;
 &lt;li&gt;Conditions for checking Convexity. &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id="1.-MSE-Loss-Function--"&gt;1. MSE Loss Function -&lt;a class="anchor-link" href="#1.-MSE-Loss-Function--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The MSE loss function in a Regression setting is defined as -&lt;/p&gt;
+&lt;h3 id="1.-MSE-Loss-Function--"&gt;1. MSE Loss Function -&lt;a class="anchor-link" href="#1.-MSE-Loss-Function--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The MSE loss function in a Regression setting is defined as -&lt;/p&gt;
 $$
 \begin{align}
 J(W) = \frac{1}{2m}\sum_{i=1}^{m} [y^{(i)} - \hat{y}^{(i)}]^2 \tag{1}
 \end{align}
 $$&lt;p&gt;Where,&lt;/p&gt;
 &lt;center&gt;
-m = number of training examples.&lt;br&gt;
-$J(w)$ = Loss as a function of Regression Coeffients. &lt;br&gt;
-$y^{(i)}$ = true value for the $ith$ training example. &lt;br&gt;
-$\hat{y}^{(i)}$ = predicted value for the $ith$ training example.&lt;br&gt;
+m = number of training examples.&lt;br/&gt;
+$J(w)$ = Loss as a function of Regression Coeffients. &lt;br/&gt;
+$y^{(i)}$ = true value for the $ith$ training example. &lt;br/&gt;
+$\hat{y}^{(i)}$ = predicted value for the $ith$ training example.&lt;br/&gt;
 &lt;/center&gt;&lt;p&gt;For $ith$ training example, $\hat{y}^{(i)}$ is defined as -&lt;/p&gt;
 $$
 \begin{align}
@@ -3882,7 +3876,7 @@ $$
 \end{align}
 $$&lt;p&gt;Where,&lt;/p&gt;
 &lt;center&gt;
-n = number of features.&lt;br&gt;
+n = number of features.&lt;br/&gt;
 &lt;/center&gt;&lt;p&gt;For the sake of convenience/readability, &lt;strong&gt;let's assume n = 3&lt;/strong&gt;. The eq.(2) can thus be written as -&lt;/p&gt;
 $$
 \begin{align}
@@ -3902,7 +3896,7 @@ $$
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="2.-Checking-for-Convexity-of-J(W)-"&gt;2. Checking for Convexity of J(W)-&lt;a class="anchor-link" href="#2.-Checking-for-Convexity-of-J(W)-"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;For checking the convexity of Mean-Squared-Error function, we shall perform the following checks -&lt;/p&gt;
+&lt;h3 id="2.-Checking-for-Convexity-of-J(W)-"&gt;2. Checking for Convexity of J(W)-&lt;a class="anchor-link" href="#2.-Checking-for-Convexity-of-J(W)-"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;For checking the convexity of Mean-Squared-Error function, we shall perform the following checks -&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Step 1 - Computing the Hessian of J(W)&lt;/li&gt;
 &lt;li&gt;Step 2- Computing the Principal Minors of the Hessian.&lt;/li&gt;
@@ -3910,7 +3904,7 @@ $$
 &lt;li&gt;Step 4 - Comment on Convexity based on convexity tests. &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Let us get down to it right away-&lt;/p&gt;
-&lt;h4 id="Step-1---Hessian-of-$J(w)$--"&gt;Step 1 - Hessian of $J(w)$ -&lt;a class="anchor-link" href="#Step-1---Hessian-of-$J(w)$--"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;$$
+&lt;h4 id="Step-1---Hessian-of-$J(w)$--"&gt;Step 1 - Hessian of $J(w)$ -&lt;a class="anchor-link" href="#Step-1---Hessian-of-$J(w)$--"&gt;¶&lt;/a&gt;&lt;/h4&gt;$$
 \begin{align}
 J^H = \begin{bmatrix} 
 \frac{\partial ^2 J}{\partial w_1^2} &amp;amp; 
@@ -3979,16 +3973,16 @@ $$
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="Step-2---Computing-the-Principal-Minors---"&gt;Step 2 - Computing the Principal Minors  -&lt;a class="anchor-link" href="#Step-2---Computing-the-Principal-Minors---"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;From &lt;a href="https://jadhavpritish.github.io/2019/08/The%20Curious%20Case%20of%20Convex%20Functions.html"&gt;previous blog post&lt;/a&gt;, a function is convex if all the principal minors are greater than or equal to zero i.e. $\bigtriangleup_k$ $\geq 0 \;\; \forall$ k .&lt;/p&gt;
-&lt;h5 id="compute-$\bigtriangleup_1$---"&gt;compute $\bigtriangleup_1$  -&lt;a class="anchor-link" href="#compute-$\bigtriangleup_1$---"&gt;&amp;#182;&lt;/a&gt;&lt;/h5&gt;&lt;p&gt;Principal Minors of order 1 ($\bigtriangleup_1$) can be obtained by deleting any 3-1 = 2 rows and corresponding columns.&lt;/p&gt;
+&lt;h4 id="Step-2---Computing-the-Principal-Minors---"&gt;Step 2 - Computing the Principal Minors  -&lt;a class="anchor-link" href="#Step-2---Computing-the-Principal-Minors---"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;From &lt;a href="https://jadhavpritish.github.io/2019/08/The%20Curious%20Case%20of%20Convex%20Functions.html"&gt;previous blog post&lt;/a&gt;, a function is convex if all the principal minors are greater than or equal to zero i.e. $\bigtriangleup_k$ $\geq 0 \;\; \forall$ k .&lt;/p&gt;
+&lt;h5 id="compute-$\bigtriangleup_1$---"&gt;compute $\bigtriangleup_1$  -&lt;a class="anchor-link" href="#compute-$\bigtriangleup_1$---"&gt;¶&lt;/a&gt;&lt;/h5&gt;&lt;p&gt;Principal Minors of order 1 ($\bigtriangleup_1$) can be obtained by deleting any 3-1 = 2 rows and corresponding columns.&lt;/p&gt;
 &lt;p&gt;a. By deleting row 2 and 3 along with corresponding columns
 $ \bigtriangleup_1 $ = x_1^2&lt;/p&gt;
 &lt;p&gt;b. By deleting row 1 and 3 along with corresponding columns
 $ \bigtriangleup_1 $ = x_2^2&lt;/p&gt;
 &lt;p&gt;c. By deleting row 1 and 2 along with corresponding columns
 $ \bigtriangleup_1 $ = x_3^2&lt;/p&gt;
-&lt;h5 id="compute-$\bigtriangleup_2$---"&gt;compute $\bigtriangleup_2$  -&lt;a class="anchor-link" href="#compute-$\bigtriangleup_2$---"&gt;&amp;#182;&lt;/a&gt;&lt;/h5&gt;&lt;p&gt;Principal Minors of order 2 can be obtained by deleting any 3-2 = 1 row and corresponding column.&lt;/p&gt;
-&lt;p&gt;a. By deleting row 1 and corresponding column 1 - &lt;br&gt;&lt;/p&gt;
+&lt;h5 id="compute-$\bigtriangleup_2$---"&gt;compute $\bigtriangleup_2$  -&lt;a class="anchor-link" href="#compute-$\bigtriangleup_2$---"&gt;¶&lt;/a&gt;&lt;/h5&gt;&lt;p&gt;Principal Minors of order 2 can be obtained by deleting any 3-2 = 1 row and corresponding column.&lt;/p&gt;
+&lt;p&gt;a. By deleting row 1 and corresponding column 1 - &lt;br/&gt;&lt;/p&gt;
 $$
 \begin{align}
 \bigtriangleup_2 &amp;amp; = \begin{vmatrix}
@@ -4023,7 +4017,7 @@ x_2x_1 &amp;amp; x_2^2
 &amp;amp; = 0 
 \end{align}
 $$&lt;/p&gt;
-&lt;h5 id="compute-$\bigtriangleup_3$---"&gt;compute $\bigtriangleup_3$  -&lt;a class="anchor-link" href="#compute-$\bigtriangleup_3$---"&gt;&amp;#182;&lt;/a&gt;&lt;/h5&gt;&lt;p&gt;Principal Minors of order 3 can be obtained by computing determinant of J(W).&lt;/p&gt;
+&lt;h5 id="compute-$\bigtriangleup_3$---"&gt;compute $\bigtriangleup_3$  -&lt;a class="anchor-link" href="#compute-$\bigtriangleup_3$---"&gt;¶&lt;/a&gt;&lt;/h5&gt;&lt;p&gt;Principal Minors of order 3 can be obtained by computing determinant of J(W).&lt;/p&gt;
 $$
 \begin{align}
 \bigtriangleup_3 &amp;amp; = \begin{vmatrix}J^H \end{vmatrix} 
@@ -4040,13 +4034,13 @@ x_3^2 \\
 &amp;amp;= x_1^2 * (x_2^2x_3^2 - x_2^2x_3^2) - x_1x_2 * (x_1x_2x_3^2 - x_1x_2x_3^2) + x_1x_3(x_1x_2^2x_3 - x_1x_2^2x_3) \\
 &amp;amp;= 0 
 \end{align}
-$$&lt;h4 id="Step-3---Comment-on-Definiteness-of-Hessian-of-J(w)--"&gt;Step 3 - Comment on Definiteness of Hessian of J(w) -&lt;a class="anchor-link" href="#Step-3---Comment-on-Definiteness-of-Hessian-of-J(w)--"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+$$&lt;h4 id="Step-3---Comment-on-Definiteness-of-Hessian-of-J(w)--"&gt;Step 3 - Comment on Definiteness of Hessian of J(w) -&lt;a class="anchor-link" href="#Step-3---Comment-on-Definiteness-of-Hessian-of-J(w)--"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;The principal minors of order 1 have a squared form. We know that a squared function is always positive. &lt;/li&gt;
 &lt;li&gt;The principal minors of order 2 and 3 are equal zero. &lt;/li&gt;
 &lt;li&gt;It can be concluded that $\bigtriangleup_k \geq 0 \;\; \forall k$&lt;/li&gt;
 &lt;li&gt;Hence the Hessian of J(w) is Positive Semidefinite. &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id="Step-4-Comment-on-convexity--"&gt;Step 4 Comment on convexity -&lt;a class="anchor-link" href="#Step-4-Comment-on-convexity--"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Before we comment on the convexity of J(W), let's revise the conditions for convexity -&lt;/p&gt;
+&lt;h4 id="Step-4-Comment-on-convexity--"&gt;Step 4 Comment on convexity -&lt;a class="anchor-link" href="#Step-4-Comment-on-convexity--"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Before we comment on the convexity of J(W), let's revise the conditions for convexity -&lt;/p&gt;
 &lt;p&gt;If $X^H$ is the Hessian Matrix of f(x) then -&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;f(x) is &lt;strong&gt;strictly convex&lt;/strong&gt; in $S$ if $X^H$ is a Postive Definite Matrix. &lt;/li&gt;
@@ -4055,24 +4049,20 @@ $$&lt;h4 id="Step-3---Comment-on-Definiteness-of-Hessian-of-J(w)--"&gt;Step 3 - 
 &lt;li&gt;f(x) is &lt;strong&gt;concave&lt;/strong&gt; in $S$ if $X^H$ is a Negative Semi-Definite Matrix.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;Since the Hessian of J(w) is Positive Semidefinite, it can be concluded that the function J(w) is convex.&lt;/strong&gt;&lt;/p&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Final-Comments--"&gt;Final Comments -&lt;a class="anchor-link" href="#Final-Comments--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;h3 id="Final-Comments--"&gt;Final Comments -&lt;a class="anchor-link" href="#Final-Comments--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;This blog post is aimed at proving the convexity of MSE loss function in a Regression setting by simplifying the problem. &lt;/li&gt;
 &lt;li&gt;There are different ways of proving the convexity but I found this easier to comprehend. &lt;/li&gt;
 &lt;li&gt;Feel free to try out the process for different loss functions that you may have encountered. &lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
- 
-
 
 &lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
@@ -5254,25 +5244,25 @@ h6:hover .anchor-link {
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="The-Curious-Case-of-Convex-Functions"&gt;The Curious Case of Convex Functions&lt;a class="anchor-link" href="#The-Curious-Case-of-Convex-Functions"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;h3 id="The-Curious-Case-of-Convex-Functions"&gt;The Curious Case of Convex Functions&lt;a class="anchor-link" href="#The-Curious-Case-of-Convex-Functions"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;Most of the introductory courses for Machine Learning cover algorithms like Linear Regression and Logistic Regression with varying degrees of detail.&lt;/li&gt;
 &lt;li&gt;The resources are plentiful for grasping the nitty gitties involved. However, I rarely found traditional courses diving into proving the convexity of MSE loss function. &lt;/li&gt;
 &lt;li&gt;Most of the online resources often skim through the part where they define the cost function for Regression Algorithms using MSE where the cost function is claimed to be a convex function. &lt;/li&gt;
 &lt;li&gt;The convexity property unlocks a crucial advantage where the local minima of a convex function is also a global minima.&lt;/li&gt;
 &lt;li&gt;This ensures that a model can be trained where the loss function is minimized to its globally minimum value. &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;br&gt;
-&lt;img src="../../images/convex_functions/convex_function_image.png"&gt; &lt;br&gt;&lt;/p&gt;
-&lt;h3 id="Proving-Convexity--"&gt;Proving Convexity -&lt;a class="anchor-link" href="#Proving-Convexity--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;p&gt;&lt;br/&gt;
+&lt;img src="../../images/convex_functions/convex_function_image.png"/&gt; &lt;br/&gt;&lt;/p&gt;
+&lt;h3 id="Proving-Convexity--"&gt;Proving Convexity -&lt;a class="anchor-link" href="#Proving-Convexity--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;In this blog post, we shall work through the concepts needed to prove the convexity of a function. &lt;/li&gt;
 &lt;li&gt;So hang in tight and by the end of this article, you would have a better understanding of - &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;a. Symmetric Matrices. &lt;br&gt;
-b. Hessian Matrices. &lt;br&gt;
-c. Postive and Negative Definite/Semidefinite Matrices. &lt;br&gt;
-d. Proving convexity of functions. &lt;br&gt;&lt;/p&gt;
+&lt;p&gt;a. Symmetric Matrices. &lt;br/&gt;
+b. Hessian Matrices. &lt;br/&gt;
+c. Postive and Negative Definite/Semidefinite Matrices. &lt;br/&gt;
+d. Proving convexity of functions. &lt;br/&gt;&lt;/p&gt;
 &lt;p&gt;Without much further ado, let's jump into it.&lt;/p&gt;
-&lt;h3 id="Basics-of-Matrices--"&gt;Basics of Matrices -&lt;a class="anchor-link" href="#Basics-of-Matrices--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We shall touch base on some of the basic concepts in Matrices that will help us in proving the convexity of a function. These basics are typically covered in Undergraduate Courses and should sound familiar to you.&lt;/p&gt;
+&lt;h3 id="Basics-of-Matrices--"&gt;Basics of Matrices -&lt;a class="anchor-link" href="#Basics-of-Matrices--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We shall touch base on some of the basic concepts in Matrices that will help us in proving the convexity of a function. These basics are typically covered in Undergraduate Courses and should sound familiar to you.&lt;/p&gt;
 &lt;p&gt;&lt;u&gt;&lt;b&gt; 1. Square Matrix - &lt;/b&gt;&lt;/u&gt;&lt;/p&gt;
 &lt;p&gt;Given a matrix X of dimensions $m \times n$, X is a square matrix iff (if and only if) m = n. In other words, A matrix 'X' is called a square matrix if the number of matrix rows is equal to the number of columns.&lt;/p&gt;
 $$
@@ -5280,66 +5270,48 @@ $$
 X = \begin{bmatrix} 1 &amp;amp; 2 &amp;amp; 3 \\ 4 &amp;amp; 5 &amp;amp; 6 \\ 8 &amp;amp; 9 &amp;amp; 10 \end{bmatrix}_{3 \times 3} 
 \end{align}
 $$&lt;p&gt;In the above example, since the number of rows (m) = number of columns (3),&lt;b&gt; X can be termed as a square matrix. &lt;/b&gt;&lt;/p&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[108]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [108]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;## basic python imports&lt;/span&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;## basic python imports&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.core.display&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.datasets&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;make_spd_matrix&lt;/span&gt;
 
-&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;style&amp;gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&amp;lt;/style&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;lt;style&amp;gt;.container { width:100% !important; }&amp;lt;/style&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;style&amp;gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&amp;lt;/style&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"&amp;lt;style&amp;gt;.container { width:100% !important; }&amp;lt;/style&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
+&lt;/div&gt;
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
-
-
 &lt;div class="output_area"&gt;
-
-    &lt;div class="prompt"&gt;&lt;/div&gt;
-
-
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea"&gt;
 &lt;style&gt;.prompt{width: 0px; min-width: 0px; visibility: collapse}&lt;/style&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
-
 &lt;div class="output_area"&gt;
-
-    &lt;div class="prompt"&gt;&lt;/div&gt;
-
-
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea"&gt;
 &lt;style&gt;.container { width:100% !important; }&lt;/style&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
-
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[109]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [109]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;### python function for checking whether a matrix is a square matrix. &lt;/span&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;### python function for checking whether a matrix is a square matrix. &lt;/span&gt;
 
 
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;check_square_matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -5353,102 +5325,83 @@ $$&lt;p&gt;In the above example, since the number of rows (m) = number of column
 &lt;span class="n"&gt;A&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;B&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Is Matrix A a Square Matrix: - {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_square_matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Is Matrix B a Square Matrix  - {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_square_matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is Matrix A a Square Matrix: - {0}"&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_square_matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is Matrix B a Square Matrix  - {0}"&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_square_matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
       
 &lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
+&lt;/div&gt;
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
-
-
 &lt;div class="output_area"&gt;
-
-    &lt;div class="prompt"&gt;&lt;/div&gt;
-
-
+&lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;Is Matrix A a Square Matrix: - True
 Is Matrix B a Square Matrix  - False
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="2.-Symmetric-Matrix--"&gt;2. Symmetric Matrix -&lt;a class="anchor-link" href="#2.-Symmetric-Matrix--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;A &lt;b&gt;square&lt;/b&gt; matrix 'X' is termed as symmetric if $x_{ij} = x_{ji}$ for all i and j where i, j denotes the ith row and jth column respectively. In other words, a matrix X is syemmetric if the transpose of X if equal to matrix X.&lt;/p&gt;
+&lt;h3 id="2.-Symmetric-Matrix--"&gt;2. Symmetric Matrix -&lt;a class="anchor-link" href="#2.-Symmetric-Matrix--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;A &lt;b&gt;square&lt;/b&gt; matrix 'X' is termed as symmetric if $x_{ij} = x_{ji}$ for all i and j where i, j denotes the ith row and jth column respectively. In other words, a matrix X is syemmetric if the transpose of X if equal to matrix X.&lt;/p&gt;
 &lt;p&gt;i.e, 
 $$
 \begin{align}
 X^T = X
 \end{align}
 $$&lt;/p&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[110]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [110]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;## function for checking if a matrix is symmetric&lt;/span&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;## function for checking if a matrix is symmetric&lt;/span&gt;
 
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;check_symmetry&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;check_square_matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transpose&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;is a Symmetric Matrix&amp;quot;&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"is a Symmetric Matrix"&lt;/span&gt;
         &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;not a Symmetric Matrix&amp;quot;&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"not a Symmetric Matrix"&lt;/span&gt;
     &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;not a Symmetric Matrix since it is not Square Matrix&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"not a Symmetric Matrix since it is not Square Matrix"&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[111]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [111]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;## pseudo generate a symmetric matrix &lt;/span&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;## pseudo generate a symmetric matrix &lt;/span&gt;
 
 &lt;span class="n"&gt;base_matrix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="n"&gt;SA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;base_matrix&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;base_matrix&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Matrix A - &lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt; {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SA&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;"Matrix A - &lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt; {0}"&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SA&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="c1"&gt;## generate a random matrix&lt;/span&gt;
 &lt;span class="n"&gt;SB&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Matrix B - &lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt; {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SB&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;"Matrix B - &lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt; {0}"&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SB&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="n"&gt;SC&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Matrix C - &lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt; {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SC&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;"Matrix C - &lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt; {0}"&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SC&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
+&lt;/div&gt;
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
-
-
 &lt;div class="output_area"&gt;
-
-    &lt;div class="prompt"&gt;&lt;/div&gt;
-
-
+&lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;Matrix A - 
  [[34 16 12]
@@ -5464,34 +5417,25 @@ Matrix C -
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[112]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [112]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Is Matrix A {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_symmetry&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SA&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Is Matrix B {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_symmetry&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SB&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Is Matrix C {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_symmetry&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SC&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is Matrix A {0}"&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_symmetry&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SA&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is Matrix B {0}"&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_symmetry&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SB&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is Matrix C {0}"&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_symmetry&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SC&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
+&lt;/div&gt;
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
-
-
 &lt;div class="output_area"&gt;
-
-    &lt;div class="prompt"&gt;&lt;/div&gt;
-
-
+&lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;Is Matrix A is a Symmetric Matrix
 Is Matrix B not a Symmetric Matrix
@@ -5499,79 +5443,67 @@ Is Matrix C not a Symmetric Matrix since it is not Square Matrix
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="3.-Hermitian-Matrix--"&gt;3. Hermitian Matrix -&lt;a class="anchor-link" href="#3.-Hermitian-Matrix--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;A square matrix X is self-adjoint or a Hermitian matrix if -&lt;/p&gt;
+&lt;h3 id="3.-Hermitian-Matrix--"&gt;3. Hermitian Matrix -&lt;a class="anchor-link" href="#3.-Hermitian-Matrix--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;A square matrix X is self-adjoint or a Hermitian matrix if -&lt;/p&gt;
 $$
 \begin{align}
 \overline{X^{T}} = X = X^{H}
 \end{align}
 $$&lt;p&gt;Note that the terms &lt;strong&gt;self-adjoint and Hermitian can be used interchangeably&lt;/strong&gt;.&lt;/p&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[113]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [113]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;check_hermitian&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;check_hermitian&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;check_square_matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conjugate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transpose&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;is a Hermitian Matrix&amp;quot;&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"is a Hermitian Matrix"&lt;/span&gt;
         &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;is not a Hermitian Matrix&amp;quot;&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"is not a Hermitian Matrix"&lt;/span&gt;
     &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;is not a Hermitian Matrix since it is not a Square Matrix&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"is not a Hermitian Matrix since it is not a Square Matrix"&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[114]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [114]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;## pseudo generate a symmetric matrix &lt;/span&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;## pseudo generate a symmetric matrix &lt;/span&gt;
 
 &lt;span class="c1"&gt;##generate a random complex matrix with entries between -20 and 10.&lt;/span&gt;
 &lt;span class="n"&gt;base_matrix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1j&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="c1"&gt;## trick to force symmetric nature&lt;/span&gt;
 &lt;span class="n"&gt;HA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;base_matrix&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conjugate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;base_matrix&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Matrix A - &lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt; {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HA&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;"Matrix A - &lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt; {0}"&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HA&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
 &lt;span class="c1"&gt;## generate a random complex matrix that is not symmetric&lt;/span&gt;
 &lt;span class="n"&gt;HB&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1j&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Matrix B - &lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt; {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HB&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;"Matrix B - &lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt; {0}"&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HB&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="n"&gt;HC&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1j&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Matrix C - &lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt; {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HC&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;"Matrix C - &lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt; {0}"&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HC&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
+&lt;/div&gt;
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
-
-
 &lt;div class="output_area"&gt;
-
-    &lt;div class="prompt"&gt;&lt;/div&gt;
-
-
+&lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;Matrix A - 
  [[-16. +0.j  -5. -8.j  -4.+20.j]
@@ -5590,34 +5522,25 @@ Matrix C -
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[115]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [115]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Is Matrix A {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_hermitian&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HA&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Is Matrix B {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_hermitian&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HB&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Is Matrix C {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_hermitian&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HC&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is Matrix A {0}"&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_hermitian&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HA&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is Matrix B {0}"&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_hermitian&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HB&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Is Matrix C {0}"&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;check_hermitian&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HC&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
+&lt;/div&gt;
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
-
-
 &lt;div class="output_area"&gt;
-
-    &lt;div class="prompt"&gt;&lt;/div&gt;
-
-
+&lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;Is Matrix A is a Hermitian Matrix
 Is Matrix B is not a Hermitian Matrix
@@ -5625,15 +5548,13 @@ Is Matrix C is not a Hermitian Matrix since it is not a Square Matrix
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="4.-Hessian-Matrix--"&gt;4. Hessian Matrix -&lt;a class="anchor-link" href="#4.-Hessian-Matrix--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The Hessian of a multivariate function $f(x_1, x_2, ...x_n)$ is a way for organizing second-order partial derivatives in the form of a matrix.&lt;/p&gt;
+&lt;h3 id="4.-Hessian-Matrix--"&gt;4. Hessian Matrix -&lt;a class="anchor-link" href="#4.-Hessian-Matrix--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The Hessian of a multivariate function $f(x_1, x_2, ...x_n)$ is a way for organizing second-order partial derivatives in the form of a matrix.&lt;/p&gt;
 &lt;p&gt;Consider a multivariate fucntion $ f(x_1, x_2, ...x_n) $ then its Hessian can be defined as follows -&lt;/p&gt;
 $$
 \begin{align}
@@ -5654,14 +5575,13 @@ H_f = \begin{bmatrix}
 \end{bmatrix}
 \end{align}
 $$&lt;p&gt;Note that a Hessian matrix by definition is a Square and Symmetric matrix.&lt;/p&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="5.-Positive-Definite-and-Semidefinte-Matrices--"&gt;5. Positive Definite and Semidefinte Matrices -&lt;a class="anchor-link" href="#5.-Positive-Definite-and-Semidefinte-Matrices--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;You may have seen references about these matrices at multiple places but the definition and ways to prove definitiveness remains elusive to many. Let us start with the text definition -&lt;/p&gt;
+&lt;h3 id="5.-Positive-Definite-and-Semidefinte-Matrices--"&gt;5. Positive Definite and Semidefinte Matrices -&lt;a class="anchor-link" href="#5.-Positive-Definite-and-Semidefinte-Matrices--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;You may have seen references about these matrices at multiple places but the definition and ways to prove definitiveness remains elusive to many. Let us start with the text definition -&lt;/p&gt;
 \begin{align}
 A \; n \times n \; square \; matrix \; X \; is \; Postive \; Definite \; if \;\;\; a^TXa \; &amp;gt; \; 0 \; \forall a \; \in \; \mathbb R^n.
 \end{align}&lt;p&gt;Similarly,&lt;/p&gt;
@@ -5670,14 +5590,14 @@ A \; n \times n \; square \; matrix \; X \; is \; Postive \; Semidefinite \; if 
 \end{align}&lt;p&gt;The same logic can be easily extended to Negative Definite and Negative Semidefinite matrices.&lt;/p&gt;
 \begin{align}
 A \; n \times n \; square \; matrix \; X \; is \; Negative \; Definite \; if \;\; a^TXa \; &amp;lt; \; 0 \; \forall a \; \in \; \mathbb R^n.
-\end{align}&lt;p&gt;And finally, &lt;br&gt;&lt;/p&gt;
+\end{align}&lt;p&gt;And finally, &lt;br/&gt;&lt;/p&gt;
 \begin{align}
 A \; n \times n \; square \; matrix \; X \; is \; Negative \; Semidefinite \; if \;\; a^TXa \leq 0 \; \forall \; a \in \; \mathbb R^n. 
 \end{align}&lt;ul&gt;
 &lt;li&gt;However, while checking for Matrix Definiteness, manually validating the condition of every value of x is definitely not an option. &lt;/li&gt;
 &lt;li&gt;So let us try and break this down even further.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="Eigen-Values-and-Eigen-Vector--"&gt;Eigen Values and Eigen Vector -&lt;a class="anchor-link" href="#Eigen-Values-and-Eigen-Vector--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We know that an eigenvector is a vector whose direction remains unchanged when a linear transformation is applied to it.&lt;/p&gt;
+&lt;h3 id="Eigen-Values-and-Eigen-Vector--"&gt;Eigen Values and Eigen Vector -&lt;a class="anchor-link" href="#Eigen-Values-and-Eigen-Vector--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We know that an eigenvector is a vector whose direction remains unchanged when a linear transformation is applied to it.&lt;/p&gt;
 &lt;p&gt;Mathematically,&lt;/p&gt;
 $$
 \begin{align}
@@ -5696,29 +5616,28 @@ $$
 a^TXa = \lambda a^T a = \lambda &amp;lt;a, a&amp;gt; \tag{3}
 \end{align}
 $$
-where, &lt;br&gt;
+where, &lt;br/&gt;
 $&amp;lt;x, y&amp;gt;$ represent the dot product, $x^Ty$&lt;/p&gt;
-&lt;h3 id="Analysis"&gt;Analysis&lt;a class="anchor-link" href="#Analysis"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;h3 id="Analysis"&gt;Analysis&lt;a class="anchor-link" href="#Analysis"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;It is easy to see that the dot product of a with $a^T$ will always be positive. &lt;/li&gt;
 &lt;li&gt;Referring back to the definition of positive definite matrix and eq(3), $a^TXa$ can be greater than zero if and only if $\lambda$ is greater than zero. &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="Derived-Definition-for-Matrix-Definiteness--"&gt;Derived Definition for Matrix Definiteness -&lt;a class="anchor-link" href="#Derived-Definition-for-Matrix-Definiteness--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Based on pointers mentioned in above Analysis we can tweak the formal definitions of Matrix Definiteness as follows -&lt;/p&gt;
+&lt;h3 id="Derived-Definition-for-Matrix-Definiteness--"&gt;Derived Definition for Matrix Definiteness -&lt;a class="anchor-link" href="#Derived-Definition-for-Matrix-Definiteness--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Based on pointers mentioned in above Analysis we can tweak the formal definitions of Matrix Definiteness as follows -&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;A Symmetric Matrix 'X' is Positive Definite if $\lambda_{i} &amp;gt; \; 0 \;\; \forall i$&lt;/li&gt;
 &lt;li&gt;A Symmetric Matrix 'X' is Positive Semi-Definite if $\lambda_{i} \geq \; 0 \;\; \forall i$&lt;/li&gt;
 &lt;li&gt;A Symmetric Matrix 'X' is Negative Definite if $\lambda_{i} &amp;lt; \; 0 \;\; \forall i$&lt;/li&gt;
 &lt;li&gt;A Symmetric Matrix 'X' is Negative Semi-Definite if $\lambda_{i} \leq \; 0 \;\; \forall i$&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[116]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [116]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;### computing eigen values in python - &lt;/span&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;### computing eigen values in python - &lt;/span&gt;
 
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;compute_eigen_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;eigen_values&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;linalg&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eigvals&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -5726,46 +5645,37 @@ $&amp;lt;x, y&amp;gt;$ represent the dot product, $x^Ty$&lt;/p&gt;
 
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;check_definiteness&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eigen_values&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eigen_values&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Matrix is Postive Definite as well as Positive Semidefinite&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"Matrix is Postive Definite as well as Positive Semidefinite"&lt;/span&gt;
     &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eigen_values&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Matrix is Postive Semi Definite only&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"Matrix is Postive Semi Definite only"&lt;/span&gt;
     &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eigen_values&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Matrix is Negative Definite as well as Negative Semidefinite&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"Matrix is Negative Definite as well as Negative Semidefinite"&lt;/span&gt;
     &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eigen_values&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Matrix is Negative SemiDefinite&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"Matrix is Negative SemiDefinite"&lt;/span&gt;
     &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Matrix is neither positive definite nor negative definite&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"Matrix is neither positive definite nor negative definite"&lt;/span&gt;
     
 &lt;span class="n"&gt;base_eig_matrix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;make_spd_matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;EA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;base_eig_matrix&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;base_eig_matrix&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transpose&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="n"&gt;ea_eigen_values&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compute_eigen_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;EA&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Eigen values are &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;ea_eigen_values&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;"Eigen values are &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;ea_eigen_values&lt;/span&gt;
 &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;check_definiteness&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ea_eigen_values&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
+&lt;/div&gt;
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
-
-
 &lt;div class="output_area"&gt;
-
-    &lt;div class="prompt"&gt;&lt;/div&gt;
-
-
+&lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
 &lt;pre&gt;Eigen values are [6.54206241 0.08543726 0.82923445]
 Matrix is Postive Definite as well as Positive Semidefinite
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
@@ -5777,35 +5687,33 @@ Matrix is Postive Definite as well as Positive Semidefinite
 &lt;li&gt;Hence, It may not always to be feasible to solve for Eigen Values.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;An Alternate Theorem for Determing Defniteness of Matrices comes to the rescue -&lt;/p&gt;
-&lt;h3 id="Theorem--"&gt;Theorem -&lt;a class="anchor-link" href="#Theorem--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;
+&lt;h3 id="Theorem--"&gt;Theorem -&lt;a class="anchor-link" href="#Theorem--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;A Symmetric Matrix 'X' is Positive Definite if $D_k &amp;gt; \; 0 \;\; \forall k$ Where, $D_k$ represents the kth &lt;strong&gt;Leading Principal Minor.&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;A Symmetric Matrix 'X' is Positive Semi-Definite if $\bigtriangleup_k \geq \; 0 \;\; \forall k$ Where, $\bigtriangleup_k$ represents the kth &lt;strong&gt;Principal Minor.&lt;/strong&gt; &lt;/li&gt;
 &lt;li&gt;A Symmetric Matrix 'X' is Negative Definite if $D_k &amp;lt; \; 0 \;\; \forall k$ Where, $D_k$ represents the kth &lt;strong&gt;Leading Principal Minor.&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;A Symmetric Matrix 'X' is Negative Semi-Definite if $\bigtriangleup_k \leq \; 0 \;\; \forall k$ Where, $\bigtriangleup_k$ represents the kth &lt;strong&gt;Principal Minor.&lt;/strong&gt; &lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Principal-Minors-of-a-Matrix--"&gt;Principal Minors of a Matrix -&lt;a class="anchor-link" href="#Principal-Minors-of-a-Matrix--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;h3 id="Principal-Minors-of-a-Matrix--"&gt;Principal Minors of a Matrix -&lt;a class="anchor-link" href="#Principal-Minors-of-a-Matrix--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;For a Square Matrix X, a Pricipal Submatrix of order k is obtained by deleting &lt;strong&gt;any&lt;/strong&gt; (n-k) rows and corresponding (n-k) columns. &lt;/li&gt;
 &lt;li&gt;The determinant of such a Pricipal Submatrix is called as the Principal Minor of matrix X. &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="Leading-Principal-Minors-of-a-Matrix--"&gt;Leading Principal Minors of a Matrix -&lt;a class="anchor-link" href="#Leading-Principal-Minors-of-a-Matrix--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;h3 id="Leading-Principal-Minors-of-a-Matrix--"&gt;Leading Principal Minors of a Matrix -&lt;a class="anchor-link" href="#Leading-Principal-Minors-of-a-Matrix--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;For a Square Matrix X, a Leading Pricipal Submatrix of order k is obtained by deleting &lt;strong&gt;last&lt;/strong&gt; (n-k) rows and corresponding (n-k) columns. &lt;/li&gt;
 &lt;li&gt;The determinant of such a Leading Pricipal Submatrix is called as the Leading Principal Minor of matrix X. &lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Proving-/-Checking-Convexity-of-a-function--"&gt;Proving / Checking Convexity of a function -&lt;a class="anchor-link" href="#Proving-/-Checking-Convexity-of-a-function--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;With all the relevant definitions and theorem covered in previous sections, we are now ready to define checks for determining the convexity of functions.&lt;/p&gt;
+&lt;h3 id="Proving-/-Checking-Convexity-of-a-function--"&gt;Proving / Checking Convexity of a function -&lt;a class="anchor-link" href="#Proving-/-Checking-Convexity-of-a-function--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;With all the relevant definitions and theorem covered in previous sections, we are now ready to define checks for determining the convexity of functions.&lt;/p&gt;
 &lt;p&gt;A function f(x) defined over n variables on an open convex set $S$ can be tested for convexity using following criteria -&lt;/p&gt;
 &lt;p&gt;If $X^H$ is the Hessian Matrix of f(x) then -&lt;/p&gt;
 &lt;ul&gt;
@@ -5814,12 +5722,12 @@ Matrix is Postive Definite as well as Positive Semidefinite
 &lt;li&gt;f(x) is &lt;strong&gt;strictly concave&lt;/strong&gt; in $S$ if $X^H$ is a Negative Definite Matrix. &lt;/li&gt;
 &lt;li&gt;f(x) is &lt;strong&gt;concave&lt;/strong&gt; in $S$ if $X^H$ is a Negative Semi-Definite Matrix.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="Example--"&gt;Example -&lt;a class="anchor-link" href="#Example--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Consider an equation of Quadratic form -&lt;/p&gt;
+&lt;h3 id="Example--"&gt;Example -&lt;a class="anchor-link" href="#Example--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Consider an equation of Quadratic form -&lt;/p&gt;
 $$
 \begin{align}
 f(x_1, x_2, x_3) = 5x_1^2 - 2x_1x_2 + 2x_2^2 + x_3x_2 + x_3^2
 \end{align}
-$$&lt;h3 id="STEP-1---Computing-the-Hessian"&gt;STEP 1 - Computing the Hessian&lt;a class="anchor-link" href="#STEP-1---Computing-the-Hessian"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The Hessian of $f(x_1, x_2, x_3)$ can be defined as follows - 
+$$&lt;h3 id="STEP-1---Computing-the-Hessian"&gt;STEP 1 - Computing the Hessian&lt;a class="anchor-link" href="#STEP-1---Computing-the-Hessian"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The Hessian of $f(x_1, x_2, x_3)$ can be defined as follows - 
 $$
 \begin{align}
 X^H = \begin{bmatrix}
@@ -5876,7 +5784,7 @@ $$&lt;/p&gt;
 \begin{align}
 X^H = \begin{bmatrix}10 &amp;amp; -2 &amp;amp; 0 \\ -2 &amp;amp; 4 &amp;amp; 1 \\ 0 &amp;amp; 1 &amp;amp; 2\end{bmatrix}
 \end{align}
-$$&lt;h3 id="Step-2---Compute-Leading-Principal-Minors--"&gt;Step 2 - Compute Leading Principal Minors -&lt;a class="anchor-link" href="#Step-2---Compute-Leading-Principal-Minors--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;for k = 3,  delete last (3-3) =0 rows and (3-3) = 0 columns
+$$&lt;h3 id="Step-2---Compute-Leading-Principal-Minors--"&gt;Step 2 - Compute Leading Principal Minors -&lt;a class="anchor-link" href="#Step-2---Compute-Leading-Principal-Minors--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;for k = 3,  delete last (3-3) =0 rows and (3-3) = 0 columns
 $$
 \begin{align} \\
 D_{k} &amp;amp; = D_{3} 
@@ -5909,17 +5817,16 @@ D_{k} &amp;amp; = D_{1}
 \end{align}
 $$&lt;/p&gt;
 &lt;p&gt;Since $D_1  &amp;gt; 0 $, $D_2 &amp;gt;0 $ and $D_3 &amp;gt; 0$, Hessian of $f(x_1, x_2, x_3)$ is Positive Definite.&lt;/p&gt;
-&lt;h3 id="Step-3---Comment-on-Convexity--"&gt;Step 3 - Comment on Convexity -&lt;a class="anchor-link" href="#Step-3---Comment-on-Convexity--"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;h3 id="Step-3---Comment-on-Convexity--"&gt;Step 3 - Comment on Convexity -&lt;a class="anchor-link" href="#Step-3---Comment-on-Convexity--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;Since Hessian of $f(x_1, x_2, x_3)$ is Positive Definite, the function is &lt;strong&gt;strictly convex.&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Properties-of-Convex-functions---"&gt;Properties of Convex functions  -&lt;a class="anchor-link" href="#Properties-of-Convex-functions---"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;h3 id="Properties-of-Convex-functions---"&gt;Properties of Convex functions  -&lt;a class="anchor-link" href="#Properties-of-Convex-functions---"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;Constant functions of the form $f(x) = c$ are both convex and concave. &lt;/li&gt;
 &lt;li&gt;$f(x) = x$ is both convex and concave. &lt;/li&gt;
 &lt;li&gt;Functions of the form $f(x) = x^r$ with $r \geq 1$ are convex on the Interval $0 &amp;lt; x &amp;lt; \infty$ &lt;/li&gt;
@@ -5929,13 +5836,12 @@ $$&lt;/p&gt;
 &lt;li&gt;If $f(x)$ is convex, then $g(x) = cf(x)$ is also convex for any positive value of c.&lt;/li&gt;
 &lt;li&gt;If $f(x)$ and $g(x)$ are convex then their sum $h(x) = f(x) + g(x)$ is also convex. &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="Final-Comments----"&gt;Final Comments   -&lt;a class="anchor-link" href="#Final-Comments----"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;h3 id="Final-Comments----"&gt;Final Comments   -&lt;a class="anchor-link" href="#Final-Comments----"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;We have investigated convex functions in depth while studying different ways of proving convexity. &lt;/li&gt;
 &lt;li&gt;In the next part of the article, we shall prove convexity of MSE loss function used in linear regression. &lt;/li&gt;
 &lt;li&gt;Convex functions are easy to minimise thus resulting in its usage across research domains. &lt;/li&gt;
 &lt;li&gt;So, the next time you want to plug in a different loss function in place of MSE while training a linear regression model, you might as well check its convexity. &lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -5943,17 +5849,14 @@ $$&lt;/p&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;References -&lt;/p&gt;
-&lt;p&gt;[1] &lt;a href="https://www.visiondummy.com/2014/03/eigenvalues-eigenvectors/"&gt;Eigen Values and Eigen Vectors&lt;/a&gt; &lt;br&gt;
-[2] &lt;a href="https://en.wikipedia.org/wiki/Definiteness_of_a_matrix"&gt;Formal Definitions for Matrix Definiteness&lt;/a&gt; &lt;br&gt;
-[3] &lt;a href="https://www.dr-eriksen.no/teaching/GRA6035/2010/lecture5.pdf"&gt;Principal Minors and Hessian Matrix by Dr. Eivind Eriksen&lt;/a&gt;&lt;br&gt;
-[4] &lt;a href="https://www.purplemath.com/modules/minors.htm"&gt;Computing Minors and Cofactors&lt;/a&gt;&lt;br&gt;
+&lt;p&gt;[1] &lt;a href="https://www.visiondummy.com/2014/03/eigenvalues-eigenvectors/"&gt;Eigen Values and Eigen Vectors&lt;/a&gt; &lt;br/&gt;
+[2] &lt;a href="https://en.wikipedia.org/wiki/Definiteness_of_a_matrix"&gt;Formal Definitions for Matrix Definiteness&lt;/a&gt; &lt;br/&gt;
+[3] &lt;a href="https://www.dr-eriksen.no/teaching/GRA6035/2010/lecture5.pdf"&gt;Principal Minors and Hessian Matrix by Dr. Eivind Eriksen&lt;/a&gt;&lt;br/&gt;
+[4] &lt;a href="https://www.purplemath.com/modules/minors.htm"&gt;Computing Minors and Cofactors&lt;/a&gt;&lt;br/&gt;
 [5] &lt;a href="http://www.math.cmu.edu/~lohp/docs/math/mop2013/convexity-soln.pdf"&gt;Properties of convex functions&lt;/a&gt;&lt;/p&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
- 
-
 
 &lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
