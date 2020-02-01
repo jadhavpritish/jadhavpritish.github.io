@@ -36,7 +36,7 @@
         <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/bootstrap.flatly.min.css" type="text/css"/>
     <link href="https://jadhavpritish.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="https://jadhavpritish.github.io/theme/css/pygments/solarizedlight.css" rel="stylesheet">
+    <link href="https://jadhavpritish.github.io/theme/css/pygments/pastie.css" rel="stylesheet">
     <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/style.css" type="text/css"/>
         <link href="https://jadhavpritish.github.io/extras/custom.css" rel="stylesheet">
 
@@ -1240,45 +1240,7 @@ h6:hover .anchor-link {
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
 .highlight .vm { color: #19177C } /* Name.Variable.Magic */
-.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
-<style type="text/css">
-/* Temporary definitions which will become obsolete with Notebook release 5.0 */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-bold { font-weight: bold; }
-</style>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="CIFAR-10-Image-Classification-using-Keras">CIFAR-10 Image Classification using Keras<a class="anchor-link" href="#CIFAR-10-Image-Classification-using-Keras">¶</a></h2><ul>
@@ -1312,10 +1274,10 @@ h6:hover .anchor-link {
 <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
 <span class="kn">import</span> <span class="nn">scipy.io</span> 
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">import</span> <span class="nn">keras.backend</span> <span class="kn">as</span> <span class="nn">K</span>
+<span class="kn">import</span> <span class="nn">keras.backend</span> <span class="k">as</span> <span class="nn">K</span>
 <span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Dense</span><span class="p">,</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">Activation</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> 
                 <span class="n">Input</span><span class="p">,</span> <span class="n">MaxPooling2D</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">BatchNormalization</span><span class="p">,</span> <span class="n">LeakyReLU</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
@@ -1330,7 +1292,7 @@ h6:hover .anchor-link {
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelBinarizer</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span><span class="n">HTML</span>
@@ -1488,7 +1450,7 @@ h6:hover .anchor-link {
 <div class="highlight hl-ipython2"><pre><span></span><span class="n">raw_X</span><span class="p">,</span> <span class="n">raw_labels</span> <span class="o">=</span> <span class="n">read_cifar_data</span><span class="p">(</span><span class="s1">'./data/cifar10/cifar-10-python/cifar-10-batches-py/data_batch*'</span><span class="p">)</span>
 <span class="n">cifar_raw_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">raw_X</span><span class="p">,</span> <span class="n">raw_labels</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'np_images'</span><span class="p">,</span> <span class="s1">'labels'</span><span class="p">])</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">cifar_raw_data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cifar_raw_data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1556,7 +1518,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [68]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">"Successfully trained a Binarizer with </span><span class="si">%d</span><span class="s2"> unique classes"</span><span class="o">%</span><span class="k">len</span>(label_binarizer.classes_))
+<div class="highlight hl-ipython2"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Successfully trained a Binarizer with </span><span class="si">%d</span><span class="s2"> unique classes"</span><span class="o">%</span><span class="k">len</span>(label_binarizer.classes_))
 </pre></div>
 </div>
 </div>
@@ -1599,7 +1561,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [70]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="n">sampled_data</span> <span class="o">=</span> <span class="n">cifar_raw_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'labels'</span><span class="p">,</span> <span class="n">as_index</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">get_shuffled_data</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<div class="highlight hl-ipython2"><pre><span></span><span class="n">sampled_data</span> <span class="o">=</span> <span class="n">cifar_raw_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'labels'</span><span class="p">,</span> <span class="n">as_index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">get_shuffled_data</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1620,7 +1582,7 @@ h6:hover .anchor-link {
 
     <span class="c1"># Find the number of unique categories in the training dataset</span>
     <span class="n">rows</span> <span class="o">=</span> <span class="n">vis_df</span><span class="p">[</span><span class="s1">'labels'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
-    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="n">rows</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">sharey</span> <span class="o">=</span> <span class="bp">True</span><span class="p">);</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="n">rows</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span> <span class="o">=</span> <span class="kc">True</span><span class="p">);</span>
 
     <span class="n">labels</span> <span class="o">=</span> <span class="n">vis_df</span><span class="p">[</span><span class="s1">'labels'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">((</span><span class="n">columns</span><span class="o">*</span><span class="n">rows</span><span class="p">)):</span>
@@ -1689,12 +1651,12 @@ h6:hover .anchor-link {
 <span class="n">complete_train_data</span><span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">cifar_raw_data</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span>
 <span class="n">train_data</span><span class="p">,</span> <span class="n">validation_data</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">complete_train_data</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.08</span><span class="p">)</span>
 
-<span class="n">train_data</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
-<span class="n">validation_data</span> <span class="o">=</span> <span class="n">validation_data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
-<span class="n">test_data</span> <span class="o">=</span> <span class="n">test_data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">"Training data is of size </span><span class="si">%d</span><span class="s2">"</span><span class="o">%</span><span class="k">len</span>(train_data))
-<span class="k">print</span><span class="p">(</span><span class="s2">"Validation data is of size </span><span class="si">%d</span><span class="s2">"</span><span class="o">%</span><span class="k">len</span>(validation_data))
-<span class="k">print</span><span class="p">(</span><span class="s2">"Test data is of size </span><span class="si">%d</span><span class="s2">"</span><span class="o">%</span><span class="k">len</span>(test_data))
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">validation_data</span> <span class="o">=</span> <span class="n">validation_data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">test_data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Training data is of size </span><span class="si">%d</span><span class="s2">"</span><span class="o">%</span><span class="k">len</span>(train_data))
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Validation data is of size </span><span class="si">%d</span><span class="s2">"</span><span class="o">%</span><span class="k">len</span>(validation_data))
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Test data is of size </span><span class="si">%d</span><span class="s2">"</span><span class="o">%</span><span class="k">len</span>(test_data))
 </pre></div>
 </div>
 </div>
@@ -1737,7 +1699,7 @@ While True:<br/>
     
     <span class="n">indices</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_df</span><span class="p">))</span>
     <span class="n">indx_iterator</span> <span class="o">=</span> <span class="mi">0</span> 
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">indx_iterator</span> <span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">batch_size</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">):</span>
             <span class="n">indx_iterator</span> <span class="o">=</span> <span class="mi">0</span> 
             <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
@@ -1839,8 +1801,8 @@ While True:<br/>
 <div class="prompt input_prompt">In [120]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">plot_keras_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">show_shapes_bool</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">SVG</span><span class="p">(</span><span class="n">model_to_dot</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span> <span class="n">show_shapes_bool</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">'dot'</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">'svg'</span><span class="p">))</span>
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">plot_keras_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">show_shapes_bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">SVG</span><span class="p">(</span><span class="n">model_to_dot</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span> <span class="n">show_shapes_bool</span><span class="p">)</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">'dot'</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'svg'</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1852,8 +1814,8 @@ While True:<br/>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython2"><pre><span></span><span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="n">tboard</span> <span class="o">=</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">TensorBoard</span><span class="p">(</span><span class="n">log_dir</span><span class="o">=</span><span class="s1">'./logs'</span><span class="p">,</span> <span class="n">histogram_freq</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">write_graph</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">write_grads</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-                                       <span class="n">write_images</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">embeddings_freq</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">tboard</span> <span class="o">=</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">TensorBoard</span><span class="p">(</span><span class="n">log_dir</span><span class="o">=</span><span class="s1">'./logs'</span><span class="p">,</span> <span class="n">histogram_freq</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">write_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">write_grads</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                       <span class="n">write_images</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">embeddings_freq</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="n">train_data_gen</span> <span class="o">=</span> <span class="n">prep_training_generators</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">label_binarizer</span><span class="p">,</span> <span class="n">BATCH_SIZE</span><span class="p">)</span>
 <span class="n">validation_data_gen</span> <span class="o">=</span> <span class="n">prep_training_generators</span><span class="p">(</span><span class="n">validation_data</span><span class="p">,</span> <span class="n">label_binarizer</span><span class="p">,</span> <span class="n">BATCH_SIZE</span><span class="p">)</span>
@@ -1933,7 +1895,7 @@ ________________________________________________________________________________
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython2"><pre><span></span><span class="c1"># plot_keras_model(image_only_model, to_file='keras_cnn_cifar_model.png')</span>
-<span class="n">plot_model</span><span class="p">(</span><span class="n">image_only_model</span><span class="p">,</span> <span class="n">to_file</span><span class="o">=</span><span class="s1">'keras_cnn_cifar_model.png'</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">show_layer_names</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plot_model</span><span class="p">(</span><span class="n">image_only_model</span><span class="p">,</span> <span class="n">to_file</span><span class="o">=</span><span class="s1">'keras_cnn_cifar_model.png'</span><span class="p">,</span> <span class="n">show_shapes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_layer_names</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2014,7 +1976,7 @@ Epoch 15/15
     
     <span class="n">indices</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_df</span><span class="p">))</span>
     <span class="n">indx_iterator</span> <span class="o">=</span> <span class="mi">0</span> 
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">indx_iterator</span> <span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">batch_size</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">):</span>
             <span class="n">indx_iterator</span> <span class="o">=</span> <span class="mi">0</span>
         
@@ -2071,7 +2033,7 @@ Epoch 15/15
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython2"><pre><span></span><span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">predicted_values</span><span class="p">,</span> <span class="n">test_data</span><span class="p">[</span><span class="s1">'labels'</span><span class="p">][:</span><span class="nb">len</span><span class="p">(</span><span class="n">predicted_values</span><span class="p">)]</span><span class="o">.</span><span class="n">values</span><span class="p">)))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">"Test Accuracy is </span><span class="si">%f</span><span class="s2">"</span><span class="o">%</span><span class="p">(</span><span class="n">test_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Test Accuracy is </span><span class="si">%f</span><span class="s2">"</span><span class="o">%</span><span class="p">(</span><span class="n">test_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>

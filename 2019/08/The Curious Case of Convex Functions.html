@@ -35,7 +35,7 @@
         <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/bootstrap.flatly.min.css" type="text/css"/>
     <link href="https://jadhavpritish.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="https://jadhavpritish.github.io/theme/css/pygments/solarizedlight.css" rel="stylesheet">
+    <link href="https://jadhavpritish.github.io/theme/css/pygments/pastie.css" rel="stylesheet">
     <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/style.css" type="text/css"/>
         <link href="https://jadhavpritish.github.io/extras/custom.css" rel="stylesheet">
 
@@ -1237,45 +1237,7 @@ h6:hover .anchor-link {
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
 .highlight .vm { color: #19177C } /* Name.Variable.Magic */
-.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
-<style type="text/css">
-/* Temporary definitions which will become obsolete with Notebook release 5.0 */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-bold { font-weight: bold; }
-</style>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="The-Curious-Case-of-Convex-Functions">The Curious Case of Convex Functions<a class="anchor-link" href="#The-Curious-Case-of-Convex-Functions">¶</a></h3><ul>
@@ -1313,7 +1275,7 @@ $$<p>In the above example, since the number of rows (m) = number of columns (3),
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython2"><pre><span></span><span class="c1">## basic python imports</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span><span class="n">HTML</span>
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_spd_matrix</span>
 
@@ -1351,16 +1313,16 @@ $$<p>In the above example, since the number of rows (m) = number of columns (3),
 <span class="k">def</span> <span class="nf">check_square_matrix</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
     
     <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="kc">True</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="kc">False</span>
         
     
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix A a Square Matrix: - {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_square_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix B a Square Matrix  - {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_square_matrix</span><span class="p">(</span><span class="n">B</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Is Matrix A a Square Matrix: - </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_square_matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Is Matrix B a Square Matrix  - </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_square_matrix</span><span class="p">(</span><span class="n">B</span><span class="p">)))</span>
       
 </pre></div>
 </div>
@@ -1421,13 +1383,13 @@ $$</p>
 
 <span class="n">base_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 <span class="n">SA</span> <span class="o">=</span> <span class="p">(</span><span class="n">base_matrix</span> <span class="o">+</span> <span class="n">base_matrix</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-<span class="k">print</span> <span class="s2">"Matrix A - </span><span class="se">\n</span><span class="s2"> {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">SA</span><span class="p">))</span>
+<span class="nb">print</span> <span class="s2">"Matrix A - </span><span class="se">\n</span><span class="s2"> </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">SA</span><span class="p">))</span>
 <span class="c1">## generate a random matrix</span>
 <span class="n">SB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="k">print</span> <span class="s2">"Matrix B - </span><span class="se">\n</span><span class="s2"> {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SB</span><span class="p">)</span>
+<span class="nb">print</span> <span class="s2">"Matrix B - </span><span class="se">\n</span><span class="s2"> </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SB</span><span class="p">)</span>
 
 <span class="n">SC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
-<span class="k">print</span> <span class="s2">"Matrix C - </span><span class="se">\n</span><span class="s2"> {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SC</span><span class="p">)</span>
+<span class="nb">print</span> <span class="s2">"Matrix C - </span><span class="se">\n</span><span class="s2"> </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">SC</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1459,9 +1421,9 @@ Matrix C -
 <div class="prompt input_prompt">In [112]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix A {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_symmetry</span><span class="p">(</span><span class="n">SA</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix B {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_symmetry</span><span class="p">(</span><span class="n">SB</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix C {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_symmetry</span><span class="p">(</span><span class="n">SC</span><span class="p">)))</span>
+<div class="highlight hl-ipython2"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Is Matrix A </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_symmetry</span><span class="p">(</span><span class="n">SA</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Is Matrix B </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_symmetry</span><span class="p">(</span><span class="n">SB</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Is Matrix C </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_symmetry</span><span class="p">(</span><span class="n">SC</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -1519,17 +1481,17 @@ $$<p>Note that the terms <strong>self-adjoint and Hermitian can be used intercha
 <div class="highlight hl-ipython2"><pre><span></span><span class="c1">## pseudo generate a symmetric matrix </span>
 
 <span class="c1">##generate a random complex matrix with entries between -20 and 10.</span>
-<span class="n">base_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">base_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 <span class="c1">## trick to force symmetric nature</span>
 <span class="n">HA</span> <span class="o">=</span> <span class="p">(</span><span class="n">base_matrix</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">base_matrix</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
-<span class="k">print</span> <span class="s2">"Matrix A - </span><span class="se">\n</span><span class="s2"> {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">HA</span><span class="p">))</span>
+<span class="nb">print</span> <span class="s2">"Matrix A - </span><span class="se">\n</span><span class="s2"> </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">HA</span><span class="p">))</span>
 
 <span class="c1">## generate a random complex matrix that is not symmetric</span>
-<span class="n">HB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="k">print</span> <span class="s2">"Matrix B - </span><span class="se">\n</span><span class="s2"> {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">HB</span><span class="p">)</span>
+<span class="n">HB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span> <span class="s2">"Matrix B - </span><span class="se">\n</span><span class="s2"> </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">HB</span><span class="p">)</span>
 
-<span class="n">HC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-<span class="k">print</span> <span class="s2">"Matrix C - </span><span class="se">\n</span><span class="s2"> {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">HC</span><span class="p">)</span>
+<span class="n">HC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span> <span class="s2">"Matrix C - </span><span class="se">\n</span><span class="s2"> </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">HC</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1564,9 +1526,9 @@ Matrix C -
 <div class="prompt input_prompt">In [115]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix A {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_hermitian</span><span class="p">(</span><span class="n">HA</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix B {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_hermitian</span><span class="p">(</span><span class="n">HB</span><span class="p">)))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">"Is Matrix C {0}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_hermitian</span><span class="p">(</span><span class="n">HC</span><span class="p">)))</span>
+<div class="highlight hl-ipython2"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Is Matrix A </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_hermitian</span><span class="p">(</span><span class="n">HA</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Is Matrix B </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_hermitian</span><span class="p">(</span><span class="n">HB</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Is Matrix C </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">check_hermitian</span><span class="p">(</span><span class="n">HC</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -1692,8 +1654,8 @@ $&lt;x, y&gt;$ represent the dot product, $x^Ty$</p>
 <span class="n">base_eig_matrix</span> <span class="o">=</span> <span class="n">make_spd_matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">EA</span> <span class="o">=</span> <span class="n">base_eig_matrix</span> <span class="o">+</span> <span class="n">base_eig_matrix</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
 <span class="n">ea_eigen_values</span> <span class="o">=</span> <span class="n">compute_eigen_values</span><span class="p">(</span><span class="n">EA</span><span class="p">)</span>
-<span class="k">print</span> <span class="s2">"Eigen values are </span><span class="si">%s</span><span class="s2">"</span><span class="o">%</span><span class="k">ea_eigen_values</span>
-<span class="k">print</span> <span class="n">check_definiteness</span><span class="p">(</span><span class="n">ea_eigen_values</span><span class="p">)</span>
+<span class="nb">print</span> <span class="s2">"Eigen values are </span><span class="si">%s</span><span class="s2">"</span><span class="o">%</span><span class="k">ea_eigen_values</span>
+<span class="nb">print</span> <span class="n">check_definiteness</span><span class="p">(</span><span class="n">ea_eigen_values</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

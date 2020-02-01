@@ -35,7 +35,7 @@
         <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/bootstrap.flatly.min.css" type="text/css"/>
     <link href="https://jadhavpritish.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="https://jadhavpritish.github.io/theme/css/pygments/solarizedlight.css" rel="stylesheet">
+    <link href="https://jadhavpritish.github.io/theme/css/pygments/pastie.css" rel="stylesheet">
     <link rel="stylesheet" href="https://jadhavpritish.github.io/theme/css/style.css" type="text/css"/>
         <link href="https://jadhavpritish.github.io/extras/custom.css" rel="stylesheet">
 
@@ -1239,45 +1239,7 @@ h6:hover .anchor-link {
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
 .highlight .vm { color: #19177C } /* Name.Variable.Magic */
-.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
-<style type="text/css">
-/* Temporary definitions which will become obsolete with Notebook release 5.0 */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-bold { font-weight: bold; }
-</style>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Winning-Fantasy-Sports-using-Data-Science">Winning Fantasy Sports using Data Science<a class="anchor-link" href="#Winning-Fantasy-Sports-using-Data-Science">¶</a></h1><p>With all the buzz around Indian Premier League (IPL), FIFA World Cup, Cricket World Cup-2019, fantasy sports websites like Dream11 are gaining traction. Fantasy Sports Portal allows sports fans like me to be a part of it. Having said that, it is very difficult to keep track of all the players and their performance across the sports.</p>
@@ -1305,8 +1267,8 @@ In this tutorial, I will try to automate the fantasy selection process so that t
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">re</span>
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">ast</span> <span class="kn">import</span> <span class="n">literal_eval</span>
 <span class="kn">import</span> <span class="nn">pulp</span>
@@ -1591,7 +1553,7 @@ player 2 - [50, 40 , 30, 20 , 10] <br/></p>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython2"><pre><span></span><span class="n">processed_player_data</span><span class="p">[</span><span class="s1">'weighted_player_points'</span><span class="p">]</span> <span class="o">=</span> <span class="n">processed_player_data</span><span class="p">[</span><span class="s1">'last_5_matches_points'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">compute_weighted_points</span><span class="p">)</span>
-<span class="n">processed_player_data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">processed_player_data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">processed_player_data</span><span class="p">[[</span><span class="s1">'player_name'</span><span class="p">,</span> <span class="s1">'last_5_matches_points'</span><span class="p">,</span> <span class="s1">'weighted_player_points'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -1712,11 +1674,11 @@ player 2 - [50, 40 , 30, 20 , 10] <br/></p>
 <span class="n">decision_variables</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">rownum</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">processed_player_data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">variable</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">'x_{}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">rownum</span><span class="p">)))</span>
+    <span class="n">variable</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">'x_</span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">rownum</span><span class="p">)))</span>
     <span class="n">variable</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpVariable</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">lowBound</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">upBound</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cat</span> <span class="o">=</span> <span class="s1">'Integer'</span> <span class="p">)</span> 
     <span class="n">decision_variables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
     
-<span class="k">print</span> <span class="n">decision_variables</span>
+<span class="nb">print</span> <span class="n">decision_variables</span>
 </pre></div>
 </div>
 </div>
@@ -1739,7 +1701,7 @@ player 2 - [50, 40 , 30, 20 , 10] <br/></p>
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython2"><pre><span></span><span class="c1"># Create optimization Function</span>
-<span class="k">print</span> <span class="n">processed_player_data</span><span class="o">.</span><span class="n">columns</span>
+<span class="nb">print</span> <span class="n">processed_player_data</span><span class="o">.</span><span class="n">columns</span>
 <span class="n">total_points</span> <span class="o">=</span> <span class="s1">''</span>
 <span class="k">for</span> <span class="n">rownum</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">processed_player_data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
     <span class="n">formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'weighted_player_points'</span><span class="p">]</span> <span class="o">*</span> <span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
@@ -1816,7 +1778,7 @@ player 2 - [50, 40 , 30, 20 , 10] <br/></p>
 
 
 
-<span class="k">print</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
 <span class="n">prob</span><span class="o">.</span><span class="n">writeLP</span><span class="p">(</span><span class="s1">'Dreamteam.lp'</span><span class="p">)</span>
 
 <span class="n">optimization_result</span> <span class="o">=</span> <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
@@ -1895,13 +1857,13 @@ VARIABLES
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">'index'</span><span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">processed_player_data</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s1">'index'</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">'value'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">'weighted_player_points'</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">'value'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">'weighted_player_points'</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">selected_cols_final</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'player_name'</span><span class="p">,</span> <span class="s1">'team_name_CSK'</span><span class="p">,</span> <span class="s1">'team_name_MI'</span><span class="p">,</span> <span class="s1">'weighted_player_points'</span><span class="p">]</span>
 <span class="n">final_set_of_players_to_be_selected</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">selected_cols_final</span><span class="p">]</span>
 
 <span class="n">display</span><span class="p">(</span><span class="n">final_set_of_players_to_be_selected</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">"We can accrue an estimated points of </span><span class="si">%f</span><span class="s2">"</span><span class="o">%</span><span class="p">(</span><span class="n">final_set_of_players_to_be_selected</span><span class="p">[</span><span class="s1">'weighted_player_points'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"We can accrue an estimated points of </span><span class="si">%f</span><span class="s2">"</span><span class="o">%</span><span class="p">(</span><span class="n">final_set_of_players_to_be_selected</span><span class="p">[</span><span class="s1">'weighted_player_points'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
 </pre></div>
 </div>
 </div>
