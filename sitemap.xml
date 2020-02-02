@@ -5,370 +5,377 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/</loc>
-<lastmod>2020-02-01T21:30:18-00:00</lastmod>
+<lastmod>2020-02-02T22:48:25-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/archives.html</loc>
-<lastmod>2020-02-01T21:30:18-00:00</lastmod>
+<lastmod>2020-02-02T22:48:25-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/tags.html</loc>
-<lastmod>2020-02-01T21:30:18-00:00</lastmod>
+<lastmod>2020-02-02T22:48:25-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2019/12/KL Divergence in VAE - Closed form Solution.html</loc>
+<loc>https://jadhavpritish.github.io/categories.html</loc>
+<lastmod>2020-02-02T22:48:25-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/KL Divergence in VAE - Closed form Solution.html</loc>
 <lastmod>2019-12-15T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2019/10/Bending the ELBO in Variational Autoencoders.html</loc>
+<loc>https://jadhavpritish.github.io/Bending the ELBO in Variational Autoencoders.html</loc>
 <lastmod>2019-10-15T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2019/09/multilabel text classification.html</loc>
+<loc>https://jadhavpritish.github.io/multilabel text classification.html</loc>
 <lastmod>2019-09-11T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2019/08/Proving Convexity of Mean Squared Error Loss in a Regression Setting..html</loc>
+<loc>https://jadhavpritish.github.io/Proving Convexity of Mean Squared Error Loss in a Regression Setting..html</loc>
 <lastmod>2019-08-25T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2019/08/The Curious Case of Convex Functions.html</loc>
+<loc>https://jadhavpritish.github.io/The Curious Case of Convex Functions.html</loc>
 <lastmod>2019-08-24T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2019/08/Building Web APIs Using Python & Flask..html</loc>
+<loc>https://jadhavpritish.github.io/Building Web APIs Using Python & Flask..html</loc>
 <lastmod>2019-08-21T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2019/07/Generating MNIST data by leveraging Multivariate Normal Distribution..html</loc>
+<loc>https://jadhavpritish.github.io/Generating MNIST data by leveraging Multivariate Normal Distribution..html</loc>
 <lastmod>2019-07-19T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2019/06/Training Classifier Using PyTorch - Detailed Example..html</loc>
+<loc>https://jadhavpritish.github.io/Training Classifier Using PyTorch - Detailed Example..html</loc>
 <lastmod>2019-06-26T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2019/06/Deep Neural Network for Multiclass Classification Using Keras..html</loc>
+<loc>https://jadhavpritish.github.io/Deep Neural Network for Multiclass Classification Using Keras..html</loc>
 <lastmod>2019-06-19T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2019/05/TextRank Algorithm for Key-Phrase Extraction / Text Summarization..html</loc>
+<loc>https://jadhavpritish.github.io/TextRank Algorithm for Key-Phrase Extraction / Text Summarization..html</loc>
 <lastmod>2019-05-24T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2018/12/fantasy_sports_auto_selection.html</loc>
+<loc>https://jadhavpritish.github.io/fantasy_sports_auto_selection.html</loc>
 <lastmod>2018-12-03T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2018/10/image_text_classification.html</loc>
+<loc>https://jadhavpritish.github.io/image_text_classification.html</loc>
 <lastmod>2018-10-10T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2018/07/Logistic Regression from scratch..html</loc>
+<loc>https://jadhavpritish.github.io/Logistic Regression from scratch..html</loc>
 <lastmod>2018-07-08T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/2018/06/Linear Regression using Numpy.html</loc>
+<loc>https://jadhavpritish.github.io/Linear Regression using Numpy.html</loc>
 <lastmod>2018-06-08T18:00:00+05:30</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/category/data-science</loc>
+<loc>https://jadhavpritish.github.io/category/data-science.html</loc>
 <lastmod>2019-05-24T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/category/deep-learning</loc>
+<loc>https://jadhavpritish.github.io/category/deep-learning.html</loc>
 <lastmod>2019-09-11T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/category/frameworks</loc>
+<loc>https://jadhavpritish.github.io/category/frameworks.html</loc>
 <lastmod>2019-08-21T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/category/linear-algebra</loc>
+<loc>https://jadhavpritish.github.io/category/linear-algebra.html</loc>
 <lastmod>2019-12-15T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/category/machine-learning</loc>
+<loc>https://jadhavpritish.github.io/category/machine-learning.html</loc>
 <lastmod>2018-07-08T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/nlp</loc>
+<loc>https://jadhavpritish.github.io/tag/nlp.html</loc>
 <lastmod>2019-05-24T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/classification</loc>
+<loc>https://jadhavpritish.github.io/tag/classification.html</loc>
 <lastmod>2018-07-08T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/integer-linear-programming</loc>
+<loc>https://jadhavpritish.github.io/tag/integer-linear-programming.html</loc>
 <lastmod>2018-12-03T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/deep-learning</loc>
+<loc>https://jadhavpritish.github.io/tag/deep-learning.html</loc>
 <lastmod>2019-12-15T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/text-classification</loc>
+<loc>https://jadhavpritish.github.io/tag/text-classification.html</loc>
 <lastmod>2019-09-11T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/generative-modeling</loc>
+<loc>https://jadhavpritish.github.io/tag/generative-modeling.html</loc>
 <lastmod>2019-07-19T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/flask</loc>
+<loc>https://jadhavpritish.github.io/tag/flask.html</loc>
 <lastmod>2019-08-21T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/matrices</loc>
+<loc>https://jadhavpritish.github.io/tag/matrices.html</loc>
 <lastmod>2019-08-25T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/multiclass-classification-ptroch</loc>
+<loc>https://jadhavpritish.github.io/tag/multiclass-classification-ptroch.html</loc>
 <lastmod>2019-06-26T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/multiclass</loc>
+<loc>https://jadhavpritish.github.io/tag/multiclass.html</loc>
 <lastmod>2019-06-19T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/logistic-regression</loc>
+<loc>https://jadhavpritish.github.io/tag/logistic-regression.html</loc>
 <lastmod>2018-07-08T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/machine-learning</loc>
+<loc>https://jadhavpritish.github.io/tag/machine-learning.html</loc>
 <lastmod>2019-08-21T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/numpy</loc>
+<loc>https://jadhavpritish.github.io/tag/numpy.html</loc>
 <lastmod>2018-06-08T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/linear-regression</loc>
+<loc>https://jadhavpritish.github.io/tag/linear-regression.html</loc>
 <lastmod>2018-06-08T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/keras</loc>
+<loc>https://jadhavpritish.github.io/tag/keras.html</loc>
 <lastmod>2019-09-11T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/python</loc>
+<loc>https://jadhavpritish.github.io/tag/python.html</loc>
 <lastmod>2019-12-15T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/autograd</loc>
+<loc>https://jadhavpritish.github.io/tag/autograd.html</loc>
 <lastmod>2019-06-26T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/resource-allocation</loc>
+<loc>https://jadhavpritish.github.io/tag/resource-allocation.html</loc>
 <lastmod>2018-12-03T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/pagerank</loc>
+<loc>https://jadhavpritish.github.io/tag/pagerank.html</loc>
 <lastmod>2019-05-24T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/supervised-learning</loc>
+<loc>https://jadhavpritish.github.io/tag/supervised-learning.html</loc>
 <lastmod>2018-07-08T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/image-classification</loc>
+<loc>https://jadhavpritish.github.io/tag/image-classification.html</loc>
 <lastmod>2019-06-19T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/convexity</loc>
+<loc>https://jadhavpritish.github.io/tag/convexity.html</loc>
 <lastmod>2019-08-25T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/dream11-prediction</loc>
+<loc>https://jadhavpritish.github.io/tag/dream11-prediction.html</loc>
 <lastmod>2018-12-03T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/optimization</loc>
+<loc>https://jadhavpritish.github.io/tag/optimization.html</loc>
 <lastmod>2019-08-25T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/multilabel</loc>
+<loc>https://jadhavpritish.github.io/tag/multilabel.html</loc>
 <lastmod>2019-09-11T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/fantasy-sports</loc>
+<loc>https://jadhavpritish.github.io/tag/fantasy-sports.html</loc>
 <lastmod>2018-12-03T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/variational-autoencoders</loc>
+<loc>https://jadhavpritish.github.io/tag/variational-autoencoders.html</loc>
 <lastmod>2019-12-15T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/nltk</loc>
+<loc>https://jadhavpritish.github.io/tag/nltk.html</loc>
 <lastmod>2019-05-24T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/author/pritish-jadhav</loc>
+<loc>https://jadhavpritish.github.io/author/pritish-jadhav.html</loc>
 <lastmod>2018-12-03T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/author/pritish-jadhav-mrunal-jadhav</loc>
+<loc>https://jadhavpritish.github.io/author/pritish-jadhav-mrunal-jadhav.html</loc>
 <lastmod>2018-10-10T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/author/pritish-sunil-jadhav</loc>
+<loc>https://jadhavpritish.github.io/author/pritish-sunil-jadhav.html</loc>
 <lastmod>2019-12-15T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
