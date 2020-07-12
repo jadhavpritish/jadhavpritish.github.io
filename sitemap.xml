@@ -5,29 +5,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/</loc>
-<lastmod>2020-07-07T19:16:33-00:00</lastmod>
+<lastmod>2020-07-12T19:52:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/archives.html</loc>
-<lastmod>2020-07-07T19:16:33-00:00</lastmod>
+<lastmod>2020-07-12T19:52:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/tags.html</loc>
-<lastmod>2020-07-07T19:16:33-00:00</lastmod>
+<lastmod>2020-07-12T19:52:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/categories.html</loc>
-<lastmod>2020-07-07T19:16:33-00:00</lastmod>
+<lastmod>2020-07-12T19:52:55-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/Sequence to Sequence Modeling.html</loc>
+<lastmod>2020-07-11T18:00:00+05:30</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -138,7 +145,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/category/deep-learning.html</loc>
-<lastmod>2019-09-11T18:00:00+05:53</lastmod>
+<lastmod>2020-07-11T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -187,14 +194,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/tag/deep-learning.html</loc>
-<lastmod>2019-12-15T18:00:00+05:53</lastmod>
+<lastmod>2020-07-11T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/tag/text-classification.html</loc>
-<lastmod>2019-09-11T18:00:00+05:53</lastmod>
+<lastmod>2020-07-11T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -263,15 +270,15 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/keras.html</loc>
-<lastmod>2019-09-11T18:00:00+05:53</lastmod>
+<loc>https://jadhavpritish.github.io/tag/variational-autoencoders.html</loc>
+<lastmod>2019-12-15T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/tag/python.html</loc>
-<lastmod>2019-12-15T18:00:00+05:53</lastmod>
+<lastmod>2020-07-11T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -334,7 +341,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/tag/multilabel.html</loc>
-<lastmod>2019-09-11T18:00:00+05:53</lastmod>
+<lastmod>2020-07-11T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -347,8 +354,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/variational-autoencoders.html</loc>
-<lastmod>2019-12-15T18:00:00+05:53</lastmod>
+<loc>https://jadhavpritish.github.io/tag/keras.html</loc>
+<lastmod>2020-07-11T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -376,7 +383,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/author/pritish-sunil-jadhav.html</loc>
-<lastmod>2019-12-15T18:00:00+05:53</lastmod>
+<lastmod>2020-07-11T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
