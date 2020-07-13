@@ -1252,10 +1252,10 @@ The architecture in Fig 4.1 can be applied when the length of the input and outp
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="a6a2fd0e-436c-42cb-89e0-0a2374f4160b"&gt;&lt;/div&gt;
+&lt;div id="614c5d4a-cc06-42e5-8ee6-3ef3e6641570"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#a6a2fd0e-436c-42cb-89e0-0a2374f4160b');
+var element = $('#614c5d4a-cc06-42e5-8ee6-3ef3e6641570');
 
             setTimeout(function() {
                 var nbb_cell_id = 1;
@@ -1326,10 +1326,10 @@ var element = $('#a6a2fd0e-436c-42cb-89e0-0a2374f4160b');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="e46c47a1-6f0d-4e23-bff8-c8af760f1350"&gt;&lt;/div&gt;
+&lt;div id="c0b2e8fc-c72b-4a7b-959c-4d6f78aa960e"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#e46c47a1-6f0d-4e23-bff8-c8af760f1350');
+var element = $('#c0b2e8fc-c72b-4a7b-959c-4d6f78aa960e');
 
             setTimeout(function() {
                 var nbb_cell_id = 2;
@@ -1416,10 +1416,10 @@ Each Dataset is represented in the following format : &lt;strong&gt;English + TA
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="42c85526-7b8b-40e5-8e99-ca46c3b63701"&gt;&lt;/div&gt;
+&lt;div id="884b9a9d-fc4b-497c-989a-03d3c3719cae"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#42c85526-7b8b-40e5-8e99-ca46c3b63701');
+var element = $('#884b9a9d-fc4b-497c-989a-03d3c3719cae');
 
             setTimeout(function() {
                 var nbb_cell_id = 4;
@@ -1528,10 +1528,10 @@ var element = $('#42c85526-7b8b-40e5-8e99-ca46c3b63701');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="7e896eb6-6d37-4489-9369-137be6cc230a"&gt;&lt;/div&gt;
+&lt;div id="c9c26716-90ba-4c9f-9da8-63bac9407fb2"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#7e896eb6-6d37-4489-9369-137be6cc230a');
+var element = $('#c9c26716-90ba-4c9f-9da8-63bac9407fb2');
 
             setTimeout(function() {
                 var nbb_cell_id = 5;
@@ -1623,10 +1623,10 @@ var element = $('#7e896eb6-6d37-4489-9369-137be6cc230a');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="d6f92fb8-7ba7-4ecb-b81a-547e43844211"&gt;&lt;/div&gt;
+&lt;div id="9bb36a8e-d44a-4cf7-8a5d-ce3029f3470e"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#d6f92fb8-7ba7-4ecb-b81a-547e43844211');
+var element = $('#9bb36a8e-d44a-4cf7-8a5d-ce3029f3470e');
 
             setTimeout(function() {
                 var nbb_cell_id = 7;
@@ -1710,10 +1710,10 @@ List of Preprocessing steps performed on each component of Text Data are :&lt;/p
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="f4279694-7afa-40f6-8d70-158acba65755"&gt;&lt;/div&gt;
+&lt;div id="1d24c073-9acb-436c-847a-af6d67ee76f2"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#f4279694-7afa-40f6-8d70-158acba65755');
+var element = $('#1d24c073-9acb-436c-847a-af6d67ee76f2');
 
             setTimeout(function() {
                 var nbb_cell_id = 5;
@@ -1780,10 +1780,10 @@ var element = $('#f4279694-7afa-40f6-8d70-158acba65755');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="3e3b7452-261a-48c4-8f80-b8da0998a455"&gt;&lt;/div&gt;
+&lt;div id="5ee02d29-ee06-4f2e-aa33-4f20cab67346"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#3e3b7452-261a-48c4-8f80-b8da0998a455');
+var element = $('#5ee02d29-ee06-4f2e-aa33-4f20cab67346');
 
             setTimeout(function() {
                 var nbb_cell_id = 6;
@@ -1906,10 +1906,10 @@ var element = $('#3e3b7452-261a-48c4-8f80-b8da0998a455');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="eb1e72c9-2e9d-48c1-a36e-127d3eb851b1"&gt;&lt;/div&gt;
+&lt;div id="d3e5b8fc-3b5f-4e3a-90df-06a3d2c9c0e0"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#eb1e72c9-2e9d-48c1-a36e-127d3eb851b1');
+var element = $('#d3e5b8fc-3b5f-4e3a-90df-06a3d2c9c0e0');
 
             setTimeout(function() {
                 var nbb_cell_id = 7;
@@ -1966,10 +1966,10 @@ The Data Test split has 17721 records
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="26a7fbae-b8cc-4cdf-a84c-7da1b3fc3bae"&gt;&lt;/div&gt;
+&lt;div id="d6bccfeb-032f-4802-8a8e-822e927c8b2e"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#26a7fbae-b8cc-4cdf-a84c-7da1b3fc3bae');
+var element = $('#d6bccfeb-032f-4802-8a8e-822e927c8b2e');
 
             setTimeout(function() {
                 var nbb_cell_id = 19;
@@ -2049,10 +2049,10 @@ var element = $('#26a7fbae-b8cc-4cdf-a84c-7da1b3fc3bae');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="fa04e941-93f8-4cf0-b201-a204eae57d77"&gt;&lt;/div&gt;
+&lt;div id="396abade-4949-4579-9247-98cfe7f708aa"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#fa04e941-93f8-4cf0-b201-a204eae57d77');
+var element = $('#396abade-4949-4579-9247-98cfe7f708aa');
 
             setTimeout(function() {
                 var nbb_cell_id = 12;
@@ -2102,10 +2102,10 @@ var element = $('#fa04e941-93f8-4cf0-b201-a204eae57d77');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="56f546e9-5263-4053-989a-0e1b53a89576"&gt;&lt;/div&gt;
+&lt;div id="fefb8285-2e31-476e-9f1a-a78d16263a86"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#56f546e9-5263-4053-989a-0e1b53a89576');
+var element = $('#fefb8285-2e31-476e-9f1a-a78d16263a86');
 
             setTimeout(function() {
                 var nbb_cell_id = 13;
@@ -2161,10 +2161,10 @@ var element = $('#56f546e9-5263-4053-989a-0e1b53a89576');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="22e1ac81-8789-4112-83eb-4dd4ae2916ac"&gt;&lt;/div&gt;
+&lt;div id="ab760612-fadc-430a-89c6-a1f1ac926ded"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#22e1ac81-8789-4112-83eb-4dd4ae2916ac');
+var element = $('#ab760612-fadc-430a-89c6-a1f1ac926ded');
 
             setTimeout(function() {
                 var nbb_cell_id = 14;
@@ -2212,10 +2212,10 @@ var element = $('#22e1ac81-8789-4112-83eb-4dd4ae2916ac');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="2763f1e5-0252-4664-84c7-480c84d4f617"&gt;&lt;/div&gt;
+&lt;div id="bed08a54-406f-45b7-89f5-00501ccb3820"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#2763f1e5-0252-4664-84c7-480c84d4f617');
+var element = $('#bed08a54-406f-45b7-89f5-00501ccb3820');
 
             setTimeout(function() {
                 var nbb_cell_id = 15;
@@ -2291,10 +2291,10 @@ var element = $('#2763f1e5-0252-4664-84c7-480c84d4f617');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="8222ead5-29f3-4522-812a-d85ccd0c2b60"&gt;&lt;/div&gt;
+&lt;div id="53adf267-3617-4cd5-aa86-968c25f0897a"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#8222ead5-29f3-4522-812a-d85ccd0c2b60');
+var element = $('#53adf267-3617-4cd5-aa86-968c25f0897a');
 
             setTimeout(function() {
                 var nbb_cell_id = 16;
@@ -2433,10 +2433,10 @@ var element = $('#8222ead5-29f3-4522-812a-d85ccd0c2b60');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="55c701da-568f-4237-b815-a503ed6acd73"&gt;&lt;/div&gt;
+&lt;div id="54c426e0-e2aa-40a7-a878-aab7c43f0576"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#55c701da-568f-4237-b815-a503ed6acd73');
+var element = $('#54c426e0-e2aa-40a7-a878-aab7c43f0576');
 
             setTimeout(function() {
                 var nbb_cell_id = 20;
@@ -2474,10 +2474,10 @@ var element = $('#55c701da-568f-4237-b815-a503ed6acd73');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="9a2e6e2d-f2b6-4ab2-9975-e75c1d00ef55"&gt;&lt;/div&gt;
+&lt;div id="55ea1765-3dd5-4d9a-82c4-e160d42fd880"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#9a2e6e2d-f2b6-4ab2-9975-e75c1d00ef55');
+var element = $('#55ea1765-3dd5-4d9a-82c4-e160d42fd880');
 
             setTimeout(function() {
                 var nbb_cell_id = 21;
@@ -2583,10 +2583,10 @@ var element = $('#9a2e6e2d-f2b6-4ab2-9975-e75c1d00ef55');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="b531c826-3f2f-4d42-9379-b9c70761a07a"&gt;&lt;/div&gt;
+&lt;div id="6660b0e4-7a6e-401f-9fde-2a2ed5205ded"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#b531c826-3f2f-4d42-9379-b9c70761a07a');
+var element = $('#6660b0e4-7a6e-401f-9fde-2a2ed5205ded');
 
             setTimeout(function() {
                 var nbb_cell_id = 30;
@@ -2623,10 +2623,10 @@ var element = $('#b531c826-3f2f-4d42-9379-b9c70761a07a');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="1567b98f-6f6c-433d-91f3-dd8331190588"&gt;&lt;/div&gt;
+&lt;div id="248291cc-5476-4809-b931-89beece8d58c"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#1567b98f-6f6c-433d-91f3-dd8331190588');
+var element = $('#248291cc-5476-4809-b931-89beece8d58c');
 
             setTimeout(function() {
                 var nbb_cell_id = 31;
@@ -2670,10 +2670,10 @@ var element = $('#1567b98f-6f6c-433d-91f3-dd8331190588');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="3414f9de-1f62-44e8-b3ab-fb7d0b959cb3"&gt;&lt;/div&gt;
+&lt;div id="c458d014-0e23-4290-8785-3de82ab926e6"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#3414f9de-1f62-44e8-b3ab-fb7d0b959cb3');
+var element = $('#c458d014-0e23-4290-8785-3de82ab926e6');
 
             setTimeout(function() {
                 var nbb_cell_id = 32;
@@ -2713,10 +2713,10 @@ var element = $('#3414f9de-1f62-44e8-b3ab-fb7d0b959cb3');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="c0a4b242-cfe7-41b7-8201-a36b89e07342"&gt;&lt;/div&gt;
+&lt;div id="c4ed92af-669a-479e-834f-e9800fd8d6dd"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#c0a4b242-cfe7-41b7-8201-a36b89e07342');
+var element = $('#c4ed92af-669a-479e-834f-e9800fd8d6dd');
 
             setTimeout(function() {
                 var nbb_cell_id = 23;
@@ -2870,10 +2870,10 @@ Epoch 00011: early stopping
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="962e281d-4aaf-4488-83b0-e316470e16f1"&gt;&lt;/div&gt;
+&lt;div id="aec58054-dce2-4d1e-8efd-4c00bd36335f"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#962e281d-4aaf-4488-83b0-e316470e16f1');
+var element = $('#aec58054-dce2-4d1e-8efd-4c00bd36335f');
 
             setTimeout(function() {
                 var nbb_cell_id = 24;
@@ -3132,10 +3132,10 @@ var element = $('#962e281d-4aaf-4488-83b0-e316470e16f1');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="3a38e692-205c-4324-a663-11b029f706b1"&gt;&lt;/div&gt;
+&lt;div id="d2bc599c-adc8-4522-b352-fe567fd31747"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#3a38e692-205c-4324-a663-11b029f706b1');
+var element = $('#d2bc599c-adc8-4522-b352-fe567fd31747');
 
             setTimeout(function() {
                 var nbb_cell_id = 36;
@@ -3244,10 +3244,10 @@ BlEU-4 :   0.47073541733215074
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="efae04f7-3aa3-4937-a01f-918917d38989"&gt;&lt;/div&gt;
+&lt;div id="7840cc3a-f880-401f-87e2-e4432bae6319"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#efae04f7-3aa3-4937-a01f-918917d38989');
+var element = $('#7840cc3a-f880-401f-87e2-e4432bae6319');
 
             setTimeout(function() {
                 var nbb_cell_id = 22;
@@ -3266,17 +3266,6 @@ var element = $('#efae04f7-3aa3-4937-a01f-918917d38989');
             
 &lt;/script&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [48]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# predicted_results.to_csv("./data/fra-eng/version1/modelv1_results.csv")&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
