@@ -1238,7 +1238,7 @@ h6:hover .anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Proving-Convexity-of-Mean-Squared-Error-Loss---Case-Study">Proving Convexity of Mean Squared Error Loss - Case Study<a class="anchor-link" href="#Proving-Convexity-of-Mean-Squared-Error-Loss---Case-Study">¶</a></h2><ul>
-<li>In this blog post, we shall quickly cover the convexity proof for Mean Squared Error Loss function used in a traditional Regression setting.</li>
+<li>In this blog post, we shall quickly cover the convexity proof for the Mean Squared Error Loss function used in a traditional Regression setting.</li>
 <li>In case you haven't checked out my previous blog - <a href="https://jadhavpritish.github.io/2019/08/The%20Curious%20Case%20of%20Convex%20Functions.html">The Curious Case of Convex Functions</a>, I would highly recommend you to check it out. The blog focuses on all the basic building blocks for proving convexity. </li>
 </ul>
 <p>With that in mind, let us start by reviewing -</p>
@@ -1361,14 +1361,14 @@ $$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Step-2---Computing-the-Principal-Minors---">Step 2 - Computing the Principal Minors  -<a class="anchor-link" href="#Step-2---Computing-the-Principal-Minors---">¶</a></h4><p>From <a href="https://jadhavpritish.github.io/2019/08/The%20Curious%20Case%20of%20Convex%20Functions.html">previous blog post</a>, a function is convex if all the principal minors are greater than or equal to zero i.e. $\bigtriangleup_k$ $\geq 0 \;\; \forall$ k .</p>
+<h4 id="Step-2---Computing-the-Principal-Minors---">Step 2 - Computing the Principal Minors  -<a class="anchor-link" href="#Step-2---Computing-the-Principal-Minors---">¶</a></h4><p>From the <a href="https://jadhavpritish.github.io/2019/08/The%20Curious%20Case%20of%20Convex%20Functions.html">previous blog post</a>, a function is convex if all the principal minors are greater than or equal to zero i.e. $\bigtriangleup_k$ $\geq 0 \;\; \forall$ k .</p>
 <h5 id="compute-$\bigtriangleup_1$---">compute $\bigtriangleup_1$  -<a class="anchor-link" href="#compute-$\bigtriangleup_1$---">¶</a></h5><p>Principal Minors of order 1 ($\bigtriangleup_1$) can be obtained by deleting any 3-1 = 2 rows and corresponding columns.</p>
 <p>a. By deleting row 2 and 3 along with corresponding columns
-$ \bigtriangleup_1 $ = x_1^2</p>
+$ \bigtriangleup_1 $ = $x_{1}^2$</p>
 <p>b. By deleting row 1 and 3 along with corresponding columns
-$ \bigtriangleup_1 $ = x_2^2</p>
+$ \bigtriangleup_1 $ = $x_{2}^2$</p>
 <p>c. By deleting row 1 and 2 along with corresponding columns
-$ \bigtriangleup_1 $ = x_3^2</p>
+$ \bigtriangleup_1 $ = $x_{3}^2$</p>
 <h5 id="compute-$\bigtriangleup_2$---">compute $\bigtriangleup_2$  -<a class="anchor-link" href="#compute-$\bigtriangleup_2$---">¶</a></h5><p>Principal Minors of order 2 can be obtained by deleting any 3-2 = 1 row and corresponding column.</p>
 <p>a. By deleting row 1 and corresponding column 1 - <br/></p>
 $$
@@ -1405,7 +1405,7 @@ x_2x_1 &amp; x_2^2
 &amp; = 0 
 \end{align}
 $$</p>
-<h5 id="compute-$\bigtriangleup_3$---">compute $\bigtriangleup_3$  -<a class="anchor-link" href="#compute-$\bigtriangleup_3$---">¶</a></h5><p>Principal Minors of order 3 can be obtained by computing determinant of J(W).</p>
+<h5 id="compute-$\bigtriangleup_3$---">compute $\bigtriangleup_3$  -<a class="anchor-link" href="#compute-$\bigtriangleup_3$---">¶</a></h5><p>Principal Minors of order 3 can be obtained by computing the determinant of J(W).</p>
 $$
 \begin{align}
 \bigtriangleup_3 &amp; = \begin{vmatrix}J^H \end{vmatrix} 

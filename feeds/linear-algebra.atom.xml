@@ -3736,7 +3736,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="Proving-Convexity-of-Mean-Squared-Error-Loss---Case-Study"&gt;Proving Convexity of Mean Squared Error Loss - Case Study&lt;a class="anchor-link" href="#Proving-Convexity-of-Mean-Squared-Error-Loss---Case-Study"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;In this blog post, we shall quickly cover the convexity proof for Mean Squared Error Loss function used in a traditional Regression setting.&lt;/li&gt;
+&lt;li&gt;In this blog post, we shall quickly cover the convexity proof for the Mean Squared Error Loss function used in a traditional Regression setting.&lt;/li&gt;
 &lt;li&gt;In case you haven't checked out my previous blog - &lt;a href="https://jadhavpritish.github.io/2019/08/The%20Curious%20Case%20of%20Convex%20Functions.html"&gt;The Curious Case of Convex Functions&lt;/a&gt;, I would highly recommend you to check it out. The blog focuses on all the basic building blocks for proving convexity. &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;With that in mind, let us start by reviewing -&lt;/p&gt;
@@ -3859,14 +3859,14 @@ $$
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="Step-2---Computing-the-Principal-Minors---"&gt;Step 2 - Computing the Principal Minors  -&lt;a class="anchor-link" href="#Step-2---Computing-the-Principal-Minors---"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;From &lt;a href="https://jadhavpritish.github.io/2019/08/The%20Curious%20Case%20of%20Convex%20Functions.html"&gt;previous blog post&lt;/a&gt;, a function is convex if all the principal minors are greater than or equal to zero i.e. $\bigtriangleup_k$ $\geq 0 \;\; \forall$ k .&lt;/p&gt;
+&lt;h4 id="Step-2---Computing-the-Principal-Minors---"&gt;Step 2 - Computing the Principal Minors  -&lt;a class="anchor-link" href="#Step-2---Computing-the-Principal-Minors---"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;From the &lt;a href="https://jadhavpritish.github.io/2019/08/The%20Curious%20Case%20of%20Convex%20Functions.html"&gt;previous blog post&lt;/a&gt;, a function is convex if all the principal minors are greater than or equal to zero i.e. $\bigtriangleup_k$ $\geq 0 \;\; \forall$ k .&lt;/p&gt;
 &lt;h5 id="compute-$\bigtriangleup_1$---"&gt;compute $\bigtriangleup_1$  -&lt;a class="anchor-link" href="#compute-$\bigtriangleup_1$---"&gt;¶&lt;/a&gt;&lt;/h5&gt;&lt;p&gt;Principal Minors of order 1 ($\bigtriangleup_1$) can be obtained by deleting any 3-1 = 2 rows and corresponding columns.&lt;/p&gt;
 &lt;p&gt;a. By deleting row 2 and 3 along with corresponding columns
-$ \bigtriangleup_1 $ = x_1^2&lt;/p&gt;
+$ \bigtriangleup_1 $ = $x_{1}^2$&lt;/p&gt;
 &lt;p&gt;b. By deleting row 1 and 3 along with corresponding columns
-$ \bigtriangleup_1 $ = x_2^2&lt;/p&gt;
+$ \bigtriangleup_1 $ = $x_{2}^2$&lt;/p&gt;
 &lt;p&gt;c. By deleting row 1 and 2 along with corresponding columns
-$ \bigtriangleup_1 $ = x_3^2&lt;/p&gt;
+$ \bigtriangleup_1 $ = $x_{3}^2$&lt;/p&gt;
 &lt;h5 id="compute-$\bigtriangleup_2$---"&gt;compute $\bigtriangleup_2$  -&lt;a class="anchor-link" href="#compute-$\bigtriangleup_2$---"&gt;¶&lt;/a&gt;&lt;/h5&gt;&lt;p&gt;Principal Minors of order 2 can be obtained by deleting any 3-2 = 1 row and corresponding column.&lt;/p&gt;
 &lt;p&gt;a. By deleting row 1 and corresponding column 1 - &lt;br/&gt;&lt;/p&gt;
 $$
@@ -3903,7 +3903,7 @@ x_2x_1 &amp;amp; x_2^2
 &amp;amp; = 0 
 \end{align}
 $$&lt;/p&gt;
-&lt;h5 id="compute-$\bigtriangleup_3$---"&gt;compute $\bigtriangleup_3$  -&lt;a class="anchor-link" href="#compute-$\bigtriangleup_3$---"&gt;¶&lt;/a&gt;&lt;/h5&gt;&lt;p&gt;Principal Minors of order 3 can be obtained by computing determinant of J(W).&lt;/p&gt;
+&lt;h5 id="compute-$\bigtriangleup_3$---"&gt;compute $\bigtriangleup_3$  -&lt;a class="anchor-link" href="#compute-$\bigtriangleup_3$---"&gt;¶&lt;/a&gt;&lt;/h5&gt;&lt;p&gt;Principal Minors of order 3 can be obtained by computing the determinant of J(W).&lt;/p&gt;
 $$
 \begin{align}
 \bigtriangleup_3 &amp;amp; = \begin{vmatrix}J^H \end{vmatrix} 

@@ -1252,10 +1252,10 @@ The architecture in Fig 4.1 can be applied when the length of the input and outp
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="6a00b824-2d49-41b0-a04c-e4f943520894"&gt;&lt;/div&gt;
+&lt;div id="295a5b7e-da47-4ec8-aa68-2294d54d11cc"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#6a00b824-2d49-41b0-a04c-e4f943520894');
+var element = $('#295a5b7e-da47-4ec8-aa68-2294d54d11cc');
 
             setTimeout(function() {
                 var nbb_cell_id = 1;
@@ -1326,10 +1326,10 @@ var element = $('#6a00b824-2d49-41b0-a04c-e4f943520894');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="bf0d8024-aade-48b4-bff9-457ee735ca6b"&gt;&lt;/div&gt;
+&lt;div id="56628a2a-3cab-496b-9793-25a4ad7ba5fc"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#bf0d8024-aade-48b4-bff9-457ee735ca6b');
+var element = $('#56628a2a-3cab-496b-9793-25a4ad7ba5fc');
 
             setTimeout(function() {
                 var nbb_cell_id = 2;
@@ -1416,10 +1416,10 @@ Each Dataset is represented in the following format : &lt;strong&gt;English + TA
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="24b7150d-be1f-4c47-a3f0-4dc43d5b73da"&gt;&lt;/div&gt;
+&lt;div id="7db44f12-74cb-425d-ab94-3c3ab263d4b3"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#24b7150d-be1f-4c47-a3f0-4dc43d5b73da');
+var element = $('#7db44f12-74cb-425d-ab94-3c3ab263d4b3');
 
             setTimeout(function() {
                 var nbb_cell_id = 4;
@@ -1528,10 +1528,10 @@ var element = $('#24b7150d-be1f-4c47-a3f0-4dc43d5b73da');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="5e697547-5805-480e-a7c9-1c4e23f4a41d"&gt;&lt;/div&gt;
+&lt;div id="5133c5ba-5d2f-43b4-8c0f-4109596bb3c8"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#5e697547-5805-480e-a7c9-1c4e23f4a41d');
+var element = $('#5133c5ba-5d2f-43b4-8c0f-4109596bb3c8');
 
             setTimeout(function() {
                 var nbb_cell_id = 5;
@@ -1623,10 +1623,10 @@ var element = $('#5e697547-5805-480e-a7c9-1c4e23f4a41d');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="494057a7-48d7-4ff5-857e-8d34c8067342"&gt;&lt;/div&gt;
+&lt;div id="5582a68c-b2be-4d3e-adab-2a17b3331e44"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#494057a7-48d7-4ff5-857e-8d34c8067342');
+var element = $('#5582a68c-b2be-4d3e-adab-2a17b3331e44');
 
             setTimeout(function() {
                 var nbb_cell_id = 7;
@@ -1710,10 +1710,10 @@ List of Preprocessing steps performed on each component of Text Data are :&lt;/p
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="947e9eb5-083e-4878-ad03-afdc90cf7cd9"&gt;&lt;/div&gt;
+&lt;div id="0b2dbbb3-dd18-4bb0-8c2f-6f3b62d3e309"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#947e9eb5-083e-4878-ad03-afdc90cf7cd9');
+var element = $('#0b2dbbb3-dd18-4bb0-8c2f-6f3b62d3e309');
 
             setTimeout(function() {
                 var nbb_cell_id = 5;
@@ -1780,10 +1780,10 @@ var element = $('#947e9eb5-083e-4878-ad03-afdc90cf7cd9');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="109e0239-2f56-4fb1-b8de-4f4e33cdaaf6"&gt;&lt;/div&gt;
+&lt;div id="de91c61b-44e0-4540-8aff-7f661efb147b"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#109e0239-2f56-4fb1-b8de-4f4e33cdaaf6');
+var element = $('#de91c61b-44e0-4540-8aff-7f661efb147b');
 
             setTimeout(function() {
                 var nbb_cell_id = 6;
@@ -1906,10 +1906,10 @@ var element = $('#109e0239-2f56-4fb1-b8de-4f4e33cdaaf6');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="2b2c9a4e-8e9f-46b5-abbd-84f6617683d4"&gt;&lt;/div&gt;
+&lt;div id="9448de22-9605-4851-8de9-fe87f27846b5"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#2b2c9a4e-8e9f-46b5-abbd-84f6617683d4');
+var element = $('#9448de22-9605-4851-8de9-fe87f27846b5');
 
             setTimeout(function() {
                 var nbb_cell_id = 7;
@@ -1966,10 +1966,10 @@ The Data Test split has 17721 records
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="603739f0-b945-4c03-bcad-dcec0431fd90"&gt;&lt;/div&gt;
+&lt;div id="aaee90ad-129a-438e-9288-5064824f51ac"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#603739f0-b945-4c03-bcad-dcec0431fd90');
+var element = $('#aaee90ad-129a-438e-9288-5064824f51ac');
 
             setTimeout(function() {
                 var nbb_cell_id = 19;
@@ -2049,10 +2049,10 @@ var element = $('#603739f0-b945-4c03-bcad-dcec0431fd90');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="65afc1fe-f4d0-43a0-af59-f32f0d6889fb"&gt;&lt;/div&gt;
+&lt;div id="de1543e8-26ae-407e-b9fe-34abb3bb96a4"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#65afc1fe-f4d0-43a0-af59-f32f0d6889fb');
+var element = $('#de1543e8-26ae-407e-b9fe-34abb3bb96a4');
 
             setTimeout(function() {
                 var nbb_cell_id = 12;
@@ -2102,10 +2102,10 @@ var element = $('#65afc1fe-f4d0-43a0-af59-f32f0d6889fb');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="06ffec1f-58d6-4bc1-acff-10c8e4f485c5"&gt;&lt;/div&gt;
+&lt;div id="aaaeaa62-02d7-431b-ae13-a8a119700cf6"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#06ffec1f-58d6-4bc1-acff-10c8e4f485c5');
+var element = $('#aaaeaa62-02d7-431b-ae13-a8a119700cf6');
 
             setTimeout(function() {
                 var nbb_cell_id = 13;
@@ -2161,10 +2161,10 @@ var element = $('#06ffec1f-58d6-4bc1-acff-10c8e4f485c5');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="3c12d527-f8ca-42c2-8c5b-47ac4f6d79ab"&gt;&lt;/div&gt;
+&lt;div id="1f9338b8-0ad6-4e60-b1e2-d84d7d77192a"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#3c12d527-f8ca-42c2-8c5b-47ac4f6d79ab');
+var element = $('#1f9338b8-0ad6-4e60-b1e2-d84d7d77192a');
 
             setTimeout(function() {
                 var nbb_cell_id = 14;
@@ -2212,10 +2212,10 @@ var element = $('#3c12d527-f8ca-42c2-8c5b-47ac4f6d79ab');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="0fc70a79-06e8-45f1-97f1-4eb8085ec44f"&gt;&lt;/div&gt;
+&lt;div id="4b2cf3ef-9cb4-4e49-9281-98f8d2ac6991"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#0fc70a79-06e8-45f1-97f1-4eb8085ec44f');
+var element = $('#4b2cf3ef-9cb4-4e49-9281-98f8d2ac6991');
 
             setTimeout(function() {
                 var nbb_cell_id = 15;
@@ -2291,10 +2291,10 @@ var element = $('#0fc70a79-06e8-45f1-97f1-4eb8085ec44f');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="78ec6235-a6b5-48d8-bb17-d08659a29b5f"&gt;&lt;/div&gt;
+&lt;div id="9dbb620a-a11d-452e-9fa8-30c0995cb114"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#78ec6235-a6b5-48d8-bb17-d08659a29b5f');
+var element = $('#9dbb620a-a11d-452e-9fa8-30c0995cb114');
 
             setTimeout(function() {
                 var nbb_cell_id = 16;
@@ -2433,10 +2433,10 @@ var element = $('#78ec6235-a6b5-48d8-bb17-d08659a29b5f');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="111697e9-df1d-4e58-b95e-aeac5d99c7a8"&gt;&lt;/div&gt;
+&lt;div id="edd2fa2f-e3c3-44fb-b0ea-eae1c5a3e8ba"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#111697e9-df1d-4e58-b95e-aeac5d99c7a8');
+var element = $('#edd2fa2f-e3c3-44fb-b0ea-eae1c5a3e8ba');
 
             setTimeout(function() {
                 var nbb_cell_id = 20;
@@ -2474,10 +2474,10 @@ var element = $('#111697e9-df1d-4e58-b95e-aeac5d99c7a8');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="11c88de2-471d-4ea6-b202-f1aa37b66586"&gt;&lt;/div&gt;
+&lt;div id="1fc23a89-59d7-4246-b9da-1af721fa6690"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#11c88de2-471d-4ea6-b202-f1aa37b66586');
+var element = $('#1fc23a89-59d7-4246-b9da-1af721fa6690');
 
             setTimeout(function() {
                 var nbb_cell_id = 21;
@@ -2583,10 +2583,10 @@ var element = $('#11c88de2-471d-4ea6-b202-f1aa37b66586');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="1e941ef7-0ddd-48fb-a76a-8ff69d68fcf9"&gt;&lt;/div&gt;
+&lt;div id="ae4a2a4a-c364-4a3a-b5db-5345fe88d4a0"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#1e941ef7-0ddd-48fb-a76a-8ff69d68fcf9');
+var element = $('#ae4a2a4a-c364-4a3a-b5db-5345fe88d4a0');
 
             setTimeout(function() {
                 var nbb_cell_id = 30;
@@ -2623,10 +2623,10 @@ var element = $('#1e941ef7-0ddd-48fb-a76a-8ff69d68fcf9');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="eb4b4a35-a51c-4a35-bfa2-b05b326d24fc"&gt;&lt;/div&gt;
+&lt;div id="b2de131c-bca0-4c99-b47f-8f531bd8fe06"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#eb4b4a35-a51c-4a35-bfa2-b05b326d24fc');
+var element = $('#b2de131c-bca0-4c99-b47f-8f531bd8fe06');
 
             setTimeout(function() {
                 var nbb_cell_id = 31;
@@ -2670,10 +2670,10 @@ var element = $('#eb4b4a35-a51c-4a35-bfa2-b05b326d24fc');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="fd17748a-518c-4600-b6e5-0cfd32986e10"&gt;&lt;/div&gt;
+&lt;div id="c610eba7-8bab-4e3c-b3cf-4643e6f66aa6"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#fd17748a-518c-4600-b6e5-0cfd32986e10');
+var element = $('#c610eba7-8bab-4e3c-b3cf-4643e6f66aa6');
 
             setTimeout(function() {
                 var nbb_cell_id = 32;
@@ -2713,10 +2713,10 @@ var element = $('#fd17748a-518c-4600-b6e5-0cfd32986e10');
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="cf09705b-92b9-42f4-8af5-8ded7cea07b0"&gt;&lt;/div&gt;
+&lt;div id="ab7e3d48-2fcd-4a8d-9261-f236d11a7e2e"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#cf09705b-92b9-42f4-8af5-8ded7cea07b0');
+var element = $('#ab7e3d48-2fcd-4a8d-9261-f236d11a7e2e');
 
             setTimeout(function() {
                 var nbb_cell_id = 23;
@@ -2870,10 +2870,10 @@ Epoch 00011: early stopping
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="20c18000-9939-4177-a426-57e70e1591fb"&gt;&lt;/div&gt;
+&lt;div id="ca046325-f93f-424e-bcd0-105385ddef74"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#20c18000-9939-4177-a426-57e70e1591fb');
+var element = $('#ca046325-f93f-424e-bcd0-105385ddef74');
 
             setTimeout(function() {
                 var nbb_cell_id = 24;
@@ -3132,10 +3132,10 @@ var element = $('#20c18000-9939-4177-a426-57e70e1591fb');
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="081d8753-482f-4fcc-8de4-a76d7ce8866a"&gt;&lt;/div&gt;
+&lt;div id="93c12e23-e000-4de7-a722-82c469cf74db"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#081d8753-482f-4fcc-8de4-a76d7ce8866a');
+var element = $('#93c12e23-e000-4de7-a722-82c469cf74db');
 
             setTimeout(function() {
                 var nbb_cell_id = 36;
@@ -3244,10 +3244,10 @@ BlEU-4 :   0.47073541733215074
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div id="8da6dee1-089f-465a-b1d7-c86fdd4ef00e"&gt;&lt;/div&gt;
+&lt;div id="7f7a4757-d07f-465e-8c47-e6356344d3c2"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_javascript"&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#8da6dee1-089f-465a-b1d7-c86fdd4ef00e');
+var element = $('#7f7a4757-d07f-465e-8c47-e6356344d3c2');
 
             setTimeout(function() {
                 var nbb_cell_id = 22;
