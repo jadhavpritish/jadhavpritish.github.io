@@ -3749,8 +3749,9 @@ $$
 \begin{align}
 J(W) = \frac{1}{2m}\sum_{i=1}^{m} [y^{(i)} - \hat{y}^{(i)}]^2 \tag{1}
 \end{align}
-$$&lt;p&gt;Where,&lt;/p&gt;
+$$&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
 &lt;center&gt;
+Where,&lt;br/&gt;
 m = number of training examples.&lt;br/&gt;
 $J(w)$ = Loss as a function of Regression Coeffients. &lt;br/&gt;
 $y^{(i)}$ = true value for the $ith$ training example. &lt;br/&gt;

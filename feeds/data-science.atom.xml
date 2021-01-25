@@ -3044,10 +3044,35 @@ h6:hover .anchor-link {
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h1 id="Winning-Fantasy-Sports-using-Data-Science"&gt;Winning Fantasy Sports using Data Science&lt;a class="anchor-link" href="#Winning-Fantasy-Sports-using-Data-Science"&gt;¶&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;With all the buzz around Indian Premier League (IPL), FIFA World Cup, Cricket World Cup-2019, fantasy sports websites like Dream11 are gaining traction. Fantasy Sports Portal allows sports fans like me to be a part of it. Having said that, it is very difficult to keep track of all the players and their performance across the sports.&lt;/p&gt;
-&lt;p&gt;&lt;br/&gt;
-In this tutorial, I will try to automate the fantasy selection process so that the probability of winning a fantasy league is maximized.&lt;/p&gt;
+&lt;h1 id="Crushing-Fantasy-Sports-Leaderboard"&gt;Crushing Fantasy Sports Leaderboard&lt;a class="anchor-link" href="#Crushing-Fantasy-Sports-Leaderboard"&gt;¶&lt;/a&gt;&lt;/h1&gt;&lt;h2 id="Leverage-historical-data-and-Integer-Linear-Programming-for-selecting-an-optimal-fantasy-team."&gt;Leverage historical data and Integer Linear Programming for selecting an optimal fantasy team.&lt;a class="anchor-link" href="#Leverage-historical-data-and-Integer-Linear-Programming-for-selecting-an-optimal-fantasy-team."&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Sports have played a pivotal role in our society for ages. It has been an active medium for entertainment and a means for uniting people. &lt;br/&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Sports have given us legends who are followed, loved, and worshipped across the globe. &lt;br/&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Over the last few years, the emergence of fantasy sports platforms has allowed fans to connect with sports on a deeper level. &lt;br/&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;According to a recent report published by Businesswire, North American Fantasy Sports Markets are expected to grow at a staggering CAGR of 10.7% over the next five years. &lt;br/&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The story is no different in India, Asia. The fantasy sports platform, Dream11, has grown its user base by a jaw-dropping 6000% from a few lakh in 2015 users to over eight crore active users in 2020. &lt;br/&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Selecting a fantasy team that is capable of earning the maximum points is not trivial. Often, emotions take over and your team ends up at the bottom of the points table in the fantasy league. &lt;br/&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;In this blog post, we shall explore a data-driven approach for selecting the fantasy team objectively given historical data. &lt;br/&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;br/&gt;&lt;/p&gt;
+&lt;h3 id="Data-Description--"&gt;Data Description -&lt;a class="anchor-link" href="#Data-Description--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;For the sake of this blog, let’s focus on the game of cricket. Technically, once we have chalked out the details it is trivial to extend the logic for other sports.&lt;/li&gt;
+&lt;li&gt;I have managed to dump the historical fantasy points data for two of the biggest teams in the Indian Premier League (IPL), Chennai Super Kings and Mumbai Indians, in a &lt;a href="https://github.com/jadhavpritish/Dream11_Predictor/blob/master/data/dream11_performance_data.csv"&gt;CSV file&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The input file for auto-selecting players has the following fields -&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Cost - Most of the fantasy websites (including Dream11) allocate a total budget which cannot be exceeded. &lt;/li&gt;
+&lt;li&gt;last_5_matches_points - This field is a list of points accrued by a player in his last 5 matches. &lt;/li&gt;
+&lt;li&gt;player_category - This field highlights the category of the player. In the case of cricket, the possible categories are wicket-keeper, batsman, all-rounder, bowler. For a sport like football, the possible categories are - Goalkeeper, Defender, Midfielder, Striker. This field is important because every fantasy website restricts the number of players one can select from each of these categories. &lt;/li&gt;
+&lt;li&gt;player_name - This field highlights the player name on a fantasy sports website.&lt;/li&gt;
+&lt;li&gt;team_name - This column in the data frame highlights the team name of the player. &lt;/li&gt;
+&lt;/ol&gt;
 &lt;h3 id="Let's-get-right-to-it-by-loading-and-inspecting-the-player-data-for-an-upcoming-match-between-Chennai-Superkings-vs-Mumbai-Indians."&gt;Let's get right to it by loading and inspecting the player data for an upcoming match between Chennai Superkings vs Mumbai Indians.&lt;a class="anchor-link" href="#Let's-get-right-to-it-by-loading-and-inspecting-the-player-data-for-an-upcoming-match-between-Chennai-Superkings-vs-Mumbai-Indians."&gt;¶&lt;/a&gt;&lt;/h3&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3074,6 +3099,7 @@ In this tutorial, I will try to automate the fantasy selection process so that t
 
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;ast&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;literal_eval&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pulp&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;typing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Dict&lt;/span&gt;
 
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.preprocessing&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;LabelBinarizer&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.core.display&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;
@@ -3100,134 +3126,13 @@ In this tutorial, I will try to automate the fantasy selection process so that t
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Data-Description--"&gt;Data Description -&lt;a class="anchor-link" href="#Data-Description--"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The input file for auto-selecting players has the following fields -&lt;/p&gt;
-&lt;p&gt;a. Cost - Most of the fantasy websites (including Dream11) allocate a total budget which cannot be exceeded. &lt;br/&gt;&lt;br/&gt;
-b. last_5_matches_points - This field is a list of points accrued by a player in his last 5 matches. 
-&lt;br/&gt;&lt;br/&gt;
-c. player_category - This field highlights the category of the player. In the case of cricket, the possible categories are wicket-keeper, batsman, all-rounder, bowler. For a sport like football, the possible categories are - Goalkeeper, Defender, Midfielder, Striker. This field is important because every fantasy website restricts the number of players one can select from each of these categories. 
-&lt;br/&gt;&lt;br/&gt;
-d. player_name - This field highlights the player name on a fantasy sports website.
-&lt;br/&gt;&lt;br/&gt;
-e. team_name - This column in the data frame highlights the team name of the player.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;raw_player_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'data/dream11_performance_data.csv'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;converters&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"last_5_matches_points"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;literal_eval&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
-&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;font size=2&amp;gt;'&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;raw_player_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_html&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;/font&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_html rendered_html output_subarea"&gt;
-&lt;font size="2"&gt;&lt;table border="1" class="dataframe"&gt;
-&lt;thead&gt;
-&lt;tr style="text-align: right;"&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;cost&lt;/th&gt;
-&lt;th&gt;last_5_matches_points&lt;/th&gt;
-&lt;th&gt;player_category&lt;/th&gt;
-&lt;th&gt;player_name&lt;/th&gt;
-&lt;th&gt;team_name&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;th&gt;0&lt;/th&gt;
-&lt;td&gt;9.0&lt;/td&gt;
-&lt;td&gt;[25, 20, 15, 30, 18]&lt;/td&gt;
-&lt;td&gt;wicket_keeper&lt;/td&gt;
-&lt;td&gt;M.S. dhoni&lt;/td&gt;
-&lt;td&gt;CSK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;1&lt;/th&gt;
-&lt;td&gt;10.0&lt;/td&gt;
-&lt;td&gt;[30, 10, 23, 22, 16]&lt;/td&gt;
-&lt;td&gt;batsman&lt;/td&gt;
-&lt;td&gt;Suresh Raina&lt;/td&gt;
-&lt;td&gt;CSK&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;2&lt;/th&gt;
-&lt;td&gt;8.5&lt;/td&gt;
-&lt;td&gt;[17, 13, 14, 27, 35]&lt;/td&gt;
-&lt;td&gt;wicket_keeper&lt;/td&gt;
-&lt;td&gt;kishan&lt;/td&gt;
-&lt;td&gt;MI&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;3&lt;/th&gt;
-&lt;td&gt;10.5&lt;/td&gt;
-&lt;td&gt;[15, 7, 9, 40, 3]&lt;/td&gt;
-&lt;td&gt;batsman&lt;/td&gt;
-&lt;td&gt;rohit_sharma&lt;/td&gt;
-&lt;td&gt;MI&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;4&lt;/th&gt;
-&lt;td&gt;9.5&lt;/td&gt;
-&lt;td&gt;[20, 18, 15, 22, 20]&lt;/td&gt;
-&lt;td&gt;batsman&lt;/td&gt;
-&lt;td&gt;lewis&lt;/td&gt;
-&lt;td&gt;MI&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;&lt;/font&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id="Algorithm-Pseudo-Code-/-Workflow--"&gt;Algorithm Pseudo Code / Workflow -&lt;a class="anchor-link" href="#Algorithm-Pseudo-Code-/-Workflow--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;We will be viewing the selection problem as an Integer Linear Programming (ILP) problem with constraints.
-&lt;br/&gt;&lt;/li&gt;
-&lt;li&gt;The objective function for ILP (Integer Linear Programming) will be to maximize the expected points. 
-&lt;br/&gt;&lt;/li&gt;
-&lt;li&gt;The constraints will be defined as per the rules imposed by the fantasy website (In this case, Dream11).
-&lt;br/&gt;&lt;/li&gt;
-&lt;li&gt;Once an ILP problem is defined, it can be easily solved using the PuLP library in python. 
-&lt;br/&gt;
-For more mathematical details, I will be adding references at the end of the tutorial&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h3 id='As-one-can-imagine,-we-cannot-work-directly-with-text-data.-Hence,-we-will-be-using-the-"get_dummies"-function-in-pandas-to-convert-categorical-data-into-one-hot-encoded-vectors.'&gt;As one can imagine, we cannot work directly with text data. Hence, we will be using the "get_dummies" function in pandas to convert categorical data into one-hot encoded vectors.&lt;a class="anchor-link" href='#As-one-can-imagine,-we-cannot-work-directly-with-text-data.-Hence,-we-will-be-using-the-"get_dummies"-function-in-pandas-to-convert-categorical-data-into-one-hot-encoded-vectors.'&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;br/&gt;
-For Eg - A single column of player_category in pandas data frame will be split into the number of unique values of the player category. In this case, each player can either be a wicketkeeper, batsman, allrounder or a bowler. As a result, the player category for each player will be represented by a 4-dimensional one-hot encoded vector.&lt;/p&gt;
-&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
 &lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_dummies&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"player_category"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"team_name"&lt;/span&gt;&lt;span class="p"&gt;]):&lt;/span&gt;
-    &lt;span class="n"&gt;dummies_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_dummies&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;raw_player_data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"player_category"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"team_name"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;dummies_data&lt;/span&gt;
-
-&lt;span class="n"&gt;processed_player_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_dummies&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;raw_player_data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
- 
-&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HTML&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;font size=2&amp;gt;'&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;drop&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;'cost'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'last_5_matches_points'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_html&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;'&amp;lt;/font&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;raw_player_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'https://raw.githubusercontent.com/jadhavpritish/Dream11_Predictor/master/data/dream11_performance_data.csv'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;converters&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"last_5_matches_points"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;literal_eval&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;raw_player_data&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s2"&gt;"team_name"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"player_name"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"player_category"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"last_5_matches_points"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"cost"&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;style&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_properties&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;'background-color'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;'#f7ebcf'&lt;/span&gt;&lt;span class="p"&gt;}))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3237,72 +3142,291 @@ For Eg - A single column of player_category in pandas data frame will be split i
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea"&gt;
-&lt;font size="2"&gt;&lt;table border="1" class="dataframe"&gt;
-&lt;thead&gt;
-&lt;tr style="text-align: right;"&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;player_name&lt;/th&gt;
-&lt;th&gt;player_category_all_rounder&lt;/th&gt;
-&lt;th&gt;player_category_batsman&lt;/th&gt;
-&lt;th&gt;player_category_bowler&lt;/th&gt;
-&lt;th&gt;player_category_wicket_keeper&lt;/th&gt;
-&lt;th&gt;team_name_CSK&lt;/th&gt;
-&lt;th&gt;team_name_MI&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;th&gt;0&lt;/th&gt;
-&lt;td&gt;M.S. dhoni&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;1&lt;/th&gt;
-&lt;td&gt;Suresh Raina&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;2&lt;/th&gt;
-&lt;td&gt;kishan&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;3&lt;/th&gt;
-&lt;td&gt;rohit_sharma&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;4&lt;/th&gt;
-&lt;td&gt;lewis&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;&lt;/font&gt;
+&lt;style type="text/css"&gt;
+    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col4 {
+            background-color:  #f7ebcf;
+        }&lt;/style&gt;
+&lt;table id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140ef"&gt;
+&lt;thead&gt; &lt;tr&gt;
+&lt;th class="blank level0"&gt;&lt;/th&gt;
+&lt;th class="col_heading level0 col0"&gt;team_name&lt;/th&gt;
+&lt;th class="col_heading level0 col1"&gt;player_name&lt;/th&gt;
+&lt;th class="col_heading level0 col2"&gt;player_category&lt;/th&gt;
+&lt;th class="col_heading level0 col3"&gt;last_5_matches_points&lt;/th&gt;
+&lt;th class="col_heading level0 col4"&gt;cost&lt;/th&gt;
+&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row0"&gt;0&lt;/th&gt;
+&lt;td class="data row0 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col0"&gt;CSK&lt;/td&gt;
+&lt;td class="data row0 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col1"&gt;M.S. dhoni&lt;/td&gt;
+&lt;td class="data row0 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col2"&gt;wicket_keeper&lt;/td&gt;
+&lt;td class="data row0 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col3"&gt;[25, 20, 15, 30, 18]&lt;/td&gt;
+&lt;td class="data row0 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col4"&gt;9&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row1"&gt;1&lt;/th&gt;
+&lt;td class="data row1 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col0"&gt;CSK&lt;/td&gt;
+&lt;td class="data row1 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col1"&gt;Suresh Raina&lt;/td&gt;
+&lt;td class="data row1 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col2"&gt;batsman&lt;/td&gt;
+&lt;td class="data row1 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col3"&gt;[30, 10, 23, 22, 16]&lt;/td&gt;
+&lt;td class="data row1 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col4"&gt;10&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row2"&gt;2&lt;/th&gt;
+&lt;td class="data row2 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col0"&gt;MI&lt;/td&gt;
+&lt;td class="data row2 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col1"&gt;kishan&lt;/td&gt;
+&lt;td class="data row2 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col2"&gt;wicket_keeper&lt;/td&gt;
+&lt;td class="data row2 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col3"&gt;[17, 13, 14, 27, 35]&lt;/td&gt;
+&lt;td class="data row2 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col4"&gt;8.5&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row3"&gt;3&lt;/th&gt;
+&lt;td class="data row3 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col0"&gt;MI&lt;/td&gt;
+&lt;td class="data row3 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col1"&gt;rohit_sharma&lt;/td&gt;
+&lt;td class="data row3 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col2"&gt;batsman&lt;/td&gt;
+&lt;td class="data row3 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col3"&gt;[15, 7, 9, 40, 3]&lt;/td&gt;
+&lt;td class="data row3 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col4"&gt;10.5&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row4"&gt;4&lt;/th&gt;
+&lt;td class="data row4 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col0"&gt;MI&lt;/td&gt;
+&lt;td class="data row4 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col1"&gt;lewis&lt;/td&gt;
+&lt;td class="data row4 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col2"&gt;batsman&lt;/td&gt;
+&lt;td class="data row4 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col3"&gt;[20, 18, 15, 22, 20]&lt;/td&gt;
+&lt;td class="data row4 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col4"&gt;9.5&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row5" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row5"&gt;5&lt;/th&gt;
+&lt;td class="data row5 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col0"&gt;CSK&lt;/td&gt;
+&lt;td class="data row5 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col1"&gt;rayadu&lt;/td&gt;
+&lt;td class="data row5 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col2"&gt;batsman&lt;/td&gt;
+&lt;td class="data row5 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col3"&gt;[38, 40, 32, 28, 41]&lt;/td&gt;
+&lt;td class="data row5 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col4"&gt;9&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row6" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row6"&gt;6&lt;/th&gt;
+&lt;td class="data row6 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col0"&gt;MI&lt;/td&gt;
+&lt;td class="data row6 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col1"&gt;surya&lt;/td&gt;
+&lt;td class="data row6 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col2"&gt;batsman&lt;/td&gt;
+&lt;td class="data row6 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col3"&gt;[30, 23, 10, 18, 25]&lt;/td&gt;
+&lt;td class="data row6 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col4"&gt;8.5&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row7" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row7"&gt;7&lt;/th&gt;
+&lt;td class="data row7 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col0"&gt;CSK&lt;/td&gt;
+&lt;td class="data row7 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col1"&gt;watson&lt;/td&gt;
+&lt;td class="data row7 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col2"&gt;all_rounder&lt;/td&gt;
+&lt;td class="data row7 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col3"&gt;[35, 30, 25, 7, 18]&lt;/td&gt;
+&lt;td class="data row7 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col4"&gt;10.5&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row8" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row8"&gt;8&lt;/th&gt;
+&lt;td class="data row8 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col0"&gt;MI&lt;/td&gt;
+&lt;td class="data row8 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col1"&gt;hardik&lt;/td&gt;
+&lt;td class="data row8 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col2"&gt;all_rounder&lt;/td&gt;
+&lt;td class="data row8 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col3"&gt;[25, 18, 15, 25, 30]&lt;/td&gt;
+&lt;td class="data row8 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col4"&gt;9&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row9" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row9"&gt;9&lt;/th&gt;
+&lt;td class="data row9 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col0"&gt;MI&lt;/td&gt;
+&lt;td class="data row9 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col1"&gt;krunal&lt;/td&gt;
+&lt;td class="data row9 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col2"&gt;all_rounder&lt;/td&gt;
+&lt;td class="data row9 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col3"&gt;[22, 10, 5, 10, 15]&lt;/td&gt;
+&lt;td class="data row9 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col4"&gt;9&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row10" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row10"&gt;10&lt;/th&gt;
+&lt;td class="data row10 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col0"&gt;CSK&lt;/td&gt;
+&lt;td class="data row10 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col1"&gt;bravo&lt;/td&gt;
+&lt;td class="data row10 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col2"&gt;all_rounder&lt;/td&gt;
+&lt;td class="data row10 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col3"&gt;[27, 20, 15, 20, 15]&lt;/td&gt;
+&lt;td class="data row10 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col4"&gt;9&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row11" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row11"&gt;11&lt;/th&gt;
+&lt;td class="data row11 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col0"&gt;MI&lt;/td&gt;
+&lt;td class="data row11 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col1"&gt;bumrah&lt;/td&gt;
+&lt;td class="data row11 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col2"&gt;bowler&lt;/td&gt;
+&lt;td class="data row11 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col3"&gt;[10, 20, 25, 17, 10]&lt;/td&gt;
+&lt;td class="data row11 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col4"&gt;9&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row12" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row12"&gt;12&lt;/th&gt;
+&lt;td class="data row12 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col0"&gt;MI&lt;/td&gt;
+&lt;td class="data row12 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col1"&gt;rahman&lt;/td&gt;
+&lt;td class="data row12 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col2"&gt;bowler&lt;/td&gt;
+&lt;td class="data row12 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col3"&gt;[10, 0, 0, 5, 2]&lt;/td&gt;
+&lt;td class="data row12 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col4"&gt;8.5&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row13" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row13"&gt;13&lt;/th&gt;
+&lt;td class="data row13 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col0"&gt;MI&lt;/td&gt;
+&lt;td class="data row13 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col1"&gt;markande&lt;/td&gt;
+&lt;td class="data row13 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col2"&gt;bowler&lt;/td&gt;
+&lt;td class="data row13 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col3"&gt;[28, 30, 20, 30, 40]&lt;/td&gt;
+&lt;td class="data row13 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col4"&gt;8.5&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row14" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row14"&gt;14&lt;/th&gt;
+&lt;td class="data row14 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col0"&gt;CSK&lt;/td&gt;
+&lt;td class="data row14 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col1"&gt;thakur&lt;/td&gt;
+&lt;td class="data row14 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col2"&gt;bowler&lt;/td&gt;
+&lt;td class="data row14 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col3"&gt;[16, 10, 7, 8, 9, 15]&lt;/td&gt;
+&lt;td class="data row14 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col4"&gt;8.5&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row15" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row15"&gt;15&lt;/th&gt;
+&lt;td class="data row15 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col0"&gt;CSK&lt;/td&gt;
+&lt;td class="data row15 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col1"&gt;chahar&lt;/td&gt;
+&lt;td class="data row15 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col2"&gt;bowler&lt;/td&gt;
+&lt;td class="data row15 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col3"&gt;[24, 15, 10, 20, 23]&lt;/td&gt;
+&lt;td class="data row15 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col4"&gt;8&lt;/td&gt;
+&lt;/tr&gt;&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3311,52 +3435,485 @@ For Eg - A single column of player_category in pandas data frame will be split i
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;In this section, we will start crunching numbers so that an optimal objective function can be designed. One of the most important features which dictate where a player should be included in a fantasy team in his recent performance. The column - "last_5_matches_points" is a list of points accrued by a player in his last 5 matches.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Now, Instead of taking a simple average of these points, we will be using a weighted average where weights are time decayed. This will ensure that the very recent form of a player is captured and leveraged by the selection algorithm. To better illustrate the importance of the weighted average, let us consider the following scenario.&lt;/p&gt;
-&lt;/li&gt;
+&lt;h3 id="What-are-we-trying-to-achieve?"&gt;What are we trying to achieve?&lt;a class="anchor-link" href="#What-are-we-trying-to-achieve?"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Given the player attributes and their historical fantasy sports (at least for the last five matches), we would want to select a team of 11 players such that the probability of us winning the fantasy league is maximized.&lt;/li&gt;
+&lt;li&gt;Certain constraints must be satisfied while selecting the fantasy team that makes the whole process engaging and exciting.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;br/&gt;
-Say, the points for player 1 and player 2 in last 5 matches are as follows -&lt;/p&gt;
-&lt;p&gt;player 1 - [10, 20 , 30 , 40 , 50] &lt;br/&gt;
-player 2 - [50, 40 , 30, 20 , 10] &lt;br/&gt;&lt;/p&gt;
-&lt;p&gt;The approach of computing simple averages will yield averaged scores as follows - &lt;br/&gt;
-&lt;strong&gt;player 1 - 30&lt;/strong&gt; &lt;br/&gt;
-&lt;strong&gt;player 2 - 30&lt;/strong&gt; &lt;br/&gt;&lt;/p&gt;
-&lt;p&gt;The above stats imply that both player 1 and player 2 accrue 30 points on average. However, it can be seen that player 1 is growing in confidence and has an upward trend to his performance whereas player 2 has a downward trend to his performance. By taking a simple average, we are losing an important insight.&lt;/p&gt;
-&lt;p&gt;Now, if we compute the averages using time decayed weights, the averaged points are as follows -
-&lt;br/&gt;
-&lt;strong&gt;player 1 - 33.93&lt;/strong&gt; &lt;br/&gt;
-&lt;strong&gt;player 2 - 26.06&lt;/strong&gt; &lt;br/&gt;&lt;/p&gt;
-&lt;p&gt;As can seen from the above numbers, even though both the players have amassed the same number of points,  the trend in performances is now being captured with player 2 getting a higher average as compared to player 1.  Such subtle differences will help us build a robust model.&lt;/p&gt;
-&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;So, let's compute the time decayed weighted averages for the eligible players in the data frame.&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id="The-summary-of-rules-for-selecting-a-cricket-team-on-Dream11-is-as-follows--"&gt;The summary of rules for selecting a cricket team on Dream11 is as follows -&lt;a class="anchor-link" href="#The-summary-of-rules-for-selecting-a-cricket-team-on-Dream11-is-as-follows--"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Every cricket team you build on Dream11 has to have an exact of 11 players. We can select a maximum of 7 players can be from the same team.
+&lt;img src="../../images/fantasy_sports/fantasy_rules.png"/&gt; &lt;br/&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The captain will give you 2x points scored by them in the actual match.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;The vice-captain will give you 1.5x points scored by them in the actual match.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="Algorithm-for-selecting-an-Optimal-Fantasy-Team--"&gt;Algorithm for selecting an Optimal Fantasy Team -&lt;a class="anchor-link" href="#Algorithm-for-selecting-an-Optimal-Fantasy-Team--"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;We shall frame the selection problem using Integer Linear Programming (ILP) with constraints.&lt;/li&gt;
+&lt;li&gt;For the sake of convenience, we shall skip the selection of caption and vice-captain in this implementation.&lt;/li&gt;
+&lt;li&gt;The objective function for ILP (Integer Linear Programming) will be to maximize the expected points while honoring the constraints mentioned above.&lt;/li&gt;
+&lt;/ul&gt;
+$$
+\begin{equation} 
+max \sum \limits_{i=1}^{n} [p_i \times s_i] \\ 
+\text{S.T} \\
+\text{maximum players from team 1} \implies n_{team1} \leq 7 \\
+\text{maximum players from team 2} \implies n_{team2} \leq 7 \\
+\text{number of wkt keepers} \implies 1 \leq n_{keepers} \leq 4 \\
+\text{number of batsmen})\implies 3 \leq n_{batsmen} \leq 6 \\
+\text{number of all-rounders} \implies 1 \leq n_{all-rounders} \leq 4 \\
+\text{number of bowlers} \implies 3 \leq n_{bowlers} \leq 6 \\ 
+\text{WHERE} \\
+p_i \implies \text{estimated points for player i} \\
+x_i \implies \text{Selection decision variable for player i [0,1]} \\
+\end{equation}
+$$&lt;ul&gt;
+&lt;li&gt;Once we define the ILP problem in python, we shall use the PuLP library in python for solving the problem.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="So-without-further-adieu,-let’s-get-down-to-coding."&gt;So without further adieu, let’s get down to coding.&lt;a class="anchor-link" href="#So-without-further-adieu,-let’s-get-down-to-coding."&gt;¶&lt;/a&gt;&lt;/h4&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Data-Preprocessing--"&gt;Data Preprocessing -&lt;a class="anchor-link" href="#Data-Preprocessing--"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;h3 id="1.-Handling-Categorical-Variables"&gt;1. Handling Categorical Variables&lt;a class="anchor-link" href="#1.-Handling-Categorical-Variables"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;The team_name and player_category columns in our data are categorical features.&lt;/li&gt;
+&lt;li&gt;For specifying the constraints on our ILP objective function, we need to convert these features into one-hot encoded vectors. A single line of python code helps us achieve this.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [22]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;compute_weighted_points&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;points_vector&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alpha&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.20&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;weights&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;reversed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;points_vector&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;alpha&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
-    &lt;span class="n"&gt;exponential_weighted_average&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;average&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;points_vector&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;weights&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;weights&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;exponential_weighted_average&lt;/span&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_dummies&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;col_names&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"player_category"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"team_name"&lt;/span&gt;&lt;span class="p"&gt;]):&lt;/span&gt;
+    &lt;span class="n"&gt;dummies_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_dummies&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;raw_player_data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;col_names&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;dummies_data&lt;/span&gt;
+
+&lt;span class="n"&gt;processed_player_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_dummies&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;raw_player_data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"player_category"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"team_name"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+ 
+&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;drop&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;'cost'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'last_5_matches_points'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;style&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_properties&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;'background-color'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;'#f7ebcf'&lt;/span&gt;&lt;span class="p"&gt;}))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea"&gt;
+&lt;style type="text/css"&gt;
+    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col0 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col1 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col2 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col3 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col4 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col5 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col6 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col0 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col1 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col2 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col3 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col4 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col5 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col6 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col0 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col1 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col2 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col3 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col4 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col5 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col6 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col0 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col1 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col2 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col3 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col4 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col5 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col6 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col0 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col1 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col2 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col3 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col4 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col5 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col6 {
+            background-color:  #f7ebcf;
+        }&lt;/style&gt;
+&lt;table id="T_d7e45812_5eab_11eb_a32f_4074e0b140ef"&gt;
+&lt;thead&gt; &lt;tr&gt;
+&lt;th class="blank level0"&gt;&lt;/th&gt;
+&lt;th class="col_heading level0 col0"&gt;player_name&lt;/th&gt;
+&lt;th class="col_heading level0 col1"&gt;player_category_all_rounder&lt;/th&gt;
+&lt;th class="col_heading level0 col2"&gt;player_category_batsman&lt;/th&gt;
+&lt;th class="col_heading level0 col3"&gt;player_category_bowler&lt;/th&gt;
+&lt;th class="col_heading level0 col4"&gt;player_category_wicket_keeper&lt;/th&gt;
+&lt;th class="col_heading level0 col5"&gt;team_name_CSK&lt;/th&gt;
+&lt;th class="col_heading level0 col6"&gt;team_name_MI&lt;/th&gt;
+&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row0" id="T_d7e45812_5eab_11eb_a32f_4074e0b140eflevel0_row0"&gt;0&lt;/th&gt;
+&lt;td class="data row0 col0" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col0"&gt;M.S. dhoni&lt;/td&gt;
+&lt;td class="data row0 col1" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col1"&gt;0&lt;/td&gt;
+&lt;td class="data row0 col2" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col2"&gt;0&lt;/td&gt;
+&lt;td class="data row0 col3" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col3"&gt;0&lt;/td&gt;
+&lt;td class="data row0 col4" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col4"&gt;1&lt;/td&gt;
+&lt;td class="data row0 col5" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col5"&gt;1&lt;/td&gt;
+&lt;td class="data row0 col6" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col6"&gt;0&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row1" id="T_d7e45812_5eab_11eb_a32f_4074e0b140eflevel0_row1"&gt;1&lt;/th&gt;
+&lt;td class="data row1 col0" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col0"&gt;Suresh Raina&lt;/td&gt;
+&lt;td class="data row1 col1" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col1"&gt;0&lt;/td&gt;
+&lt;td class="data row1 col2" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col2"&gt;1&lt;/td&gt;
+&lt;td class="data row1 col3" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col3"&gt;0&lt;/td&gt;
+&lt;td class="data row1 col4" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col4"&gt;0&lt;/td&gt;
+&lt;td class="data row1 col5" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col5"&gt;1&lt;/td&gt;
+&lt;td class="data row1 col6" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col6"&gt;0&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row2" id="T_d7e45812_5eab_11eb_a32f_4074e0b140eflevel0_row2"&gt;2&lt;/th&gt;
+&lt;td class="data row2 col0" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col0"&gt;kishan&lt;/td&gt;
+&lt;td class="data row2 col1" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col1"&gt;0&lt;/td&gt;
+&lt;td class="data row2 col2" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col2"&gt;0&lt;/td&gt;
+&lt;td class="data row2 col3" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col3"&gt;0&lt;/td&gt;
+&lt;td class="data row2 col4" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col4"&gt;1&lt;/td&gt;
+&lt;td class="data row2 col5" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col5"&gt;0&lt;/td&gt;
+&lt;td class="data row2 col6" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col6"&gt;1&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row3" id="T_d7e45812_5eab_11eb_a32f_4074e0b140eflevel0_row3"&gt;3&lt;/th&gt;
+&lt;td class="data row3 col0" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col0"&gt;rohit_sharma&lt;/td&gt;
+&lt;td class="data row3 col1" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col1"&gt;0&lt;/td&gt;
+&lt;td class="data row3 col2" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col2"&gt;1&lt;/td&gt;
+&lt;td class="data row3 col3" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col3"&gt;0&lt;/td&gt;
+&lt;td class="data row3 col4" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col4"&gt;0&lt;/td&gt;
+&lt;td class="data row3 col5" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col5"&gt;0&lt;/td&gt;
+&lt;td class="data row3 col6" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col6"&gt;1&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row4" id="T_d7e45812_5eab_11eb_a32f_4074e0b140eflevel0_row4"&gt;4&lt;/th&gt;
+&lt;td class="data row4 col0" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col0"&gt;lewis&lt;/td&gt;
+&lt;td class="data row4 col1" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col1"&gt;0&lt;/td&gt;
+&lt;td class="data row4 col2" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col2"&gt;1&lt;/td&gt;
+&lt;td class="data row4 col3" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col3"&gt;0&lt;/td&gt;
+&lt;td class="data row4 col4" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col4"&gt;0&lt;/td&gt;
+&lt;td class="data row4 col5" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col5"&gt;0&lt;/td&gt;
+&lt;td class="data row4 col6" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col6"&gt;1&lt;/td&gt;
+&lt;/tr&gt;&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="2.-Computing-the-Estimated-Points-per-player."&gt;2. Computing the Estimated Points per player.&lt;a class="anchor-link" href="#2.-Computing-the-Estimated-Points-per-player."&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;The objective function is designed to maximize the summation of estimated points for the fantasy team.&lt;/li&gt;
+&lt;li&gt;We have access to every player’s historical points, but we still need to compress them into point estimates that reflect each player’s worth.&lt;/li&gt;
+&lt;li&gt;A simple way to achieve this would be to compute the mean fantasy points accrued by each player over the last 5 matches.&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;However, using an averaging aggregation can be misleading because we would want to capture the recent form of a player more accurately. To achieve this, we shall leverage the weighted averaging technique.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;To demonstrate this further, let us consider an example, say, the fantasy points scored by player-1 and player-2 in the last 5 matches are as follows -&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;player-1 - [10, 20 , 30 , 40 , 50] &lt;br/&gt;
+player-2 - [50, 40 , 30, 20 , 10] &lt;br/&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Computing simple averages results in an aggregated score of 30 for both players.&lt;/li&gt;
+&lt;li&gt;However, the data suggests that player-1 is growing in confidence and has an upward trend in his performance. On the other hand, player-2 has a downward trend in his performance.&lt;/li&gt;
+&lt;li&gt;By taking a simple average, we are losing an important insight.&lt;/li&gt;
+&lt;li&gt;If we compute the averages using time decayed weights such that the most recent performance has a higher weight as compared to older performances resulting in an aggregated score of 33.93 and 26.06 for player-1 and player-2, respectively.&lt;/li&gt;
+&lt;li&gt;As can be seen from the above numbers that even though both the players have amassed the same number of points, the trend in performances is now being captured with player-2 getting a higher average as compared to player-1.&lt;/li&gt;
+&lt;li&gt;Such subtle differences will help us build a robust model.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="So,-let’s-compute-the-time-decayed-weighted-averages-for-the-eligible-players-in-the-dataset."&gt;So, let’s compute the time decayed weighted averages for the eligible players in the dataset.&lt;a class="anchor-link" href="#So,-let’s-compute-the-time-decayed-weighted-averages-for-the-eligible-players-in-the-dataset."&gt;¶&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [5]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'weighted_player_points'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'last_5_matches_points'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;compute_weighted_points&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;compute_weighted_points&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;points_vector&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alpha&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.20&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    
+    &lt;span class="c1"&gt;# compute weights such that recent values are assigned a higher weight as compared to the older values. &lt;/span&gt;
+    &lt;span class="n"&gt;weights&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;reversed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;points_vector&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;alpha&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+    &lt;span class="n"&gt;exponential_weighted_average&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;average&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;points_vector&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;weights&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;weights&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;exponential_weighted_average&lt;/span&gt;
+
+&lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'weighted_player_points'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'last_5_matches_points'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;compute_weighted_points&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reset_index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;inplace&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s1"&gt;'player_name'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'last_5_matches_points'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'weighted_player_points'&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s1"&gt;'player_name'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'last_5_matches_points'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'weighted_player_points'&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;style&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_properties&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;'background-color'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;'#f7ebcf'&lt;/span&gt;&lt;span class="p"&gt;}))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea"&gt;
+&lt;style type="text/css"&gt;
+    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow0_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow0_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow0_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow1_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow1_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow1_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow2_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow2_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow2_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow3_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow3_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow3_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow4_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow4_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow4_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow5_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow5_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow5_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow6_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow6_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow6_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow7_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow7_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow7_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow8_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow8_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow8_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow9_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow9_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow9_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow10_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow10_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow10_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow11_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow11_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow11_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow12_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow12_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow12_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow13_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow13_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow13_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow14_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow14_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow14_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow15_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow15_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow15_col2 {
+            background-color:  #f7ebcf;
+        }&lt;/style&gt;
+&lt;table id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140ef"&gt;
+&lt;thead&gt; &lt;tr&gt;
+&lt;th class="blank level0"&gt;&lt;/th&gt;
+&lt;th class="col_heading level0 col0"&gt;player_name&lt;/th&gt;
+&lt;th class="col_heading level0 col1"&gt;last_5_matches_points&lt;/th&gt;
+&lt;th class="col_heading level0 col2"&gt;weighted_player_points&lt;/th&gt;
+&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row0"&gt;0&lt;/th&gt;
+&lt;td class="data row0 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow0_col0"&gt;M.S. dhoni&lt;/td&gt;
+&lt;td class="data row0 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow0_col1"&gt;[25, 20, 15, 30, 18]&lt;/td&gt;
+&lt;td class="data row0 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow0_col2"&gt;21.4574&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row1"&gt;1&lt;/th&gt;
+&lt;td class="data row1 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow1_col0"&gt;Suresh Raina&lt;/td&gt;
+&lt;td class="data row1 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow1_col1"&gt;[30, 10, 23, 22, 16]&lt;/td&gt;
+&lt;td class="data row1 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow1_col2"&gt;19.6139&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row2"&gt;2&lt;/th&gt;
+&lt;td class="data row2 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow2_col0"&gt;kishan&lt;/td&gt;
+&lt;td class="data row2 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow2_col1"&gt;[17, 13, 14, 27, 35]&lt;/td&gt;
+&lt;td class="data row2 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow2_col2"&gt;23.3034&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row3" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row3"&gt;3&lt;/th&gt;
+&lt;td class="data row3 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow3_col0"&gt;rohit_sharma&lt;/td&gt;
+&lt;td class="data row3 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow3_col1"&gt;[15, 7, 9, 40, 3]&lt;/td&gt;
+&lt;td class="data row3 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow3_col2"&gt;15.016&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row4" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row4"&gt;4&lt;/th&gt;
+&lt;td class="data row4 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow4_col0"&gt;lewis&lt;/td&gt;
+&lt;td class="data row4 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow4_col1"&gt;[20, 18, 15, 22, 20]&lt;/td&gt;
+&lt;td class="data row4 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow4_col2"&gt;19.1937&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row5" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row5"&gt;5&lt;/th&gt;
+&lt;td class="data row5 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow5_col0"&gt;rayadu&lt;/td&gt;
+&lt;td class="data row5 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow5_col1"&gt;[38, 40, 32, 28, 41]&lt;/td&gt;
+&lt;td class="data row5 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow5_col2"&gt;35.6739&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row6" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row6"&gt;6&lt;/th&gt;
+&lt;td class="data row6 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow6_col0"&gt;surya&lt;/td&gt;
+&lt;td class="data row6 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow6_col1"&gt;[30, 23, 10, 18, 25]&lt;/td&gt;
+&lt;td class="data row6 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow6_col2"&gt;20.8027&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row7" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row7"&gt;7&lt;/th&gt;
+&lt;td class="data row7 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow7_col0"&gt;watson&lt;/td&gt;
+&lt;td class="data row7 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow7_col1"&gt;[35, 30, 25, 7, 18]&lt;/td&gt;
+&lt;td class="data row7 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow7_col2"&gt;20.842&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row8" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row8"&gt;8&lt;/th&gt;
+&lt;td class="data row8 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow8_col0"&gt;hardik&lt;/td&gt;
+&lt;td class="data row8 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow8_col1"&gt;[25, 18, 15, 25, 30]&lt;/td&gt;
+&lt;td class="data row8 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow8_col2"&gt;23.4099&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row9" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row9"&gt;9&lt;/th&gt;
+&lt;td class="data row9 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow9_col0"&gt;krunal&lt;/td&gt;
+&lt;td class="data row9 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow9_col1"&gt;[22, 10, 5, 10, 15]&lt;/td&gt;
+&lt;td class="data row9 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow9_col2"&gt;12.0189&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row10" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row10"&gt;10&lt;/th&gt;
+&lt;td class="data row10 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow10_col0"&gt;bravo&lt;/td&gt;
+&lt;td class="data row10 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow10_col1"&gt;[27, 20, 15, 20, 15]&lt;/td&gt;
+&lt;td class="data row10 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow10_col2"&gt;18.507&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row11" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row11"&gt;11&lt;/th&gt;
+&lt;td class="data row11 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow11_col0"&gt;bumrah&lt;/td&gt;
+&lt;td class="data row11 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow11_col1"&gt;[10, 20, 25, 17, 10]&lt;/td&gt;
+&lt;td class="data row11 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow11_col2"&gt;16.1006&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row12" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row12"&gt;12&lt;/th&gt;
+&lt;td class="data row12 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow12_col0"&gt;rahman&lt;/td&gt;
+&lt;td class="data row12 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow12_col1"&gt;[10, 0, 0, 5, 2]&lt;/td&gt;
+&lt;td class="data row12 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow12_col2"&gt;3.03595&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row13" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row13"&gt;13&lt;/th&gt;
+&lt;td class="data row13 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow13_col0"&gt;markande&lt;/td&gt;
+&lt;td class="data row13 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow13_col1"&gt;[28, 30, 20, 30, 40]&lt;/td&gt;
+&lt;td class="data row13 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow13_col2"&gt;30.6877&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row14" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row14"&gt;14&lt;/th&gt;
+&lt;td class="data row14 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow14_col0"&gt;thakur&lt;/td&gt;
+&lt;td class="data row14 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow14_col1"&gt;[16, 10, 7, 8, 9, 15]&lt;/td&gt;
+&lt;td class="data row14 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow14_col2"&gt;10.8823&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row15" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row15"&gt;15&lt;/th&gt;
+&lt;td class="data row15 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow15_col0"&gt;chahar&lt;/td&gt;
+&lt;td class="data row15 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow15_col1"&gt;[24, 15, 10, 20, 23]&lt;/td&gt;
+&lt;td class="data row15 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow15_col2"&gt;18.6666&lt;/td&gt;
+&lt;/tr&gt;&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Now, let's define the constraints for selecting players as defined by Dream11. These constraints are to be honored by the algorithm while trying to maximize points.
+&lt;br/&gt;&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;For more information, check out dream11 &lt;a href="https://www.dream11.com/games/cricket/how-to-play"&gt;FAQs&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [15]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Initialize the optimization Problem &lt;/span&gt;
+&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LpProblem&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Dreamteam'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LpMaximize&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# selection decision variables can be 0 or 1. The number of `selection_decision_varibales` should be equal to &lt;/span&gt;
+&lt;span class="c1"&gt;# the number of players under consideration&lt;/span&gt;
+&lt;span class="n"&gt;selection_decision_variables&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;itertuples&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;variable_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'x_&lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Index&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;variable&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LpVariable&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;variable_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lowBound&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;upBound&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Integer'&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; 
+    &lt;span class="n"&gt;selection_decision_variables&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s2"&gt;"pulp_variable"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;variable&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"player_name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;player_name&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+ 
+&lt;span class="n"&gt;selection_decision_variables_df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;selection_decision_variables&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;merged_processed_player_df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;merge&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;selection_decision_variables_df&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+                                                   &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"player_name"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;merged_processed_player_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"pulp_variable_name"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;merged_processed_player_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"pulp_variable"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;selection_decision_variables_df&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3385,40 +3942,89 @@ player 2 - [50, 40 , 30, 20 , 10] &lt;br/&gt;&lt;/p&gt;
 &lt;tr style="text-align: right;"&gt;
 &lt;th&gt;&lt;/th&gt;
 &lt;th&gt;player_name&lt;/th&gt;
-&lt;th&gt;last_5_matches_points&lt;/th&gt;
-&lt;th&gt;weighted_player_points&lt;/th&gt;
+&lt;th&gt;pulp_variable&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;th&gt;0&lt;/th&gt;
 &lt;td&gt;M.S. dhoni&lt;/td&gt;
-&lt;td&gt;[25, 20, 15, 30, 18]&lt;/td&gt;
-&lt;td&gt;21.457434&lt;/td&gt;
+&lt;td&gt;x_0&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;th&gt;1&lt;/th&gt;
 &lt;td&gt;Suresh Raina&lt;/td&gt;
-&lt;td&gt;[30, 10, 23, 22, 16]&lt;/td&gt;
-&lt;td&gt;19.613900&lt;/td&gt;
+&lt;td&gt;x_1&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;th&gt;2&lt;/th&gt;
 &lt;td&gt;kishan&lt;/td&gt;
-&lt;td&gt;[17, 13, 14, 27, 35]&lt;/td&gt;
-&lt;td&gt;23.303382&lt;/td&gt;
+&lt;td&gt;x_2&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;th&gt;3&lt;/th&gt;
 &lt;td&gt;rohit_sharma&lt;/td&gt;
-&lt;td&gt;[15, 7, 9, 40, 3]&lt;/td&gt;
-&lt;td&gt;15.016017&lt;/td&gt;
+&lt;td&gt;x_3&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;th&gt;4&lt;/th&gt;
 &lt;td&gt;lewis&lt;/td&gt;
-&lt;td&gt;[20, 18, 15, 22, 20]&lt;/td&gt;
-&lt;td&gt;19.193689&lt;/td&gt;
+&lt;td&gt;x_4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;5&lt;/th&gt;
+&lt;td&gt;rayadu&lt;/td&gt;
+&lt;td&gt;x_5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;6&lt;/th&gt;
+&lt;td&gt;surya&lt;/td&gt;
+&lt;td&gt;x_6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;7&lt;/th&gt;
+&lt;td&gt;watson&lt;/td&gt;
+&lt;td&gt;x_7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;8&lt;/th&gt;
+&lt;td&gt;hardik&lt;/td&gt;
+&lt;td&gt;x_8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;9&lt;/th&gt;
+&lt;td&gt;krunal&lt;/td&gt;
+&lt;td&gt;x_9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;10&lt;/th&gt;
+&lt;td&gt;bravo&lt;/td&gt;
+&lt;td&gt;x_10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;11&lt;/th&gt;
+&lt;td&gt;bumrah&lt;/td&gt;
+&lt;td&gt;x_11&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;12&lt;/th&gt;
+&lt;td&gt;rahman&lt;/td&gt;
+&lt;td&gt;x_12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;13&lt;/th&gt;
+&lt;td&gt;markande&lt;/td&gt;
+&lt;td&gt;x_13&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;14&lt;/th&gt;
+&lt;td&gt;thakur&lt;/td&gt;
+&lt;td&gt;x_14&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;15&lt;/th&gt;
+&lt;td&gt;chahar&lt;/td&gt;
+&lt;td&gt;x_15&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -3428,87 +4034,17 @@ player 2 - [50, 40 , 30, 20 , 10] &lt;br/&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now, let's define the constraints for selecting players as defined by Dream11. These constraints are to be honored by the algorithm while trying to maximize points.
-&lt;br/&gt;&lt;br/&gt;&lt;/p&gt;
-&lt;p&gt;For more information, check out dream11 &lt;a href="https://www.dream11.com/games/cricket/how-to-play"&gt;FAQs&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [41]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [16]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;max_players&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;
-&lt;span class="n"&gt;max_batsman&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;
-&lt;span class="n"&gt;max_allrounders&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
-&lt;span class="n"&gt;max_bowlers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;
-&lt;span class="n"&gt;max_keepers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
-&lt;span class="n"&gt;max_cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
-&lt;span class="n"&gt;max_team1_players&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;
-&lt;span class="n"&gt;max_team2_players&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [42]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LpProblem&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Dreamteam'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LpMaximize&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [43]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# define decision variables for each row in the input dataframe&lt;/span&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Create the objective Function to be maximized&lt;/span&gt;
 
-&lt;span class="n"&gt;decision_variables&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
-
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rownum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iterrows&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="n"&gt;variable&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'x_&lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rownum&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
-    &lt;span class="n"&gt;variable&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;LpVariable&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;variable&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lowBound&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;upBound&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'Integer'&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; 
-    &lt;span class="n"&gt;decision_variables&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;variable&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    
-&lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="n"&gt;decision_variables&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-&lt;div class="output_area"&gt;
-&lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;[x_0, x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8, x_9, x_10, x_11, x_12, x_13, x_14, x_15]
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [44]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Create optimization Function&lt;/span&gt;
-&lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;
-&lt;span class="n"&gt;total_points&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rownum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iterrows&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="n"&gt;formula&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'weighted_player_points'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;decision_variables&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;rownum&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;total_points&lt;/span&gt;&lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;formula&lt;/span&gt;
+&lt;span class="n"&gt;total_points&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lpSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;merged_processed_player_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"weighted_player_points"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;selection_decision_variables_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"pulp_variable"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
 &lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;total_points&lt;/span&gt;
+
+&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prob&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3517,13 +4053,27 @@ player 2 - [50, 40 , 30, 20 , 10] &lt;br/&gt;&lt;/p&gt;
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;Index([u'index', u'cost', u'last_5_matches_points', u'player_name',
-       u'player_category_all_rounder', u'player_category_batsman',
-       u'player_category_bowler', u'player_category_wicket_keeper',
-       u'team_name_CSK', u'team_name_MI', u'weighted_player_points'],
-      dtype='object')
-&lt;/pre&gt;
+&lt;div class="output_text output_subarea"&gt;
+&lt;pre&gt;Dreamteam:
+MAXIMIZE
+21.4574342327*x_0 + 19.6138998634*x_1 + 18.507022734*x_10 + 16.1006207824*x_11 + 3.03595134142*x_12 + 30.6877000247*x_13 + 10.8823368063*x_14 + 18.6665650801*x_15 + 23.3033823875*x_2 + 15.0160173204*x_3 + 19.1936886525*x_4 + 35.6738860573*x_5 + 20.8026696164*x_6 + 20.8419816771*x_7 + 23.4099290007*x_8 + 12.0189162375*x_9 + 0.0
+VARIABLES
+0 &amp;lt;= x_0 &amp;lt;= 1 Integer
+0 &amp;lt;= x_1 &amp;lt;= 1 Integer
+0 &amp;lt;= x_10 &amp;lt;= 1 Integer
+0 &amp;lt;= x_11 &amp;lt;= 1 Integer
+0 &amp;lt;= x_12 &amp;lt;= 1 Integer
+0 &amp;lt;= x_13 &amp;lt;= 1 Integer
+0 &amp;lt;= x_14 &amp;lt;= 1 Integer
+0 &amp;lt;= x_15 &amp;lt;= 1 Integer
+0 &amp;lt;= x_2 &amp;lt;= 1 Integer
+0 &amp;lt;= x_3 &amp;lt;= 1 Integer
+0 &amp;lt;= x_4 &amp;lt;= 1 Integer
+0 &amp;lt;= x_5 &amp;lt;= 1 Integer
+0 &amp;lt;= x_6 &amp;lt;= 1 Integer
+0 &amp;lt;= x_7 &amp;lt;= 1 Integer
+0 &amp;lt;= x_8 &amp;lt;= 1 Integer
+0 &amp;lt;= x_9 &amp;lt;= 1 Integer&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3531,59 +4081,51 @@ player 2 - [50, 40 , 30, 20 , 10] &lt;br/&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [45]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [17]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#set constrainst for keeper&lt;/span&gt;
-&lt;span class="n"&gt;total_keepers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;
-&lt;span class="n"&gt;total_batsman&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;
-&lt;span class="n"&gt;total_allrounder&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;
-&lt;span class="n"&gt;total_bowler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;
-&lt;span class="n"&gt;total_players&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;
-&lt;span class="n"&gt;total_cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;
-&lt;span class="n"&gt;total_team2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;
-&lt;span class="n"&gt;total_team1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# 1 &amp;lt;= n_keeper &amp;lt;= 4 &lt;/span&gt;
+&lt;span class="n"&gt;total_keepers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lpSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;merged_processed_player_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"player_category_wicket_keeper"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;selection_decision_variables_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"pulp_variable"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_keepers&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_keepers&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rownum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iterrows&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="n"&gt;keeper_formula&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'player_category_wicket_keeper'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;decision_variables&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;rownum&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;total_keepers&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;keeper_formula&lt;/span&gt;
-    
-    &lt;span class="n"&gt;batsman_formula&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'player_category_batsman'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;decision_variables&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;rownum&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;total_batsman&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;batsman_formula&lt;/span&gt;
-    
-    &lt;span class="n"&gt;allrounder_formula&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'player_category_all_rounder'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;decision_variables&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;rownum&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;total_allrounder&lt;/span&gt;&lt;span class="o"&gt;+=&lt;/span&gt;&lt;span class="n"&gt;allrounder_formula&lt;/span&gt;
-    
-    &lt;span class="n"&gt;bowler_formula&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'player_category_bowler'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;decision_variables&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;rownum&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;total_bowler&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;bowler_formula&lt;/span&gt;
-    
-    &lt;span class="n"&gt;total_players_formula&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;decision_variables&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;rownum&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;total_players&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;total_players_formula&lt;/span&gt;
-    
-    &lt;span class="n"&gt;total_cost_formula&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'cost'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;decision_variables&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;rownum&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;total_cost&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;total_cost_formula&lt;/span&gt;
-    
-    &lt;span class="n"&gt;formula&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'team_name_CSK'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;decision_variables&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;rownum&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;total_team1&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;formula&lt;/span&gt;
-    
-    &lt;span class="n"&gt;formula&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'team_name_MI'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;decision_variables&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;rownum&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;total_team2&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;formula&lt;/span&gt;
-    
-&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_keepers&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;max_keepers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_batsman&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;max_batsman&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_allrounder&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;max_allrounders&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_bowler&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;max_bowlers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_players&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;max_players&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_cost&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;max_cost&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_team1&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;max_team1_players&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_team2&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;max_team2_players&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 3 &amp;lt;= n_batsmen &amp;lt;= 6 &lt;/span&gt;
+&lt;span class="n"&gt;total_batsmen&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lpSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;merged_processed_player_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"player_category_batsman"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;selection_decision_variables_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"pulp_variable"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_batsmen&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_batsmen&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 1 &amp;lt;= n_allrounders &amp;lt;= 4&lt;/span&gt;
+&lt;span class="n"&gt;total_allrounders&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lpSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;merged_processed_player_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"player_category_all_rounder"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;selection_decision_variables_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"pulp_variable"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_allrounders&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_allrounders&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 3 &amp;lt;= n_bowlers &amp;lt;= 6&lt;/span&gt;
+&lt;span class="n"&gt;total_bowlers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lpSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;merged_processed_player_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"player_category_bowler"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;selection_decision_variables_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"pulp_variable"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_bowlers&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_bowlers&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# maximum of 11 players&lt;/span&gt;
+&lt;span class="n"&gt;total_players&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lpSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;selection_decision_variables_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"pulp_variable"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_players&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# maximum fantasy budget of 100&lt;/span&gt;
+&lt;span class="n"&gt;total_cost&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lpSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;merged_processed_player_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"cost"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;selection_decision_variables_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"pulp_variable"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_cost&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# we cannot pick more than 7 players from the same team&lt;/span&gt;
+&lt;span class="n"&gt;total_team1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lpSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;merged_processed_player_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"team_name_CSK"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;selection_decision_variables_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"pulp_variable"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_team1&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;total_team2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lpSum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;merged_processed_player_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"team_name_MI"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;selection_decision_variables_df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"pulp_variable"&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;prob&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;total_team2&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 
 
-&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prob&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prob&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;prob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;writeLP&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Dreamteam.lp'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="n"&gt;optimization_result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;prob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;solve&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pulp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;listSolvers&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;onlyAvailable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"solvers not installed correctly - check - https://www.coin-or.org/PuLP/main/installing_pulp_at_home.html"&lt;/span&gt;
+&lt;span class="n"&gt;prob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;solve&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3592,29 +4134,37 @@ player 2 - [50, 40 , 30, 20 , 10] &lt;br/&gt;&lt;/p&gt;
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
-&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;div class="output_text output_subarea"&gt;
 &lt;pre&gt;Dreamteam:
 MAXIMIZE
 21.4574342327*x_0 + 19.6138998634*x_1 + 18.507022734*x_10 + 16.1006207824*x_11 + 3.03595134142*x_12 + 30.6877000247*x_13 + 10.8823368063*x_14 + 18.6665650801*x_15 + 23.3033823875*x_2 + 15.0160173204*x_3 + 19.1936886525*x_4 + 35.6738860573*x_5 + 20.8026696164*x_6 + 20.8419816771*x_7 + 23.4099290007*x_8 + 12.0189162375*x_9 + 0.0
 SUBJECT TO
-_C1: x_0 + x_2 = 1
+_C1: x_0 + x_2 &amp;gt;= 1
 
-_C2: x_1 + x_3 + x_4 + x_5 + x_6 &amp;lt;= 5
+_C2: x_0 + x_2 &amp;lt;= 4
 
-_C3: x_10 + x_7 + x_8 + x_9 &amp;lt;= 3
+_C3: x_1 + x_3 + x_4 + x_5 + x_6 &amp;gt;= 3
 
-_C4: x_11 + x_12 + x_13 + x_14 + x_15 &amp;lt;= 5
+_C4: x_1 + x_3 + x_4 + x_5 + x_6 &amp;lt;= 6
 
-_C5: x_0 + x_1 + x_10 + x_11 + x_12 + x_13 + x_14 + x_15 + x_2 + x_3 + x_4
+_C5: x_10 + x_7 + x_8 + x_9 &amp;gt;= 1
+
+_C6: x_10 + x_7 + x_8 + x_9 &amp;lt;= 4
+
+_C7: x_11 + x_12 + x_13 + x_14 + x_15 &amp;gt;= 3
+
+_C8: x_11 + x_12 + x_13 + x_14 + x_15 &amp;lt;= 6
+
+_C9: x_0 + x_1 + x_10 + x_11 + x_12 + x_13 + x_14 + x_15 + x_2 + x_3 + x_4
  + x_5 + x_6 + x_7 + x_8 + x_9 = 11
 
-_C6: 9 x_0 + 10 x_1 + 9 x_10 + 9 x_11 + 8.5 x_12 + 8.5 x_13 + 8.5 x_14
+_C10: 9 x_0 + 10 x_1 + 9 x_10 + 9 x_11 + 8.5 x_12 + 8.5 x_13 + 8.5 x_14
  + 8 x_15 + 8.5 x_2 + 10.5 x_3 + 9.5 x_4 + 9 x_5 + 8.5 x_6 + 10.5 x_7 + 9 x_8
  + 9 x_9 &amp;lt;= 100
 
-_C7: x_0 + x_1 + x_10 + x_14 + x_15 + x_5 + x_7 &amp;lt;= 7
+_C11: x_0 + x_1 + x_10 + x_14 + x_15 + x_5 + x_7 &amp;lt;= 7
 
-_C8: x_11 + x_12 + x_13 + x_2 + x_3 + x_4 + x_6 + x_8 + x_9 &amp;lt;= 7
+_C12: x_11 + x_12 + x_13 + x_2 + x_3 + x_4 + x_6 + x_8 + x_9 &amp;lt;= 7
 
 VARIABLES
 0 &amp;lt;= x_0 &amp;lt;= 1 Integer
@@ -3632,9 +4182,7 @@ VARIABLES
 0 &amp;lt;= x_6 &amp;lt;= 1 Integer
 0 &amp;lt;= x_7 &amp;lt;= 1 Integer
 0 &amp;lt;= x_8 &amp;lt;= 1 Integer
-0 &amp;lt;= x_9 &amp;lt;= 1 Integer
-
-&lt;/pre&gt;
+0 &amp;lt;= x_9 &amp;lt;= 1 Integer&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3642,28 +4190,28 @@ VARIABLES
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [48]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [20]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;variable_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
-&lt;span class="n"&gt;variable_value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+&lt;div class="highlight hl-ipython2"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# prep solution&lt;/span&gt;
 
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;prob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;variables&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="n"&gt;variable_name&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;variable_value&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;varValue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    
-&lt;span class="n"&gt;df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s1"&gt;'index'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;variable_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'value'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;variable_value&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;rownum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iterrows&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;'(\d+)'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'index'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-    &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loc&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;rownum&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'index'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;solutions_df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="s1"&gt;'pulp_variable_name'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+            &lt;span class="s1"&gt;'value'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;varValue&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;prob&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;variables&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="n"&gt;df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'index'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;merge&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;processed_player_data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'index'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;merge&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;merged_processed_player_df&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;solutions_df&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'pulp_variable_name'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'value'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'weighted_player_points'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ascending&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;selected_cols_final&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'player_name'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'team_name_CSK'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'team_name_MI'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'weighted_player_points'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="n"&gt;final_set_of_players_to_be_selected&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;selected_cols_final&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 
-&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;final_set_of_players_to_be_selected&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;final_set_of_players_to_be_selected&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;style&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_properties&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;'background-color'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;'#f7ebcf'&lt;/span&gt;&lt;span class="p"&gt;}))&lt;/span&gt;
 
 &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"We can accrue an estimated points of &lt;/span&gt;&lt;span class="si"&gt;%f&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;final_set_of_players_to_be_selected&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'weighted_player_points'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;()))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -3675,104 +4223,178 @@ VARIABLES
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_html rendered_html output_subarea"&gt;
-&lt;div&gt;
-&lt;table border="1" class="dataframe"&gt;
-&lt;thead&gt;
-&lt;tr style="text-align: right;"&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;player_name&lt;/th&gt;
-&lt;th&gt;team_name_CSK&lt;/th&gt;
-&lt;th&gt;team_name_MI&lt;/th&gt;
-&lt;th&gt;weighted_player_points&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;th&gt;5&lt;/th&gt;
-&lt;td&gt;rayadu&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;35.673886&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;13&lt;/th&gt;
-&lt;td&gt;markande&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;30.687700&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;8&lt;/th&gt;
-&lt;td&gt;hardik&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;23.409929&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;2&lt;/th&gt;
-&lt;td&gt;kishan&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;23.303382&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;7&lt;/th&gt;
-&lt;td&gt;watson&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;20.841982&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;6&lt;/th&gt;
-&lt;td&gt;surya&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;20.802670&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;1&lt;/th&gt;
-&lt;td&gt;Suresh Raina&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;19.613900&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;4&lt;/th&gt;
-&lt;td&gt;lewis&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;19.193689&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;15&lt;/th&gt;
-&lt;td&gt;chahar&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;18.666565&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;10&lt;/th&gt;
-&lt;td&gt;bravo&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;18.507023&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;th&gt;11&lt;/th&gt;
-&lt;td&gt;bumrah&lt;/td&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;1&lt;/td&gt;
-&lt;td&gt;16.100621&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+&lt;style type="text/css"&gt;
+    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col3 {
+            background-color:  #f7ebcf;
+        }&lt;/style&gt;
+&lt;table id="T_108847f6_5e0b_11eb_a32f_4074e0b140ef"&gt;
+&lt;thead&gt; &lt;tr&gt;
+&lt;th class="blank level0"&gt;&lt;/th&gt;
+&lt;th class="col_heading level0 col0"&gt;player_name&lt;/th&gt;
+&lt;th class="col_heading level0 col1"&gt;team_name_CSK&lt;/th&gt;
+&lt;th class="col_heading level0 col2"&gt;team_name_MI&lt;/th&gt;
+&lt;th class="col_heading level0 col3"&gt;weighted_player_points&lt;/th&gt;
+&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row0"&gt;5&lt;/th&gt;
+&lt;td class="data row0 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col0"&gt;rayadu&lt;/td&gt;
+&lt;td class="data row0 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col1"&gt;1&lt;/td&gt;
+&lt;td class="data row0 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col2"&gt;0&lt;/td&gt;
+&lt;td class="data row0 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col3"&gt;35.6739&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row1"&gt;13&lt;/th&gt;
+&lt;td class="data row1 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col0"&gt;markande&lt;/td&gt;
+&lt;td class="data row1 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col1"&gt;0&lt;/td&gt;
+&lt;td class="data row1 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col2"&gt;1&lt;/td&gt;
+&lt;td class="data row1 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col3"&gt;30.6877&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row2"&gt;8&lt;/th&gt;
+&lt;td class="data row2 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col0"&gt;hardik&lt;/td&gt;
+&lt;td class="data row2 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col1"&gt;0&lt;/td&gt;
+&lt;td class="data row2 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col2"&gt;1&lt;/td&gt;
+&lt;td class="data row2 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col3"&gt;23.4099&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row3"&gt;2&lt;/th&gt;
+&lt;td class="data row3 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col0"&gt;kishan&lt;/td&gt;
+&lt;td class="data row3 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col1"&gt;0&lt;/td&gt;
+&lt;td class="data row3 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col2"&gt;1&lt;/td&gt;
+&lt;td class="data row3 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col3"&gt;23.3034&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row4" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row4"&gt;0&lt;/th&gt;
+&lt;td class="data row4 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col0"&gt;M.S. dhoni&lt;/td&gt;
+&lt;td class="data row4 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col1"&gt;1&lt;/td&gt;
+&lt;td class="data row4 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col2"&gt;0&lt;/td&gt;
+&lt;td class="data row4 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col3"&gt;21.4574&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row5" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row5"&gt;7&lt;/th&gt;
+&lt;td class="data row5 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col0"&gt;watson&lt;/td&gt;
+&lt;td class="data row5 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col1"&gt;1&lt;/td&gt;
+&lt;td class="data row5 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col2"&gt;0&lt;/td&gt;
+&lt;td class="data row5 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col3"&gt;20.842&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row6" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row6"&gt;6&lt;/th&gt;
+&lt;td class="data row6 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col0"&gt;surya&lt;/td&gt;
+&lt;td class="data row6 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col1"&gt;0&lt;/td&gt;
+&lt;td class="data row6 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col2"&gt;1&lt;/td&gt;
+&lt;td class="data row6 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col3"&gt;20.8027&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row7" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row7"&gt;1&lt;/th&gt;
+&lt;td class="data row7 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col0"&gt;Suresh Raina&lt;/td&gt;
+&lt;td class="data row7 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col1"&gt;1&lt;/td&gt;
+&lt;td class="data row7 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col2"&gt;0&lt;/td&gt;
+&lt;td class="data row7 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col3"&gt;19.6139&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row8" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row8"&gt;4&lt;/th&gt;
+&lt;td class="data row8 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col0"&gt;lewis&lt;/td&gt;
+&lt;td class="data row8 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col1"&gt;0&lt;/td&gt;
+&lt;td class="data row8 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col2"&gt;1&lt;/td&gt;
+&lt;td class="data row8 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col3"&gt;19.1937&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row9" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row9"&gt;15&lt;/th&gt;
+&lt;td class="data row9 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col0"&gt;chahar&lt;/td&gt;
+&lt;td class="data row9 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col1"&gt;1&lt;/td&gt;
+&lt;td class="data row9 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col2"&gt;0&lt;/td&gt;
+&lt;td class="data row9 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col3"&gt;18.6666&lt;/td&gt;
+&lt;/tr&gt; &lt;tr&gt;
+&lt;th class="row_heading level0 row10" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row10"&gt;11&lt;/th&gt;
+&lt;td class="data row10 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col0"&gt;bumrah&lt;/td&gt;
+&lt;td class="data row10 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col1"&gt;0&lt;/td&gt;
+&lt;td class="data row10 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col2"&gt;1&lt;/td&gt;
+&lt;td class="data row10 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col3"&gt;16.1006&lt;/td&gt;
+&lt;/tr&gt;&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;We can accrue an estimated points of 246.801346
+&lt;pre&gt;We can accrue an estimated points of 249.751757
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;

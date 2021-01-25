@@ -1239,10 +1239,35 @@ h6:hover .anchor-link {
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Winning-Fantasy-Sports-using-Data-Science">Winning Fantasy Sports using Data Science<a class="anchor-link" href="#Winning-Fantasy-Sports-using-Data-Science">¶</a></h1><p>With all the buzz around Indian Premier League (IPL), FIFA World Cup, Cricket World Cup-2019, fantasy sports websites like Dream11 are gaining traction. Fantasy Sports Portal allows sports fans like me to be a part of it. Having said that, it is very difficult to keep track of all the players and their performance across the sports.</p>
-<p><br/>
-In this tutorial, I will try to automate the fantasy selection process so that the probability of winning a fantasy league is maximized.</p>
+<h1 id="Crushing-Fantasy-Sports-Leaderboard">Crushing Fantasy Sports Leaderboard<a class="anchor-link" href="#Crushing-Fantasy-Sports-Leaderboard">¶</a></h1><h2 id="Leverage-historical-data-and-Integer-Linear-Programming-for-selecting-an-optimal-fantasy-team.">Leverage historical data and Integer Linear Programming for selecting an optimal fantasy team.<a class="anchor-link" href="#Leverage-historical-data-and-Integer-Linear-Programming-for-selecting-an-optimal-fantasy-team.">¶</a></h2><ul>
+<li><p>Sports have played a pivotal role in our society for ages. It has been an active medium for entertainment and a means for uniting people. <br/></p>
+</li>
+<li><p>Sports have given us legends who are followed, loved, and worshipped across the globe. <br/></p>
+</li>
+<li><p>Over the last few years, the emergence of fantasy sports platforms has allowed fans to connect with sports on a deeper level. <br/></p>
+</li>
+<li><p>According to a recent report published by Businesswire, North American Fantasy Sports Markets are expected to grow at a staggering CAGR of 10.7% over the next five years. <br/></p>
+</li>
+<li><p>The story is no different in India, Asia. The fantasy sports platform, Dream11, has grown its user base by a jaw-dropping 6000% from a few lakh in 2015 users to over eight crore active users in 2020. <br/></p>
+</li>
+<li><p>Selecting a fantasy team that is capable of earning the maximum points is not trivial. Often, emotions take over and your team ends up at the bottom of the points table in the fantasy league. <br/></p>
+</li>
+<li><p>In this blog post, we shall explore a data-driven approach for selecting the fantasy team objectively given historical data. <br/></p>
+</li>
+</ul>
 <p><br/></p>
+<h3 id="Data-Description--">Data Description -<a class="anchor-link" href="#Data-Description--">¶</a></h3><ul>
+<li>For the sake of this blog, let’s focus on the game of cricket. Technically, once we have chalked out the details it is trivial to extend the logic for other sports.</li>
+<li>I have managed to dump the historical fantasy points data for two of the biggest teams in the Indian Premier League (IPL), Chennai Super Kings and Mumbai Indians, in a <a href="https://github.com/jadhavpritish/Dream11_Predictor/blob/master/data/dream11_performance_data.csv">CSV file</a>.</li>
+</ul>
+<p>The input file for auto-selecting players has the following fields -</p>
+<ol>
+<li>Cost - Most of the fantasy websites (including Dream11) allocate a total budget which cannot be exceeded. </li>
+<li>last_5_matches_points - This field is a list of points accrued by a player in his last 5 matches. </li>
+<li>player_category - This field highlights the category of the player. In the case of cricket, the possible categories are wicket-keeper, batsman, all-rounder, bowler. For a sport like football, the possible categories are - Goalkeeper, Defender, Midfielder, Striker. This field is important because every fantasy website restricts the number of players one can select from each of these categories. </li>
+<li>player_name - This field highlights the player name on a fantasy sports website.</li>
+<li>team_name - This column in the data frame highlights the team name of the player. </li>
+</ol>
 <h3 id="Let's-get-right-to-it-by-loading-and-inspecting-the-player-data-for-an-upcoming-match-between-Chennai-Superkings-vs-Mumbai-Indians.">Let's get right to it by loading and inspecting the player data for an upcoming match between Chennai Superkings vs Mumbai Indians.<a class="anchor-link" href="#Let's-get-right-to-it-by-loading-and-inspecting-the-player-data-for-an-upcoming-match-between-Chennai-Superkings-vs-Mumbai-Indians.">¶</a></h3>
 </div>
 </div>
@@ -1269,6 +1294,7 @@ In this tutorial, I will try to automate the fantasy selection process so that t
 
 <span class="kn">from</span> <span class="nn">ast</span> <span class="kn">import</span> <span class="n">literal_eval</span>
 <span class="kn">import</span> <span class="nn">pulp</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelBinarizer</span>
 <span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span><span class="n">HTML</span>
@@ -1295,134 +1321,13 @@ In this tutorial, I will try to automate the fantasy selection process so that t
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Data-Description--">Data Description -<a class="anchor-link" href="#Data-Description--">¶</a></h2><p>The input file for auto-selecting players has the following fields -</p>
-<p>a. Cost - Most of the fantasy websites (including Dream11) allocate a total budget which cannot be exceeded. <br/><br/>
-b. last_5_matches_points - This field is a list of points accrued by a player in his last 5 matches. 
-<br/><br/>
-c. player_category - This field highlights the category of the player. In the case of cricket, the possible categories are wicket-keeper, batsman, all-rounder, bowler. For a sport like football, the possible categories are - Goalkeeper, Defender, Midfielder, Striker. This field is important because every fantasy website restricts the number of players one can select from each of these categories. 
-<br/><br/>
-d. player_name - This field highlights the player name on a fantasy sports website.
-<br/><br/>
-e. team_name - This column in the data frame highlights the team name of the player.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [2]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="n">raw_player_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data/dream11_performance_data.csv'</span><span class="p">,</span> <span class="n">converters</span><span class="o">=</span><span class="p">{</span><span class="s2">"last_5_matches_points"</span><span class="p">:</span> <span class="n">literal_eval</span><span class="p">})</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">'&lt;font size=2&gt;'</span><span class="o">+</span><span class="n">raw_player_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span><span class="o">+</span><span class="s1">'&lt;/font&gt;'</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea">
-<font size="2"><table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>cost</th>
-<th>last_5_matches_points</th>
-<th>player_category</th>
-<th>player_name</th>
-<th>team_name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>9.0</td>
-<td>[25, 20, 15, 30, 18]</td>
-<td>wicket_keeper</td>
-<td>M.S. dhoni</td>
-<td>CSK</td>
-</tr>
-<tr>
-<th>1</th>
-<td>10.0</td>
-<td>[30, 10, 23, 22, 16]</td>
-<td>batsman</td>
-<td>Suresh Raina</td>
-<td>CSK</td>
-</tr>
-<tr>
-<th>2</th>
-<td>8.5</td>
-<td>[17, 13, 14, 27, 35]</td>
-<td>wicket_keeper</td>
-<td>kishan</td>
-<td>MI</td>
-</tr>
-<tr>
-<th>3</th>
-<td>10.5</td>
-<td>[15, 7, 9, 40, 3]</td>
-<td>batsman</td>
-<td>rohit_sharma</td>
-<td>MI</td>
-</tr>
-<tr>
-<th>4</th>
-<td>9.5</td>
-<td>[20, 18, 15, 22, 20]</td>
-<td>batsman</td>
-<td>lewis</td>
-<td>MI</td>
-</tr>
-</tbody>
-</table></font>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Algorithm-Pseudo-Code-/-Workflow--">Algorithm Pseudo Code / Workflow -<a class="anchor-link" href="#Algorithm-Pseudo-Code-/-Workflow--">¶</a></h3><ol>
-<li>We will be viewing the selection problem as an Integer Linear Programming (ILP) problem with constraints.
-<br/></li>
-<li>The objective function for ILP (Integer Linear Programming) will be to maximize the expected points. 
-<br/></li>
-<li>The constraints will be defined as per the rules imposed by the fantasy website (In this case, Dream11).
-<br/></li>
-<li>Once an ILP problem is defined, it can be easily solved using the PuLP library in python. 
-<br/>
-For more mathematical details, I will be adding references at the end of the tutorial</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id='As-one-can-imagine,-we-cannot-work-directly-with-text-data.-Hence,-we-will-be-using-the-"get_dummies"-function-in-pandas-to-convert-categorical-data-into-one-hot-encoded-vectors.'>As one can imagine, we cannot work directly with text data. Hence, we will be using the "get_dummies" function in pandas to convert categorical data into one-hot encoded vectors.<a class="anchor-link" href='#As-one-can-imagine,-we-cannot-work-directly-with-text-data.-Hence,-we-will-be-using-the-"get_dummies"-function-in-pandas-to-convert-categorical-data-into-one-hot-encoded-vectors.'>¶</a></h3><p><br/>
-For Eg - A single column of player_category in pandas data frame will be split into the number of unique values of the player category. In this case, each player can either be a wicketkeeper, batsman, allrounder or a bowler. As a result, the player category for each player will be represented by a 4-dimensional one-hot encoded vector.</p>
-<p><br/></p>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">col_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"player_category"</span><span class="p">,</span> <span class="s2">"team_name"</span><span class="p">]):</span>
-    <span class="n">dummies_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">raw_player_data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"player_category"</span><span class="p">,</span> <span class="s2">"team_name"</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">dummies_data</span>
-
-<span class="n">processed_player_data</span> <span class="o">=</span> <span class="n">get_dummies</span><span class="p">(</span><span class="n">raw_player_data</span><span class="p">)</span>
- 
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">'&lt;font size=2&gt;'</span><span class="o">+</span><span class="n">processed_player_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'cost'</span><span class="p">,</span> <span class="s1">'last_5_matches_points'</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span><span class="o">+</span><span class="s1">'&lt;/font&gt;'</span><span class="p">))</span>
+<div class="highlight hl-ipython2"><pre><span></span><span class="n">raw_player_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'https://raw.githubusercontent.com/jadhavpritish/Dream11_Predictor/master/data/dream11_performance_data.csv'</span><span class="p">,</span> <span class="n">converters</span><span class="o">=</span><span class="p">{</span><span class="s2">"last_5_matches_points"</span><span class="p">:</span> <span class="n">literal_eval</span><span class="p">})</span>
+<span class="n">display</span><span class="p">(</span><span class="n">raw_player_data</span><span class="p">[[</span><span class="s2">"team_name"</span><span class="p">,</span> <span class="s2">"player_name"</span><span class="p">,</span> <span class="s2">"player_category"</span><span class="p">,</span> <span class="s2">"last_5_matches_points"</span><span class="p">,</span> <span class="s2">"cost"</span><span class="p">]]</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">set_properties</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">'background-color'</span><span class="p">:</span><span class="s1">'#f7ebcf'</span><span class="p">}))</span>
 </pre></div>
 </div>
 </div>
@@ -1432,72 +1337,291 @@ For Eg - A single column of player_category in pandas data frame will be split i
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea">
-<font size="2"><table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>player_name</th>
-<th>player_category_all_rounder</th>
-<th>player_category_batsman</th>
-<th>player_category_bowler</th>
-<th>player_category_wicket_keeper</th>
-<th>team_name_CSK</th>
-<th>team_name_MI</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>M.S. dhoni</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<th>1</th>
-<td>Suresh Raina</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<th>2</th>
-<td>kishan</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<th>3</th>
-<td>rohit_sharma</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<th>4</th>
-<td>lewis</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
-</table></font>
+<style type="text/css">
+    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col4 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col3 {
+            background-color:  #f7ebcf;
+        }    #T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col4 {
+            background-color:  #f7ebcf;
+        }</style>
+<table id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140ef">
+<thead> <tr>
+<th class="blank level0"></th>
+<th class="col_heading level0 col0">team_name</th>
+<th class="col_heading level0 col1">player_name</th>
+<th class="col_heading level0 col2">player_category</th>
+<th class="col_heading level0 col3">last_5_matches_points</th>
+<th class="col_heading level0 col4">cost</th>
+</tr></thead>
+<tbody> <tr>
+<th class="row_heading level0 row0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row0">0</th>
+<td class="data row0 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col0">CSK</td>
+<td class="data row0 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col1">M.S. dhoni</td>
+<td class="data row0 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col2">wicket_keeper</td>
+<td class="data row0 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col3">[25, 20, 15, 30, 18]</td>
+<td class="data row0 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow0_col4">9</td>
+</tr> <tr>
+<th class="row_heading level0 row1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row1">1</th>
+<td class="data row1 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col0">CSK</td>
+<td class="data row1 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col1">Suresh Raina</td>
+<td class="data row1 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col2">batsman</td>
+<td class="data row1 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col3">[30, 10, 23, 22, 16]</td>
+<td class="data row1 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow1_col4">10</td>
+</tr> <tr>
+<th class="row_heading level0 row2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row2">2</th>
+<td class="data row2 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col0">MI</td>
+<td class="data row2 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col1">kishan</td>
+<td class="data row2 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col2">wicket_keeper</td>
+<td class="data row2 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col3">[17, 13, 14, 27, 35]</td>
+<td class="data row2 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow2_col4">8.5</td>
+</tr> <tr>
+<th class="row_heading level0 row3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row3">3</th>
+<td class="data row3 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col0">MI</td>
+<td class="data row3 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col1">rohit_sharma</td>
+<td class="data row3 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col2">batsman</td>
+<td class="data row3 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col3">[15, 7, 9, 40, 3]</td>
+<td class="data row3 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow3_col4">10.5</td>
+</tr> <tr>
+<th class="row_heading level0 row4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row4">4</th>
+<td class="data row4 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col0">MI</td>
+<td class="data row4 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col1">lewis</td>
+<td class="data row4 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col2">batsman</td>
+<td class="data row4 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col3">[20, 18, 15, 22, 20]</td>
+<td class="data row4 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow4_col4">9.5</td>
+</tr> <tr>
+<th class="row_heading level0 row5" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row5">5</th>
+<td class="data row5 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col0">CSK</td>
+<td class="data row5 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col1">rayadu</td>
+<td class="data row5 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col2">batsman</td>
+<td class="data row5 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col3">[38, 40, 32, 28, 41]</td>
+<td class="data row5 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow5_col4">9</td>
+</tr> <tr>
+<th class="row_heading level0 row6" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row6">6</th>
+<td class="data row6 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col0">MI</td>
+<td class="data row6 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col1">surya</td>
+<td class="data row6 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col2">batsman</td>
+<td class="data row6 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col3">[30, 23, 10, 18, 25]</td>
+<td class="data row6 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow6_col4">8.5</td>
+</tr> <tr>
+<th class="row_heading level0 row7" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row7">7</th>
+<td class="data row7 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col0">CSK</td>
+<td class="data row7 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col1">watson</td>
+<td class="data row7 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col2">all_rounder</td>
+<td class="data row7 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col3">[35, 30, 25, 7, 18]</td>
+<td class="data row7 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow7_col4">10.5</td>
+</tr> <tr>
+<th class="row_heading level0 row8" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row8">8</th>
+<td class="data row8 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col0">MI</td>
+<td class="data row8 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col1">hardik</td>
+<td class="data row8 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col2">all_rounder</td>
+<td class="data row8 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col3">[25, 18, 15, 25, 30]</td>
+<td class="data row8 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow8_col4">9</td>
+</tr> <tr>
+<th class="row_heading level0 row9" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row9">9</th>
+<td class="data row9 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col0">MI</td>
+<td class="data row9 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col1">krunal</td>
+<td class="data row9 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col2">all_rounder</td>
+<td class="data row9 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col3">[22, 10, 5, 10, 15]</td>
+<td class="data row9 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow9_col4">9</td>
+</tr> <tr>
+<th class="row_heading level0 row10" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row10">10</th>
+<td class="data row10 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col0">CSK</td>
+<td class="data row10 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col1">bravo</td>
+<td class="data row10 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col2">all_rounder</td>
+<td class="data row10 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col3">[27, 20, 15, 20, 15]</td>
+<td class="data row10 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow10_col4">9</td>
+</tr> <tr>
+<th class="row_heading level0 row11" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row11">11</th>
+<td class="data row11 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col0">MI</td>
+<td class="data row11 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col1">bumrah</td>
+<td class="data row11 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col2">bowler</td>
+<td class="data row11 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col3">[10, 20, 25, 17, 10]</td>
+<td class="data row11 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow11_col4">9</td>
+</tr> <tr>
+<th class="row_heading level0 row12" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row12">12</th>
+<td class="data row12 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col0">MI</td>
+<td class="data row12 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col1">rahman</td>
+<td class="data row12 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col2">bowler</td>
+<td class="data row12 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col3">[10, 0, 0, 5, 2]</td>
+<td class="data row12 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow12_col4">8.5</td>
+</tr> <tr>
+<th class="row_heading level0 row13" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row13">13</th>
+<td class="data row13 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col0">MI</td>
+<td class="data row13 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col1">markande</td>
+<td class="data row13 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col2">bowler</td>
+<td class="data row13 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col3">[28, 30, 20, 30, 40]</td>
+<td class="data row13 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow13_col4">8.5</td>
+</tr> <tr>
+<th class="row_heading level0 row14" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row14">14</th>
+<td class="data row14 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col0">CSK</td>
+<td class="data row14 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col1">thakur</td>
+<td class="data row14 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col2">bowler</td>
+<td class="data row14 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col3">[16, 10, 7, 8, 9, 15]</td>
+<td class="data row14 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow14_col4">8.5</td>
+</tr> <tr>
+<th class="row_heading level0 row15" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140eflevel0_row15">15</th>
+<td class="data row15 col0" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col0">CSK</td>
+<td class="data row15 col1" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col1">chahar</td>
+<td class="data row15 col2" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col2">bowler</td>
+<td class="data row15 col3" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col3">[24, 15, 10, 20, 23]</td>
+<td class="data row15 col4" id="T_5aa30d40_5e0a_11eb_a32f_4074e0b140efrow15_col4">8</td>
+</tr></tbody>
+</table>
 </div>
 </div>
 </div>
@@ -1506,52 +1630,485 @@ For Eg - A single column of player_category in pandas data frame will be split i
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><p>In this section, we will start crunching numbers so that an optimal objective function can be designed. One of the most important features which dictate where a player should be included in a fantasy team in his recent performance. The column - "last_5_matches_points" is a list of points accrued by a player in his last 5 matches.</p>
-</li>
-<li><p>Now, Instead of taking a simple average of these points, we will be using a weighted average where weights are time decayed. This will ensure that the very recent form of a player is captured and leveraged by the selection algorithm. To better illustrate the importance of the weighted average, let us consider the following scenario.</p>
-</li>
+<h3 id="What-are-we-trying-to-achieve?">What are we trying to achieve?<a class="anchor-link" href="#What-are-we-trying-to-achieve?">¶</a></h3><ul>
+<li>Given the player attributes and their historical fantasy sports (at least for the last five matches), we would want to select a team of 11 players such that the probability of us winning the fantasy league is maximized.</li>
+<li>Certain constraints must be satisfied while selecting the fantasy team that makes the whole process engaging and exciting.</li>
 </ul>
-<p><br/>
-Say, the points for player 1 and player 2 in last 5 matches are as follows -</p>
-<p>player 1 - [10, 20 , 30 , 40 , 50] <br/>
-player 2 - [50, 40 , 30, 20 , 10] <br/></p>
-<p>The approach of computing simple averages will yield averaged scores as follows - <br/>
-<strong>player 1 - 30</strong> <br/>
-<strong>player 2 - 30</strong> <br/></p>
-<p>The above stats imply that both player 1 and player 2 accrue 30 points on average. However, it can be seen that player 1 is growing in confidence and has an upward trend to his performance whereas player 2 has a downward trend to his performance. By taking a simple average, we are losing an important insight.</p>
-<p>Now, if we compute the averages using time decayed weights, the averaged points are as follows -
-<br/>
-<strong>player 1 - 33.93</strong> <br/>
-<strong>player 2 - 26.06</strong> <br/></p>
-<p>As can seen from the above numbers, even though both the players have amassed the same number of points,  the trend in performances is now being captured with player 2 getting a higher average as compared to player 1.  Such subtle differences will help us build a robust model.</p>
-<p><br/></p>
-<p><strong>So, let's compute the time decayed weighted averages for the eligible players in the data frame.</strong></p>
+<h4 id="The-summary-of-rules-for-selecting-a-cricket-team-on-Dream11-is-as-follows--">The summary of rules for selecting a cricket team on Dream11 is as follows -<a class="anchor-link" href="#The-summary-of-rules-for-selecting-a-cricket-team-on-Dream11-is-as-follows--">¶</a></h4><ul>
+<li><p>Every cricket team you build on Dream11 has to have an exact of 11 players. We can select a maximum of 7 players can be from the same team.
+<img src="../../images/fantasy_sports/fantasy_rules.png"/> <br/></p>
+</li>
+<li><p>The captain will give you 2x points scored by them in the actual match.</p>
+</li>
+<li>The vice-captain will give you 1.5x points scored by them in the actual match.</li>
+</ul>
+<h3 id="Algorithm-for-selecting-an-Optimal-Fantasy-Team--">Algorithm for selecting an Optimal Fantasy Team -<a class="anchor-link" href="#Algorithm-for-selecting-an-Optimal-Fantasy-Team--">¶</a></h3><ul>
+<li>We shall frame the selection problem using Integer Linear Programming (ILP) with constraints.</li>
+<li>For the sake of convenience, we shall skip the selection of caption and vice-captain in this implementation.</li>
+<li>The objective function for ILP (Integer Linear Programming) will be to maximize the expected points while honoring the constraints mentioned above.</li>
+</ul>
+$$
+\begin{equation} 
+max \sum \limits_{i=1}^{n} [p_i \times s_i] \\ 
+\text{S.T} \\
+\text{maximum players from team 1} \implies n_{team1} \leq 7 \\
+\text{maximum players from team 2} \implies n_{team2} \leq 7 \\
+\text{number of wkt keepers} \implies 1 \leq n_{keepers} \leq 4 \\
+\text{number of batsmen})\implies 3 \leq n_{batsmen} \leq 6 \\
+\text{number of all-rounders} \implies 1 \leq n_{all-rounders} \leq 4 \\
+\text{number of bowlers} \implies 3 \leq n_{bowlers} \leq 6 \\ 
+\text{WHERE} \\
+p_i \implies \text{estimated points for player i} \\
+x_i \implies \text{Selection decision variable for player i [0,1]} \\
+\end{equation}
+$$<ul>
+<li>Once we define the ILP problem in python, we shall use the PuLP library in python for solving the problem.</li>
+</ul>
+<h4 id="So-without-further-adieu,-let’s-get-down-to-coding.">So without further adieu, let’s get down to coding.<a class="anchor-link" href="#So-without-further-adieu,-let’s-get-down-to-coding.">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Data-Preprocessing--">Data Preprocessing -<a class="anchor-link" href="#Data-Preprocessing--">¶</a></h2><h3 id="1.-Handling-Categorical-Variables">1. Handling Categorical Variables<a class="anchor-link" href="#1.-Handling-Categorical-Variables">¶</a></h3><ul>
+<li>The team_name and player_category columns in our data are categorical features.</li>
+<li>For specifying the constraints on our ILP objective function, we need to convert these features into one-hot encoded vectors. A single line of python code helps us achieve this.</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [4]:</div>
+<div class="prompt input_prompt">In [22]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">compute_weighted_points</span><span class="p">(</span><span class="n">points_vector</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">):</span>
-    <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points_vector</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">alpha</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
-    <span class="n">exponential_weighted_average</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points_vector</span><span class="p">),</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">exponential_weighted_average</span>
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">col_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"player_category"</span><span class="p">,</span> <span class="s2">"team_name"</span><span class="p">]):</span>
+    <span class="n">dummies_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">raw_player_data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dummies_data</span>
+
+<span class="n">processed_player_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">raw_player_data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"player_category"</span><span class="p">,</span> <span class="s2">"team_name"</span><span class="p">])</span>
+ 
+<span class="n">display</span><span class="p">(</span><span class="n">processed_player_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'cost'</span><span class="p">,</span> <span class="s1">'last_5_matches_points'</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">set_properties</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">'background-color'</span><span class="p">:</span><span class="s1">'#f7ebcf'</span><span class="p">}))</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<style type="text/css">
+    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col0 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col1 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col2 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col3 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col4 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col5 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col6 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col0 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col1 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col2 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col3 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col4 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col5 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col6 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col0 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col1 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col2 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col3 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col4 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col5 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col6 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col0 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col1 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col2 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col3 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col4 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col5 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col6 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col0 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col1 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col2 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col3 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col4 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col5 {
+            background-color:  #f7ebcf;
+        }    #T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col6 {
+            background-color:  #f7ebcf;
+        }</style>
+<table id="T_d7e45812_5eab_11eb_a32f_4074e0b140ef">
+<thead> <tr>
+<th class="blank level0"></th>
+<th class="col_heading level0 col0">player_name</th>
+<th class="col_heading level0 col1">player_category_all_rounder</th>
+<th class="col_heading level0 col2">player_category_batsman</th>
+<th class="col_heading level0 col3">player_category_bowler</th>
+<th class="col_heading level0 col4">player_category_wicket_keeper</th>
+<th class="col_heading level0 col5">team_name_CSK</th>
+<th class="col_heading level0 col6">team_name_MI</th>
+</tr></thead>
+<tbody> <tr>
+<th class="row_heading level0 row0" id="T_d7e45812_5eab_11eb_a32f_4074e0b140eflevel0_row0">0</th>
+<td class="data row0 col0" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col0">M.S. dhoni</td>
+<td class="data row0 col1" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col1">0</td>
+<td class="data row0 col2" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col2">0</td>
+<td class="data row0 col3" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col3">0</td>
+<td class="data row0 col4" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col4">1</td>
+<td class="data row0 col5" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col5">1</td>
+<td class="data row0 col6" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow0_col6">0</td>
+</tr> <tr>
+<th class="row_heading level0 row1" id="T_d7e45812_5eab_11eb_a32f_4074e0b140eflevel0_row1">1</th>
+<td class="data row1 col0" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col0">Suresh Raina</td>
+<td class="data row1 col1" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col1">0</td>
+<td class="data row1 col2" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col2">1</td>
+<td class="data row1 col3" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col3">0</td>
+<td class="data row1 col4" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col4">0</td>
+<td class="data row1 col5" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col5">1</td>
+<td class="data row1 col6" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow1_col6">0</td>
+</tr> <tr>
+<th class="row_heading level0 row2" id="T_d7e45812_5eab_11eb_a32f_4074e0b140eflevel0_row2">2</th>
+<td class="data row2 col0" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col0">kishan</td>
+<td class="data row2 col1" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col1">0</td>
+<td class="data row2 col2" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col2">0</td>
+<td class="data row2 col3" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col3">0</td>
+<td class="data row2 col4" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col4">1</td>
+<td class="data row2 col5" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col5">0</td>
+<td class="data row2 col6" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow2_col6">1</td>
+</tr> <tr>
+<th class="row_heading level0 row3" id="T_d7e45812_5eab_11eb_a32f_4074e0b140eflevel0_row3">3</th>
+<td class="data row3 col0" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col0">rohit_sharma</td>
+<td class="data row3 col1" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col1">0</td>
+<td class="data row3 col2" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col2">1</td>
+<td class="data row3 col3" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col3">0</td>
+<td class="data row3 col4" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col4">0</td>
+<td class="data row3 col5" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col5">0</td>
+<td class="data row3 col6" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow3_col6">1</td>
+</tr> <tr>
+<th class="row_heading level0 row4" id="T_d7e45812_5eab_11eb_a32f_4074e0b140eflevel0_row4">4</th>
+<td class="data row4 col0" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col0">lewis</td>
+<td class="data row4 col1" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col1">0</td>
+<td class="data row4 col2" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col2">1</td>
+<td class="data row4 col3" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col3">0</td>
+<td class="data row4 col4" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col4">0</td>
+<td class="data row4 col5" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col5">0</td>
+<td class="data row4 col6" id="T_d7e45812_5eab_11eb_a32f_4074e0b140efrow4_col6">1</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="2.-Computing-the-Estimated-Points-per-player.">2. Computing the Estimated Points per player.<a class="anchor-link" href="#2.-Computing-the-Estimated-Points-per-player.">¶</a></h2><ul>
+<li>The objective function is designed to maximize the summation of estimated points for the fantasy team.</li>
+<li>We have access to every player’s historical points, but we still need to compress them into point estimates that reflect each player’s worth.</li>
+<li>A simple way to achieve this would be to compute the mean fantasy points accrued by each player over the last 5 matches.</li>
+<li><p>However, using an averaging aggregation can be misleading because we would want to capture the recent form of a player more accurately. To achieve this, we shall leverage the weighted averaging technique.</p>
+</li>
+<li><p>To demonstrate this further, let us consider an example, say, the fantasy points scored by player-1 and player-2 in the last 5 matches are as follows -</p>
+</li>
+</ul>
+<p><br/></p>
+<p>player-1 - [10, 20 , 30 , 40 , 50] <br/>
+player-2 - [50, 40 , 30, 20 , 10] <br/></p>
+<ul>
+<li>Computing simple averages results in an aggregated score of 30 for both players.</li>
+<li>However, the data suggests that player-1 is growing in confidence and has an upward trend in his performance. On the other hand, player-2 has a downward trend in his performance.</li>
+<li>By taking a simple average, we are losing an important insight.</li>
+<li>If we compute the averages using time decayed weights such that the most recent performance has a higher weight as compared to older performances resulting in an aggregated score of 33.93 and 26.06 for player-1 and player-2, respectively.</li>
+<li>As can be seen from the above numbers that even though both the players have amassed the same number of points, the trend in performances is now being captured with player-2 getting a higher average as compared to player-1.</li>
+<li>Such subtle differences will help us build a robust model.</li>
+</ul>
+<h3 id="So,-let’s-compute-the-time-decayed-weighted-averages-for-the-eligible-players-in-the-dataset.">So, let’s compute the time decayed weighted averages for the eligible players in the dataset.<a class="anchor-link" href="#So,-let’s-compute-the-time-decayed-weighted-averages-for-the-eligible-players-in-the-dataset.">¶</a></h3>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [5]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="n">processed_player_data</span><span class="p">[</span><span class="s1">'weighted_player_points'</span><span class="p">]</span> <span class="o">=</span> <span class="n">processed_player_data</span><span class="p">[</span><span class="s1">'last_5_matches_points'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">compute_weighted_points</span><span class="p">)</span>
+<div class="highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">compute_weighted_points</span><span class="p">(</span><span class="n">points_vector</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">):</span>
+    
+    <span class="c1"># compute weights such that recent values are assigned a higher weight as compared to the older values. </span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">points_vector</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">alpha</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+    <span class="n">exponential_weighted_average</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points_vector</span><span class="p">),</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">exponential_weighted_average</span>
+
+<span class="n">processed_player_data</span><span class="p">[</span><span class="s1">'weighted_player_points'</span><span class="p">]</span> <span class="o">=</span> <span class="n">processed_player_data</span><span class="p">[</span><span class="s1">'last_5_matches_points'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">compute_weighted_points</span><span class="p">)</span>
 <span class="n">processed_player_data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">processed_player_data</span><span class="p">[[</span><span class="s1">'player_name'</span><span class="p">,</span> <span class="s1">'last_5_matches_points'</span><span class="p">,</span> <span class="s1">'weighted_player_points'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">processed_player_data</span><span class="p">[[</span><span class="s1">'player_name'</span><span class="p">,</span> <span class="s1">'last_5_matches_points'</span><span class="p">,</span> <span class="s1">'weighted_player_points'</span><span class="p">]]</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">set_properties</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">'background-color'</span><span class="p">:</span><span class="s1">'#f7ebcf'</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_html rendered_html output_subarea">
+<style type="text/css">
+    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow0_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow0_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow0_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow1_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow1_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow1_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow2_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow2_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow2_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow3_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow3_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow3_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow4_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow4_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow4_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow5_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow5_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow5_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow6_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow6_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow6_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow7_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow7_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow7_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow8_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow8_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow8_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow9_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow9_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow9_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow10_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow10_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow10_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow11_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow11_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow11_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow12_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow12_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow12_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow13_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow13_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow13_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow14_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow14_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow14_col2 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow15_col0 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow15_col1 {
+            background-color:  #f7ebcf;
+        }    #T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow15_col2 {
+            background-color:  #f7ebcf;
+        }</style>
+<table id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140ef">
+<thead> <tr>
+<th class="blank level0"></th>
+<th class="col_heading level0 col0">player_name</th>
+<th class="col_heading level0 col1">last_5_matches_points</th>
+<th class="col_heading level0 col2">weighted_player_points</th>
+</tr></thead>
+<tbody> <tr>
+<th class="row_heading level0 row0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row0">0</th>
+<td class="data row0 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow0_col0">M.S. dhoni</td>
+<td class="data row0 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow0_col1">[25, 20, 15, 30, 18]</td>
+<td class="data row0 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow0_col2">21.4574</td>
+</tr> <tr>
+<th class="row_heading level0 row1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row1">1</th>
+<td class="data row1 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow1_col0">Suresh Raina</td>
+<td class="data row1 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow1_col1">[30, 10, 23, 22, 16]</td>
+<td class="data row1 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow1_col2">19.6139</td>
+</tr> <tr>
+<th class="row_heading level0 row2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row2">2</th>
+<td class="data row2 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow2_col0">kishan</td>
+<td class="data row2 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow2_col1">[17, 13, 14, 27, 35]</td>
+<td class="data row2 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow2_col2">23.3034</td>
+</tr> <tr>
+<th class="row_heading level0 row3" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row3">3</th>
+<td class="data row3 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow3_col0">rohit_sharma</td>
+<td class="data row3 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow3_col1">[15, 7, 9, 40, 3]</td>
+<td class="data row3 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow3_col2">15.016</td>
+</tr> <tr>
+<th class="row_heading level0 row4" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row4">4</th>
+<td class="data row4 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow4_col0">lewis</td>
+<td class="data row4 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow4_col1">[20, 18, 15, 22, 20]</td>
+<td class="data row4 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow4_col2">19.1937</td>
+</tr> <tr>
+<th class="row_heading level0 row5" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row5">5</th>
+<td class="data row5 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow5_col0">rayadu</td>
+<td class="data row5 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow5_col1">[38, 40, 32, 28, 41]</td>
+<td class="data row5 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow5_col2">35.6739</td>
+</tr> <tr>
+<th class="row_heading level0 row6" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row6">6</th>
+<td class="data row6 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow6_col0">surya</td>
+<td class="data row6 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow6_col1">[30, 23, 10, 18, 25]</td>
+<td class="data row6 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow6_col2">20.8027</td>
+</tr> <tr>
+<th class="row_heading level0 row7" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row7">7</th>
+<td class="data row7 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow7_col0">watson</td>
+<td class="data row7 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow7_col1">[35, 30, 25, 7, 18]</td>
+<td class="data row7 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow7_col2">20.842</td>
+</tr> <tr>
+<th class="row_heading level0 row8" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row8">8</th>
+<td class="data row8 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow8_col0">hardik</td>
+<td class="data row8 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow8_col1">[25, 18, 15, 25, 30]</td>
+<td class="data row8 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow8_col2">23.4099</td>
+</tr> <tr>
+<th class="row_heading level0 row9" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row9">9</th>
+<td class="data row9 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow9_col0">krunal</td>
+<td class="data row9 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow9_col1">[22, 10, 5, 10, 15]</td>
+<td class="data row9 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow9_col2">12.0189</td>
+</tr> <tr>
+<th class="row_heading level0 row10" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row10">10</th>
+<td class="data row10 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow10_col0">bravo</td>
+<td class="data row10 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow10_col1">[27, 20, 15, 20, 15]</td>
+<td class="data row10 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow10_col2">18.507</td>
+</tr> <tr>
+<th class="row_heading level0 row11" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row11">11</th>
+<td class="data row11 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow11_col0">bumrah</td>
+<td class="data row11 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow11_col1">[10, 20, 25, 17, 10]</td>
+<td class="data row11 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow11_col2">16.1006</td>
+</tr> <tr>
+<th class="row_heading level0 row12" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row12">12</th>
+<td class="data row12 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow12_col0">rahman</td>
+<td class="data row12 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow12_col1">[10, 0, 0, 5, 2]</td>
+<td class="data row12 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow12_col2">3.03595</td>
+</tr> <tr>
+<th class="row_heading level0 row13" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row13">13</th>
+<td class="data row13 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow13_col0">markande</td>
+<td class="data row13 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow13_col1">[28, 30, 20, 30, 40]</td>
+<td class="data row13 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow13_col2">30.6877</td>
+</tr> <tr>
+<th class="row_heading level0 row14" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row14">14</th>
+<td class="data row14 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow14_col0">thakur</td>
+<td class="data row14 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow14_col1">[16, 10, 7, 8, 9, 15]</td>
+<td class="data row14 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow14_col2">10.8823</td>
+</tr> <tr>
+<th class="row_heading level0 row15" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140eflevel0_row15">15</th>
+<td class="data row15 col0" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow15_col0">chahar</td>
+<td class="data row15 col1" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow15_col1">[24, 15, 10, 20, 23]</td>
+<td class="data row15 col2" id="T_5bbfe131_5e0a_11eb_a32f_4074e0b140efrow15_col2">18.6666</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, let's define the constraints for selecting players as defined by Dream11. These constraints are to be honored by the algorithm while trying to maximize points.
+<br/><br/></p>
+<p>For more information, check out dream11 <a href="https://www.dream11.com/games/cricket/how-to-play">FAQs</a>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight hl-ipython2"><pre><span></span><span class="c1"># Initialize the optimization Problem </span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpProblem</span><span class="p">(</span><span class="s1">'Dreamteam'</span><span class="p">,</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpMaximize</span><span class="p">)</span>
+
+<span class="c1"># selection decision variables can be 0 or 1. The number of `selection_decision_varibales` should be equal to </span>
+<span class="c1"># the number of players under consideration</span>
+<span class="n">selection_decision_variables</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">processed_player_data</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">variable_name</span> <span class="o">=</span> <span class="s1">'x_</span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">Index</span><span class="p">))</span>
+    <span class="n">variable</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpVariable</span><span class="p">(</span><span class="n">variable_name</span><span class="p">,</span> <span class="n">lowBound</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">upBound</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cat</span> <span class="o">=</span> <span class="s1">'Integer'</span> <span class="p">)</span> 
+    <span class="n">selection_decision_variables</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"pulp_variable"</span><span class="p">:</span><span class="n">variable</span><span class="p">,</span> <span class="s2">"player_name"</span><span class="p">:</span> <span class="n">row</span><span class="o">.</span><span class="n">player_name</span><span class="p">})</span>
+ 
+<span class="n">selection_decision_variables_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">selection_decision_variables</span><span class="p">)</span>
+
+<span class="n">merged_processed_player_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">processed_player_data</span><span class="p">,</span> <span class="n">selection_decision_variables_df</span><span class="p">,</span> 
+                                                   <span class="n">on</span> <span class="o">=</span> <span class="s2">"player_name"</span><span class="p">)</span>
+<span class="n">merged_processed_player_df</span><span class="p">[</span><span class="s2">"pulp_variable_name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged_processed_player_df</span><span class="p">[</span><span class="s2">"pulp_variable"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">selection_decision_variables_df</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1580,40 +2137,89 @@ player 2 - [50, 40 , 30, 20 , 10] <br/></p>
 <tr style="text-align: right;">
 <th></th>
 <th>player_name</th>
-<th>last_5_matches_points</th>
-<th>weighted_player_points</th>
+<th>pulp_variable</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <th>0</th>
 <td>M.S. dhoni</td>
-<td>[25, 20, 15, 30, 18]</td>
-<td>21.457434</td>
+<td>x_0</td>
 </tr>
 <tr>
 <th>1</th>
 <td>Suresh Raina</td>
-<td>[30, 10, 23, 22, 16]</td>
-<td>19.613900</td>
+<td>x_1</td>
 </tr>
 <tr>
 <th>2</th>
 <td>kishan</td>
-<td>[17, 13, 14, 27, 35]</td>
-<td>23.303382</td>
+<td>x_2</td>
 </tr>
 <tr>
 <th>3</th>
 <td>rohit_sharma</td>
-<td>[15, 7, 9, 40, 3]</td>
-<td>15.016017</td>
+<td>x_3</td>
 </tr>
 <tr>
 <th>4</th>
 <td>lewis</td>
-<td>[20, 18, 15, 22, 20]</td>
-<td>19.193689</td>
+<td>x_4</td>
+</tr>
+<tr>
+<th>5</th>
+<td>rayadu</td>
+<td>x_5</td>
+</tr>
+<tr>
+<th>6</th>
+<td>surya</td>
+<td>x_6</td>
+</tr>
+<tr>
+<th>7</th>
+<td>watson</td>
+<td>x_7</td>
+</tr>
+<tr>
+<th>8</th>
+<td>hardik</td>
+<td>x_8</td>
+</tr>
+<tr>
+<th>9</th>
+<td>krunal</td>
+<td>x_9</td>
+</tr>
+<tr>
+<th>10</th>
+<td>bravo</td>
+<td>x_10</td>
+</tr>
+<tr>
+<th>11</th>
+<td>bumrah</td>
+<td>x_11</td>
+</tr>
+<tr>
+<th>12</th>
+<td>rahman</td>
+<td>x_12</td>
+</tr>
+<tr>
+<th>13</th>
+<td>markande</td>
+<td>x_13</td>
+</tr>
+<tr>
+<th>14</th>
+<td>thakur</td>
+<td>x_14</td>
+</tr>
+<tr>
+<th>15</th>
+<td>chahar</td>
+<td>x_15</td>
 </tr>
 </tbody>
 </table>
@@ -1623,87 +2229,17 @@ player 2 - [50, 40 , 30, 20 , 10] <br/></p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, let's define the constraints for selecting players as defined by Dream11. These constraints are to be honored by the algorithm while trying to maximize points.
-<br/><br/></p>
-<p>For more information, check out dream11 <a href="https://www.dream11.com/games/cricket/how-to-play">FAQs</a>.</p>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [41]:</div>
+<div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="n">max_players</span> <span class="o">=</span> <span class="mi">11</span>
-<span class="n">max_batsman</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">max_allrounders</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">max_bowlers</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">max_keepers</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">max_cost</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">max_team1_players</span> <span class="o">=</span> <span class="mi">7</span>
-<span class="n">max_team2_players</span> <span class="o">=</span> <span class="mi">7</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [42]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="n">prob</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpProblem</span><span class="p">(</span><span class="s1">'Dreamteam'</span><span class="p">,</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpMaximize</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [43]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="c1"># define decision variables for each row in the input dataframe</span>
+<div class="highlight hl-ipython2"><pre><span></span><span class="c1"># Create the objective Function to be maximized</span>
 
-<span class="n">decision_variables</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">rownum</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">processed_player_data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">variable</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">'x_</span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">rownum</span><span class="p">)))</span>
-    <span class="n">variable</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpVariable</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">lowBound</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">upBound</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cat</span> <span class="o">=</span> <span class="s1">'Integer'</span> <span class="p">)</span> 
-    <span class="n">decision_variables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
-    
-<span class="nb">print</span> <span class="n">decision_variables</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[x_0, x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8, x_9, x_10, x_11, x_12, x_13, x_14, x_15]
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [44]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="c1"># Create optimization Function</span>
-<span class="nb">print</span> <span class="n">processed_player_data</span><span class="o">.</span><span class="n">columns</span>
-<span class="n">total_points</span> <span class="o">=</span> <span class="s1">''</span>
-<span class="k">for</span> <span class="n">rownum</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">processed_player_data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'weighted_player_points'</span><span class="p">]</span> <span class="o">*</span> <span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
-    <span class="n">total_points</span><span class="o">+=</span> <span class="n">formula</span>
+<span class="n">total_points</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">lpSum</span><span class="p">(</span><span class="n">merged_processed_player_df</span><span class="p">[</span><span class="s2">"weighted_player_points"</span><span class="p">]</span> <span class="o">*</span> <span class="n">selection_decision_variables_df</span><span class="p">[</span><span class="s2">"pulp_variable"</span><span class="p">])</span>
 <span class="n">prob</span> <span class="o">+=</span> <span class="n">total_points</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1712,13 +2248,27 @@ player 2 - [50, 40 , 30, 20 , 10] <br/></p>
 <div class="output">
 <div class="output_area">
 <div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Index([u'index', u'cost', u'last_5_matches_points', u'player_name',
-       u'player_category_all_rounder', u'player_category_batsman',
-       u'player_category_bowler', u'player_category_wicket_keeper',
-       u'team_name_CSK', u'team_name_MI', u'weighted_player_points'],
-      dtype='object')
-</pre>
+<div class="output_text output_subarea">
+<pre>Dreamteam:
+MAXIMIZE
+21.4574342327*x_0 + 19.6138998634*x_1 + 18.507022734*x_10 + 16.1006207824*x_11 + 3.03595134142*x_12 + 30.6877000247*x_13 + 10.8823368063*x_14 + 18.6665650801*x_15 + 23.3033823875*x_2 + 15.0160173204*x_3 + 19.1936886525*x_4 + 35.6738860573*x_5 + 20.8026696164*x_6 + 20.8419816771*x_7 + 23.4099290007*x_8 + 12.0189162375*x_9 + 0.0
+VARIABLES
+0 &lt;= x_0 &lt;= 1 Integer
+0 &lt;= x_1 &lt;= 1 Integer
+0 &lt;= x_10 &lt;= 1 Integer
+0 &lt;= x_11 &lt;= 1 Integer
+0 &lt;= x_12 &lt;= 1 Integer
+0 &lt;= x_13 &lt;= 1 Integer
+0 &lt;= x_14 &lt;= 1 Integer
+0 &lt;= x_15 &lt;= 1 Integer
+0 &lt;= x_2 &lt;= 1 Integer
+0 &lt;= x_3 &lt;= 1 Integer
+0 &lt;= x_4 &lt;= 1 Integer
+0 &lt;= x_5 &lt;= 1 Integer
+0 &lt;= x_6 &lt;= 1 Integer
+0 &lt;= x_7 &lt;= 1 Integer
+0 &lt;= x_8 &lt;= 1 Integer
+0 &lt;= x_9 &lt;= 1 Integer</pre>
 </div>
 </div>
 </div>
@@ -1726,59 +2276,51 @@ player 2 - [50, 40 , 30, 20 , 10] <br/></p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [45]:</div>
+<div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="c1">#set constrainst for keeper</span>
-<span class="n">total_keepers</span> <span class="o">=</span> <span class="s1">''</span>
-<span class="n">total_batsman</span> <span class="o">=</span> <span class="s1">''</span>
-<span class="n">total_allrounder</span> <span class="o">=</span> <span class="s1">''</span>
-<span class="n">total_bowler</span> <span class="o">=</span> <span class="s1">''</span>
-<span class="n">total_players</span> <span class="o">=</span> <span class="s1">''</span>
-<span class="n">total_cost</span> <span class="o">=</span> <span class="s1">''</span>
-<span class="n">total_team2</span> <span class="o">=</span> <span class="s1">''</span>
-<span class="n">total_team1</span> <span class="o">=</span> <span class="s1">''</span>
+<div class="highlight hl-ipython2"><pre><span></span><span class="c1"># 1 &lt;= n_keeper &lt;= 4 </span>
+<span class="n">total_keepers</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">lpSum</span><span class="p">(</span><span class="n">merged_processed_player_df</span><span class="p">[</span><span class="s2">"player_category_wicket_keeper"</span><span class="p">]</span> <span class="o">*</span> <span class="n">selection_decision_variables_df</span><span class="p">[</span><span class="s2">"pulp_variable"</span><span class="p">])</span>
+<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_keepers</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_keepers</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">rownum</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">processed_player_data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">keeper_formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'player_category_wicket_keeper'</span><span class="p">]</span><span class="o">*</span> <span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
-    <span class="n">total_keepers</span> <span class="o">+=</span> <span class="n">keeper_formula</span>
-    
-    <span class="n">batsman_formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'player_category_batsman'</span><span class="p">]</span> <span class="o">*</span> <span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
-    <span class="n">total_batsman</span> <span class="o">+=</span> <span class="n">batsman_formula</span>
-    
-    <span class="n">allrounder_formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'player_category_all_rounder'</span><span class="p">]</span> <span class="o">*</span> <span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
-    <span class="n">total_allrounder</span><span class="o">+=</span><span class="n">allrounder_formula</span>
-    
-    <span class="n">bowler_formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'player_category_bowler'</span><span class="p">]</span><span class="o">*</span><span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
-    <span class="n">total_bowler</span> <span class="o">+=</span> <span class="n">bowler_formula</span>
-    
-    <span class="n">total_players_formula</span> <span class="o">=</span> <span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
-    <span class="n">total_players</span> <span class="o">+=</span> <span class="n">total_players_formula</span>
-    
-    <span class="n">total_cost_formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'cost'</span><span class="p">]</span><span class="o">*</span><span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
-    <span class="n">total_cost</span> <span class="o">+=</span> <span class="n">total_cost_formula</span>
-    
-    <span class="n">formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'team_name_CSK'</span><span class="p">]</span><span class="o">*</span><span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
-    <span class="n">total_team1</span> <span class="o">+=</span> <span class="n">formula</span>
-    
-    <span class="n">formula</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'team_name_MI'</span><span class="p">]</span><span class="o">*</span><span class="n">decision_variables</span><span class="p">[</span><span class="n">rownum</span><span class="p">]</span>
-    <span class="n">total_team2</span> <span class="o">+=</span> <span class="n">formula</span>
-    
-<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_keepers</span> <span class="o">==</span> <span class="n">max_keepers</span><span class="p">)</span>
-<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_batsman</span> <span class="o">&lt;=</span> <span class="n">max_batsman</span><span class="p">)</span>
-<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_allrounder</span> <span class="o">&lt;=</span> <span class="n">max_allrounders</span><span class="p">)</span>
-<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_bowler</span> <span class="o">&lt;=</span> <span class="n">max_bowlers</span><span class="p">)</span>
-<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_players</span> <span class="o">==</span> <span class="n">max_players</span><span class="p">)</span>
-<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_cost</span> <span class="o">&lt;=</span> <span class="n">max_cost</span><span class="p">)</span>
-<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_team1</span> <span class="o">&lt;=</span> <span class="n">max_team1_players</span><span class="p">)</span>
-<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_team2</span> <span class="o">&lt;=</span> <span class="n">max_team2_players</span><span class="p">)</span>
+<span class="c1"># 3 &lt;= n_batsmen &lt;= 6 </span>
+<span class="n">total_batsmen</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">lpSum</span><span class="p">(</span><span class="n">merged_processed_player_df</span><span class="p">[</span><span class="s2">"player_category_batsman"</span><span class="p">]</span> <span class="o">*</span> <span class="n">selection_decision_variables_df</span><span class="p">[</span><span class="s2">"pulp_variable"</span><span class="p">])</span>
+<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_batsmen</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_batsmen</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="c1"># 1 &lt;= n_allrounders &lt;= 4</span>
+<span class="n">total_allrounders</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">lpSum</span><span class="p">(</span><span class="n">merged_processed_player_df</span><span class="p">[</span><span class="s2">"player_category_all_rounder"</span><span class="p">]</span> <span class="o">*</span> <span class="n">selection_decision_variables_df</span><span class="p">[</span><span class="s2">"pulp_variable"</span><span class="p">])</span>
+<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_allrounders</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_allrounders</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># 3 &lt;= n_bowlers &lt;= 6</span>
+<span class="n">total_bowlers</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">lpSum</span><span class="p">(</span><span class="n">merged_processed_player_df</span><span class="p">[</span><span class="s2">"player_category_bowler"</span><span class="p">]</span> <span class="o">*</span> <span class="n">selection_decision_variables_df</span><span class="p">[</span><span class="s2">"pulp_variable"</span><span class="p">])</span>
+<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_bowlers</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_bowlers</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="c1"># maximum of 11 players</span>
+<span class="n">total_players</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">lpSum</span><span class="p">(</span><span class="n">selection_decision_variables_df</span><span class="p">[</span><span class="s2">"pulp_variable"</span><span class="p">])</span>
+<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_players</span> <span class="o">==</span> <span class="mi">11</span><span class="p">)</span>
+
+<span class="c1"># maximum fantasy budget of 100</span>
+<span class="n">total_cost</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">lpSum</span><span class="p">(</span><span class="n">merged_processed_player_df</span><span class="p">[</span><span class="s2">"cost"</span><span class="p">]</span> <span class="o">*</span> <span class="n">selection_decision_variables_df</span><span class="p">[</span><span class="s2">"pulp_variable"</span><span class="p">])</span>
+<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_cost</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># we cannot pick more than 7 players from the same team</span>
+<span class="n">total_team1</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">lpSum</span><span class="p">(</span><span class="n">merged_processed_player_df</span><span class="p">[</span><span class="s2">"team_name_CSK"</span><span class="p">]</span> <span class="o">*</span> <span class="n">selection_decision_variables_df</span><span class="p">[</span><span class="s2">"pulp_variable"</span><span class="p">])</span>
+<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_team1</span> <span class="o">&lt;=</span> <span class="mi">7</span><span class="p">)</span>
+
+<span class="n">total_team2</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">lpSum</span><span class="p">(</span><span class="n">merged_processed_player_df</span><span class="p">[</span><span class="s2">"team_name_MI"</span><span class="p">]</span> <span class="o">*</span> <span class="n">selection_decision_variables_df</span><span class="p">[</span><span class="s2">"pulp_variable"</span><span class="p">])</span>
+<span class="n">prob</span> <span class="o">+=</span> <span class="p">(</span><span class="n">total_team2</span> <span class="o">&lt;=</span> <span class="mi">7</span><span class="p">)</span>
 
 
 
-<span class="nb">print</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
 <span class="n">prob</span><span class="o">.</span><span class="n">writeLP</span><span class="p">(</span><span class="s1">'Dreamteam.lp'</span><span class="p">)</span>
 
-<span class="n">optimization_result</span> <span class="o">=</span> <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">pulp</span><span class="o">.</span><span class="n">listSolvers</span><span class="p">(</span><span class="n">onlyAvailable</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"solvers not installed correctly - check - https://www.coin-or.org/PuLP/main/installing_pulp_at_home.html"</span>
+<span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1787,29 +2329,37 @@ player 2 - [50, 40 , 30, 20 , 10] <br/></p>
 <div class="output">
 <div class="output_area">
 <div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
+<div class="output_text output_subarea">
 <pre>Dreamteam:
 MAXIMIZE
 21.4574342327*x_0 + 19.6138998634*x_1 + 18.507022734*x_10 + 16.1006207824*x_11 + 3.03595134142*x_12 + 30.6877000247*x_13 + 10.8823368063*x_14 + 18.6665650801*x_15 + 23.3033823875*x_2 + 15.0160173204*x_3 + 19.1936886525*x_4 + 35.6738860573*x_5 + 20.8026696164*x_6 + 20.8419816771*x_7 + 23.4099290007*x_8 + 12.0189162375*x_9 + 0.0
 SUBJECT TO
-_C1: x_0 + x_2 = 1
+_C1: x_0 + x_2 &gt;= 1
 
-_C2: x_1 + x_3 + x_4 + x_5 + x_6 &lt;= 5
+_C2: x_0 + x_2 &lt;= 4
 
-_C3: x_10 + x_7 + x_8 + x_9 &lt;= 3
+_C3: x_1 + x_3 + x_4 + x_5 + x_6 &gt;= 3
 
-_C4: x_11 + x_12 + x_13 + x_14 + x_15 &lt;= 5
+_C4: x_1 + x_3 + x_4 + x_5 + x_6 &lt;= 6
 
-_C5: x_0 + x_1 + x_10 + x_11 + x_12 + x_13 + x_14 + x_15 + x_2 + x_3 + x_4
+_C5: x_10 + x_7 + x_8 + x_9 &gt;= 1
+
+_C6: x_10 + x_7 + x_8 + x_9 &lt;= 4
+
+_C7: x_11 + x_12 + x_13 + x_14 + x_15 &gt;= 3
+
+_C8: x_11 + x_12 + x_13 + x_14 + x_15 &lt;= 6
+
+_C9: x_0 + x_1 + x_10 + x_11 + x_12 + x_13 + x_14 + x_15 + x_2 + x_3 + x_4
  + x_5 + x_6 + x_7 + x_8 + x_9 = 11
 
-_C6: 9 x_0 + 10 x_1 + 9 x_10 + 9 x_11 + 8.5 x_12 + 8.5 x_13 + 8.5 x_14
+_C10: 9 x_0 + 10 x_1 + 9 x_10 + 9 x_11 + 8.5 x_12 + 8.5 x_13 + 8.5 x_14
  + 8 x_15 + 8.5 x_2 + 10.5 x_3 + 9.5 x_4 + 9 x_5 + 8.5 x_6 + 10.5 x_7 + 9 x_8
  + 9 x_9 &lt;= 100
 
-_C7: x_0 + x_1 + x_10 + x_14 + x_15 + x_5 + x_7 &lt;= 7
+_C11: x_0 + x_1 + x_10 + x_14 + x_15 + x_5 + x_7 &lt;= 7
 
-_C8: x_11 + x_12 + x_13 + x_2 + x_3 + x_4 + x_6 + x_8 + x_9 &lt;= 7
+_C12: x_11 + x_12 + x_13 + x_2 + x_3 + x_4 + x_6 + x_8 + x_9 &lt;= 7
 
 VARIABLES
 0 &lt;= x_0 &lt;= 1 Integer
@@ -1827,9 +2377,7 @@ VARIABLES
 0 &lt;= x_6 &lt;= 1 Integer
 0 &lt;= x_7 &lt;= 1 Integer
 0 &lt;= x_8 &lt;= 1 Integer
-0 &lt;= x_9 &lt;= 1 Integer
-
-</pre>
+0 &lt;= x_9 &lt;= 1 Integer</pre>
 </div>
 </div>
 </div>
@@ -1837,28 +2385,28 @@ VARIABLES
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [48]:</div>
+<div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class="highlight hl-ipython2"><pre><span></span><span class="n">variable_name</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">variable_value</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight hl-ipython2"><pre><span></span><span class="c1"># prep solution</span>
 
-<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">prob</span><span class="o">.</span><span class="n">variables</span><span class="p">():</span>
-    <span class="n">variable_name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">variable_value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">varValue</span><span class="p">)</span>
-    
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'index'</span><span class="p">:</span> <span class="n">variable_name</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">:</span> <span class="n">variable_value</span><span class="p">})</span>
-<span class="k">for</span> <span class="n">rownum</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">'(\d+)'</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s1">'index'</span><span class="p">])</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">rownum</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">solutions_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s1">'pulp_variable_name'</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> 
+            <span class="s1">'value'</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">varValue</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">prob</span><span class="o">.</span><span class="n">variables</span><span class="p">()</span>
+    <span class="p">]</span>
+<span class="p">)</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">'index'</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">processed_player_data</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s1">'index'</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">merged_processed_player_df</span><span class="p">,</span> <span class="n">solutions_df</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s1">'pulp_variable_name'</span><span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">'value'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">'weighted_player_points'</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">selected_cols_final</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'player_name'</span><span class="p">,</span> <span class="s1">'team_name_CSK'</span><span class="p">,</span> <span class="s1">'team_name_MI'</span><span class="p">,</span> <span class="s1">'weighted_player_points'</span><span class="p">]</span>
 <span class="n">final_set_of_players_to_be_selected</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">selected_cols_final</span><span class="p">]</span>
 
-<span class="n">display</span><span class="p">(</span><span class="n">final_set_of_players_to_be_selected</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">final_set_of_players_to_be_selected</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">set_properties</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">'background-color'</span><span class="p">:</span><span class="s1">'#f7ebcf'</span><span class="p">}))</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"We can accrue an estimated points of </span><span class="si">%f</span><span class="s2">"</span><span class="o">%</span><span class="p">(</span><span class="n">final_set_of_players_to_be_selected</span><span class="p">[</span><span class="s1">'weighted_player_points'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
 </pre></div>
@@ -1870,104 +2418,178 @@ VARIABLES
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea">
-<div>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>player_name</th>
-<th>team_name_CSK</th>
-<th>team_name_MI</th>
-<th>weighted_player_points</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>5</th>
-<td>rayadu</td>
-<td>1</td>
-<td>0</td>
-<td>35.673886</td>
-</tr>
-<tr>
-<th>13</th>
-<td>markande</td>
-<td>0</td>
-<td>1</td>
-<td>30.687700</td>
-</tr>
-<tr>
-<th>8</th>
-<td>hardik</td>
-<td>0</td>
-<td>1</td>
-<td>23.409929</td>
-</tr>
-<tr>
-<th>2</th>
-<td>kishan</td>
-<td>0</td>
-<td>1</td>
-<td>23.303382</td>
-</tr>
-<tr>
-<th>7</th>
-<td>watson</td>
-<td>1</td>
-<td>0</td>
-<td>20.841982</td>
-</tr>
-<tr>
-<th>6</th>
-<td>surya</td>
-<td>0</td>
-<td>1</td>
-<td>20.802670</td>
-</tr>
-<tr>
-<th>1</th>
-<td>Suresh Raina</td>
-<td>1</td>
-<td>0</td>
-<td>19.613900</td>
-</tr>
-<tr>
-<th>4</th>
-<td>lewis</td>
-<td>0</td>
-<td>1</td>
-<td>19.193689</td>
-</tr>
-<tr>
-<th>15</th>
-<td>chahar</td>
-<td>1</td>
-<td>0</td>
-<td>18.666565</td>
-</tr>
-<tr>
-<th>10</th>
-<td>bravo</td>
-<td>1</td>
-<td>0</td>
-<td>18.507023</td>
-</tr>
-<tr>
-<th>11</th>
-<td>bumrah</td>
-<td>0</td>
-<td>1</td>
-<td>16.100621</td>
-</tr>
-</tbody>
+<style type="text/css">
+    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col3 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col0 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col1 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col2 {
+            background-color:  #f7ebcf;
+        }    #T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col3 {
+            background-color:  #f7ebcf;
+        }</style>
+<table id="T_108847f6_5e0b_11eb_a32f_4074e0b140ef">
+<thead> <tr>
+<th class="blank level0"></th>
+<th class="col_heading level0 col0">player_name</th>
+<th class="col_heading level0 col1">team_name_CSK</th>
+<th class="col_heading level0 col2">team_name_MI</th>
+<th class="col_heading level0 col3">weighted_player_points</th>
+</tr></thead>
+<tbody> <tr>
+<th class="row_heading level0 row0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row0">5</th>
+<td class="data row0 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col0">rayadu</td>
+<td class="data row0 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col1">1</td>
+<td class="data row0 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col2">0</td>
+<td class="data row0 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow0_col3">35.6739</td>
+</tr> <tr>
+<th class="row_heading level0 row1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row1">13</th>
+<td class="data row1 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col0">markande</td>
+<td class="data row1 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col1">0</td>
+<td class="data row1 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col2">1</td>
+<td class="data row1 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow1_col3">30.6877</td>
+</tr> <tr>
+<th class="row_heading level0 row2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row2">8</th>
+<td class="data row2 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col0">hardik</td>
+<td class="data row2 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col1">0</td>
+<td class="data row2 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col2">1</td>
+<td class="data row2 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow2_col3">23.4099</td>
+</tr> <tr>
+<th class="row_heading level0 row3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row3">2</th>
+<td class="data row3 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col0">kishan</td>
+<td class="data row3 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col1">0</td>
+<td class="data row3 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col2">1</td>
+<td class="data row3 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow3_col3">23.3034</td>
+</tr> <tr>
+<th class="row_heading level0 row4" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row4">0</th>
+<td class="data row4 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col0">M.S. dhoni</td>
+<td class="data row4 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col1">1</td>
+<td class="data row4 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col2">0</td>
+<td class="data row4 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow4_col3">21.4574</td>
+</tr> <tr>
+<th class="row_heading level0 row5" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row5">7</th>
+<td class="data row5 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col0">watson</td>
+<td class="data row5 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col1">1</td>
+<td class="data row5 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col2">0</td>
+<td class="data row5 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow5_col3">20.842</td>
+</tr> <tr>
+<th class="row_heading level0 row6" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row6">6</th>
+<td class="data row6 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col0">surya</td>
+<td class="data row6 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col1">0</td>
+<td class="data row6 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col2">1</td>
+<td class="data row6 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow6_col3">20.8027</td>
+</tr> <tr>
+<th class="row_heading level0 row7" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row7">1</th>
+<td class="data row7 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col0">Suresh Raina</td>
+<td class="data row7 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col1">1</td>
+<td class="data row7 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col2">0</td>
+<td class="data row7 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow7_col3">19.6139</td>
+</tr> <tr>
+<th class="row_heading level0 row8" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row8">4</th>
+<td class="data row8 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col0">lewis</td>
+<td class="data row8 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col1">0</td>
+<td class="data row8 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col2">1</td>
+<td class="data row8 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow8_col3">19.1937</td>
+</tr> <tr>
+<th class="row_heading level0 row9" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row9">15</th>
+<td class="data row9 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col0">chahar</td>
+<td class="data row9 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col1">1</td>
+<td class="data row9 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col2">0</td>
+<td class="data row9 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow9_col3">18.6666</td>
+</tr> <tr>
+<th class="row_heading level0 row10" id="T_108847f6_5e0b_11eb_a32f_4074e0b140eflevel0_row10">11</th>
+<td class="data row10 col0" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col0">bumrah</td>
+<td class="data row10 col1" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col1">0</td>
+<td class="data row10 col2" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col2">1</td>
+<td class="data row10 col3" id="T_108847f6_5e0b_11eb_a32f_4074e0b140efrow10_col3">16.1006</td>
+</tr></tbody>
 </table>
-</div>
 </div>
 </div>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>We can accrue an estimated points of 246.801346
+<pre>We can accrue an estimated points of 249.751757
 </pre>
 </div>
 </div>
