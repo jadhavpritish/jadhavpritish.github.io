@@ -5,29 +5,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/</loc>
-<lastmod>2021-01-24T20:30:42-00:00</lastmod>
+<lastmod>2021-04-03T12:28:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/archives.html</loc>
-<lastmod>2021-01-24T20:30:42-00:00</lastmod>
+<lastmod>2021-04-03T12:28:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/tags.html</loc>
-<lastmod>2021-01-24T20:30:42-00:00</lastmod>
+<lastmod>2021-04-03T12:28:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/categories.html</loc>
-<lastmod>2021-01-24T20:30:42-00:00</lastmod>
+<lastmod>2021-04-03T12:28:34-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/Leveraging Explore Exploit strategy for determining the optimal price for a product..html</loc>
+<lastmod>2021-01-03T18:00:00+05:30</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -138,7 +145,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/category/data-science.html</loc>
-<lastmod>2019-05-24T18:00:00+05:53</lastmod>
+<lastmod>2021-01-03T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -174,6 +181,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://jadhavpritish.github.io/tag/nlp.html</loc>
 <lastmod>2019-05-24T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/tag/ecommerce.html</loc>
+<lastmod>2021-01-03T18:00:00+05:53</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://jadhavpritish.github.io/tag/data-science.html</loc>
+<lastmod>2021-01-03T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -250,7 +271,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/tag/machine-learning.html</loc>
-<lastmod>2019-08-21T18:00:00+05:53</lastmod>
+<lastmod>2021-01-03T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -270,15 +291,15 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/variational-autoencoders.html</loc>
-<lastmod>2019-12-15T18:00:00+05:53</lastmod>
+<loc>https://jadhavpritish.github.io/tag/keras.html</loc>
+<lastmod>2020-07-12T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://jadhavpritish.github.io/tag/python.html</loc>
-<lastmod>2020-07-12T18:00:00+05:53</lastmod>
+<lastmod>2021-01-03T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -354,8 +375,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://jadhavpritish.github.io/tag/keras.html</loc>
-<lastmod>2020-07-12T18:00:00+05:53</lastmod>
+<loc>https://jadhavpritish.github.io/tag/variational-autoencoders.html</loc>
+<lastmod>2019-12-15T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -369,7 +390,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://jadhavpritish.github.io/author/pritish-jadhav.html</loc>
-<lastmod>2018-12-03T18:00:00+05:53</lastmod>
+<lastmod>2021-01-03T18:00:00+05:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
